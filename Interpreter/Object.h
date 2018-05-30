@@ -14,7 +14,7 @@ public:
 	ObjectType getType() const { return type_; }
 };
 
-class ValueObject:
+class ValueObject :
 	public Object
 {
 public:
@@ -22,7 +22,7 @@ public:
 	~ValueObject() override = default;
 };
 
-class VariableObject:
+class VariableObject :
 	public Object
 {
 public:

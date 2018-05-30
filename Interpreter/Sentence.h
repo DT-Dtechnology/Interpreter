@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#include <iostream> // 
+
+using std::string;
 
 enum SentenceType
 {
@@ -8,9 +12,12 @@ enum SentenceType
 class Sentence
 {
 	SentenceType senType_;
+	string order_;
 	int tab_cnt_;
-	//int row;
+	int row_; //
 public:
-	Sentence();
+	Sentence() = delete;
+	Sentence(std::string& order, int tab, int row);
 	~Sentence();
+	void printTest() const { std::cout << row_ << " " << tab_cnt_ << " " << order_ << '\n'; }
 };

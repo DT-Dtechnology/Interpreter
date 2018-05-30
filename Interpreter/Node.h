@@ -21,19 +21,8 @@ class Node
 public:
 	Node();
 	~Node();
-	Node(NodeType nodeType):nodeType_(nodeType){}
+	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
 	NodeVector* getChild() { return &childVector_; }
 	Object* getValue();
 };
-
-
-
-Node::Node()
-{
-}
-
-
-Node::~Node()
-{
-}

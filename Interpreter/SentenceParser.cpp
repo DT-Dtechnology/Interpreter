@@ -21,7 +21,7 @@ void SentenceParser::buildTree()
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
 
-		if( Top == NodeType::TERMINATE)
+		if (Top == NodeType::TERMINATE)
 		{
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
 				X->getValue()->getType() == ObjectType::TotalVariable)
@@ -40,7 +40,7 @@ void SentenceParser::buildTree()
 			else
 				throw Error();
 		}
-		else if( Top == NodeType::END)
+		else if (Top == NodeType::END)
 		{
 			if (front == "#")
 				FLAG = false;
