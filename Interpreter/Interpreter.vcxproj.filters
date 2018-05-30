@@ -45,6 +45,18 @@
     <ClInclude Include="PVM.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Inputter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SentenceVector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QuoteDetecter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputterTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -65,5 +77,19 @@
     <ClCompile Include="PVM.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Inputter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SentenceVector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Sentence.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="InputterTest.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>
