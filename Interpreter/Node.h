@@ -19,17 +19,7 @@ class Node
 	bool isLeaf_;
 	NodeType nodeType_;
 public:
-	Node();
-	~Node();
+	Node() {}
+	~Node() {}
 };
 
-
-
-Node::Node()
-{
-}
-
-
-Node::~Node()
-{
-}

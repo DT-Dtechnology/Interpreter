@@ -14,6 +14,6 @@ class Word
 	WordType word_type_;
 	string msg_;
 public:
-	Word();
-	~Word();
+	Word() {}
+	~Word() {}
 };

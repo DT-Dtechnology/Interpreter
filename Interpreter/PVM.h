@@ -8,8 +8,8 @@ class PVM
 	void input();
 	void run();
 public:
-	PVM();
-	~PVM();
+	PVM() {}
+	~PVM() {}
 	void work()
 	{
 		input();

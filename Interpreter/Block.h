@@ -25,7 +25,7 @@ class Block
 	Traveller traveller_;
 	Object* return_pos_;
 public:
-	Block();
-	~Block();
+	Block() {}
+	~Block() {}
 };
 

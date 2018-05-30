@@ -11,6 +11,6 @@ class Sentence
 	int tab_cnt_;
 	//int row;
 public:
-	Sentence();
-	~Sentence();
+	Sentence() {}
+	~Sentence() {}
 };

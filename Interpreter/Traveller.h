@@ -6,8 +6,8 @@ class Traveller
 	Block* c_block_;
 	SentenceParser sentence_parser_;
 public:
-	Traveller();
-	~Traveller();
+	Traveller() {}
+	~Traveller() {}
 	void work();
 };
 

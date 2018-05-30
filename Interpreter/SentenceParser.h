@@ -20,8 +20,8 @@ class SentenceParser
 	void parserNode(Node*);
 	void parserRoot() { parserNode(root_); }
 public:
-	SentenceParser();
-	~SentenceParser();
+	SentenceParser() {}
+	~SentenceParser() {}
 	void work();
 };
 
