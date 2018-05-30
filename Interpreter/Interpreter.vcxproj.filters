@@ -45,6 +45,15 @@
     <ClInclude Include="PVM.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TypeDetector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SentenceDivider.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +72,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PVM.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SentenceDivider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
