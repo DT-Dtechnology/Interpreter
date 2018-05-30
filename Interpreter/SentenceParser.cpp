@@ -95,3 +95,9 @@ void SentenceParser::buildTree()
 	}
 	root_ = Root;
 }
+
+Object* getObject(Block*, string)
+{
+	// ####
+	return nullptr;
+}

@@ -10,7 +10,7 @@ class Object
 	ObjectType type_;
 public:
 	Object(ObjectType type) :type_(type) { }
-	virtual ~Object() = 0;
+	virtual ~Object();
 	ObjectType getType() const { return type_; }
 };
 

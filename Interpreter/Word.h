@@ -14,8 +14,8 @@ class Word
 	WordType word_type_;
 	string msg_;
 public:
-	Word();
-	~Word();
+	Word() = default;
+	~Word() = default;
 	string getMsg() const { return msg_; }
 	void setMsg(string msg) { msg_ = msg; }
 	WordType getType() const { return word_type_; }

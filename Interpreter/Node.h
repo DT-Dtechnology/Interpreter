@@ -30,3 +30,9 @@ public:
 
 	friend class SentenceParser;
 };
+
+inline Object* Node::getValue()
+{
+	// ####
+	return nullptr;
+}
