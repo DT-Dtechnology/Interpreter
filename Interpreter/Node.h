@@ -25,4 +25,8 @@ public:
 	NodeType getNodeType() const { return nodeType_; };
 	NodeVector* getChild() { return &childVector_; }
 	Object* getValue();
+	void addNode(Node* node) { childVector_.push_back(node); }
+	void setValue(Object* object) { value_ = object; }
+
+	friend class SentenceParser;
 };

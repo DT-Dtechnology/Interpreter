@@ -18,4 +18,5 @@ public:
 	~Word();
 	string getMsg() const { return msg_; }
 	void setMsg(string msg) { msg_ = msg; }
+	WordType getType() const { return word_type_; }
 };

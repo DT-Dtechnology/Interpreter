@@ -3,5 +3,5 @@
 
 void FuncSwitcher(Block* cur, Node* node)
 {
-	switch (node->) {  }
+
 }

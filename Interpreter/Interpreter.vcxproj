@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ParseFuncSwitcher.h" />

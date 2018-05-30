@@ -9,6 +9,13 @@ using std::map;
 const int MatrixRow = 7;
 const int MatrixColumn = 9;
 
+//####
+bool isUnTerminate[256];
+bool isTerminate[256];
+//Value and Variable 记录为 false
+//其余各个终结符号居委true
+//####
+
 string Matrix[MatrixRow][MatrixColumn];
 
 map<char, string> charToString;
@@ -53,7 +60,18 @@ void buildStoC()
 	stringToChar["variable"] = 'c';
 }
 
-// Nodetype为enum
+// Nodetype enum
 map<NodeType, int> nodeToInt;
 
 map<int, NodeType> intToNode;
+
+//####
+map<char, NodeType> charToNode;
+map<string, int> stringToInt;
+//####
+
+//####
+//## def a func
+//void calcMatrix()
+//Usage: 将V'等转化为V-32/V-64待定
+//####

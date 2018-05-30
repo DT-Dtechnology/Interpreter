@@ -51,6 +51,9 @@
     <ClInclude Include="Error.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
