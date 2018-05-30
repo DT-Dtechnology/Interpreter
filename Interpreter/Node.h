@@ -21,6 +21,8 @@ class Node
 public:
 	Node();
 	~Node();
+	NodeType getNodeType() const;
+	NodeVector* getChild() const;
 };
 
 

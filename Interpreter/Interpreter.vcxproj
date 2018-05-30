@@ -90,11 +90,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -150,6 +154,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ParseFuncSwitcher.h" />
     <ClInclude Include="PVM.h" />
     <ClInclude Include="Sentence.h" />
     <ClInclude Include="SentenceParser.h" />
@@ -161,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="ParseFuncSwitcher.cpp" />
     <ClCompile Include="PVM.cpp" />
     <ClCompile Include="SentenceParser.cpp" />
     <ClCompile Include="stdafx.cpp">
