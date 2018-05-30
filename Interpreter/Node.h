@@ -8,21 +8,23 @@ typedef std::vector<Node*> NodeVector;
 
 enum NodeType
 {
-	
+	ROOT, END, TERMINATE, VALUE, VARIABLE
 };
 
 class Node
 {
-	Object* value_;
-	Node* parent_;
+	Object* value_ = nullptr;
+	Node* parent_ = nullptr;
 	NodeVector childVector_;
-	bool isLeaf_;
+	bool isLeaf_ = false;
 	NodeType nodeType_;
 public:
 	Node();
 	~Node();
-	NodeType getNodeType() const;
-	NodeVector* getChild() const;
+	Node(NodeType nodeType):nodeType_(nodeType){}
+	NodeType getNodeType() const { return nodeType_; };
+	NodeVector* getChild() { return &childVector_; }
+	Object* getValue();
 };
 
 

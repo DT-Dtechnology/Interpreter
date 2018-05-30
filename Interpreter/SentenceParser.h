@@ -1,19 +1,19 @@
 #pragma once
 #include "Sentence.h"
 #include "Word.h"
-#include <vector>
+#include <queue>
 #include "Node.h"
 
 class Block;
 
-typedef std::vector<Word> WordVector;
+typedef std::queue<Word> WordQueue;
 
 class SentenceParser
 {
 	Sentence* sentence_;
 	Block* cur_block_;
-	WordVector word_vector_;
-	Node* root_;
+	WordQueue word_queue_;
+	Node* root_ = nullptr;
 
 	void divide();
 	void buildTree();

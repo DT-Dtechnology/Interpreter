@@ -16,4 +16,6 @@ class Word
 public:
 	Word();
 	~Word();
+	string getMsg() const { return msg_; }
+	void setMsg(string msg) { msg_ = msg; }
 };
