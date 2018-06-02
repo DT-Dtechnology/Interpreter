@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "SentenceDivider.h"
-#include <queue>
-#include "OperatorSet.h"
 #include "TypeDetector.h"
+#include "OperatorSet.h"
+#include <string>
+
+using std::string;
 
 inline bool isChar(char c)
 {

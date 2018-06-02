@@ -21,31 +21,22 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Inputter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputterTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SentenceVector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QuoteDetecter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Word.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SentenceParser.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Sentence.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Traveller.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="PVM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TypeDetector.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="OperatorSet.h">
@@ -54,15 +45,15 @@
     <ClInclude Include="SentenceDivider.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="TypeDetector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Interpreter.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SentenceParser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Traveller.cpp">
@@ -74,8 +65,20 @@
     <ClCompile Include="PVM.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Inputter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SentenceVector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="QuoteDetecter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="SentenceDivider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="InputterTest.txt" />
   </ItemGroup>
 </Project>

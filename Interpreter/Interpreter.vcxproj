@@ -147,19 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Block.h" />
     <ClInclude Include="Inputter.h" />
     <ClInclude Include="InputterTest.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="OperatorSet.h" />
-    <ClInclude Include="PVM.h" />
+    <ClInclude Include="QuoteDetecter.h" />
     <ClInclude Include="Sentence.h" />
-    <ClInclude Include="SentenceParser.h" />
+    <ClInclude Include="SentenceDivider.h" />
     <ClInclude Include="SentenceVector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Traveller.h" />
     <ClInclude Include="TypeDetector.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
@@ -168,7 +164,8 @@
     <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="PVM.cpp" />
-    <ClCompile Include="SentenceParser.cpp" />
+    <ClCompile Include="QuoteDetecter.cpp" />
+    <ClCompile Include="SentenceDivider.cpp" />
     <ClCompile Include="SentenceVector.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

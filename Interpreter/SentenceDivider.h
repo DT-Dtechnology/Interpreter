@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
 #include <string>
 #include <vector>
+#include "Word.h"
 #include "Sentence.h"
 #include <queue>
 
