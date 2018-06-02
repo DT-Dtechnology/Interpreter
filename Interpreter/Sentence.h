@@ -21,3 +21,9 @@ public:
 	~Sentence();
 	void printTest() const { std::cout << row_ << " " << tab_cnt_ << " " << order_ << '\n'; }
 };
+
+inline Sentence::Sentence(std::string& order, int tab, int row):
+	order_(order),tab_cnt_(tab),row_(row)
+{
+	
+}

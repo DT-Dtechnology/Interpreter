@@ -153,23 +153,31 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="Inputter.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OperatorSet.h" />
+    <ClInclude Include="ParseBuildTreeTest.h" />
     <ClInclude Include="ParseFuncSwitcher.h" />
     <ClInclude Include="PVM.h" />
+    <ClInclude Include="QuoteDetecter.h" />
+    <ClInclude Include="SenDivider.h" />
     <ClInclude Include="Sentence.h" />
     <ClInclude Include="SentenceParser.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Traveller.h" />
+    <ClInclude Include="TypeDetecter.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />
     <ClCompile Include="PVM.cpp" />
+    <ClCompile Include="SenDivider.cpp" />
     <ClCompile Include="SentenceParser.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

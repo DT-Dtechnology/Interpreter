@@ -54,6 +54,24 @@
     <ClInclude Include="Matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ParseBuildTreeTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="QuoteDetecter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SenDivider.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OperatorSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDetecter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +93,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ParseFuncSwitcher.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Inputter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SenDivider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

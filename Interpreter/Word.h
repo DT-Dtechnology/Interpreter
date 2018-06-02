@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Object.h"
 
 using std::string;
 
@@ -16,6 +17,7 @@ class Word
 public:
 	Word() = default;
 	~Word() = default;
+	Word(WordType type, string str) :word_type_(type), msg_(str) { }
 	string getMsg() const { return msg_; }
 	void setMsg(string msg) { msg_ = msg; }
 	WordType getType() const { return word_type_; }
