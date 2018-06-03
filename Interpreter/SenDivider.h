@@ -3,7 +3,6 @@
 #include <vector>
 #include <queue>
 #include "Word.h"
-#include "Object.h"
 
 using std::string;
 using std::vector;
