@@ -23,7 +23,7 @@ class Block
 	VarTable var_table_;
 	FuncTable func_table_;
 	Traveller traveller_;
-	Object* return_pos_;
+	Object* return_pos_ = nullptr;
 public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector), traveller_(this) { }
 	~Block() = default;
