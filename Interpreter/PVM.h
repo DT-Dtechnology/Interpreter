@@ -11,17 +11,20 @@ class PVM
 	void run();
 public:
 	PVM(string file_name) :file_name_(file_name) { }
-	~PVM();
+	~PVM() = default;
 	void work()
 	{
 		input();
 		run();
 	}
+	void print_test_first();
 };
 
 inline void PVM::input()
 {
-	Inputter* inputter = new Inputter(file_name_);
+	ifstream fin;
+	fin.open(file_name_);
+	Inputter* inputter = new Inputter(fin);
 	Global_ = new Block(inputter->get_sentence_vector());
 	delete inputter;
 }
@@ -29,5 +32,12 @@ inline void PVM::input()
 inline void PVM::run()
 {
 	
+}
+
+inline void PVM::print_test_first()
+{
+	input();
+	std::cout << "Hello World" << std::endl;
+	Global_->print_all();
 }
 

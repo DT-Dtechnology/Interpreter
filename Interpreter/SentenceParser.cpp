@@ -114,9 +114,10 @@ void SentenceParser::print_test_first()
 	divide();
 	while (!word_queue_.empty())
 	{
-		std::cout << word_queue_.front().getMsg() << " ";
+		std::cout << word_queue_.front().getMsg() << "/";
 		word_queue_.pop();
 	}
+	std::cout << std::endl;
 }
 
 Object* getObject(Block*, string)

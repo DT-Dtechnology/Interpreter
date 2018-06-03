@@ -11,12 +11,9 @@ typedef std::vector<Sentence*> SenVector;
 
 class Inputter
 {
-	string name_;
-	SenVector s_v_;
-	ifstream fin_;
+	ifstream& fin_;
 public:
-	Inputter(const string& name);
+	Inputter(ifstream& fin) :fin_(fin) { }
 	~Inputter() = default;
-	void transfer();
-	SenVector& get_sentence_vector() { return s_v_; }
+	SenVector* get_sentence_vector() const;
 };

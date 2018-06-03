@@ -17,16 +17,16 @@ typedef map<string, Block*> FuncTable;
 
 class Block
 {
-	SenVector sentence_vector_;
+	SenVector* sentence_vector_;
 	stack<Block*> block_space_stack_;
 	stack<Block*> temp_space_stack_;
 	VarTable var_table_;
 	FuncTable func_table_;
-	Traveller traveller_;
+	//Traveller traveller_;
 	Object* return_pos_;
 public:
-	Block(SenVector& sen_vector) :sentence_vector_(sen_vector) { }
-	~Block();
+	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
+	~Block() = default;
 	
 	void print_all();
 };
