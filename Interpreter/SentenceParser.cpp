@@ -3,10 +3,18 @@
 #include "Object.h"
 #include "Error.h"
 #include "Matrix.h"
+#include "SenDivider.h"
 
 using std::stack;
 
 Object* getObject(Block*, string);
+
+void SentenceParser::divide()
+{
+	SenDivider* sen_divider = new SenDivider(sentence_->getOrder());
+	word_queue_ = *sen_divider->work();
+	delete sen_divider;
+}
 
 void SentenceParser::buildTree()
 {
@@ -94,6 +102,21 @@ void SentenceParser::buildTree()
 			throw Error();
 	}
 	root_ = Root;
+}
+
+void SentenceParser::parserNode(Node*)
+{
+	//####
+}
+
+void SentenceParser::print_test_first()
+{
+	divide();
+	while (!word_queue_.empty())
+	{
+		std::cout << word_queue_.front().getMsg() << " ";
+		word_queue_.pop();
+	}
 }
 
 Object* getObject(Block*, string)

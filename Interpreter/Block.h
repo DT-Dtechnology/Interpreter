@@ -25,7 +25,9 @@ class Block
 	Traveller traveller_;
 	Object* return_pos_;
 public:
-	Block();
+	Block(SenVector& sen_vector) :sentence_vector_(sen_vector) { }
 	~Block();
+	
+	void print_all();
 };
 

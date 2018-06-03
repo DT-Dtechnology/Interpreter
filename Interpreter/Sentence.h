@@ -19,6 +19,7 @@ public:
 	Sentence() = delete;
 	Sentence(std::string& order, int tab, int row);
 	~Sentence();
+	string getOrder() const { return order_; }
 	void printTest() const { std::cout << row_ << " " << tab_cnt_ << " " << order_ << '\n'; }
 };
 
