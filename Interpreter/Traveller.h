@@ -4,9 +4,8 @@
 class Traveller
 {
 	Block* c_block_;
-	SentenceParser sentence_parser_;
 public:
-	Traveller() = default;
+	Traveller(Block* c_block) :c_block_(c_block) { ; }
 	~Traveller() = default;
 	void work();
 };
