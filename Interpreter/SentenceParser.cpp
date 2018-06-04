@@ -35,8 +35,17 @@ void SentenceParser::buildTree()
 		cout << "Type " << Top << endl;
 		cout << "Front" << front << endl;
 
-		if (Top == NodeType::TERMINATE)
+		if (isTerminate[stringToChar[front]])
 		{
+			word_queue_.pop();
+			front = word_queue_.front().getMsg();	//此处用于报错
+			ParseStack.push(X);
+
+			cout << "Match" << endl;
+		}
+		else if (Top == NodeType::TERMINATE)
+		{
+			
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
 				X->getValue()->getType() == ObjectType::TotalVariable)
 			{
@@ -45,13 +54,6 @@ void SentenceParser::buildTree()
 				// 报错处理时要格外小心
 				// ####
 				X->value_ = getObject(cur_block_, front);
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();
-			}
-			else if (isTerminate[stringToChar[front]])
-			{
-				const int tmp = stringToChar[front];
-				X->nodeType_ = charToNode[tmp];
 				word_queue_.pop();
 				front = word_queue_.front().getMsg();
 			}
@@ -89,9 +91,7 @@ void SentenceParser::buildTree()
 					// 注意value 和 variable 不是 true
 					// 基于对应的 chartoNode
 					// ####
-					Node* node = new Node(TERMINATE);
-					node->setValue(new OperatorObject());
-					X->addNode(node);
+					X->nodeType_ = charToNode[magic_code[i]];
 				}
 				else
 				{
