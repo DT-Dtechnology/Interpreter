@@ -109,6 +109,13 @@ void SentenceParser::parserNode(Node*)
 	//####
 }
 
+void SentenceParser::work()
+{
+	divide();
+	buildTree();
+	parserRoot();
+}
+
 void SentenceParser::print_test_first()
 {
 	divide();
@@ -120,8 +127,15 @@ void SentenceParser::print_test_first()
 	std::cout << std::endl;
 }
 
-Object* getObject(Block*, string)
+void SentenceParser::print_test_second()
+{
+	divide();
+	buildTree();
+	
+}
+
+Object* getObject(Block*, string name)
 {
 	// ####
-	return nullptr;
+	return new TestObject(name);
 }

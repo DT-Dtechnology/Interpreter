@@ -24,5 +24,6 @@ public:
 	~SentenceParser() = default;
 	void work();
 	void print_test_first();
+	void print_test_second();
 };
 

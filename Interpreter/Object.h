@@ -1,8 +1,9 @@
 #pragma once
+#include <iostream>
 
 enum ObjectType
 {
-	TotalVariable, TotalValue
+	DEBUG_TEST, TotalVariable, TotalValue
 };
 
 class Object
@@ -28,4 +29,20 @@ class VariableObject :
 public:
 	VariableObject() :Object(ObjectType::TotalVariable) { }
 	~VariableObject() override = default;
+};
+
+class TestObject :
+	public Object
+{
+	std::string var_name_;
+public:
+	TestObject(const std::string& var_name)
+		: Object(ObjectType::DEBUG_TEST)
+	{
+		var_name_ = var_name;
+	}
+	void print_test() const
+	{
+		std::cout << var_name_ << std::endl;
+	}
 };
