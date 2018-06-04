@@ -28,7 +28,7 @@ void buildIsTerminate()
 	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	//= ~ ( ) b c + - * / 
-	char Tsets[] = { '=', '#', '(', ')', 'b', 'c', '+', '-', '*', '/' };
+	char Tsets[] = { '=', '#', '(', ')', '+', '-', '*', '/' };
 	for (auto i : Tsets) {
 		isTerminate[(int)i] = true;
 	}
@@ -81,12 +81,12 @@ map<NodeType, int> nodeToInt;
 void buildNtoI()
 {
 	nodeToInt[TEST_A] = 0;
-	nodeToInt[TEST_L] = 1;
-	nodeToInt[TEST_E] = 2;
+	nodeToInt[TEST_E] = 1;
+	nodeToInt[TEST_G] = 2;
 	nodeToInt[TEST_T] = 3;
-	nodeToInt[TEST_G] = 4;
-	nodeToInt[TEST_H] = 5;
-	nodeToInt[TEST_F] = 6;
+	nodeToInt[TEST_H] = 4;
+	nodeToInt[TEST_F] = 5;
+	nodeToInt[TEST_L] = 6;
 	nodeToInt[TEST_P] = 7;
 	nodeToInt[TEST_M] = 8;
 }

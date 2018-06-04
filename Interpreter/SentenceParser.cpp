@@ -34,6 +34,9 @@ void SentenceParser::buildTree()
 		cout << endl;
 		cout << "Type " << Top << endl;
 		cout << "Front " << front << endl;
+		cout << "  " << nodeToInt[Top] << endl;
+		cout << "  " << stringToInt[front] << endl;
+		cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 
 		if (isTerminate[stringToChar[front]])
 		{
