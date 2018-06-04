@@ -7,7 +7,7 @@
 using std::string;
 using std::map;
 
-const int MatrixRow = 9;
+const int MatrixRow = 7;
 const int MatrixColumn = 10;
 
 //####
@@ -16,7 +16,7 @@ void buildIsUnTerminate()
 {
 	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
-	char UTsets[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F', 'P', 'M' };
+	char UTsets[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F' };
 		for (auto i : UTsets) {
 			isUnTerminate[(int)i] = true;
 		}
@@ -28,7 +28,7 @@ void buildIsTerminate()
 	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	//= ~ ( ) b c + - * / 
-	char Tsets[] = { '=', '#', '(', ')', 'b', 'c', '+', '-', '*', '/' };
+	char Tsets[] = { '=', '#', '(', ')', '+', '-', '*', '/' };
 	for (auto i : Tsets) {
 		isTerminate[(int)i] = true;
 	}
@@ -63,8 +63,8 @@ string Matrix[MatrixRow][MatrixColumn];
 map<string, char> stringToChar;
 void buildStoC()
 {
-	string UTsets[] = { "A", "L", "E", "T", "G", "H", "F", "P", "M" };
-	char UTsetc[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F', 'P', 'M' };
+	string UTsets[] = { "A", "L", "E", "T", "G", "H", "F" };
+	char UTsetc[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F' };
 	for (int i = 0; i < MatrixRow; i++) {
 		stringToChar[UTsets[i]] = UTsetc[i];
 		}
@@ -81,14 +81,12 @@ map<NodeType, int> nodeToInt;
 void buildNtoI()
 {
 	nodeToInt[TEST_A] = 0;
-	nodeToInt[TEST_L] = 1;
-	nodeToInt[TEST_E] = 2;
+	nodeToInt[TEST_E] = 1;
+	nodeToInt[TEST_G] = 2;
 	nodeToInt[TEST_T] = 3;
-	nodeToInt[TEST_G] = 4;
-	nodeToInt[TEST_H] = 5;
-	nodeToInt[TEST_F] = 6;
-	nodeToInt[TEST_P] = 7;
-	nodeToInt[TEST_M] = 8;
+	nodeToInt[TEST_H] = 4;
+	nodeToInt[TEST_F] = 5;
+	nodeToInt[TEST_L] = 6;
 }
 
 //map<int, NodeType> intToNode;
@@ -134,15 +132,15 @@ map<string, int> stringToInt;
 void buildStoI()
 {
 	stringToInt["="] = 0;
-	stringToInt["#"] = 1;
-	stringToInt["("] = 2;
-	stringToInt[")"] = 3;
-	stringToInt["b"] = 4;
-	stringToInt["c"] = 5;
-	stringToInt["+"] = 6;
-	stringToInt["-"] = 7;
-	stringToInt["*"] = 8;
-	stringToInt["/"] = 9;
+	stringToInt["+"] = 1;
+	stringToInt["-"] = 2;
+	stringToInt["#"] = 3;
+	stringToInt["*"] = 4;
+	stringToInt["/"] = 5;
+	stringToInt["("] = 6;
+	stringToInt[")"] = 7;
+	stringToInt["b"] = 8;
+	stringToInt["c"] = 9;
 }
 //####
 
