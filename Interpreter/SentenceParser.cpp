@@ -30,6 +30,8 @@ void SentenceParser::buildTree()
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
 
+		cout << front << endl;
+
 		if (Top == NodeType::TERMINATE)
 		{
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
@@ -61,7 +63,10 @@ void SentenceParser::buildTree()
 		else if (Matrix[nodeToInt[Top]][stringToChar[front]] != "_")
 		{
 			string magic_code = Matrix[nodeToInt[Top]][stringToChar[front]];
-
+			
+			
+			
+			cout << magic_code << endl;
 			// 顺序生成X的子节点
 			for (auto i = 0; i < magic_code.length(); ++i)
 			{
@@ -94,7 +99,7 @@ void SentenceParser::buildTree()
 			}
 
 			// 倒序入栈
-			for(auto it = X->childVector_.end()-1; it >= X->childVector_.begin(); --it)
+			for(auto it = X->childVector_.end(); it != X->childVector_.begin(); --it)
 				ParseStack.push(*it);
 
 		}
@@ -131,7 +136,14 @@ void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
-	
+	cout << "1" << endl;
+	print_node(root_);
+	std::cout << std::endl;
+}
+
+void SentenceParser::build_all()
+{
+	buildAll();
 }
 
 Object* getObject(Block*, string name)

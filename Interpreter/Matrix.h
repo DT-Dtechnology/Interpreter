@@ -132,6 +132,8 @@ void buildCtoN()
 	charToNode['/'] = DIVIDE;
 }
 
+void buildMatrix();
+
 // ап╨е
 map<string, int> stringToInt;
 void buildStringToInt()
