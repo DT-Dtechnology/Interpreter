@@ -14,7 +14,7 @@ const int MatrixColumn = 9;
 bool isUnTerminate[256];
 void buildIsUnTerminate()
 {
-	for (int i = 0; i <= 256; i++)
+	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	isUnTerminate['S'] = true;
 	isUnTerminate['A'] = true;
@@ -28,7 +28,7 @@ void buildIsUnTerminate()
 bool isTerminate[256];
 void buildIsTerminate()
 {
-	for (int i = 0; i <= 256; i++)
+	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	isTerminate['='] = true;
 	isTerminate['('] = true;
@@ -78,12 +78,12 @@ void buildStoC()
 	stringToChar["M"] = 'M';
 	stringToChar["("] = '(';
 	stringToChar[")"] = ')';
-	stringToChar["value"] = 'b';
+	stringToChar["b"] = 'b';
 	stringToChar["+"] = '+';
 	stringToChar["-"] = '-';
 	stringToChar["*"] = '*';
 	stringToChar["/"] = '/';
-	stringToChar["variable"] = 'c';
+	stringToChar["c"] = 'c';
 }
 
 // Nodetype enum
@@ -141,12 +141,12 @@ void buildStringToInt()
 	stringToInt["="] = 0;
 	stringToInt["("] = 1;
 	stringToInt[")"] = 2;
-	stringToInt["value"] = 3;
+	stringToInt["b"] = 3;
 	stringToInt["+"] = 4;
 	stringToInt["-"] = 5;
 	stringToInt["*"] = 6;
 	stringToInt["/"] = 7;
-	stringToInt["variable"] = 8;
+	stringToInt["c"] = 8;
 }
 //####
 

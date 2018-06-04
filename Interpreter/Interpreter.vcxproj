@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\009.txt" />
+    <Text Include="009.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

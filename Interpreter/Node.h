@@ -43,12 +43,11 @@ inline void print_node(Node* node)
 	}
 	else
 	{
-		std::cout << "(";
 		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
 		{
 			print_node(*it);
 		}
-		std::cout << ")";
+		std::cout << std::endl;
 	}
 }
 
