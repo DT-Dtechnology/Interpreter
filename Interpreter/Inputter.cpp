@@ -2,14 +2,11 @@
 #include "Inputter.h"
 #include "QuoteDetecter.h"
 
-Inputter::Inputter(const string& name) : name_(name)
+SenVector* Inputter::get_sentence_vector() const
 {
-}
-
-void Inputter::transfer()
-{
+	SenVector* sen_vector = new SenVector;
 	QuoteDetecter quote_detecter;
-	fin_.open(name_);
+	
 	string temp;
 	int row_cnt = 0;
 	while (getline(fin_, temp))
@@ -43,8 +40,8 @@ void Inputter::transfer()
 		else
 		{
 			row_cnt++;
-			s_v_.push_back(new Sentence(line, tab_cnt, row_cnt));
+			sen_vector->push_back(new Sentence(line, tab_cnt, row_cnt));
 		}
 	}
+	return sen_vector;
 }
-

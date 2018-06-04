@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <set>
 #include <string>
 
@@ -14,10 +14,10 @@ string python_operator[] =
 	"+=", "*=", "++", "(", ")", ",", "--"
 };
 
-set<string> operatorSet(python_operator, python_operator + sizeof(python_operator) / sizeof(string *));
+set<string> operatorSet(python_operator, python_operator + 34);
 
 
-string _keyword[] =
+string python_keyword[] =
 { "False",  "def",      "if",     "raise",  "None",    "del",   "import",
 "return",  "True",     "elif",   "in",     "try",     "and",   "else",
 "is",      "while",    "as",     "except", "lambda",  "with",  "assert",
@@ -25,13 +25,6 @@ string _keyword[] =
 "or",      "continue", "global", "pass", "not"
 };
 
-/*
-*"False",  "def",      "if",   "None",
-*"return",  "True",     "elif",   "in",    "and",   "else",
-*"is",  "while",
-*"break",  "for", "from",
-*"or",      "continue", "pass", "not"£¬ "break"
-*
-*/
 
-set<string> KeyWordSet(_keyword, _keyword + sizeof(_keyword) / sizeof(string *));
+
+set<string> KeyWordSet(python_keyword, python_keyword + 33);
