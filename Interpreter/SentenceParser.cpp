@@ -32,89 +32,92 @@ void SentenceParser::buildTree()
 		NodeType Top = X->getNodeType();
 
 		cout << endl;
-		cout << "Type " << Top << endl;
-		cout << "Front" << front << endl;
+		
 
-		if (Top == NodeType::TERMINATE)
-		{
-			if (X->getValue()->getType() == ObjectType::TotalValue ||
-				X->getValue()->getType() == ObjectType::TotalVariable)
+			if (Top == NodeType::TERMINATE)
 			{
-				// X 更新 Object 所指向的内容
-				// 此处暂时存储为Total Object的特殊对象
-				// 报错处理时要格外小心
-				// ####
-				X->value_ = getObject(cur_block_, front);
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();
-			}
-			else if (isTerminate[stringToChar[front]])
-			{
-				const int tmp = stringToChar[front];
-				X->nodeType_ = charToNode[tmp];
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();
-			}
-			else
-				throw Error("Wrong Match");
-			cout << "Match" << endl;
-		}
-		else if (Top == NodeType::END)
-		{
-			if (front == "#")
-				FLAG = false;
-			else
-				throw Error("No END");
-		}
-		else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
-		{
-			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
-			
-			cout << magic_code << endl;
-			cout << front << endl;
-			// 顺序生成X的子节点
-			for (auto i = 0; i < magic_code.length(); ++i)
-			{
-				if (magic_code[i] == '~')
-					continue;
-				if (isUnTerminate[magic_code[i]])
+				if (X->getValue()->getType() == ObjectType::TotalValue ||
+					X->getValue()->getType() == ObjectType::TotalVariable)
 				{
-					const NodeType type = charToNode[magic_code[i]];
-					Node* node = new Node(type);
-					X->addNode(node);
-				}
-				else if(isTerminate[magic_code[i]])
-				{
-					// 判断读入符号类型, 同时处理X结点的NodeType
-					// 注意value 和 variable 不是 true
-					// 基于对应的 chartoNode
+					// X 更新 Object 所指向的内容
+					// 此处暂时存储为Total Object的特殊对象
+					// 报错处理时要格外小心
 					// ####
-					Node* node = new Node(TERMINATE);
-					node->setValue(new OperatorObject());
-					X->addNode(node);
+					X->value_ = getObject(cur_block_, front);
+					word_queue_.pop();
+					front = word_queue_.front().getMsg();
+				}
+				else if (isTerminate[stringToChar[front]])
+				{
+					const int tmp = stringToChar[front];
+					X->nodeType_ = charToNode[tmp];
+					word_queue_.pop();
+					front = word_queue_.front().getMsg();
 				}
 				else
-				{
-					Node* node = new Node(NodeType::TERMINATE);
-					if (word_queue_.front().getType() == WordType::variable)
-						node->setValue(new VariableObject());
-					else if (word_queue_.front().getType() == WordType::value)
-						node->setValue(new ValueObject());
-					else
-						throw Error();
-					node->isLeaf_ = true;
-					X->addNode(node);
-				}
+					throw Error("Wrong Match");
+				cout << "Match" << endl;
 			}
+			else if (Top == NodeType::END)
+			{
+				if (front == "#")
+					FLAG = false;
+				else
+					throw Error("No END");
+			}
+			else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
+			{
+				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-			// 倒序入栈
-			for(auto it = X->childVector_.end(); it != X->childVector_.begin();)
-				ParseStack.push(*(--it));
+				cout << magic_code << endl;
+				cout << front << endl;
 
-			cout << "Generate" << endl;
-		}
-		else
-			throw Error("What?");
+				cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
+				// 顺序生成X的子节点
+				for (auto i = 0; i < magic_code.length(); ++i)
+				{
+					if (magic_code[i] == '~')
+						continue;
+					if (isUnTerminate[magic_code[i]])
+					{
+						const NodeType type = charToNode[magic_code[i]];
+						Node* node = new Node(type);
+						X->addNode(node);
+					}
+					else if (isTerminate[magic_code[i]])
+					{
+						// 判断读入符号类型, 同时处理X结点的NodeType
+						// 注意value 和 variable 不是 true
+						// 基于对应的 chartoNode
+						// ####
+						Node* node = new Node(TERMINATE);
+						node->setValue(new OperatorObject());
+						X->addNode(node);
+					}
+					else
+					{
+						Node* node = new Node(NodeType::TERMINATE);
+						if (word_queue_.front().getType() == WordType::variable)
+							node->setValue(new VariableObject());
+						else if (word_queue_.front().getType() == WordType::value)
+							node->setValue(new ValueObject());
+						else
+							throw Error("Image");
+						node->isLeaf_ = true;
+						X->addNode(node);
+					}
+				}
+
+				// 倒序入栈
+				for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
+					ParseStack.push(*(--it));
+
+				cout << "Generate" << endl;
+			}
+			else
+				throw Error("What?");
+		
+		
 	}
 	cout << endl;
 	cout << "Finish" << endl;
