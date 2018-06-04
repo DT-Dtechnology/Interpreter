@@ -33,20 +33,10 @@ void SentenceParser::buildTree()
 
 		cout << endl;
 		cout << "Type " << Top << endl;
-		cout << "Front " << front << endl;
-		cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
+		cout << "Front" << front << endl;
 
-		
 		if (Top == NodeType::TERMINATE)
 		{
-			if (isTerminate[stringToChar[front]])
-			{
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();	//此处用于报错
-				ParseStack.push(X);
-
-				cout << "Match" << endl;
-			}
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
 				X->getValue()->getType() == ObjectType::TotalVariable)
 			{
@@ -55,6 +45,13 @@ void SentenceParser::buildTree()
 				// 报错处理时要格外小心
 				// ####
 				X->value_ = getObject(cur_block_, front);
+				word_queue_.pop();
+				front = word_queue_.front().getMsg();
+			}
+			else if (isTerminate[stringToChar[front]])
+			{
+				const int tmp = stringToChar[front];
+				X->nodeType_ = charToNode[tmp];
 				word_queue_.pop();
 				front = word_queue_.front().getMsg();
 			}
@@ -92,7 +89,9 @@ void SentenceParser::buildTree()
 					// 注意value 和 variable 不是 true
 					// 基于对应的 chartoNode
 					// ####
-					X->nodeType_ = charToNode[magic_code[i]];
+					Node* node = new Node(TERMINATE);
+					node->setValue(new OperatorObject());
+					X->addNode(node);
 				}
 				else
 				{
@@ -102,7 +101,7 @@ void SentenceParser::buildTree()
 					else if (word_queue_.front().getType() == WordType::value)
 						node->setValue(new ValueObject());
 					else
-						throw Error("Image");
+						throw Error();
 					node->isLeaf_ = true;
 					X->addNode(node);
 				}

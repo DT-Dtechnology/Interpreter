@@ -31,6 +31,14 @@ public:
 	~VariableObject() override = default;
 };
 
+class OperatorObject :
+	public Object
+{
+public:
+	OperatorObject() :Object(ObjectType::Operator) { }
+	~OperatorObject() override = default;
+};
+
 class TestObject :
 	public Object
 {
