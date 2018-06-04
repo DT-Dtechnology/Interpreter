@@ -131,7 +131,8 @@ void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
-	
+	print_node(root_);
+	std::cout << std::endl;
 }
 
 Object* getObject(Block*, string name)
