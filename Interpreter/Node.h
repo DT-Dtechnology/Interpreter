@@ -36,9 +36,18 @@ public:
 
 inline void print_node(Node* node)
 {
+	if (node->getNodeType() == NodeType::ADD)
+		std::cout << "+ " ;
+	if (node->getNodeType() == NodeType::EQUAL)
+		std::cout << "= " ;
+	if (node->getNodeType() == NodeType::MULTIPLY)
+		std::cout << "* " ;
+	if (node->getNodeType() == NodeType::LEFT_BRACKET)
+		std::cout << "( " ;
+	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
+		std::cout << ") " ;
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
-		std::cout << "Type: " << node->getNodeType() << std::endl;
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
 		tmp->print_test();
 	}
@@ -48,7 +57,6 @@ inline void print_node(Node* node)
 		{
 			print_node(*it);
 		}
-		std::cout << std::endl;
 	}
 }
 
