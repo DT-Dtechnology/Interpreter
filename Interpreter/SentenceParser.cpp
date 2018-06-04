@@ -23,6 +23,7 @@ void SentenceParser::buildTree()
 	ParseStack.push(new Node(NodeType::END));
 	ParseStack.push(Root);
 	bool FLAG = true;
+	word_queue_.push(Word(keyword, "#"));
 	string front = word_queue_.front().getMsg();
 	while (FLAG)
 	{
@@ -30,8 +31,21 @@ void SentenceParser::buildTree()
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
 
-		if (Top == NodeType::TERMINATE)
+		cout << endl;
+		cout << "Type " << Top << endl;
+		cout << "Front" << front << endl;
+
+		if (isTerminate[stringToChar[front]])
 		{
+			word_queue_.pop();
+			front = word_queue_.front().getMsg();	//此处用于报错
+			ParseStack.push(X);
+
+			cout << "Match" << endl;
+		}
+		else if (Top == NodeType::TERMINATE)
+		{
+			
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
 				X->getValue()->getType() == ObjectType::TotalVariable)
 			{
@@ -43,28 +57,28 @@ void SentenceParser::buildTree()
 				word_queue_.pop();
 				front = word_queue_.front().getMsg();
 			}
-			else if (isTerminate[stringToChar[front]])
-			{
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();
-			}
 			else
-				throw Error();
+				throw Error("Wrong Match");
+			cout << "Match" << endl;
 		}
 		else if (Top == NodeType::END)
 		{
 			if (front == "#")
 				FLAG = false;
 			else
-				throw Error();
+				throw Error("No END");
 		}
-		else if (Matrix[nodeToInt[Top]][stringToChar[front]] != "_")
+		else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
 		{
-			string magic_code = Matrix[nodeToInt[Top]][stringToChar[front]];
-
+			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
+			
+			cout << magic_code << endl;
+			cout << front << endl;
 			// 顺序生成X的子节点
 			for (auto i = 0; i < magic_code.length(); ++i)
 			{
+				if (magic_code[i] == '~')
+					continue;
 				if (isUnTerminate[magic_code[i]])
 				{
 					const NodeType type = charToNode[magic_code[i]];
@@ -94,19 +108,30 @@ void SentenceParser::buildTree()
 			}
 
 			// 倒序入栈
-			for(auto it = X->childVector_.end()-1; it >= X->childVector_.begin(); --it)
-				ParseStack.push(*it);
+			for(auto it = X->childVector_.end(); it != X->childVector_.begin();)
+				ParseStack.push(*(--it));
 
+			cout << "Generate" << endl;
 		}
 		else
-			throw Error();
+			throw Error("What?");
 	}
+	cout << endl;
+	cout << "Finish" << endl;
+	cout << endl;
 	root_ = Root;
 }
 
 void SentenceParser::parserNode(Node*)
 {
 	//####
+}
+
+void SentenceParser::work()
+{
+	divide();
+	buildTree();
+	parserRoot();
 }
 
 void SentenceParser::print_test_first()
@@ -120,8 +145,23 @@ void SentenceParser::print_test_first()
 	std::cout << std::endl;
 }
 
-Object* getObject(Block*, string)
+void SentenceParser::print_test_second()
+{
+	divide();
+	buildTree();
+	cout << "Let Us Print." << endl;
+	print_node(root_);
+	std::cout << std::endl;
+}
+
+void SentenceParser::build_all()
+{
+	buildAll();
+	printMatrix();
+}
+
+Object* getObject(Block*, string name)
 {
 	// ####
-	return nullptr;
+	return new TestObject(name);
 }
