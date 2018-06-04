@@ -1,4 +1,4 @@
-Ôªø#pragma once
+#pragma once
 #include "Node.h"
 #include <string>
 #include <map>
@@ -17,9 +17,9 @@ void buildIsUnTerminate()
 	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	char UTsets[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F', 'P', 'M' };
-	for (auto i : UTsets) {
-		isUnTerminate[(int)i] = true;
-	}
+		for (auto i : UTsets) {
+			isUnTerminate[(int)i] = true;
+		}
 }
 
 bool isTerminate[256];
@@ -33,8 +33,8 @@ void buildIsTerminate()
 		isTerminate[(int)i] = true;
 	}
 }
-//Value and Variable ¬º√á√Ç¬º√é¬™ false
-//√Ü√§√ì√†¬∏√∑¬∏√∂√ñ√ï¬Ω√°¬∑√ª¬∫√Ö¬æ√ì√é¬Øtrue
+//Value and Variable º«¬ºŒ™ false
+//∆‰”‡∏˜∏ˆ÷’Ω·∑˚∫≈æ”ŒØtrue
 //####
 
 string Matrix[MatrixRow][MatrixColumn];
@@ -42,22 +42,22 @@ string Matrix[MatrixRow][MatrixColumn];
 //map<char, string> charToString;
 /*void buildCtoS()
 {
-charToString['S'] = "S";
-charToString['A'] = "A";
-charToString['L'] = "L";
-charToString['E'] = "E";
-charToString['P'] = "P";
-charToString['='] = "=";
-charToString['T'] = "T";
-charToString['M'] = "M";
-charToString['('] = "(";
-charToString[')'] = ")";
-charToString['b'] = "value";
-charToString['+'] = "+";
-charToString['-'] = "-";
-charToString['*'] = "*";
-charToString['/'] = "/";
-charToString['c'] = "variable";
+	charToString['S'] = "S";
+	charToString['A'] = "A";
+	charToString['L'] = "L";
+	charToString['E'] = "E";
+	charToString['P'] = "P";
+	charToString['='] = "=";
+	charToString['T'] = "T";
+	charToString['M'] = "M";
+	charToString['('] = "(";
+	charToString[')'] = ")";
+	charToString['b'] = "value";
+	charToString['+'] = "+";
+	charToString['-'] = "-";
+	charToString['*'] = "*";
+	charToString['/'] = "/";
+	charToString['c'] = "variable";
 }*/
 
 map<string, char> stringToChar;
@@ -67,7 +67,7 @@ void buildStoC()
 	char UTsetc[] = { 'A', 'L', 'E', 'T', 'G', 'H', 'F', 'P', 'M' };
 	for (int i = 0; i < MatrixRow; i++) {
 		stringToChar[UTsets[i]] = UTsetc[i];
-	}
+		}
 	string Tsets[] = { "=", "#", "(", ")", "b", "c", "+", "-", "*", "/" };
 	char Tsetc[] = { '=', '#', '(', ')', 'b', 'c', '+', '-', '*', '/' };
 	for (int i = 0; i < MatrixColumn; i++) {
@@ -76,7 +76,7 @@ void buildStoC()
 }
 
 // Nodetype enum
-// √ê√ê√ä√Ω
+// –– ˝
 map<NodeType, int> nodeToInt;
 void buildNtoI()
 {
@@ -94,13 +94,13 @@ void buildNtoI()
 //map<int, NodeType> intToNode;
 /*void buildIntToNode()
 {
-intToNode[0] = TEST_S;
-intToNode[1] = TEST_A;
-intToNode[2] = TEST_E;
-intToNode[3] = TEST_T;
-intToNode[4] = TEST_P;
-intToNode[5] = TEST_M;
-intToNode[6] = TEST_L;
+	intToNode[0] = TEST_S;
+	intToNode[1] = TEST_A;
+	intToNode[2] = TEST_E;
+	intToNode[3] = TEST_T;
+	intToNode[4] = TEST_P;
+	intToNode[5] = TEST_M;
+	intToNode[6] = TEST_L;
 }*/
 
 //####
@@ -129,7 +129,7 @@ void buildCtoN()
 }
 void buildMatrix();
 
-// √Å√ê¬∫√Ö
+// ¡–∫≈
 map<string, int> stringToInt;
 void buildStoI()
 {
@@ -159,7 +159,7 @@ void buildAll()
 //####
 //## def a func
 //void calcMatrix()
-//Usage: ¬Ω¬´V'¬µ√à√ó¬™¬ª¬Ø√é¬™V-32/V-64¬¥√Ω¬∂¬®
+//Usage: Ω´V'µ»◊™ªØŒ™V-32/V-64¥˝∂®
 //####
 
 
