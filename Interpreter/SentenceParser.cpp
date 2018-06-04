@@ -34,21 +34,19 @@ void SentenceParser::buildTree()
 		cout << endl;
 		cout << "Type " << Top << endl;
 		cout << "Front " << front << endl;
-		cout << "  " << nodeToInt[Top] << endl;
-		cout << "  " << stringToInt[front] << endl;
 		cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 
-		if (isTerminate[stringToChar[front]])
+		
+		if (Top == NodeType::TERMINATE)
 		{
-			word_queue_.pop();
-			front = word_queue_.front().getMsg();	//此处用于报错
-			ParseStack.push(X);
+			if (isTerminate[stringToChar[front]])
+			{
+				word_queue_.pop();
+				front = word_queue_.front().getMsg();	//此处用于报错
+				ParseStack.push(X);
 
-			cout << "Match" << endl;
-		}
-		else if (Top == NodeType::TERMINATE)
-		{
-			
+				cout << "Match" << endl;
+			}
 			if (X->getValue()->getType() == ObjectType::TotalValue ||
 				X->getValue()->getType() == ObjectType::TotalVariable)
 			{
@@ -104,7 +102,7 @@ void SentenceParser::buildTree()
 					else if (word_queue_.front().getType() == WordType::value)
 						node->setValue(new ValueObject());
 					else
-						throw Error("Imagination");
+						throw Error("Image");
 					node->isLeaf_ = true;
 					X->addNode(node);
 				}

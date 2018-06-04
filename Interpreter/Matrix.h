@@ -28,7 +28,7 @@ void buildIsTerminate()
 	for (int i = 0; i < 256; i++)
 		isUnTerminate[i] = false;
 	//= ~ ( ) b c + - * / 
-	char Tsets[] = { '=', '#', '(', ')', '+', '-', '*', '/' };
+	char Tsets[] = { '=', '(', ')'};
 	for (auto i : Tsets) {
 		isTerminate[(int)i] = true;
 	}
