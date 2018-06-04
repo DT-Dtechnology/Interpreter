@@ -9,7 +9,7 @@ typedef std::vector<Node*> NodeVector;
 enum NodeType
 {
 	ROOT, END, TERMINATE, VALUE, VARIABLE,
-	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L,
+	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L, TEST_G, TEST_H, TEST_F,
 	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE,
 };
 
@@ -38,6 +38,7 @@ inline void print_node(Node* node)
 {
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
+		std::cout << "Type: " << node->getNodeType() << std::endl;
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
 		tmp->print_test();
 	}

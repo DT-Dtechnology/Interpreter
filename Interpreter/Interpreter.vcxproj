@@ -191,8 +191,7 @@
     <None Include="Test1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Desktop\009.txt" />
-    <Text Include="009.txt" />
+    <Text Include="H:\table.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,7 +33,7 @@ void SentenceParser::buildTree()
 
 		cout << endl;
 		cout << "Type " << Top << endl;
-		cout << "Front" << front << endl;
+		cout << "Front " << front << endl;
 
 		if (isTerminate[stringToChar[front]])
 		{
@@ -101,7 +101,7 @@ void SentenceParser::buildTree()
 					else if (word_queue_.front().getType() == WordType::value)
 						node->setValue(new ValueObject());
 					else
-						throw Error();
+						throw Error("Imagination");
 					node->isLeaf_ = true;
 					X->addNode(node);
 				}
