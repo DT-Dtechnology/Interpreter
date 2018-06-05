@@ -25,5 +25,7 @@ public:
 	void work();
 	void print_test_first();
 	void print_test_second();
+	
+	static void build_all();
 };
 

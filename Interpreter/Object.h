@@ -3,7 +3,7 @@
 
 enum ObjectType
 {
-	DEBUG_TEST, TotalVariable, TotalValue
+	DEBUG_TEST, TotalVariable, TotalValue, Operator
 };
 
 class Object
@@ -31,6 +31,14 @@ public:
 	~VariableObject() override = default;
 };
 
+class OperatorObject :
+	public Object
+{
+public:
+	OperatorObject() :Object(ObjectType::Operator) { }
+	~OperatorObject() override = default;
+};
+
 class TestObject :
 	public Object
 {
@@ -43,6 +51,6 @@ public:
 	}
 	void print_test() const
 	{
-		std::cout << var_name_ << std::endl;
+		std::cout << var_name_ << " ";
 	}
 };

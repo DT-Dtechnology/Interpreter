@@ -8,7 +8,9 @@ typedef std::vector<Node*> NodeVector;
 
 enum NodeType
 {
-	ROOT, END, TERMINATE, VALUE, VARIABLE
+	ROOT, END, TERMINATE, VALUE, VARIABLE,
+	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L, TEST_G, TEST_H, TEST_F,
+	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE,
 };
 
 class Node
@@ -34,6 +36,20 @@ public:
 
 inline void print_node(Node* node)
 {
+	if (node->getNodeType() == NodeType::ADD)
+		std::cout << "+ " ;
+	if (node->getNodeType() == NodeType::EQUAL)
+		std::cout << "= " ;
+	if (node->getNodeType() == NodeType::MULTIPLY)
+		std::cout << "* " ;
+	if (node->getNodeType() == NodeType::MINUS)
+		std::cout << "- ";
+	if (node->getNodeType() == NodeType::DIVIDE)
+		std::cout << "/ ";
+	if (node->getNodeType() == NodeType::LEFT_BRACKET)
+		std::cout << "( " ;
+	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
+		std::cout << ") " ;
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
@@ -41,12 +57,10 @@ inline void print_node(Node* node)
 	}
 	else
 	{
-		std::cout << "(";
 		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
 		{
 			print_node(*it);
 		}
-		std::cout << ")";
 	}
 }
 
