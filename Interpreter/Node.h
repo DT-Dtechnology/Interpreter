@@ -20,6 +20,7 @@ class Node
 	NodeVector childVector_;
 	bool isLeaf_ = false;
 	NodeType nodeType_;
+	bool isTemp_ = false;
 public:
 	Node();
 	~Node();
@@ -53,7 +54,10 @@ inline void print_node(Node* node)
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
-		tmp->print_test();
+		if (tmp)
+			tmp->print_test();
+		else
+			std::cout << "c ";
 	}
 	else
 	{
@@ -64,6 +68,14 @@ inline void print_node(Node* node)
 	}
 }
 
+
+inline Node::~Node()
+{
+	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
+		delete *it;
+	if (isTemp_)
+		delete value_;
+}
 
 inline Object* Node::getValue() const
 {

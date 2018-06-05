@@ -11,6 +11,7 @@ class Object
 	ObjectType type_;
 public:
 	Object(ObjectType type) :type_(type) { }
+	Object(std::string name);
 	virtual ~Object() = default;
 	ObjectType getType() const { return type_; }
 };
@@ -49,6 +50,7 @@ public:
 	{
 		var_name_ = var_name;
 	}
+	~TestObject() = default;
 	void print_test() const
 	{
 		std::cout << var_name_ << " ";

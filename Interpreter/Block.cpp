@@ -13,6 +13,11 @@ void Block::returnSpace()
 
 Object* Block::searchObject(string var_name)
 {
+	//####
+	//####
+	return nullptr;
+	//####
+	//####
 	Object* object = nullptr;
 	while(!block_space_stack_.empty())
 	{

@@ -7,7 +7,7 @@
 
 using std::stack;
 
-Object* getObject(Block*, string);
+Object* getObject(Block*, string, ObjectType);
 
 void SentenceParser::divide()
 {
@@ -52,7 +52,15 @@ void SentenceParser::buildTree()
 					// 此处暂时存储为Total Object的特殊对象
 					// 报错处理时要格外小心
 					// ####
-					X->value_ = getObject(cur_block_, word_queue_.front().getMsg());
+
+					//####
+					//释放管理，在Varieble对应的Node上，isTemp为false，默认为true
+					//用于表示不能删除
+
+					ObjectType type = X->getValue()->getType();
+					if (type == ObjectType::TotalValue)
+						X->isTemp_ = true;
+					X->value_ = getObject(cur_block_, word_queue_.front().getMsg(), type);
 					word_queue_.pop();
 					front = getNodeMsg(word_queue_.front());
 				}
@@ -174,8 +182,24 @@ void SentenceParser::build_all()
 	printMatrix();
 }
 
-Object* getObject(Block*, string name)
+Object* getObject(Block* cur_block, string name, ObjectType type = ObjectType::TotalValue)
 {
 	// ####
-	return new TestObject(name);
+	if (type == ObjectType::TotalValue)
+		return new TestObject(name);
+	else
+		return cur_block->searchObject(name);
+
+	//####
+	/*
+	 * 此处允许返回空指针，在赋值语句中会判断是否为空指针，如果为空，则会
+	 * 在Block中新建指针和添加Map，如果不为空，会直接修改存储于此处的指向对象
+	 * 利用new和delete混用新建对象
+	 */
+
+	//####
+	/*
+	 * 对于回收临时指针问题,会在Node中记录指向对象的性质，
+	 * 如果为临时对象，则析构
+	 */
 }
