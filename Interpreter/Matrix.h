@@ -106,15 +106,28 @@ map<char, NodeType> charToNode;
 void buildCtoN()
 {
 	//'A', 'L', 'E', 'T', 'G', 'H', 'F', 'P', 'M'
-	charToNode['A'] = TEST_A;
-	charToNode['L'] = TEST_L;
-	charToNode['E'] = TEST_E;
-	charToNode['T'] = TEST_T;
-	charToNode['G'] = TEST_G;
-	charToNode['H'] = TEST_H;
-	charToNode['F'] = TEST_F;
-	charToNode['P'] = TEST_P;
-	charToNode['M'] = TEST_M;
+	charToNode['E'] = EXP;
+	charToNode['E' - 64] = EE;
+	charToNode['T'] = T;
+	charToNode['T'-64] = TT;
+	charToNode['F'] = F;
+	charToNode['F' - 64] = FF;
+	charToNode['G'] = G;
+	charToNode['G' - 64] = GG;
+	charToNode['H'] = H;
+	charToNode['Q'] = FUNC;
+	charToNode['S' - 64] = SEN;
+	charToNode['L'] = LOOP;
+	charToNode['I'] = IF;
+	charToNode['J'] = JUMP;
+	charToNode['D'] = DEF;
+	charToNode['P' - 64] = PRINT;
+	charToNode['A'] = ASS;
+	charToNode['W'] = EXPL;
+	charToNode['W' - 64] = EXPLL;
+	charToNode['S'] = SUF;
+	charToNode['P'] = PRO;
+
 	//'=', '#', '(', ')', 'b', 'c', '+', '-', '*', '/'
 	charToNode['='] = EQUAL;
 	charToNode['('] = LEFT_BRACKET;
@@ -131,16 +144,37 @@ void buildMatrix();
 map<string, int> stringToInt;
 void buildStoI()
 {
-	stringToInt["="] = 0;
-	stringToInt["+"] = 1;
-	stringToInt["-"] = 2;
+	stringToInt["variable"] = 0;
+	stringToInt["=="] = 1;
+	stringToInt["!="] = 2;
 	stringToInt["#"] = 3;
-	stringToInt["*"] = 4;
-	stringToInt["/"] = 5;
-	stringToInt["("] = 6;
-	stringToInt[")"] = 7;
-	stringToInt["b"] = 8;
-	stringToInt["c"] = 9;
+	stringToInt["<<"] = 4;
+	stringToInt[">>"] = 5;
+	stringToInt["+"] = 6;
+	stringToInt["-"] = 7;
+	stringToInt["*"] = 8;
+	stringToInt["/"] = 9;
+	stringToInt["("] = 10;
+	stringToInt[")"] = 11;
+	stringToInt["="] = 12;
+	stringToInt["while"] = 13;
+	stringToInt[":"] = 14;
+	stringToInt["for"] = 15;
+	stringToInt["in"] = 16;
+	stringToInt[","] = 17;
+	stringToInt["def"] = 18;
+	stringToInt["!"] = 19;
+	stringToInt["not"] = 20;
+	stringToInt["++"] = 21;
+	stringToInt["--"] = 22;
+	stringToInt["if"] = 23;
+	stringToInt["elif"] = 24;
+	stringToInt["else"] = 25;
+	stringToInt["return"] = 26;
+	stringToInt["continue"] = 27;
+	stringToInt["break"] = 28;
+	stringToInt["pass"] = 29;
+	stringToInt["print"] = 30;
 }
 //####
 

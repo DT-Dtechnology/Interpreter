@@ -9,7 +9,8 @@ typedef std::vector<Node*> NodeVector;
 enum NodeType
 {
 	ROOT, END, TERMINATE, VALUE, VARIABLE,
-	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L, TEST_G, TEST_H, TEST_F,
+	EXP, EE, T, TT, F, FF, G, GG, H, SEN, ASS, LOOP, EXPL, EXPLL, DEF, FUNC, SUF, PRO,
+	VARL, VARLL, IF, JUMP, PRINT,
 	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE,
 };
 
@@ -38,19 +39,19 @@ public:
 inline void print_node(Node* node)
 {
 	if (node->getNodeType() == NodeType::ADD)
-		std::cout << "+ " ;
+		std::cout << "+ ";
 	if (node->getNodeType() == NodeType::EQUAL)
-		std::cout << "= " ;
+		std::cout << "= ";
 	if (node->getNodeType() == NodeType::MULTIPLY)
-		std::cout << "* " ;
+		std::cout << "* ";
 	if (node->getNodeType() == NodeType::MINUS)
 		std::cout << "- ";
 	if (node->getNodeType() == NodeType::DIVIDE)
 		std::cout << "/ ";
 	if (node->getNodeType() == NodeType::LEFT_BRACKET)
-		std::cout << "( " ;
+		std::cout << "( ";
 	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
-		std::cout << ") " ;
+		std::cout << ") ";
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
