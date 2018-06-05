@@ -151,9 +151,6 @@ void buildCtoN()
 	charToNode['P'] = PRO;
 	charToNode['V'-64] = VARL;
 	charToNode['R'] = VARLL;
-	charToNode['I'] = IF;
-	charToNode['J'] = JUMP;
-	charToNode['P' - 64] = PRINT;
 	//'=', '#', '(', ')', 'b', 'c', '+', '-', '*', '/'
 	charToNode['='] = EQUAL;
 	charToNode['('] = LEFT_BRACKET;
