@@ -16,6 +16,16 @@ void SentenceParser::divide()
 	delete sen_divider;
 }
 
+string getNodeMsg(const Word& word)
+{
+	if (word.getType() == WordType::value)
+		return "b";
+	else if (word.getType() == WordType::variable)
+		return "c";
+	else
+		return word.getMsg();
+}
+
 void SentenceParser::buildTree()
 {
 	stack<Node*> ParseStack;
@@ -24,14 +34,13 @@ void SentenceParser::buildTree()
 	ParseStack.push(Root);
 	bool FLAG = true;
 	word_queue_.push(Word(keyword, "#"));
-	string front = word_queue_.front().getMsg();
+	string front = getNodeMsg(word_queue_.front());
 	while (FLAG)
 	{
 		auto X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-
-		cout << endl;
+		
 		
 
 			if (Top == NodeType::TERMINATE)
@@ -43,16 +52,16 @@ void SentenceParser::buildTree()
 					// 此处暂时存储为Total Object的特殊对象
 					// 报错处理时要格外小心
 					// ####
-					X->value_ = getObject(cur_block_, front);
+					X->value_ = getObject(cur_block_, word_queue_.front().getMsg());
 					word_queue_.pop();
-					front = word_queue_.front().getMsg();
+					front = getNodeMsg(word_queue_.front());
 				}
 				else if (isTerminate[stringToChar[front]])
 				{
 					const int tmp = stringToChar[front];
 					X->nodeType_ = charToNode[tmp];
 					word_queue_.pop();
-					front = word_queue_.front().getMsg();
+					front = getNodeMsg(word_queue_.front());
 				}
 				else
 					throw Error("Wrong Match");
@@ -69,8 +78,10 @@ void SentenceParser::buildTree()
 			{
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
+				/*
 				cout << magic_code << endl;
 				cout << front << endl;
+				*/
 
 				cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 				// 顺序生成X的子节点

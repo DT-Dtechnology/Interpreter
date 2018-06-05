@@ -42,6 +42,10 @@ inline void print_node(Node* node)
 		std::cout << "= " ;
 	if (node->getNodeType() == NodeType::MULTIPLY)
 		std::cout << "* " ;
+	if (node->getNodeType() == NodeType::MINUS)
+		std::cout << "- ";
+	if (node->getNodeType() == NodeType::DIVIDE)
+		std::cout << "/ ";
 	if (node->getNodeType() == NodeType::LEFT_BRACKET)
 		std::cout << "( " ;
 	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
