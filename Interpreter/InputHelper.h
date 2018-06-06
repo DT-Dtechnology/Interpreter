@@ -10,9 +10,13 @@ public:
 	static const int A = 'A';
 	static const int Z = 'Z';
 	static map<string, char> Map;
-	static bool isUp(int c)
+	static bool isUp(char c)
 	{
 		return ((c >= A) && (c <= Z)) || ((c >= A - 64) && (c <= Z - 64));
+	}
+	static bool isRealUp(char c)
+	{
+		return (c >= A) && (c <= Z);
 	}
 	static void help_input() {
 		ifstream fin;
@@ -58,12 +62,12 @@ public:
 			}
 			if (nextUp == char(1))
 				system("pause");
-			if (isUp(word[0]) && nextUp < 'A' && (nextUp != char(1)))
+			if (isUp(word[0]) && !isRealUp(char(Map[word])))
 				fout << char(Map[word] + 64) << '\'';
-			if (nextUp == char(1))
-				system("pause");
 			else
 				fout << Map[word];
+			if (nextUp == char(1))
+				system("pause");
 		}
 		fin.close();
 		fout.close();
