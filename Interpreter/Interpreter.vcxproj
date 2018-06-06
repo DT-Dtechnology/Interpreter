@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="InputHelper.h" />
     <ClInclude Include="Inputter.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
@@ -191,8 +192,9 @@
     <None Include="Test1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Desktop\009.txt" />
-    <Text Include="009.txt" />
+    <Text Include="InputTest.txt" />
+    <Text Include="NewTable.txt" />
+    <Text Include="table.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

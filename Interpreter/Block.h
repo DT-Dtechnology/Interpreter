@@ -24,10 +24,13 @@ class Block
 	FuncTable func_table_;
 	Traveller traveller_;
 	Object* return_pos_ = nullptr;
+
+	void returnSpace();
 public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector), traveller_(this) { }
 	~Block() = default;
 	
+	Object* searchObject(string var_name);
+
 	void print_all();
 };
-

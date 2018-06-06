@@ -7,13 +7,26 @@
 
 using std::stack;
 
-Object* getObject(Block*, string);
+Object* getObject(Block*, string, ObjectType);
 
 void SentenceParser::divide()
 {
 	SenDivider* sen_divider = new SenDivider(sentence_->getOrder());
 	word_queue_ = *sen_divider->work();
 	delete sen_divider;
+}
+
+string getNodeMsg(const Word& word)
+{
+	if (word.getType() == WordType::value)
+		return "variable";
+	else if (word.getType() == WordType::variable)
+		//####
+		//此处原本应该是value
+		//但是，由于未出现value原因，特更改为variable
+		return "variable";
+	else
+		return word.getMsg();
 }
 
 void SentenceParser::buildTree()
@@ -24,97 +37,114 @@ void SentenceParser::buildTree()
 	ParseStack.push(Root);
 	bool FLAG = true;
 	word_queue_.push(Word(keyword, "#"));
-	string front = word_queue_.front().getMsg();
+	string front = getNodeMsg(word_queue_.front());
 	while (FLAG)
 	{
 		auto X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
+		cout << " " << nodeToInt[Top] << " " << stringToInt[front] << endl;
+		
 
-		cout << endl;
-		cout << "Type " << Top << endl;
-		cout << "Front" << front << endl;
-
-		if (isTerminate[stringToChar[front]])
-		{
-			word_queue_.pop();
-			front = word_queue_.front().getMsg();	//此处用于报错
-			ParseStack.push(X);
-
-			cout << "Match" << endl;
-		}
-		else if (Top == NodeType::TERMINATE)
-		{
-			
-			if (X->getValue()->getType() == ObjectType::TotalValue ||
-				X->getValue()->getType() == ObjectType::TotalVariable)
+			if (Top == NodeType::TERMINATE)
 			{
-				// X 更新 Object 所指向的内容
-				// 此处暂时存储为Total Object的特殊对象
-				// 报错处理时要格外小心
-				// ####
-				X->value_ = getObject(cur_block_, front);
-				word_queue_.pop();
-				front = word_queue_.front().getMsg();
-			}
-			else
-				throw Error("Wrong Match");
-			cout << "Match" << endl;
-		}
-		else if (Top == NodeType::END)
-		{
-			if (front == "#")
-				FLAG = false;
-			else
-				throw Error("No END");
-		}
-		else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
-		{
-			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
-			
-			cout << magic_code << endl;
-			cout << front << endl;
-			// 顺序生成X的子节点
-			for (auto i = 0; i < magic_code.length(); ++i)
-			{
-				if (magic_code[i] == '~')
-					continue;
-				if (isUnTerminate[magic_code[i]])
+				if (X->getValue()->getType() == ObjectType::TotalValue ||
+					X->getValue()->getType() == ObjectType::TotalVariable)
 				{
-					const NodeType type = charToNode[magic_code[i]];
-					Node* node = new Node(type);
-					X->addNode(node);
-				}
-				else if(isTerminate[magic_code[i]])
-				{
-					// 判断读入符号类型, 同时处理X结点的NodeType
-					// 注意value 和 variable 不是 true
-					// 基于对应的 chartoNode
+					// X 更新 Object 所指向的内容
+					// 此处暂时存储为Total Object的特殊对象
+					// 报错处理时要格外小心
 					// ####
-					X->nodeType_ = charToNode[magic_code[i]];
+
+					//####
+					//释放管理，在Varieble对应的Node上，isTemp为false，默认为true
+					//用于表示不能删除
+
+					ObjectType type = X->getValue()->getType();
+					if (type == ObjectType::TotalValue)
+						X->isTemp_ = true;
+					X->value_ = getObject(cur_block_, word_queue_.front().getMsg(), type);
+					word_queue_.pop();
+					front = getNodeMsg(word_queue_.front());
+				}
+				else if (isTerminate[stringToChar[front]])
+				{
+					// isTerminate[] 表示终结符
+					// stringToChar[] 表示终结符的转化
+					const int tmp = stringToChar[front];
+					// 终结符转NodeType 例如：+->ADD
+					X->nodeType_ = charToNode[tmp];
+					word_queue_.pop();
+					front = getNodeMsg(word_queue_.front());
 				}
 				else
-				{
-					Node* node = new Node(NodeType::TERMINATE);
-					if (word_queue_.front().getType() == WordType::variable)
-						node->setValue(new VariableObject());
-					else if (word_queue_.front().getType() == WordType::value)
-						node->setValue(new ValueObject());
-					else
-						throw Error();
-					node->isLeaf_ = true;
-					X->addNode(node);
-				}
+					throw Error("Wrong Match");
+				cout << "Match" << endl;
 			}
+			else if (Top == NodeType::END)
+			{
+				if (front == "#")
+					FLAG = false;
+				else
+					throw Error("No END");
+			}
+			else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
+			{
+				//nodeToInt 行号
+				//stringToInt 列好
+				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-			// 倒序入栈
-			for(auto it = X->childVector_.end(); it != X->childVector_.begin();)
-				ParseStack.push(*(--it));
+				
+				cout << magic_code << endl;
+				cout << front << endl;
+				cout << endl << endl;
 
-			cout << "Generate" << endl;
-		}
-		else
-			throw Error("What?");
+				cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
+				// 顺序生成X的子节点
+				for (auto i = 0; i < magic_code.length(); ++i)
+				{
+					if (magic_code[i] == '~')
+						continue;
+					if (isUnTerminate[magic_code[i]])
+					{
+						const NodeType type = charToNode[magic_code[i]];
+						Node* node = new Node(type);
+						X->addNode(node);
+					}
+					else if (isTerminate[magic_code[i]])
+					{
+						// 判断读入符号类型, 同时处理X结点的NodeType
+						// 注意value 和 variable 不是 true
+						// 基于对应的 chartoNode
+						// ####
+						Node* node = new Node(TERMINATE);
+						node->setValue(new OperatorObject());
+						X->addNode(node);
+					}
+					else
+					{
+						Node* node = new Node(NodeType::TERMINATE);
+						if (word_queue_.front().getType() == WordType::variable)
+							node->setValue(new VariableObject());
+						else if (word_queue_.front().getType() == WordType::value)
+							node->setValue(new ValueObject());
+						else
+							throw Error("Image");
+						node->isLeaf_ = true;
+						X->addNode(node);
+					}
+				}
+
+				// 倒序入栈
+				for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
+					ParseStack.push(*(--it));
+
+				cout << "Generate" << endl;
+			}
+			else
+				throw Error("What?");
+		
+		
 	}
 	cout << endl;
 	cout << "Finish" << endl;
@@ -160,8 +190,24 @@ void SentenceParser::build_all()
 	printMatrix();
 }
 
-Object* getObject(Block*, string name)
+Object* getObject(Block* cur_block, string name, ObjectType type = ObjectType::TotalValue)
 {
 	// ####
-	return new TestObject(name);
+	if (type == ObjectType::TotalValue)
+		return new TestObject(name);
+	else
+		return cur_block->searchObject(name);
+
+	//####
+	/*
+	 * 此处允许返回空指针，在赋值语句中会判断是否为空指针，如果为空，则会
+	 * 在Block中新建指针和添加Map，如果不为空，会直接修改存储于此处的指向对象
+	 * 利用new和delete混用新建对象
+	 */
+
+	//####
+	/*
+	 * 对于回收临时指针问题,会在Node中记录指向对象的性质，
+	 * 如果为临时对象，则析构
+	 */
 }

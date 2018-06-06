@@ -9,8 +9,12 @@ typedef std::vector<Node*> NodeVector;
 enum NodeType
 {
 	ROOT, END, TERMINATE, VALUE, VARIABLE,
-	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L,
-	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE,
+	EXP, SEN, ASS, LOOP, EXPL, EXPLL, DEF, FUNC, DEFF,
+	EE, T, TT, F, FF, G, GG, H, HH, K, X,
+	VARL, VARLL, IF, JUMP, PRINT, PRINTT,
+	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
+	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, COMMA, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
+	ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN, PARAL, PARALL, PARA
 };
 
 class Node
@@ -20,6 +24,7 @@ class Node
 	NodeVector childVector_;
 	bool isLeaf_ = false;
 	NodeType nodeType_;
+	bool isTemp_ = false;
 public:
 	Node();
 	~Node();
@@ -36,10 +41,27 @@ public:
 
 inline void print_node(Node* node)
 {
+	if (node->getNodeType() == NodeType::ADD)
+		std::cout << "+ " ;
+	if (node->getNodeType() == NodeType::EQUAL)
+		std::cout << "= " ;
+	if (node->getNodeType() == NodeType::MULTIPLY)
+		std::cout << "* " ;
+	if (node->getNodeType() == NodeType::MINUS)
+		std::cout << "- ";
+	if (node->getNodeType() == NodeType::DIVIDE)
+		std::cout << "/ ";
+	if (node->getNodeType() == NodeType::LEFT_BRACKET)
+		std::cout << "( " ;
+	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
+		std::cout << ") " ;
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
-		tmp->print_test();
+		if (tmp)
+			tmp->print_test();
+		else
+			std::cout << "c ";
 	}
 	else
 	{
@@ -47,10 +69,17 @@ inline void print_node(Node* node)
 		{
 			print_node(*it);
 		}
-		std::cout << std::endl;
 	}
 }
 
+
+inline Node::~Node()
+{
+	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
+		delete *it;
+	if (isTemp_)
+		delete value_;
+}
 
 inline Object* Node::getValue() const
 {

@@ -72,6 +72,9 @@
     <ClInclude Include="TypeDetecter.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="InputHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,10 +111,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Desktop\009.txt">
+    <Text Include="table.txt">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="009.txt">
+    <Text Include="InputTest.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="NewTable.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
