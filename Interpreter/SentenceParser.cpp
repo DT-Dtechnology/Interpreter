@@ -19,9 +19,12 @@ void SentenceParser::divide()
 string getNodeMsg(const Word& word)
 {
 	if (word.getType() == WordType::value)
-		return "b";
+		return "variable";
 	else if (word.getType() == WordType::variable)
-		return "c";
+		//####
+		//此处原本应该是value
+		//但是，由于未出现value原因，特更改为variable
+		return "variable";
 	else
 		return word.getMsg();
 }
@@ -40,7 +43,7 @@ void SentenceParser::buildTree()
 		auto X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		
+		cout << " " << nodeToInt[Top] << " " << stringToInt[front] << endl;
 		
 
 			if (Top == NodeType::TERMINATE)
@@ -86,10 +89,10 @@ void SentenceParser::buildTree()
 			{
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-				/*
+				
 				cout << magic_code << endl;
 				cout << front << endl;
-				*/
+				cout << endl << endl;
 
 				cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 				// 顺序生成X的子节点
