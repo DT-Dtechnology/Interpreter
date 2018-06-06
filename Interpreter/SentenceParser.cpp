@@ -69,7 +69,10 @@ void SentenceParser::buildTree()
 				}
 				else if (isTerminate[stringToChar[front]])
 				{
+					// isTerminate[] 表示终结符
+					// stringToChar[] 表示终结符的转化
 					const int tmp = stringToChar[front];
+					// 终结符转NodeType 例如：+->ADD
 					X->nodeType_ = charToNode[tmp];
 					word_queue_.pop();
 					front = getNodeMsg(word_queue_.front());
@@ -87,6 +90,8 @@ void SentenceParser::buildTree()
 			}
 			else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
 			{
+				//nodeToInt 行号
+				//stringToInt 列好
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
 				

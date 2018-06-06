@@ -60,14 +60,10 @@ public:
 						nextDown++;
 				}
 			}
-			if (nextUp == char(1))
-				system("pause");
 			if (isUp(word[0]) && !isRealUp(char(Map[word])))
 				fout << char(Map[word] + 64) << '\'';
 			else
 				fout << Map[word];
-			if (nextUp == char(1))
-				system("pause");
 		}
 		fin.close();
 		fout.close();

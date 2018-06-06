@@ -37,7 +37,7 @@ inline void PVM::run()
 inline void PVM::print_test_first()
 {
 	input();
-	std::cout << "Hello World" << std::endl;
+	std::cout << "Hello World" << std::endl << std::endl;
 	Global_->print_all();
 }
 
