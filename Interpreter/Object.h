@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 enum ObjectType
 {
@@ -64,6 +65,7 @@ class LongObject:
 {
 	long value_;
 public:
+	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
 	LongObject(const std::string& name)
 		: Object(ObjectType::LongObj)
 	{
@@ -76,4 +78,17 @@ public:
 	DoubleObject* operator/(const LongObject* longobj);
 
 	//
+};
+
+
+class DoubleObject : public Object {
+	friend class LongObject;
+	double value_;
+	DoubleObject( const double &_val ): Object( ObjectType::DoubleObj), value_(_val) {}
+public:
+	DoubleObject(const std::string& name) : Object(ObjectType::DoubleObj) {
+		value_ = std::stod(name);
+	}
+	~DoubleObject();
+
 };

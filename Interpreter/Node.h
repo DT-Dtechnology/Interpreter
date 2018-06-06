@@ -77,7 +77,7 @@ inline Node::~Node()
 {
 	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
 		delete *it;
-	if (isTemp_)
+	if (isTemp_ && value_ )
 		delete value_;
 }
 

@@ -176,6 +176,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />
     <ClCompile Include="PVM.cpp" />
     <ClCompile Include="SenDivider.cpp" />
