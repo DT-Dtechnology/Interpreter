@@ -149,7 +149,7 @@ void buildCtoN()
 void buildMatrix();
 
 // ÁÐºÅ
-map<string, int> stringToInt;
+//map<string, int> stringToInt;
 /*void buildStoI()
 {
 stringToInt["variable"] = 0;
@@ -185,6 +185,23 @@ stringToInt["pass"] = 29;
 stringToInt["print"] = 30;
 }*/
 //####
+map<string, NodeType> stringToNode;
+void buildStoN()
+{
+	string set1[] = { "SEN", "LOOP", "IF", "EXP", "JUMP", "DEF", "PRINT", "ASS",
+		"T", "E'", "F", "T'", "G", "F'", "H", "G'", "K", "H'", "X",
+		"FUNC", "PARAL", "PARA", "PARAL'", "VAR", "VARL'", "VARL", "EXPL", "EXPL'",
+		"while", ":", "for", "in", "if", "elif", "else", ",", "~", "==", "!=", "<<",
+		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
+		"def", "=", "print" };
+	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS, 
+		T, EE, F, TT, G, FF, H, GG, K, HH, X, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
+		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, COMMA, TERMINATE, IS_EQUAL, 
+		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET, 
+		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT};
+	for (int i = 0; i < 55; i++)
+		stringToNode[set1[i]] = set2[i];
+}
 
 void buildAll()
 {
@@ -242,6 +259,10 @@ fin.close();
 
 void buildMatrix()
 {
+	for (int i = 0; i < 256; i++)
+		isUnTerminate[i] = false;
+	for (int i = 0; i < 256; i++)
+		isTerminate[i] = false;
 	ifstream fin;
 	fin.open("Test1.txt");
 	// charToColumn
@@ -255,17 +276,21 @@ void buildMatrix()
 		{
 			if (line[i + 1] != '\'')
 			{
-				nodeToInt[charToNode[line[i]]] = column;
+				stringToInt[charToString[line[i]]] = column;
+				isTerminate[line[i]] = true;
 				column++;
 			}
 			else
 			{
-				nodeToInt[charToNode[line[i] - 64]] = column;
+				stringToInt[charToString[line[i] - 64]] = column;
+				isTerminate[line[i] - 64] = true;
 				column++;
 				i++;
 			}
 		}
 	}
+	isTerminate[stringToChar["variable"]] = false;
+	isTerminate[stringToChar["value"]] = false;
 	getline(fin, line);
 	for (int row = 0; row < MatrixRow; row++)
 	{
@@ -280,12 +305,14 @@ void buildMatrix()
 			{
 				if (line[head + 1] != '\'')
 				{
-					stringToInt[charToString[line[head]]] = row;
+					nodeToInt[stringToNode[charToString[line[head]]]] = row;
+					isUnTerminate[line[head]] = true;
 					break;
 				}
 				else
 				{
-					stringToInt[charToString[line[head] - 64]] = row;
+					nodeToInt[stringToNode[charToString[line[head] - 64]]] = row;
+					isUnTerminate[line[head] - 64] = true;
 					head++;
 					break;
 				}
