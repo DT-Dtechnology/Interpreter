@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="InputHelper.h" />
     <ClInclude Include="Inputter.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
