@@ -6,6 +6,7 @@
 
 using std::string;
 using std::map;
+using std::getline;
 
 const int MatrixRow = 23;
 const int MatrixColumn = 31;
@@ -39,28 +40,9 @@ void buildIsTerminate()
 
 string Matrix[MatrixRow][MatrixColumn];
 
-//map<char, string> charToString;
-/*void buildCtoS()
-{
-	charToString['S'] = "S";
-	charToString['A'] = "A";
-	charToString['L'] = "L";
-	charToString['E'] = "E";
-	charToString['P'] = "P";
-	charToString['='] = "=";
-	charToString['T'] = "T";
-	charToString['M'] = "M";
-	charToString['('] = "(";
-	charToString[')'] = ")";
-	charToString['b'] = "value";
-	charToString['+'] = "+";
-	charToString['-'] = "-";
-	charToString['*'] = "*";
-	charToString['/'] = "/";
-	charToString['c'] = "variable";
-}*/
 
 map<string, char> stringToChar;
+map<char, string> charToString;
 void buildStoC()
 {
 	char UTsetc[] = { 'E', 'E' - 64, 'T', 'T' - 64, 'F', 'F' - 64, 'G', 'G' - 64, 'H', 'S' - 64, 'A', 'L', 'W', 'W' - 64, 'D', 'Q', 'S', 'P', 'V' - 64, 'R', 'I', 'J', 'P' - 64 };
@@ -70,6 +52,7 @@ void buildStoC()
 	}
 	for (int i = 0; i < MatrixRow; i++) {
 		stringToChar[UTsets[i]] = UTsetc[i];
+		charToString[UTsetc[i]] = UTsets[i];
 	}
 	char Tsetc[] = { 'i', 'a', 'b', '#', 'c', 'd', '+' , '-', '*', '/', '(', ')', '=', 'l', ':', 'n', 'o', ',', 'q', '!', 'r', 's', 't', 'u', 'v', 'w', 'e', 'x', 'y', 'z', 'f' };
 	string Tsets[MatrixColumn];
@@ -78,13 +61,14 @@ void buildStoC()
 	}
 	for (int i = 0; i < MatrixColumn; i++) {
 		stringToChar[Tsets[i]] = Tsetc[i];
+		charToString[Tsetc[i]] = Tsets[i];
 	}
 }
 
 // Nodetype enum
 // ÐÐÊý
 map<NodeType, int> nodeToInt;
-void buildNtoI()
+/*void buildNtoI()
 {
 	nodeToInt[EXP] = 0;
 	nodeToInt[EE] = 1;
@@ -109,19 +93,8 @@ void buildNtoI()
 	nodeToInt[IF] = 20;
 	nodeToInt[JUMP] = 21;
 	nodeToInt[PRINT] = 22;
-}
-
-//map<int, NodeType> intToNode;
-/*void buildIntToNode()
-{
-	intToNode[0] = TEST_S;
-	intToNode[1] = TEST_A;
-	intToNode[2] = TEST_E;
-	intToNode[3] = TEST_T;
-	intToNode[4] = TEST_P;
-	intToNode[5] = TEST_M;
-	intToNode[6] = TEST_L;
 }*/
+
 
 //####
 map<char, NodeType> charToNode;
@@ -188,7 +161,7 @@ void buildMatrix();
 
 // ÁÐºÅ
 map<string, int> stringToInt;
-void buildStoI()
+/*void buildStoI()
 {
 	stringToInt["variable"] = 0;
 	stringToInt["=="] = 1;
@@ -221,7 +194,7 @@ void buildStoI()
 	stringToInt["break"] = 28;
 	stringToInt["pass"] = 29;
 	stringToInt["print"] = 30;
-}
+}*/
 //####
 
 void buildAll()
@@ -229,9 +202,9 @@ void buildAll()
 	buildCtoN();
 	buildIsTerminate();
 	buildIsUnTerminate();
-	buildNtoI();
+	//buildNtoI();
 	buildStoC();
-	buildStoI();
+	//buildStoI();
 	buildMatrix();
 }
 //####
@@ -241,7 +214,7 @@ void buildAll()
 //####
 
 
-void buildMatrix()
+/*void buildMatrix()
 {
 	ifstream fin;
 	fin.open("table.txt");
@@ -276,6 +249,82 @@ void buildMatrix()
 		}
 	}
 	fin.close();
+}*/
+
+void buildMatrix()
+{
+	ifstream fin;
+	fin.open("Test1.txt");
+	// charToColumn
+	string line;
+	getline(fin, line);
+	getline(fin, line);
+	int column = 0;
+	for (int i = 0; i < line.length(); i++)
+	{
+		if (line[i] != '|' && line[i] != '\'')
+		{
+			if (line[i + 1] != '\'')
+			{
+				nodeToInt[charToNode[line[i]]] = column;
+				column++;
+			}
+			else
+			{
+				nodeToInt[charToNode[line[i] - 64]] = column;
+				column++;
+				i++;
+			}
+		}
+	}
+	getline(fin, line);
+	for (int row = 0; row < MatrixRow; row++)
+	{
+		column = 0;
+		getline(fin, line);
+		string str = "";
+		// stringToRow
+		int head;
+		for (head = 0; head < line.length(); head++)
+		{
+			if (line[head] != '|')
+			{
+				if (line[head + 1] != '\'')
+				{
+					stringToInt[charToString[line[head]]] = row;
+					break;
+				}
+				else
+				{
+					stringToInt[charToString[line[head] - 64]] = row;
+					head++;
+					break;
+				}
+			}
+		}
+		// matrix
+		for (int j = head + 1; j < line.length(); j++)
+		{
+			if (line[j] == '\'')
+			{
+				str[str.length() - 1] -= 64;
+				continue;
+			}
+			if (line[j] == '|')
+			{
+				if (str != "")
+				{
+					//cout << "ok" << endl;
+					Matrix[row][column] = str;
+					str = "";
+					column++;
+				}
+			}
+			else
+				str = str + line[j];
+		}
+		getline(fin, line);
+	}
 }
 
 void printMatrix()
