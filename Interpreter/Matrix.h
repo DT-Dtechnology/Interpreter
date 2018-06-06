@@ -5,6 +5,8 @@
 #include <fstream>
 #include "InputHelper.h"
 
+//####
+
 using std::string;
 using std::map;
 using std::getline;
@@ -32,7 +34,7 @@ void buildIsTerminate()
 	//= ~ ( ) b c + - * / 
 	char Tsets[] = { 'i', 'a', 'b', '#', 'c', 'd', '+' , '-', '*', '/', '(', ')', '=', 'l', ':', 'n', 'o', ',', 'q', '!', 'r', 's', 't', 'u', 'v', 'w', 'e', 'x', 'y', 'z', 'f' };
 	for (auto i : Tsets) {
-		isTerminate[(int)i] = true;
+		isTerminate[i] = true;
 	}
 }
 //Value and Variable ¼ÇÂ¼Îª false
@@ -51,6 +53,7 @@ void buildStoC()
 	for(auto it = stringToChar.begin();it!=stringToChar.end();++it)
 	{
 		charToString[it->second] = it->first;
+		cout << it->second << it->first << endl;
 	}
 }
 
@@ -243,7 +246,7 @@ fin.close();
 void buildMatrix()
 {
 	ifstream fin;
-	fin.open("Test1.txt");
+	fin.open("table.txt");
 	// charToColumn
 	string line;
 	getline(fin, line);

@@ -111,7 +111,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="H:\table.txt">
+    <Text Include="table.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="InputTest.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="NewTable.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

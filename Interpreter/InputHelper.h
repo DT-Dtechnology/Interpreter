@@ -1,10 +1,10 @@
-#pragma once
-#include <fstream>
 #include <string>
 #include <map>
+#include <fstream>
 
 using namespace std;
 
+//####
 class InputHelper {
 public:
 	static const int A = 'A';
@@ -19,7 +19,7 @@ public:
 		ofstream fout;
 		int nextUp = 'A';
 		int nextDown = 'a';
-		fin.open("TableTest.txt");
+		fin.open("InputTest.txt");
 		fout.open("NewTable.txt");
 		string word;
 		while (true)
@@ -31,27 +31,37 @@ public:
 				fout << endl;
 				continue;
 			}
+			else if(word == "~"){
+				fout << "~";
+				continue;
+			}
 			else if (word == "->") {
 				fout << word;
 				continue;
 			}
 			else if (Map[word] == 0) {
-				if (isUp((int)word[0]))
+				if (isUp(word[0]))
 				{
 					Map[word] = nextUp;
 					++nextUp;
 					if (nextUp > 'Z')
-						nextUp = 0;
+						nextUp = 1;
 				}
 				else {
 					Map[word] = nextDown;
 					++nextDown;
 					if (nextDown > 'z')
 						nextDown = 33;
+					if (nextDown == '\'')
+						nextDown++;
 				}
 			}
-			if (isUp(word[0]) && nextUp < 'A')
-				fout << Map[word] + 64 << '\'';
+			if (nextUp == char(1))
+				system("pause");
+			if (isUp(word[0]) && nextUp < 'A' && (nextUp != char(1)))
+				fout << char(Map[word] + 64) << '\'';
+			if (nextUp == char(1))
+				system("pause");
 			else
 				fout << Map[word];
 		}
@@ -59,3 +69,5 @@ public:
 		fout.close();
 	}
 };
+
+map<string, char> InputHelper::Map;
