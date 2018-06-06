@@ -9,13 +9,12 @@ class InputHelper {
 public:
 	static const int A = 'A';
 	static const int Z = 'Z';
-	static const string END_MESSAGE;
 	static map<string, char> Map;
 	static bool isUp(int c)
 	{
 		return ((c >= A) && (c <= Z)) || ((c >= A - 64) && (c <= Z - 64));
 	}
-	static void inputg() {
+	static void help_input() {
 		ifstream fin;
 		ofstream fout;
 		int nextUp = 'A';
@@ -26,7 +25,7 @@ public:
 		while (true)
 		{
 			fin >> word;
-			if (word == END_MESSAGE)
+			if (word == "END")
 				return;
 			if (word == ";") {
 				fout << endl;
@@ -60,5 +59,3 @@ public:
 		fout.close();
 	}
 };
-
-string const InputHelper::END_MESSAGE = "END_OF_FILE";
