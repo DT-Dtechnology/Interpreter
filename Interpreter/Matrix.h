@@ -63,19 +63,27 @@ string Matrix[MatrixRow][MatrixColumn];
 map<string, char> stringToChar;
 void buildStoC()
 {
+	/*
 	char UTsetc[] = { 'E', 'E' - 64, 'T', 'T' - 64, 'F', 'F' - 64, 'G', 'G' - 64, 'H', 'S' - 64, 'A', 'L', 'W', 'W' - 64, 'D', 'Q', 'S', 'P', 'V' - 64, 'R', 'I', 'J', 'P' - 64 };
-	string UTsets[MatrixRow];
-	for (int i = 0; i < MatrixRow; ++i ) {
-		UTsets[i] = UTsetc[i];
-	}
+	string UTsets[] = { "EXP", "E",  };
+
 	for (int i = 0; i < MatrixRow; i++) {
 		stringToChar[UTsets[i]] = UTsetc[i];
-	}
-	char Tsetc[] = { 'i', 'a', 'b', '#', 'c', 'd', '+' , '-', '*', '/', '(', ')', '=', 'l', ':', 'n', 'o', ',', 'q', '!', 'r', 's', 't', 'u', 'v', 'w', 'e', 'x', 'y', 'z', 'f' };
-	string Tsets[MatrixColumn];
-	for (int i = 0; i < MatrixColumn; ++i) {
-		Tsets[i] = Tsetc[i];
-	}
+	}*/
+
+	char Tsetc[] = { 'i', 'a', 'b', '#', 'c',
+		'd', '+' , '-', '*', '/',
+		'(', ')', '=', 'l', ':', 
+		'n', 'o', ',', 'q', '!',
+		'r', 's', 't', 'u', 'v',
+		'w', 'e', 'x', 'y', 'z', 'f' };
+	string Tsets[] = { "variable", "==", "!=", "#", "<<", 
+		">>", "+", "-", "*", "/",
+		"(", ")", "=", "while", ":", 
+		"for", "in", ",", "def", "!", 
+		"not", "++", "--", "if", "elif", 
+		"else", "return", "continue", "break", "pass",
+		"print" };
 	for (int i = 0; i < MatrixColumn; i++) {
 		stringToChar[Tsets[i]] = Tsetc[i];
 	}

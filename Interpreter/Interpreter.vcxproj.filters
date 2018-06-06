@@ -108,9 +108,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="H:\table.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="table.txt">
       <Filter>资源文件</Filter>
     </Text>
