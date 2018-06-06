@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <map>
@@ -8,8 +7,8 @@ using namespace std;
 
 class InputHelper {
 public:
-	static const int A = (int)'A';
-	static const int Z = (int)'Z';
+	static const int A = 'A';
+	static const int Z = 'Z';
 	static const string END_MESSAGE;
 	static map<string, char> Map;
 	static bool isUp(int c)
@@ -27,7 +26,6 @@ public:
 		while (true)
 		{
 			fin >> word;
-			std::cout << word << "  <---  " << endl;
 			if (word == END_MESSAGE)
 				return;
 			if (word == ";") {
