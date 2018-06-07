@@ -7,7 +7,7 @@ SEN -> PRINT ;
 SEN -> ASS ;
 
 LOOP -> while EXP : ;
-LOOP -> for VARL in VARL ;
+LOOP -> for VARL in VARL : ;
 
 IF -> if EXP : ;
 IF -> elif EXP : ;

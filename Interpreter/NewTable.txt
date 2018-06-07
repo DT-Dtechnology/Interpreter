@@ -6,7 +6,7 @@ A->F
 A->G
 A->H
 B->aDb
-B->cIdI
+B->cIdIb
 C->eDb
 C->fDb
 C->gb
