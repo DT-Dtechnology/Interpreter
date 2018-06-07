@@ -67,6 +67,7 @@ inline string spaceKiller(const string& s)
 	return temp_str;
 }
 
+/*
 WordQueue* SenDivider::work()
 {
 	WordQueue* word_list = new WordQueue;
@@ -74,6 +75,75 @@ WordQueue* SenDivider::work()
 	for (auto i = 0; i < command.length(); ++i)
 	{
 		const auto temp = i;
+		if (command[i] == ' ')
+		{
+			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
+			if (str.length() != 0)
+				word_list->push(Word(DetectType(str), str));
+			start_posi = i;
+			continue;
+		}
+		if (findOperater(command, i))
+		{
+			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
+			if (str.length() != 0)
+				word_list->push(Word(DetectType(str), str));
+			str = spaceKiller(command.substr(temp, i + 1 - temp));
+			if (str.length() != 0)
+				word_list->push(Word(DetectType(str), str));
+			start_posi = i + 1;
+		}
+	}
+	string str = spaceKiller(command.substr(start_posi, command.length() - start_posi));
+	if (str.length() != 0)
+		word_list->push(Word(DetectType(str), str));
+	return word_list;
+}
+*/
+WordQueue* SenDivider::work()
+{
+	//####
+
+	WordQueue* word_list = new WordQueue;
+	int start_posi = 0;
+	for (auto i = 0; i < command.length(); ++i)
+	{
+		const auto temp = i;
+		string quoted = "";
+		//detect quote "  
+		if (command[i] == '\"') {
+
+			while (command[++i] != '\"' && i < command.length()) {
+				quoted += command[i];
+			}
+			if (i == command.length()) {
+				system("pause");
+				//不能处理已经进入队列的。
+				exit(1);
+			}
+			++i;
+			start_posi = i;
+			string str = "\"" + quoted + "\"";
+			word_list->push(Word(DetectType(str), str));
+			continue;
+		}
+		//detect quote '
+		if (command[i] == '\'') {
+			while (command[++i] != '\'' && i < command.length()) {
+				quoted += command[i];
+			}
+			if (i == command.length()) {
+				system("pause");
+				//不能处理已经进入队列的。
+				exit(1);
+			}
+			++i;
+			start_posi = i;
+			string str = "\'" + quoted + "\'";
+			word_list->push(Word(DetectType(str), str));
+			continue;
+		}
+
 		if (command[i] == ' ')
 		{
 			string str = spaceKiller(command.substr(start_posi, temp - start_posi));

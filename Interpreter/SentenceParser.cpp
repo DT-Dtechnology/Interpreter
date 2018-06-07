@@ -139,12 +139,7 @@ void SentenceParser::buildTree()
 					else
 					{
 						Node* node = new Node(NodeType::TERMINATE);
-						if (word_queue_.front().getType() == WordType::variable)
-							node->setValue(new VariableObject());
-						else if (word_queue_.front().getType() == WordType::value)
-							node->setValue(new ValueObject());
-						else
-							throw Error("Image");
+						node->setValue(new VariableObject());
 						node->isLeaf_ = true;
 						X->addNode(node);
 					}
