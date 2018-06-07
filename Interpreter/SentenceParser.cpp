@@ -19,12 +19,12 @@ void SentenceParser::divide()
 string getNodeMsg(const Word& word)
 {
 	if (word.getType() == WordType::value)
-		return "variable";
+		return "var";
 	else if (word.getType() == WordType::variable)
 		//####
 		//此处原本应该是value
 		//但是，由于未出现value原因，特更改为variable
-		return "variable";
+		return "var";
 	else
 		return word.getMsg();
 }
@@ -32,7 +32,7 @@ string getNodeMsg(const Word& word)
 void SentenceParser::buildTree()
 {
 	stack<Node*> ParseStack;
-	Node* Root = new Node(NodeType::ROOT);
+	Node* Root = new Node(NodeType::SEN);
 	ParseStack.push(new Node(NodeType::END));
 	ParseStack.push(Root);
 	bool FLAG = true;
@@ -94,12 +94,14 @@ void SentenceParser::buildTree()
 				//stringToInt 列好
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-				
+				cout << "Generating......" << endl;
 				cout << magic_code << endl;
 				cout << front << endl;
+				cout << Top << endl;
 				cout << endl << endl;
+				cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
 
-				cout << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
+				cout << "Match Generation" << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 				// 顺序生成X的子节点
 				for (auto i = 0; i < magic_code.length(); ++i)
 				{
@@ -139,7 +141,7 @@ void SentenceParser::buildTree()
 				for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
 					ParseStack.push(*(--it));
 
-				cout << "Generate" << endl;
+				cout << "Generate" << endl << endl;
 			}
 			else
 				throw Error("What?");

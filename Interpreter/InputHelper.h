@@ -58,6 +58,8 @@ public:
 						nextDown = 33;
 					if (nextDown == '\'')
 						nextDown++;
+					if (nextDown == '#')
+						nextDown++;
 				}
 			}
 			if (isUp(word[0]) && !isRealUp(char(Map[word])))

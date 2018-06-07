@@ -26,6 +26,7 @@ map<string, char> stringToChar;
 map<char, string> charToString;
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
+map<NodeType, string> nodeToString;
 void buildStoC()
 {
 	InputHelper::help_input();
@@ -57,7 +58,12 @@ void buildStoN()
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
 	for (int i = 0; i < 55; i++)
+	{
 		stringToNode[set1[i]] = set2[i];
+		nodeToString[set2[i]] = set1[i];
+	}
+		
+	
 }
 
 void buildAll()
@@ -157,5 +163,13 @@ void printMatrix()
 		for (int j = 0; j < MatrixColumn; j++)
 			cout << Matrix[i][j] << " ";
 		cout << endl;
+	}
+}
+
+void testMatrix()
+{
+	for(int i = 0 ; i < 59 ; ++i )
+	{
+		cout << "Type " << nodeToString[NodeType(i)] << endl;
 	}
 }

@@ -59,6 +59,13 @@ public:
 	}
 };
 
+class LongObject;
+class DoubleObject;
+class StringObject;
+class BoolObject;
+class TupleObject;
+class ListObject;
+
 class LongObject:
 	public Object
 {
@@ -73,7 +80,6 @@ public:
 	LongObject* operator+(const LongObject* longobj);
 	LongObject* operator-(const LongObject* longobj);
 	LongObject* operator*(const LongObject* longobj);
-	// DoubleObject* operator/(const LongObject* longobj);
-
+	DoubleObject* operator/(const LongObject* longobj);
 	//
 };
