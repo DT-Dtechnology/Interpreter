@@ -15,6 +15,7 @@ enum ObjectType
 class Object
 {
 	ObjectType type_;
+	bool isTemp_ = false;
 public:
 	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;

@@ -24,7 +24,6 @@ class Node
 	NodeVector childVector_;
 	bool isLeaf_ = false;
 	NodeType nodeType_;
-	bool isTemp_ = false;
 public:
 	Node();
 	~Node();
@@ -81,8 +80,7 @@ inline Node::~Node()
 {
 	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
 		delete *it;
-	if (isTemp_)
-		delete value_;
+	delete value_;
 }
 
 inline Object* Node::getValue() const

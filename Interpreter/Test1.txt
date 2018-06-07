@@ -1,17 +1,17 @@
-a=fun(a)
+def func():
 
 # -*- coding: UTF-8 -*-
-PI = 3
+PI = 3 + 1
 
 print 1
 
-# def calculate_circle(r): # 简单的函数调用
+def calculate_circle(r): # 简单的函数调用
 	result = PI
 	# for i in c: # for循环
 		result = result * r
 	return result
 
-# def main( ):
+def main():
 	
 	print "Calculate the area of shape:"
 	
@@ -32,5 +32,5 @@ print 1
 		if (ptr_wid > wid_en): # if分支语句
 			ptr_len, ptr_wid = ptr_len + step, wid_st
 
-TEMP = main( A )
+main()
 a = 3
