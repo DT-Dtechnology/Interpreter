@@ -64,9 +64,16 @@ class LongObject:
 {
 	long value_;
 public:
-	explicit LongObject(const std::string& name)
+	LongObject(const std::string& name)
 		: Object(ObjectType::LongObj)
 	{
 		value_ = std::stol(name);
 	}
+	~LongObject();
+	LongObject* operator+(const LongObject* longobj);
+	LongObject* operator-(const LongObject* longobj);
+	LongObject* operator*(const LongObject* longobj);
+	// DoubleObject* operator/(const LongObject* longobj);
+
+	//
 };

@@ -192,6 +192,8 @@
     <None Include="Test1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="InputHelp.txt" />
+    <Text Include="InputTable.txt" />
     <Text Include="InputTest.txt" />
     <Text Include="table.txt" />
   </ItemGroup>

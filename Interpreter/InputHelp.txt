@@ -66,3 +66,5 @@ ASS -> VARL = EXPL ;
 PRINT -> print EXP ;
 
 END
+
+已经测试产生式中FUNC和EXPL模块正确
