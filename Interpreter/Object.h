@@ -65,6 +65,7 @@ class StringObject;
 class BoolObject;
 class TupleObject;
 class ListObject;
+class DictObject;
 
 class LongObject:
 	public Object
