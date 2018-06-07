@@ -23,7 +23,7 @@ public:
 		ofstream fout;
 		int nextUp = 'A';
 		int nextDown = 'a';
-		fin.open("InputTest.txt");
+		fin.open("InputHelp.txt");
 		fout.open("NewTable.txt");
 		string word;
 		while (true)

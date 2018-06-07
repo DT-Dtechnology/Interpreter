@@ -43,7 +43,7 @@ void SentenceParser::buildTree()
 		auto X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		cout << " " << nodeToInt[Top] << " " << stringToInt[front] << endl;
+		cout << "Row: " << nodeToInt[Top] << " Column: " << stringToInt[front] << endl;
 		
 
 			if (Top == NodeType::TERMINATE)
@@ -79,7 +79,7 @@ void SentenceParser::buildTree()
 				}
 				else
 					throw Error("Wrong Match");
-				cout << "Match" << endl;
+				cout << "Match" << endl << endl;
 			}
 			else if (Top == NodeType::END)
 			{
@@ -95,10 +95,9 @@ void SentenceParser::buildTree()
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
 				cout << "Generating......" << endl;
-				cout << magic_code << endl;
-				cout << front << endl;
-				cout << Top << endl;
-				cout << endl << endl;
+				cout << "magic code:[ " << magic_code << "]" << endl;
+				cout << "front: " << front << endl;
+				cout << "Top: " << Top << endl;
 				cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
 
 				cout << "Match Generation" << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;

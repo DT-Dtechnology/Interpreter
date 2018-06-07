@@ -37,8 +37,8 @@ H -> K H' ;
 H' -> not K H' ;
 H' -> ~ ;
 K -> ( EXP ) ;
-K -> VARL ;
-K -> FUNC ;
+K -> var FUNC ;
+K -> VARL' ;
 
 JUMP -> continue ;
 JUMP -> break ;
@@ -47,7 +47,8 @@ JUMP -> return EXP : ;
 
 DEF -> def FUNC : ;
 
-FUNC -> var ( PARAL ) : ;
+FUNC -> ( PARAL ) : ;
+FUNC -> VARL' ;
 PARAL -> PARA PARAL' ;
 PARAL -> PARAL' ;
 PARAL' -> , PARA PARAL' ;
