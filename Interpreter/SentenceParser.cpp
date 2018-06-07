@@ -183,6 +183,7 @@ void SentenceParser::print_test_second()
 	cout << "Let Us Print." << endl;
 	print_node(root_);
 	std::cout << std::endl;
+	system("pause");
 }
 
 void SentenceParser::build_all()

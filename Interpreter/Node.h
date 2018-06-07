@@ -61,7 +61,7 @@ inline void print_node(Node* node)
 		if (tmp)
 			tmp->print_test();
 		else
-			std::cout << "c ";
+			std::cout << "var ";
 	}
 	else
 	{
