@@ -80,10 +80,6 @@ void buildAll()
 	buildStoN();
 	buildMaps();
 	buildMatrix();
-	testBoolMap();
-	testStoI();
-	testNtoI();
-	testCtoN();
 }
 
 void buildMatrix()

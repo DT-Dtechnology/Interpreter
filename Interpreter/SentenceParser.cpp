@@ -52,6 +52,10 @@ void SentenceParser::buildTree()
 				{
 					// isTerminate[] 表示终结符
 					// stringToChar[] 表示终结符的转化
+
+					// 这里实际可以添加错误判断
+
+					// 之后再说
 					const int tmp = stringToChar[front];
 					// 终结符转NodeType 例如：+->ADD
 					X->nodeType_ = charToNode[tmp];
