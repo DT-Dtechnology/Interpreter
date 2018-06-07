@@ -73,7 +73,7 @@ public:
 	LongObject* operator+(const LongObject* longobj);
 	LongObject* operator-(const LongObject* longobj);
 	LongObject* operator*(const LongObject* longobj);
-	DoubleObject* operator/(const LongObject* longobj);
+	// DoubleObject* operator/(const LongObject* longobj);
 
 	//
 };

@@ -11,7 +11,7 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 23;
+const int MatrixRow = 27;
 const int MatrixColumn = 31;
 
 //####
@@ -77,7 +77,7 @@ void buildAll()
 void buildMatrix()
 {
 	ifstream fin;
-	fin.open("NewTable.txt");
+	fin.open("InputTable.txt");
 	// charToColumn
 	string line;
 	getline(fin, line);
