@@ -1,5 +1,9 @@
 #pragma once
 #include <iostream>
+#include <vector>
+
+using std::string;
+using std::vector;
 
 enum ObjectType
 {
@@ -13,7 +17,6 @@ class Object
 	ObjectType type_;
 public:
 	Object(ObjectType type) :type_(type) { }
-	Object(const std::string& name);
 	virtual ~Object() = default;
 	ObjectType getType() const { return type_; }
 };
@@ -67,20 +70,48 @@ class TupleObject;
 class ListObject;
 class DictObject;
 
-class LongObject:
+class LongObject :
 	public Object
 {
 	long value_;
 public:
-	LongObject(const std::string& name)
-		: Object(ObjectType::LongObj)
-	{
-		value_ = std::stol(name);
-	}
-	~LongObject();
+	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
+	~LongObject() = default;
 	LongObject* operator+(const LongObject* longobj);
 	LongObject* operator-(const LongObject* longobj);
 	LongObject* operator*(const LongObject* longobj);
 	DoubleObject* operator/(const LongObject* longobj);
+
 	//
+};
+
+
+class DoubleObject : public Object {
+	double value_;
+public:
+	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val) {}
+	~DoubleObject() = default;
+
+};
+
+class StringObject: public Object
+{
+	string value_;
+public:
+	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val) {}
+	~StringObject() = default;
+
+};
+
+class BoolObject: public Object
+{
+	bool value_;
+public:
+	BoolObject(bool value) :Object(BoolObj), value_(value) { }
+	~BoolObject() = default;
+};
+
+class ListObject: public Object
+{
+	
 };

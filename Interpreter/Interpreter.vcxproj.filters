@@ -104,6 +104,9 @@
     <ClCompile Include="SenDivider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Test1.txt">
@@ -115,9 +118,6 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="InputTest.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="NewTable.txt">
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="InputHelp.txt">
