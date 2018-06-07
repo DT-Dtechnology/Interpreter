@@ -20,6 +20,8 @@ public:
 	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;
 	ObjectType getType() const { return type_; }
+	void setTemp() { isTemp_ = true; }
+	bool getStatus() const { return isTemp_; }
 };
 
 class ValueObject :
@@ -81,7 +83,7 @@ public:
 	LongObject* operator+(const LongObject* longobj);
 	LongObject* operator-(const LongObject* longobj);
 	LongObject* operator*(const LongObject* longobj);
-	DoubleObject* operator/(const LongObject* longobj);
+	DoubleObject* operator/(const LongObject* longobj) const;
 
 	//
 };
@@ -114,5 +116,8 @@ public:
 
 class ListObject: public Object
 {
-	
+	vector<Object*> value_{};
+public:
+	ListObject():Object(ObjectType::ListObj){}
+	virtual ~ListObject();
 };
