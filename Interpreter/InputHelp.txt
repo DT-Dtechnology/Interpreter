@@ -45,7 +45,7 @@ JUMP -> break ;
 JUMP -> pass ;
 JUMP -> return EXP : ;
 
-DEF -> def FUNC : ;
+DEF -> def var FUNC : ;
 
 FUNC -> ( PARAL ) : ;
 FUNC -> VARL' ;

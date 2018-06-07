@@ -39,17 +39,19 @@ void SentenceParser::buildTree()
 	word_queue_.push(Word(keyword, "#"));
 	word_queue_.push(Word(keyword, "#"));
 	string front = getNodeMsg(word_queue_.front());
+	auto X = ParseStack.top();
 	while (FLAG)
 	{
-		auto X = ParseStack.top();
+		X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		cout << "Row: " << nodeToInt[Top] << " Column: " << stringToInt[front] << endl;
+		cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
+		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << endl;
 
 			if (Top == NodeType::TERMINATE)
 			{
 				cout << front << "  ";
-				if (X->value_->getType() == ObjectType::Operator)
+				if (X->value_->getType() == ObjectType::Operator && front!= "#")
 				{
 					// isTerminate[] 表示终结符
 					// stringToChar[] 表示终结符的转化
@@ -62,6 +64,10 @@ void SentenceParser::buildTree()
 					X->nodeType_ = charToNode[tmp];
 					word_queue_.pop();
 					front = getNodeMsg(word_queue_.front());
+				}
+				else if(X->value_->getType() == ObjectType::Operator)
+				{
+					// front == "#";
 				}
 				else if (X->getValue()->getType() == ObjectType::TotalValue ||
 					X->getValue()->getType() == ObjectType::TotalVariable)
@@ -111,7 +117,7 @@ void SentenceParser::buildTree()
 				{
 					if (magic_code[i] == '~')
 						continue;
-					if (isUnTerminate[magic_code[i]])
+					else if (isUnTerminate[magic_code[i]])
 					{
 						const NodeType type = charToNode[magic_code[i]];
 						Node* node = new Node(type);
