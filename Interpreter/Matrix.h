@@ -29,6 +29,7 @@ map<string, NodeType> stringToNode;
 void buildStoC()
 {
 	InputHelper::help_input();
+	system("pause");
 	stringToChar = InputHelper::Map;
 	for(auto it = stringToChar.begin();it!=stringToChar.end();++it)
 	{
@@ -77,7 +78,7 @@ void buildAll()
 void buildMatrix()
 {
 	ifstream fin;
-	fin.open("NewTable.txt");
+	fin.open("table.txt");
 	// charToColumn
 	string line;
 	getline(fin, line);
@@ -100,6 +101,7 @@ void buildMatrix()
 			}
 		}
 	}
+	cout << "build matrix1" << endl;
 	getline(fin, line);
 	for (int row = 0; row < MatrixRow; row++)
 	{
@@ -148,6 +150,8 @@ void buildMatrix()
 		}
 		getline(fin, line);
 	}
+	cout << "build matrix2" << endl;
+	fin.close();
 }
 
 void printMatrix()

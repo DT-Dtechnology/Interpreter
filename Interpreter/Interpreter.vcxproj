@@ -193,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputTest.txt" />
-    <Text Include="NewTable.txt" />
     <Text Include="table.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
