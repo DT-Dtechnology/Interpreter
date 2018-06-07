@@ -18,8 +18,8 @@ set<string> operatorSet(python_operator, python_operator + 34);
 
 
 string python_keyword[] =
-{ "False",  "def",      "if",     "raise",  "None",    "del",   "import",
-"return",  "True",     "elif",   "in",     "try",     "and",   "else",
+{"def",      "if",     "raise",  "None",    "del",   "import",
+"return",  "elif",   "in",     "try",     "and",   "else",
 "is",      "while",    "as",     "except", "lambda",  "with",  "assert",
 "finally", "nonlocal", "yield",  "break",  "for",     "class", "from",
 "or",      "continue", "global", "pass", "not", "print"
@@ -27,4 +27,4 @@ string python_keyword[] =
 
 
 
-set<string> KeyWordSet(python_keyword, python_keyword + 34);
+set<string> KeyWordSet(python_keyword, python_keyword + 32);
