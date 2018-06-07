@@ -30,6 +30,9 @@ map<char, string> charToString;
 // eg: ==
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
+// test用
+map<NodeType, string> nodeToString;
+
 void buildMaps()
 {
 	InputHelper::help_input();
@@ -59,12 +62,17 @@ void buildStoN()
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
 	for (int i = 0; i < 55; i++)
+	{
 		stringToNode[set1[i]] = set2[i];
+		nodeToString[set2[i]] = set1[i];
+	}
+		
 }
 
 void testBoolMap();
 void testStoI();
-
+void testNtoI();
+void testCtoN();
 
 void buildAll()
 {
@@ -73,6 +81,8 @@ void buildAll()
 	buildMatrix();
 	//testBoolMap();
 	testStoI();
+	//testNtoI();
+	testCtoN();
 }
 
 void buildMatrix()
@@ -194,4 +204,16 @@ void testStoI()
 {
 	for (auto it = stringToInt.begin(); it != stringToInt.end(); it++)
 		cout << it->first << " " << it->second << endl;
+}
+
+void testNtoI()
+{
+	for (auto it = nodeToInt.begin(); it != nodeToInt.end(); it++)
+		cout << it->first << " " << it->second << endl;
+}
+
+void testCtoN()
+{
+	for (auto it = charToNode.begin(); it != charToNode.end(); it++)
+		cout << it->first << " " << nodeToString[it->second] << endl;
 }
