@@ -26,7 +26,6 @@ map<string, char> stringToChar;
 map<char, string> charToString;
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
-map<NodeType, string> nodeToString;
 void buildStoC()
 {
 	InputHelper::help_input();
@@ -38,17 +37,13 @@ void buildStoC()
 	}	
 }
 
-
-
 void buildMatrix();
-
-// ÁÐºÅ
 
 void buildStoN()
 {
 	string set1[] = { "SEN", "LOOP", "IF", "EXP", "JUMP", "DEF", "PRINT", "ASS",
 		"T", "E'", "F", "T'", "G", "F'", "H", "G'", "K", "H'", "X",
-		"FUNC", "PARAL", "PARA", "PARAL'", "VAR", "VARL'", "VARL", "EXPL", "EXPL'",
+		"FUNC", "PARAL", "PARA", "PARAL'", "var", "VARL'", "VARL", "EXPL", "EXPL'",
 		"while", ":", "for", "in", "if", "elif", "else", ",", "~", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
 		"def", "=", "print" };
@@ -58,27 +53,18 @@ void buildStoN()
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
 	for (int i = 0; i < 55; i++)
-	{
 		stringToNode[set1[i]] = set2[i];
-		nodeToString[set2[i]] = set1[i];
-	}
-		
-	
 }
+
+void testBoolMap();
 
 void buildAll()
 {
 	buildStoN();
-	//buildNtoI();
 	buildStoC();
-	//buildStoI();
 	buildMatrix();
+	testBoolMap();
 }
-//####
-//## def a func
-//void calcMatrix()
-//Usage: ½«V'µÈ×ª»¯ÎªV-32/V-64´ý¶¨
-//####
 
 void buildMatrix()
 {
@@ -89,6 +75,17 @@ void buildMatrix()
 	getline(fin, line);
 	getline(fin, line);
 	int column = 0;
+
+		cout << "ok1" << endl;
+
+	for (int i = 0; i < 256; i++)
+	{
+		isUnTerminate[i] = false;
+		isTerminate[i] = false;
+	}
+
+		cout << "ok2" << endl;
+
 	for (int i = 0; i < line.length(); i++)
 	{
 		if (line[i] != '|' && line[i] != '\'')
@@ -96,16 +93,26 @@ void buildMatrix()
 			if (line[i + 1] != '\'')
 			{
 				nodeToInt[charToNode[line[i]]] = column;
+				if (charToNode[line[i]] != VARIABLE)
+				{
+					isTerminate[line[i]] = true;
+				}
 				column++;
 			}
 			else
 			{
 				nodeToInt[charToNode[line[i] - 64]] = column;
+				if (charToNode[line[i] - 64] != VARIABLE)
+				{
+					isTerminate[line[i] - 64] = true;
+				}
 				column++;
 				i++;
 			}
 		}
 	}
+
+		cout << "ok3" << endl;
 	getline(fin, line);
 	for (int row = 0; row < MatrixRow; row++)
 	{
@@ -121,11 +128,13 @@ void buildMatrix()
 				if (line[head + 1] != '\'')
 				{
 					stringToInt[charToString[line[head]]] = row;
+					isUnTerminate[line[head]] = true;
 					break;
 				}
 				else
 				{
 					stringToInt[charToString[line[head] - 64]] = row;
+					isUnTerminate[line[head] - 64] = true;
 					head++;
 					break;
 				}
@@ -166,10 +175,14 @@ void printMatrix()
 	}
 }
 
-void testMatrix()
+// test
+void testBoolMap()
 {
-	for(int i = 0 ; i < 59 ; ++i )
-	{
-		cout << "Type " << nodeToString[NodeType(i)] << endl;
-	}
+	cout << "isUnTerminate test\n";
+	for (int i = 0; i < 128; i++)
+		cout << char(i) << " " << isUnTerminate[i] << endl;
+	cout << endl;
+	cout << "isTerminate test\n";
+	for (int i = 0; i < 128; i++)
+		cout << char(i) << " " << isTerminate[i] << endl;
 }
