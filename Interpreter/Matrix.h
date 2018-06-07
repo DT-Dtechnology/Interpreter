@@ -11,7 +11,7 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 27;
+const int MatrixRow = 28;
 const int MatrixColumn = 31;
 
 //####
@@ -69,7 +69,6 @@ void buildStoN()
 		
 }
 
-void testIsTer();
 void testBoolMap();
 void testStoI();
 void testNtoI();

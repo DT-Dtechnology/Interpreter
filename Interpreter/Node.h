@@ -56,9 +56,9 @@ inline void print_node(Node* node)
 	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
 		std::cout << ") " ;
 	if (node->getNodeType() == NodeType::COLON)
-		std::cout << ", ";
-	if (node->getNodeType() == NodeType::COMMA)
 		std::cout << ": ";
+	if (node->getNodeType() == NodeType::COMMA)
+		std::cout << ", ";
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);

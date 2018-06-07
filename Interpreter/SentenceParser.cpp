@@ -68,6 +68,9 @@ void SentenceParser::buildTree()
 				else if(X->value_->getType() == ObjectType::Operator)
 				{
 					// front == "#";
+					const int tmp = stringToChar[front];
+					// ÖÕ½á·û×ªNodeType ÀýÈç£º+->ADD
+					X->nodeType_ = charToNode[tmp];
 				}
 				else if (X->getValue()->getType() == ObjectType::TotalValue ||
 					X->getValue()->getType() == ObjectType::TotalVariable)
