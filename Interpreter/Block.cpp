@@ -43,3 +43,13 @@ void Block::print_all()
 		delete sp;
 	}
 }
+
+void Block::print_all_old()
+{
+	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
+	{
+		SentenceParser* sp = new SentenceParser((*it));
+		sp->print_test_first();
+		delete sp;
+	}
+}
