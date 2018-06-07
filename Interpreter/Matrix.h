@@ -79,6 +79,7 @@ void buildAll()
 	buildStoN();
 	buildMaps();
 	buildMatrix();
+
 }
 
 void buildMatrix()
@@ -214,6 +215,32 @@ void testNtoI()
 
 void testCtoN()
 {
-	for (auto it = charToNode.begin(); it != charToNode.end(); it++)
+	for (auto it = charToNode.begin(); it != charToNode.end(); ++it)
 		cout << it->first << " " << nodeToString[it->second] << endl;
+	for (auto it = charToString.begin(); it!=charToString.end();++it)
+		cout << it->first << " " << it->second << endl;
+}
+
+
+void print_node(Node* node)
+{
+	if (node->getNodeType() != NodeType::TERMINATE)
+	{
+		cout << nodeToString[node->getNodeType()] << " ";
+	}
+	if (node->nodeType_ == NodeType::TERMINATE)
+	{
+		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
+		if (tmp)
+			tmp->print_test();
+		else
+			std::cout << "var ";
+	}
+	else
+	{
+		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
+		{
+			print_node(*it);
+		}
+	}
 }

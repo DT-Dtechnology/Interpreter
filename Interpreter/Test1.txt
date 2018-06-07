@@ -1,4 +1,7 @@
-def func():
+a = fun( a )
+fun(a)
+b = fun()
+a = 1+2*(3)
 
 # -*- coding: UTF-8 -*-
 PI = 3 + 1
@@ -13,7 +16,7 @@ def calculate_circle(r): # 简单的函数调用
 
 def main():
 	
-	print "Calculate the area of shape:"
+	# print "Calculate the area of shape:"
 	
 	# Step 1: Circle
 	print "Circle"
@@ -26,7 +29,7 @@ def main():
 	wid_st, wid_en = 1, 2
 	ptr_len, ptr_wid = len_st, wid_st
 	step = 1
-	while (ptr_len <= len_en) and (ptr_wid <= wid_en): # while循环
+	while (ptr_len <= len_en): # while循环
 		# print "Length: %d, width: %d, area: %d" % (ptr_len, ptr_wid, ptr_len * ptr_wid) # 控制格式的输出
 		ptr_wid = ptr_wid + step
 		if (ptr_wid > wid_en): # if分支语句

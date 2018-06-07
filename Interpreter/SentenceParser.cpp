@@ -7,7 +7,7 @@
 
 using std::stack;
 
-Object* getObject(Block*, string, ObjectType);
+Object* getObject(Block*, string);
 
 void SentenceParser::divide()
 {
@@ -198,7 +198,7 @@ void SentenceParser::build_all()
 	printMatrix();
 }
 
-Object* getObject(Block* cur_block, string name, ObjectType type = ObjectType::TotalVariable)
+Object* getObject(Block* cur_block, string name)
 {
 	// ####
 	return new TestObject(name);
