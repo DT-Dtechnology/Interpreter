@@ -20,21 +20,27 @@ bool isTerminate[256];
 
 string Matrix[MatrixRow][MatrixColumn];
 
+// 非终结符对应的行号
+// eg: SEN
 map<NodeType, int> nodeToInt;
 map<char, NodeType> charToNode;
 map<string, char> stringToChar;
 map<char, string> charToString;
+// 终结符对应的列号
+// eg: ==
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
-void buildStoC()
+void buildMaps()
 {
 	InputHelper::help_input();
 	stringToChar = InputHelper::Map;
+	stringToChar["#"] = '#';
 	for(auto it = stringToChar.begin();it!=stringToChar.end();++it)
 	{
 		charToString[it->second] = it->first;
 		charToNode[it->second] = stringToNode[charToString[it->second]];
 	}	
+
 }
 
 void buildMatrix();
@@ -57,13 +63,16 @@ void buildStoN()
 }
 
 void testBoolMap();
+void testStoI();
+
 
 void buildAll()
 {
 	buildStoN();
-	buildStoC();
+	buildMaps();
 	buildMatrix();
-	testBoolMap();
+	//testBoolMap();
+	testStoI();
 }
 
 void buildMatrix()
@@ -76,15 +85,11 @@ void buildMatrix()
 	getline(fin, line);
 	int column = 0;
 
-		cout << "ok1" << endl;
-
 	for (int i = 0; i < 256; i++)
 	{
 		isUnTerminate[i] = false;
 		isTerminate[i] = false;
 	}
-
-		cout << "ok2" << endl;
 
 	for (int i = 0; i < line.length(); i++)
 	{
@@ -92,7 +97,7 @@ void buildMatrix()
 		{
 			if (line[i + 1] != '\'')
 			{
-				nodeToInt[charToNode[line[i]]] = column;
+					stringToInt[charToString[line[i]]] = column;
 				if (charToNode[line[i]] != VARIABLE)
 				{
 					isTerminate[line[i]] = true;
@@ -101,7 +106,7 @@ void buildMatrix()
 			}
 			else
 			{
-				nodeToInt[charToNode[line[i] - 64]] = column;
+				stringToInt[charToString[line[i] - 64]] = column;
 				if (charToNode[line[i] - 64] != VARIABLE)
 				{
 					isTerminate[line[i] - 64] = true;
@@ -111,8 +116,6 @@ void buildMatrix()
 			}
 		}
 	}
-
-		cout << "ok3" << endl;
 	getline(fin, line);
 	for (int row = 0; row < MatrixRow; row++)
 	{
@@ -127,13 +130,13 @@ void buildMatrix()
 			{
 				if (line[head + 1] != '\'')
 				{
-					stringToInt[charToString[line[head]]] = row;
+					nodeToInt[charToNode[line[head]]] = row;
 					isUnTerminate[line[head]] = true;
 					break;
 				}
 				else
 				{
-					stringToInt[charToString[line[head] - 64]] = row;
+					nodeToInt[charToNode[line[head] - 64]] = row;
 					isUnTerminate[line[head] - 64] = true;
 					head++;
 					break;
@@ -185,4 +188,10 @@ void testBoolMap()
 	cout << "isTerminate test\n";
 	for (int i = 0; i < 128; i++)
 		cout << char(i) << " " << isTerminate[i] << endl;
+}
+
+void testStoI()
+{
+	for (auto it = stringToInt.begin(); it != stringToInt.end(); it++)
+		cout << it->first << " " << it->second << endl;
 }
