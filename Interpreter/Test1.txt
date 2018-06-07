@@ -1,6 +1,1 @@
-"SEN"。 "LOOP"。 "IF"。 "EXP"。 "JUMP"。 "DEF"。 "PRINT"。 "ASS"。
-		"T"。 "E'"。 "F"。 "T'"。 "G"。 "F'"。 "H"。 "G'"。 "K"。 "H'"。 "X"。
-		"FUNC"。 "PARAL"。 "PARA"。 "PARAL'"。 "VAR"。 "VARL'"。 "VARL"。 "EXPL"。 "EXPL'"。
-		"while"。 ":"。 "for"。 "in"。 "if"。 "elif"。 "else"。 "。"。 "~"。 "=="。 "!="。 "<<"。
-		">>"。 "+"。 "-"。 "*"。 "/"。 "not"。 "("。 ")"。 "continue"。 "break"。 "pass"。 "return"。
-		"def"。 "="。 "print"
+cmath = 1 * 2
