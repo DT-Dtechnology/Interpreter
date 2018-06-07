@@ -3,7 +3,9 @@
 
 enum ObjectType
 {
-	DEBUG_TEST, TotalVariable, TotalValue, Operator
+	DEBUG_TEST, TotalVariable, TotalValue, Operator, LongObj,
+	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
+	BoolObj
 };
 
 class Object
@@ -11,7 +13,7 @@ class Object
 	ObjectType type_;
 public:
 	Object(ObjectType type) :type_(type) { }
-	Object(std::string name);
+	Object(const std::string& name);
 	virtual ~Object() = default;
 	ObjectType getType() const { return type_; }
 };
@@ -54,5 +56,17 @@ public:
 	void print_test() const
 	{
 		std::cout << var_name_ << " ";
+	}
+};
+
+class LongObject:
+	public Object
+{
+	long value_;
+public:
+	explicit LongObject(const std::string& name)
+		: Object(ObjectType::LongObj)
+	{
+		value_ = std::stol(name);
 	}
 };
