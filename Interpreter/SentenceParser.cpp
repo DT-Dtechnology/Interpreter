@@ -37,6 +37,7 @@ void SentenceParser::buildTree()
 	ParseStack.push(Root);
 	bool FLAG = true;
 	word_queue_.push(Word(keyword, "#"));
+	word_queue_.push(Word(keyword, "#"));
 	string front = getNodeMsg(word_queue_.front());
 	while (FLAG)
 	{
@@ -44,11 +45,20 @@ void SentenceParser::buildTree()
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
 		cout << "Row: " << nodeToInt[Top] << " Column: " << stringToInt[front] << endl;
-		
 
 			if (Top == NodeType::TERMINATE)
 			{
-				if (X->getValue()->getType() == ObjectType::TotalValue ||
+				if (X->value_->getType() == ObjectType::Operator)
+				{
+					// isTerminate[] 表示终结符
+					// stringToChar[] 表示终结符的转化
+					const int tmp = stringToChar[front];
+					// 终结符转NodeType 例如：+->ADD
+					X->nodeType_ = charToNode[tmp];
+					word_queue_.pop();
+					front = getNodeMsg(word_queue_.front());
+				}
+				else if (X->getValue()->getType() == ObjectType::TotalValue ||
 					X->getValue()->getType() == ObjectType::TotalVariable)
 				{
 					// X 更新 Object 所指向的内容
@@ -59,21 +69,12 @@ void SentenceParser::buildTree()
 					//####
 					//释放管理，在Varieble对应的Node上，isTemp为false，默认为true
 					//用于表示不能删除
+					//可能需要更改
 
 					ObjectType type = X->getValue()->getType();
 					if (type == ObjectType::TotalValue)
 						X->isTemp_ = true;
 					X->value_ = getObject(cur_block_, word_queue_.front().getMsg(), type);
-					word_queue_.pop();
-					front = getNodeMsg(word_queue_.front());
-				}
-				else if (isTerminate[stringToChar[front]])
-				{
-					// isTerminate[] 表示终结符
-					// stringToChar[] 表示终结符的转化
-					const int tmp = stringToChar[front];
-					// 终结符转NodeType 例如：+->ADD
-					X->nodeType_ = charToNode[tmp];
 					word_queue_.pop();
 					front = getNodeMsg(word_queue_.front());
 				}
@@ -95,7 +96,7 @@ void SentenceParser::buildTree()
 				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
 				cout << "Generating......" << endl;
-				cout << "magic code:[ " << magic_code << "]" << endl;
+				cout << "magic code:[ " << magic_code << " ]" << endl;
 				cout << "front: " << front << endl;
 				cout << "Top: " << Top << endl;
 				cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
@@ -170,7 +171,7 @@ void SentenceParser::print_test_first()
 	divide();
 	while (!word_queue_.empty())
 	{
-		std::cout << word_queue_.front().getMsg() << "/";
+		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
 		word_queue_.pop();
 	}
 	std::cout << std::endl;

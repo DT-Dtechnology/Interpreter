@@ -69,6 +69,7 @@ void buildStoN()
 		
 }
 
+void testIsTer();
 void testBoolMap();
 void testStoI();
 void testNtoI();
@@ -79,9 +80,9 @@ void buildAll()
 	buildStoN();
 	buildMaps();
 	buildMatrix();
-	//testBoolMap();
+	testBoolMap();
 	testStoI();
-	//testNtoI();
+	testNtoI();
 	testCtoN();
 }
 
@@ -204,6 +205,10 @@ void testStoI()
 {
 	for (auto it = stringToInt.begin(); it != stringToInt.end(); it++)
 		cout << it->first << " " << it->second << endl;
+	system("pause");
+	for (auto it = stringToChar.begin(); it != stringToChar.end(); ++it)
+		cout << it->first << " " << it->second << endl;
+	system("pause");
 }
 
 void testNtoI()

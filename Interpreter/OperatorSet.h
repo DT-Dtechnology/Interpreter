@@ -22,7 +22,7 @@ string python_keyword[] =
 "return",  "True",     "elif",   "in",     "try",     "and",   "else",
 "is",      "while",    "as",     "except", "lambda",  "with",  "assert",
 "finally", "nonlocal", "yield",  "break",  "for",     "class", "from",
-"or",      "continue", "global", "pass", "not"
+"or",      "continue", "global", "pass", "not", "print"
 };
 
 
