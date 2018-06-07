@@ -48,6 +48,7 @@ void SentenceParser::buildTree()
 
 			if (Top == NodeType::TERMINATE)
 			{
+				cout << front << "  ";
 				if (X->value_->getType() == ObjectType::Operator)
 				{
 					// isTerminate[] 表示终结符
@@ -102,10 +103,9 @@ void SentenceParser::buildTree()
 				cout << "Generating......" << endl;
 				cout << "magic code:[ " << magic_code << " ]" << endl;
 				cout << "front: " << front << endl;
-				cout << "Top: " << Top << endl;
+				cout << "Top: " << nodeToString[Top] << endl;
 				cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
 
-				cout << "Match Generation" << Matrix[nodeToInt[Top]][stringToInt[front]] << endl;
 				// 顺序生成X的子节点
 				for (auto i = 0; i < magic_code.length(); ++i)
 				{

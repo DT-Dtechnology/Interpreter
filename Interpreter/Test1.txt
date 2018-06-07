@@ -1,4 +1,4 @@
-print "Calculate the area of shape:"
+a = main()
 
 # -*- coding: UTF-8 -*-
 PI = 3
