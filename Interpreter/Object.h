@@ -1,124 +1,124 @@
-#pragma once
-#include <iostream>
-#include <vector>
+#pragmaonce
+#include<iostream>
+#include<vector>
 
-using std::string;
-using std::vector;
+usingstd::string;
+usingstd::vector;
 
-enum ObjectType
+enumObjectType
 {
-	DEBUG_TEST, TotalVariable, TotalValue, Operator, LongObj,
-	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
+	DEBUG_TEST,TotalVariable,TotalValue,Operator,LongObj,
+	DoubleObj,StringObj,TupleObj,ListObj,DictObj,
 	BoolObj
 };
 
-class Object
+classObject
 {
-	ObjectType type_;
-	bool isTemp_ = false;
+	ObjectTypetype_;
+	boolisTemp_=false;
 public:
-	Object(ObjectType type) :type_(type) { }
-	virtual ~Object() = default;
-	ObjectType getType() const { return type_; }
-	void setTemp() { isTemp_ = true; }
-	bool getStatus() const { return isTemp_; }
+	Object(ObjectTypetype):type_(type){}
+	virtual~Object()=default;
+	ObjectTypegetType()const{returntype_;}
+	voidsetTemp(){isTemp_=true;}
+	boolgetStatus()const{returnisTemp_;}
 };
 
-class ValueObject :
-	public Object
+classValueObject:
+	publicObject
 {
 public:
-	ValueObject() :Object(ObjectType::TotalValue) { }
-	~ValueObject() override = default;
+	ValueObject():Object(ObjectType::TotalValue){}
+	~ValueObject()override=default;
 };
 
-class VariableObject :
-	public Object
+classVariableObject:
+	publicObject
 {
 public:
-	VariableObject() :Object(ObjectType::TotalVariable) { }
-	~VariableObject() override = default;
+	VariableObject():Object(ObjectType::TotalVariable){}
+	~VariableObject()override=default;
 };
 
-class OperatorObject :
-	public Object
+classOperatorObject:
+	publicObject
 {
 public:
-	OperatorObject() :Object(ObjectType::Operator) { }
-	~OperatorObject() override = default;
+	OperatorObject():Object(ObjectType::Operator){}
+	~OperatorObject()override=default;
 };
 
-class TestObject :
-	public Object
+classTestObject:
+	publicObject
 {
-	std::string var_name_;
+	std::stringvar_name_;
 public:
-	TestObject(const std::string& var_name)
-		: Object(ObjectType::DEBUG_TEST)
+	TestObject(conststd::string&var_name)
+		:Object(ObjectType::DEBUG_TEST)
 	{
-		var_name_ = var_name;
+		var_name_=var_name;
 	}
-	~TestObject() = default;
-	void print_test() const
+	~TestObject()=default;
+	voidprint_test()const
 	{
-		std::cout << var_name_ << " ";
+		std::cout<<var_name_<<"";
 	}
 };
 
-class LongObject;
-class DoubleObject;
-class StringObject;
-class BoolObject;
-class TupleObject;
-class ListObject;
-class DictObject;
+classLongObject;
+classDoubleObject;
+classStringObject;
+classBoolObject;
+classTupleObject;
+classListObject;
+classDictObject;
 
-class LongObject :
-	public Object
+classLongObject:
+	publicObject
 {
-	long value_;
+	longvalue_;
 public:
-	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
-	~LongObject() = default;
-	LongObject* operator+(const LongObject* longobj) const;
-	LongObject* operator-(const LongObject* longobj) const;
-	LongObject* operator*(const LongObject* longobj) const;
-	DoubleObject* operator/(const LongObject* longobj) const;
+	LongObject(constlong&_val):Object(ObjectType::LongObj),value_(_val){}
+	~LongObject()=default;
+	LongObject*operator+(constLongObject*longobj)const;
+	LongObject*operator-(constLongObject*longobj)const;
+	LongObject*operator*(constLongObject*longobj)const;
+	DoubleObject*operator/(constLongObject*longobj)const;
 
 	//
 };
 
 
-class DoubleObject : public Object {
-	double value_;
+classDoubleObject:publicObject{
+	doublevalue_;
 public:
-	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val) {}
-	~DoubleObject() = default;
+	DoubleObject(constdouble&_val):Object(ObjectType::DoubleObj),value_(_val){}
+	~DoubleObject()=default;
 
 };
 
-class StringObject: public Object
+classStringObject:publicObject
 {
-	string value_;
+	stringvalue_;
 public:
-	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val) {}
-	~StringObject() = default;
+	StringObject(conststring&_val):Object(ObjectType::StringObj),value_(_val){}
+	~StringObject()=default;
 
 };
 
-class BoolObject: public Object
+classBoolObject:publicObject
 {
-	bool value_;
+	boolvalue_;
 public:
-	BoolObject(bool value) :Object(BoolObj), value_(value) { }
-	~BoolObject() = default;
+	BoolObject(boolvalue):Object(BoolObj),value_(value){}
+	~BoolObject()=default;
 };
 
-class ListObject: public Object
+classListObject:publicObject
 {
-	vector<Object*> value_{};
+	vector<Object*>value_{};
 public:
 	ListObject():Object(ObjectType::ListObj){}
-	~ListObject() = default;
+	~ListObject()=default;
 
 };

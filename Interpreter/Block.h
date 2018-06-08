@@ -1,37 +1,37 @@
-#pragma once
-#include <stack>
-#include <map>
-#include "Object.h"
-#include "Traveller.h"
+#pragmaonce
+#include<stack>
+#include<map>
+#include"Object.h"
+#include"Traveller.h"
 
-class Block;
+classBlock;
 
-using std::stack;
-using std::map;
-using std::string;
-using std::vector;
+usingstd::stack;
+usingstd::map;
+usingstd::string;
+usingstd::vector;
 
-typedef vector<Sentence*> SenVector;
-typedef map<string, Object*> VarTable;
-typedef map<string, Block*> FuncTable;
+typedefvector<Sentence*>SenVector;
+typedefmap<string,Object*>VarTable;
+typedefmap<string,Block*>FuncTable;
 
-class Block
+classBlock
 {
-	SenVector* sentence_vector_;
-	stack<Block*> block_space_stack_;
-	stack<Block*> temp_space_stack_;
-	VarTable var_table_;
-	FuncTable func_table_;
-	Traveller traveller_;
-	Object* return_pos_ = nullptr;
+	SenVector*sentence_vector_;
+	stack<Block*>block_space_stack_;
+	stack<Block*>temp_space_stack_;
+	VarTablevar_table_;
+	FuncTablefunc_table_;
+	Travellertraveller_;
+	Object*return_pos_=nullptr;
 
-	void returnSpace();
+	voidreturnSpace();
 public:
-	Block(SenVector* sen_vector) :sentence_vector_(sen_vector), traveller_(this) { }
-	~Block() = default;
+	Block(SenVector*sen_vector):sentence_vector_(sen_vector),traveller_(this){}
+	~Block()=default;
 	
-	Object* searchObject(string var_name);
+	Object*searchObject(stringvar_name);
 
-	void print_all();
-	void print_all_old();
+	voidprint_all();
+	voidprint_all_old();
 };

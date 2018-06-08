@@ -1,30 +1,30 @@
-﻿#pragma once
-#include <set>
-#include <string>
+﻿#pragmaonce
+#include<set>
+#include<string>
 
-using std::set;
-using std::string;
+usingstd::set;
+usingstd::string;
 
-string python_operator[] =
+stringpython_operator[]=
 {
-	"+", "-", "*", "/", "%", "&", "|", "=",
-	"**", "^", "~", "//", "[", "]", ":",
-	"<<", ">>", "<=", "==", "!=", ">=",
-	"<", ">", "%=", "<>", "/=","-=",
-	"+=", "*=", "++", "(", ")", ",", "--"
+	"+","-","*","/","%","&","|","=",
+	"**","^","~","//","[","]",":",
+	"<<",">>","<=","==","!=",">=",
+	"<",">","%=","<>","/=","-=",
+	"+=","*=","++","(",")",",","--"
 };
 
-set<string> operatorSet(python_operator, python_operator + 34);
+set<string>operatorSet(python_operator,python_operator+34);
 
 
-string python_keyword[] =
-{"def",      "if",     "raise",  "None",    "del",   "import",
-"return",  "elif",   "in",     "try",     "and",   "else",
-"is",      "while",    "as",     "except", "lambda",  "with",  "assert",
-"finally", "nonlocal", "yield",  "break",  "for",     "class", "from",
-"or",      "continue", "global", "pass", "not", "print"
+stringpython_keyword[]=
+{"def","if","raise","None","del","import",
+"return","elif","in","try","and","else",
+"is","while","as","except","lambda","with","assert",
+"finally","nonlocal","yield","break","for","class","from",
+"or","continue","global","pass","not","print"
 };
 
 
 
-set<string> KeyWordSet(python_keyword, python_keyword + 32);
+set<string>KeyWordSet(python_keyword,python_keyword+32);

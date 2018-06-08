@@ -1,2 +1,2 @@
-#pragma once
-#include "SentenceParser.h"
+#pragmaonce
+#include"SentenceParser.h"

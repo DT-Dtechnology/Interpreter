@@ -1,10 +1,10 @@
-#pragma once
-#include "Object.h"
-class ObjectFactory
+#pragmaonce
+#include"Object.h"
+classObjectFactory
 {
 public:
-	ObjectFactory() = default;
-	~ObjectFactory() = default;
-	static Object* createObject(const string& name);
+	ObjectFactory()=default;
+	~ObjectFactory()=default;
+	staticObject*createObject(conststring&name);
 };
 

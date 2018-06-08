@@ -1,208 +1,208 @@
-#include "stdafx.h"
-#include "SenDivider.h"
-#include <queue>
-#include "Word.h"
-#include "OperatorSet.h"
-#include "TypeDetecter.h"
+#include"stdafx.h"
+#include"SenDivider.h"
+#include<queue>
+#include"Word.h"
+#include"OperatorSet.h"
+#include"TypeDetecter.h"
 
-inline bool isChar(char c)
+inlineboolisChar(charc)
 {
-	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z' || c == '_');
+	return(c>='A'&&c<='Z')||(c>='a'&&c<='z'||c=='_');
 }
 
-inline bool isNum(char c)
+inlineboolisNum(charc)
 {
-	return c >= '0' && c <= '9';
+	returnc>='0'&&c<='9';
 }
 
-inline bool dotDetect(string& s, int pos)
+inlinebooldotDetect(string&s,intpos)
 {
-	if (pos != s.length() - 1 && pos != 0)
-		return !(isChar(s[pos - 1]) && isChar(s[pos + 1]));
-	else if (pos == 0)
-		return isNum(s[0]);
+	if(pos!=s.length()-1&&pos!=0)
+		return!(isChar(s[pos-1])&&isChar(s[pos+1]));
+	elseif(pos==0)
+		returnisNum(s[0]);
 	else
-		return isNum(s[s.length() - 2]);
+		returnisNum(s[s.length()-2]);
 }
 
-inline bool minusDetect(string& s, int pos)
+inlineboolminusDetect(string&s,intpos)
 {
-	if (pos == 0)
-		return true;
+	if(pos==0)
+		returntrue;
 	else
-		return isNum(s[pos - 1]);
+		returnisNum(s[pos-1]);
 }
 
-inline bool isElse(char c)
+inlineboolisElse(charc)
 {
-	return !(isChar(c) || isNum(c));
+	return!(isChar(c)||isNum(c));
 }
 
-inline bool findOperater(string& s, int& pos)
+inlineboolfindOperater(string&s,int&pos)
 {
-	if (pos == s.length() - 1)
-		return (operatorSet.find(s.substr(pos, 1)) != operatorSet.end());
-	bool match_one = (operatorSet.find(s.substr(pos, 1)) != operatorSet.end());
-	bool match_two = (operatorSet.find(s.substr(pos, 2)) != operatorSet.end());
-	if (match_two)
+	if(pos==s.length()-1)
+		return(operatorSet.find(s.substr(pos,1))!=operatorSet.end());
+	boolmatch_one=(operatorSet.find(s.substr(pos,1))!=operatorSet.end());
+	boolmatch_two=(operatorSet.find(s.substr(pos,2))!=operatorSet.end());
+	if(match_two)
 	{
-		pos += 1;
-		return true;
+		pos+=1;
+		returntrue;
 	}
-	else if (match_one)
+	elseif(match_one)
 	{
-		pos += 0;
-		return true;
+		pos+=0;
+		returntrue;
 	}
 	else
-		return false;
+		returnfalse;
 }
 
-inline string spaceKiller(const string& s)
+inlinestringspaceKiller(conststring&s)
 {
-	string temp_str;
-	for (auto i = 0; i < s.length(); ++i)
-		if (s[i] != ' ')
-			temp_str += s[i];
-	return temp_str;
+	stringtemp_str;
+	for(autoi=0;i<s.length();++i)
+		if(s[i]!='')
+			temp_str+=s[i];
+	returntemp_str;
 }
 
 /*
-WordQueue* SenDivider::work()
+WordQueue*SenDivider::work()
 {
 	//####
-	cout << endl << endl << "----------" << endl << "Divider: " << endl << command << endl << "---------" << endl << endl;
+	cout<<endl<<endl<<"----------"<<endl<<"Divider:"<<endl<<command<<endl<<"---------"<<endl<<endl;
 
-	WordQueue* word_list = new WordQueue;
-	int start_posi = 0;
-	for (auto i = 0; i < command.length(); ++i)
+	WordQueue*word_list=newWordQueue;
+	intstart_posi=0;
+	for(autoi=0;i<command.length();++i)
 	{
-		const auto temp = i;
-		string quoted = "";
-		//detect quote "  
-		if (command[i] == '\"') {
+		constautotemp=i;
+		stringquoted="";
+		//detectquote"
+		if(command[i]=='\"'){
 
-			while (command[++i] != '\"' && i < command.length()) {
-				quoted += command[i];
+			while(command[++i]!='\"'&&i<command.length()){
+				quoted+=command[i];
 			}
-			if (i == command.length()) {
+			if(i==command.length()){
 				system("pause");
 				//不能处理已经进入队列的。
 				exit(1);
 			}
 			++i;
-			start_posi = i;
-			string str = "\"" + quoted + "\"";
-			word_list->push(Word(DetectType(str), str));
+			start_posi=i;
+			stringstr="\""+quoted+"\"";
+			word_list->push(Word(DetectType(str),str));
 			continue;
 		}
-		//detect quote '
-		if (command[i] == '\'') {
-			while (command[++i] != '\'' && i < command.length()) {
-				quoted += command[i];
+		//detectquote'
+		if(command[i]=='\''){
+			while(command[++i]!='\''&&i<command.length()){
+				quoted+=command[i];
 			}
-			if (i == command.length()) {
+			if(i==command.length()){
 				system("pause");
 				//不能处理已经进入队列的。
 				exit(1);
 			}
 			++i;
-			start_posi = i;
-			string str = "\'" + quoted + "\'";
-			word_list->push(Word(DetectType(str), str));
+			start_posi=i;
+			stringstr="\'"+quoted+"\'";
+			word_list->push(Word(DetectType(str),str));
 			continue;
 		}
 
-		if (command[i] == ' ')
+		if(command[i]=='')
 		{
-			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			start_posi = i;
+			stringstr=spaceKiller(command.substr(start_posi,temp-start_posi));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			start_posi=i;
 			continue;
 		}
-		if (findOperater(command, i))
+		if(findOperater(command,i))
 		{
-			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			str = spaceKiller(command.substr(temp, i + 1 - temp));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			start_posi = i + 1;
+			stringstr=spaceKiller(command.substr(start_posi,temp-start_posi));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			str=spaceKiller(command.substr(temp,i+1-temp));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			start_posi=i+1;
 		}
 	}
-	string str = spaceKiller(command.substr(start_posi, command.length() - start_posi));
-	if (str.length() != 0)
-		word_list->push(Word(DetectType(str), str));
-	return word_list;
+	stringstr=spaceKiller(command.substr(start_posi,command.length()-start_posi));
+	if(str.length()!=0)
+		word_list->push(Word(DetectType(str),str));
+	returnword_list;
 }
 */
-WordQueue* SenDivider::work()
+WordQueue*SenDivider::work()
 {
 	//####
 
-	WordQueue* word_list = new WordQueue;
-	int start_posi = 0;
-	for (auto i = 0; i < command.length(); ++i)
+	WordQueue*word_list=newWordQueue;
+	intstart_posi=0;
+	for(autoi=0;i<command.length();++i)
 	{
-		const auto temp = i;
-		string quoted = "";
-		//detect quote "  
-		if (command[i] == '\"') {
+		constautotemp=i;
+		stringquoted="";
+		//detectquote"
+		if(command[i]=='\"'){
 
-			while (command[++i] != '\"' && i < command.length()) {
-				quoted += command[i];
+			while(command[++i]!='\"'&&i<command.length()){
+				quoted+=command[i];
 			}
-			if (i == command.length()) {
+			if(i==command.length()){
 				system("pause");
 				//不能处理已经进入队列的。
 				exit(1);
 			}
 			++i;
-			start_posi = i;
-			string str = "\"" + quoted + "\"";
-			word_list->push(Word(DetectType(str), str));
+			start_posi=i;
+			stringstr="\""+quoted+"\"";
+			word_list->push(Word(DetectType(str),str));
 			continue;
 		}
-		//detect quote '
-		if (command[i] == '\'') {
-			while (command[++i] != '\'' && i < command.length()) {
-				quoted += command[i];
+		//detectquote'
+		if(command[i]=='\''){
+			while(command[++i]!='\''&&i<command.length()){
+				quoted+=command[i];
 			}
-			if (i == command.length()) {
+			if(i==command.length()){
 				system("pause");
 				//不能处理已经进入队列的。
 				exit(1);
 			}
 			++i;
-			start_posi = i;
-			string str = "\'" + quoted + "\'";
-			word_list->push(Word(DetectType(str), str));
+			start_posi=i;
+			stringstr="\'"+quoted+"\'";
+			word_list->push(Word(DetectType(str),str));
 			continue;
 		}
 
-		if (command[i] == ' ')
+		if(command[i]=='')
 		{
-			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			start_posi = i;
+			stringstr=spaceKiller(command.substr(start_posi,temp-start_posi));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			start_posi=i;
 			continue;
 		}
-		if (findOperater(command, i))
+		if(findOperater(command,i))
 		{
-			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			str = spaceKiller(command.substr(temp, i + 1 - temp));
-			if (str.length() != 0)
-				word_list->push(Word(DetectType(str), str));
-			start_posi = i + 1;
+			stringstr=spaceKiller(command.substr(start_posi,temp-start_posi));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			str=spaceKiller(command.substr(temp,i+1-temp));
+			if(str.length()!=0)
+				word_list->push(Word(DetectType(str),str));
+			start_posi=i+1;
 		}
 	}
-	string str = spaceKiller(command.substr(start_posi, command.length() - start_posi));
-	if (str.length() != 0)
-		word_list->push(Word(DetectType(str), str));
-	return word_list;
+	stringstr=spaceKiller(command.substr(start_posi,command.length()-start_posi));
+	if(str.length()!=0)
+		word_list->push(Word(DetectType(str),str));
+	returnword_list;
 }

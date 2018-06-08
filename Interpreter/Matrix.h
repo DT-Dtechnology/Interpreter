@@ -79,6 +79,7 @@ void buildAll()
 	buildStoN();
 	buildMaps();
 	buildMatrix();
+	testCtoN();
 
 }
 

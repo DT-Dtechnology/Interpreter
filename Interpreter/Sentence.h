@@ -1,29 +1,29 @@
-#pragma once
-#include <string>
-#include <iostream> // 
+#pragmaonce
+#include<string>
+#include<iostream>//
 
-using std::string;
+usingstd::string;
 
-enum SentenceType
+enumSentenceType
 {
-	SentenceLoop, SentenceIf, SentenceDef, SentenceReturn, SentenceExp
+	SentenceLoop,SentenceIf,SentenceDef,SentenceReturn,SentenceExp
 };
 
-class Sentence
+classSentence
 {
-	SentenceType senType_;
-	string order_;
-	int tab_cnt_;
-	int row_; //
+	SentenceTypesenType_;
+	stringorder_;
+	inttab_cnt_;
+	introw_;//
 public:
-	Sentence() = delete;
-	Sentence(std::string& order, int tab, int row);
+	Sentence()=delete;
+	Sentence(std::string&order,inttab,introw);
 	~Sentence();
-	string getOrder() const { return order_; }
-	void printTest() const { std::cout << row_ << " " << tab_cnt_ << " " << order_ << '\n'; }
+	stringgetOrder()const{returnorder_;}
+	voidprintTest()const{std::cout<<row_<<""<<tab_cnt_<<""<<order_<<'\n';}
 };
 
-inline Sentence::Sentence(std::string& order, int tab, int row):
+inlineSentence::Sentence(std::string&order,inttab,introw):
 	order_(order),tab_cnt_(tab),row_(row)
 {
 	

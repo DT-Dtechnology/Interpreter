@@ -1,75 +1,75 @@
-#include <string>
-#include <map>
-#include <fstream>
+#include<string>
+#include<map>
+#include<fstream>
 
-using namespace std;
+usingnamespacestd;
 
 //####
-class InputHelper {
+classInputHelper{
 public:
-	static const int A = 'A';
-	static const int Z = 'Z';
-	static map<string, char> Map;
-	static bool isUp(char c)
+	staticconstintA='A';
+	staticconstintZ='Z';
+	staticmap<string,char>Map;
+	staticboolisUp(charc)
 	{
-		return ((c >= A) && (c <= Z)) || ((c >= A - 64) && (c <= Z - 64));
+		return((c>=A)&&(c<=Z))||((c>=A-64)&&(c<=Z-64));
 	}
-	static bool isRealUp(char c)
+	staticboolisRealUp(charc)
 	{
-		return (c >= A) && (c <= Z);
+		return(c>=A)&&(c<=Z);
 	}
-	static void help_input() {
-		ifstream fin;
-		ofstream fout;
-		int nextUp = 'A';
-		int nextDown = 'a';
+	staticvoidhelp_input(){
+		ifstreamfin;
+		ofstreamfout;
+		intnextUp='A';
+		intnextDown='a';
 		fin.open("InputHelp.txt");
 		fout.open("NewTable.txt");
-		string word;
-		while (true)
+		stringword;
+		while(true)
 		{
-			fin >> word;
-			if (word == "END")
+			fin>>word;
+			if(word=="END")
 				return;
-			if (word == ";") {
-				fout << endl;
+			if(word==";"){
+				fout<<endl;
 				continue;
 			}
-			else if(word == "~"){
-				fout << "~";
+			elseif(word=="~"){
+				fout<<"~";
 				continue;
 			}
-			else if (word == "->") {
-				fout << word;
+			elseif(word=="->"){
+				fout<<word;
 				continue;
 			}
-			else if (Map[word] == 0) {
-				if (isUp(word[0]))
+			elseif(Map[word]==0){
+				if(isUp(word[0]))
 				{
-					Map[word] = nextUp;
+					Map[word]=nextUp;
 					++nextUp;
-					if (nextUp > 'Z')
-						nextUp = 1;
+					if(nextUp>'Z')
+						nextUp=1;
 				}
-				else {
-					Map[word] = nextDown;
+				else{
+					Map[word]=nextDown;
 					++nextDown;
-					if (nextDown > 'z')
-						nextDown = 33;
-					if (nextDown == '\'')
+					if(nextDown>'z')
+						nextDown=33;
+					if(nextDown=='\'')
 						nextDown++;
-					if (nextDown == '#')
+					if(nextDown=='#')
 						nextDown++;
 				}
 			}
-			if (isUp(word[0]) && !isRealUp(char(Map[word])))
-				fout << char(Map[word] + 64) << '\'';
+			if(isUp(word[0])&&!isRealUp(char(Map[word])))
+				fout<<char(Map[word]+64)<<'\'';
 			else
-				fout << Map[word];
+				fout<<Map[word];
 		}
 		fin.close();
 		fout.close();
 	}
 };
 
-map<string, char> InputHelper::Map;
+map<string,char>InputHelper::Map;
