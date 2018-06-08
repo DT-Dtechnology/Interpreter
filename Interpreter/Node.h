@@ -2,6 +2,7 @@
 #include <vector>
 #include "Object.h"
 
+class Block;
 class Node;
 
 typedef std::vector<Node*> NodeVector;
@@ -33,9 +34,11 @@ public:
 	Object* getValue() const;
 	void addNode(Node* node) { childVector_.push_back(node); }
 	void setValue(Object* object) { value_ = object; }
+	Node* getParent() const { return parent_; }
 
 	friend class SentenceParser;
 	friend void print_node(Node*);
+	friend void FuncSwitcher(Block*, Node*);
 };
 
 inline Node::~Node()

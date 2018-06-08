@@ -80,9 +80,9 @@ class LongObject :
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
 	~LongObject() = default;
-	LongObject* operator+(const LongObject* longobj);
-	LongObject* operator-(const LongObject* longobj);
-	LongObject* operator*(const LongObject* longobj);
+	LongObject* operator+(const LongObject* longobj) const;
+	LongObject* operator-(const LongObject* longobj) const;
+	LongObject* operator*(const LongObject* longobj) const;
 	DoubleObject* operator/(const LongObject* longobj) const;
 
 	//
@@ -119,5 +119,6 @@ class ListObject: public Object
 	vector<Object*> value_{};
 public:
 	ListObject():Object(ObjectType::ListObj){}
-	virtual ~ListObject();
+	~ListObject() = default;
+
 };

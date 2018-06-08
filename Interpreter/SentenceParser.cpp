@@ -121,6 +121,7 @@ void SentenceParser::buildTree()
 					{
 						const NodeType type = charToNode[magic_code[i]];
 						Node* node = new Node(type);
+						node->parent_ = X;
 						X->addNode(node);
 					}
 					else if (isTerminate[magic_code[i]])
@@ -131,6 +132,8 @@ void SentenceParser::buildTree()
 						// ####
 						Node* node = new Node(TERMINATE);
 						node->setValue(new OperatorObject());
+						node->parent_ = X;
+						node->isLeaf_ = true;
 						X->addNode(node);
 					}
 					else
@@ -138,6 +141,7 @@ void SentenceParser::buildTree()
 						Node* node = new Node(NodeType::TERMINATE);
 						node->setValue(new VariableObject());
 						node->isLeaf_ = true;
+						node->parent_ = X;
 						X->addNode(node);
 					}
 				}

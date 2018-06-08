@@ -224,7 +224,17 @@ void testCtoN()
 
 void print_node(Node* node)
 {
-	if (node->getNodeType() != NodeType::TERMINATE)
+	
+	
+	if(node->childVector_.size() > 0)
+	{
+		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
+		{
+			print_node(*it);
+		}
+		cout << endl;
+	}
+	if (node->nodeType_!= NodeType::TERMINATE)
 	{
 		cout << nodeToString[node->getNodeType()] << " ";
 	}
@@ -235,12 +245,5 @@ void print_node(Node* node)
 			tmp->print_test();
 		else
 			std::cout << "var ";
-	}
-	else
-	{
-		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
-		{
-			print_node(*it);
-		}
 	}
 }
