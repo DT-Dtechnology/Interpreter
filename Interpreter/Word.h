@@ -1,24 +1,24 @@
-#pragmaonce
-#include<string>
-#include"Object.h"
+#pragma once
+#include <string>
+#include "Object.h"
 
-usingstd::string;
+using std::string;
 
-enumWordType
+enum WordType
 {
-	value,variable,operate,
-	keyword,word_type_error
+	value, variable, operate,
+	keyword, word_type_error
 };
 
-classWord
+class Word
 {
-	WordTypeword_type_;
-	stringmsg_;
+	WordType word_type_;
+	string msg_;
 public:
-	Word()=default;
-	~Word()=default;
-	Word(WordTypetype,stringstr):word_type_(type),msg_(str){}
-	stringgetMsg()const{returnmsg_;}
-	voidsetMsg(stringmsg){msg_=msg;}
-	WordTypegetType()const{returnword_type_;}
+	Word() = default;
+	~Word() = default;
+	Word(WordType type, string str) :word_type_(type), msg_(str) { }
+	string getMsg() const { return msg_; }
+	void setMsg(string msg) { msg_ = msg; }
+	WordType getType() const { return word_type_; }
 };

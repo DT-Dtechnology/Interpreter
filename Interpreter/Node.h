@@ -1,55 +1,55 @@
-#pragmaonce
-#include<vector>
-#include"Object.h"
+#pragma once
+#include <vector>
+#include "Object.h"
 
-classBlock;
-classNode;
+class Block;
+class Node;
 
-typedefstd::vector<Node*>NodeVector;
+typedef std::vector<Node*> NodeVector;
 
-enumNodeType
+enum NodeType
 {
-	ROOT,END,TERMINATE,VALUE,VARIABLE,
-	EXP,SEN,ASS,LOOP,EXPL,EXPLL,DEF,FUNC,DEFF,
-	EE,T,TT,F,FF,G,GG,H,HH,K,X,
-	VARL,VARLL,IF,JUMP,PRINT,PRINTT,
-	EQUAL,LEFT_BRACKET,RIGHT_BRACKET,ADD,MINUS,MULTIPLY,DIVIDE,IS_EQUAL,IS_NOT_EQUAL,
-	LEFT_MOVE,RIGHT_MOVE,WHILE,FOR,IN,COLON,COMMA,NOT,BANG,PLUS_PLUS,MINUS_MINUS,
-	ELIF,ELSE,CONTINUE,BREAK,PASS,RETURN,PARAL,PARALL,PARA
+	ROOT, END, TERMINATE, VALUE, VARIABLE,
+	EXP, SEN, ASS, LOOP, EXPL, EXPLL, DEF, FUNC, DEFF,
+	EE, T, TT, F, FF, G, GG, H, HH, K, X,
+	VARL, VARLL, IF, JUMP, PRINT, PRINTT,
+	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
+	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, COMMA, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
+	ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN, PARAL, PARALL, PARA
 };
 
-classNode
+class Node
 {
-	Object*value_=nullptr;
-	Node*parent_=nullptr;
-	NodeVectorchildVector_;
-	boolisLeaf_=false;
-	NodeTypenodeType_;
+	Object* value_ = nullptr;
+	Node* parent_ = nullptr;
+	NodeVector childVector_;
+	bool isLeaf_ = false;
+	NodeType nodeType_;
 public:
 	Node();
 	~Node();
-	Node(NodeTypenodeType):nodeType_(nodeType){}
-	NodeTypegetNodeType()const{returnnodeType_;};
-	NodeVector*getChild(){return&childVector_;}
-	Object*getValue()const;
-	voidaddNode(Node*node){childVector_.push_back(node);}
-	voidsetValue(Object*object){value_=object;}
-	Node*getParent()const{returnparent_;}
+	Node(NodeType nodeType) :nodeType_(nodeType) {}
+	NodeType getNodeType() const { return nodeType_; };
+	NodeVector* getChild() { return &childVector_; }
+	Object* getValue() const;
+	void addNode(Node* node) { childVector_.push_back(node); }
+	void setValue(Object* object) { value_ = object; }
+	Node* getParent() const { return parent_; }
 
-	friendclassSentenceParser;
-	friendvoidprint_node(Node*);
-	friendvoidFuncSwitcher(Block*,Node*);
+	friend class SentenceParser;
+	friend void print_node(Node*);
+	friend void FuncSwitcher(Block*, Node*);
 };
 
-inlineNode::~Node()
+inline Node::~Node()
 {
-	for(autoit=childVector_.begin();it!=childVector_.end();++it)
-		delete*it;
-	deletevalue_;
+	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
+		delete *it;
+	delete value_;
 }
 
-inlineObject*Node::getValue()const
+inline Object* Node::getValue() const
 {
-	//####
-	returnvalue_;
+	// ####
+	return value_;
 }

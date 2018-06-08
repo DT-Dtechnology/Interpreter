@@ -1,8 +1,8 @@
-#include"stdafx.h"
-#include"Block.h"
-#include"SentenceParser.h"
+#include "stdafx.h"
+#include "Block.h"
+#include "SentenceParser.h"
 
-voidBlock::returnSpace()
+void Block::returnSpace()
 {
 	while(!temp_space_stack_.empty())
 	{
@@ -11,45 +11,45 @@ voidBlock::returnSpace()
 	}
 }
 
-Object*Block::searchObject(stringvar_name)
+Object* Block::searchObject(string var_name)
 {
 	//####
 	//####
-	returnnullptr;
+	return nullptr;
 	//####
 	//####
-	Object*object=nullptr;
+	Object* object = nullptr;
 	while(!block_space_stack_.empty())
 	{
-		object=block_space_stack_.top()->var_table_[var_name];
-		if(object!=nullptr)
+		object = block_space_stack_.top()->var_table_[var_name];
+		if (object != nullptr)
 		{
 			returnSpace();
-			returnobject;
+			return object;
 		}
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
 	returnSpace();
-	returnnullptr;
+	return nullptr;
 }
 
-voidBlock::print_all()
+void Block::print_all()
 {
-	for(autoit=sentence_vector_->begin();it!=sentence_vector_->end();++it)
+	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
-		SentenceParser*sp=newSentenceParser((*it));
+		SentenceParser* sp = new SentenceParser((*it));
 		sp->print_test_second();
-		deletesp;
+		delete sp;
 	}
 }
 
-voidBlock::print_all_old()
+void Block::print_all_old()
 {
-	for(autoit=sentence_vector_->begin();it!=sentence_vector_->end();++it)
+	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
-		SentenceParser*sp=newSentenceParser((*it));
+		SentenceParser* sp = new SentenceParser((*it));
 		sp->print_test_first();
-		deletesp;
+		delete sp;
 	}
 }

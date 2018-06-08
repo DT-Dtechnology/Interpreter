@@ -1,22 +1,22 @@
-#pragmaonce
-#include<string>
-#include<vector>
-#include<queue>
-#include"Word.h"
+#pragma once
+#include <string>
+#include <vector>
+#include <queue>
+#include "Word.h"
 
-usingstd::string;
-usingstd::vector;
-usingstd::queue;
+using std::string;
+using std::vector;
+using std::queue;
 
-typedefqueue<Word>WordQueue;
+typedef queue<Word> WordQueue;
 
-classSenDivider
+class SenDivider
 {
-	stringcommand;
-	Block*cur_block;
+	string command;
+	Block* cur_block;
 public:
-	SenDivider(conststring&order):command(order){}
-	~SenDivider()=default;
-	WordQueue*work();
+	SenDivider(const string& order) :command(order) {}
+	~SenDivider() = default;
+	WordQueue* work();
 	//####
 };

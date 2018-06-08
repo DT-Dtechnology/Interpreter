@@ -1,7 +1,7 @@
-#include"stdafx.h"
-#include"ObjectFactory.h"
+#include "stdafx.h"
+#include "ObjectFactory.h"
 
-Object*ObjectFactory::createObject(conststring&name)
+Object* ObjectFactory::createObject(const string& name)
 {
-	returnnewTestObject(name);
+	return new TestObject(name);
 }

@@ -1,23 +1,23 @@
-#include"stdafx.h"
-#include"Object.h"
+#include "stdafx.h"
+#include "Object.h"
 
 
-LongObject*LongObject::operator+(constLongObject*longobj)const
+LongObject * LongObject::operator+(const LongObject *longobj) const
 {
-	returnnewLongObject(this->value_+longobj->value_);
+	return new LongObject(this->value_ + longobj->value_);
 }
 
-LongObject*LongObject::operator-(constLongObject*longobj)const
+LongObject * LongObject::operator-(const LongObject *longobj) const
 {
-	returnnewLongObject(this->value_-longobj->value_);
+	return new LongObject(this->value_ - longobj->value_);
 }
 
-LongObject*LongObject::operator*(constLongObject*longobj)const
+LongObject * LongObject::operator*(const LongObject *longobj) const
 {
-	returnnewLongObject(this->value_*longobj->value_);
+	return new LongObject(this->value_ * longobj->value_);
 }
 
-DoubleObject*LongObject::operator/(constLongObject*longobj)const
+DoubleObject * LongObject::operator/(const LongObject *longobj) const
 {
-	returnnewDoubleObject(this->value_/longobj->value_);
+	return new DoubleObject(this->value_ / longobj->value_);
 }

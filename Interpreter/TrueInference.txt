@@ -1,158 +1,158 @@
-Row:0Column:25
+Row: 0 Column: 25
 Generating......
-magiccode:[H]
-front:var
-Top:6
-Row0Column25
-MatchGenerationH
+magic code:[ H]
+front: var
+Top: 6
+Row0  Column25
+Match GenerationH
 Generate
 
-Row:25Column:25
+Row: 25 Column: 25
 Generating......
-magiccode:[IzJ]
-front:var
-Top:7
-Row25Column25
-MatchGenerationIzJ
+magic code:[ IzJ]
+front: var
+Top: 7
+Row25  Column25
+Match GenerationIzJ
 Generate
 
-Row:23Column:25
+Row: 23 Column: 25
 Generating......
-magiccode:[y]
-front:var
-Top:25
-Row23Column25
-MatchGenerationy
+magic code:[ y]
+front: var
+Top: 25
+Row23  Column25
+Match Generationy
 Generate
 
-Row:0Column:25
+Row: 0 Column: 25
 Match
 
-Row:24Column:26
+Row: 24 Column: 26
 Generating......
-magiccode:[~]
-front:=
-Top:26
-Row24Column26
-MatchGeneration~
+magic code:[ ~]
+front: =
+Top: 26
+Row24  Column26
+Match Generation~
 Generate
 
-Row:0Column:26
+Row: 0 Column: 26
 Match
 
-Row:3Column:25
+Row: 3 Column: 25
 Generating......
-magiccode:[DK]
-front:var
-Top:9
-Row3Column25
-MatchGenerationDK
+magic code:[ DK]
+front: var
+Top: 9
+Row3  Column25
+Match GenerationDK
 Generate
 
-Row:5Column:25
+Row: 5 Column: 25
 Generating......
-magiccode:[LM]
-front:var
-Top:5
-Row5Column25
-MatchGenerationLM
+magic code:[ LM]
+front: var
+Top: 5
+Row5  Column25
+Match GenerationLM
 Generate
 
-Row:7Column:25
+Row: 7 Column: 25
 Generating......
-magiccode:[NO]
-front:var
-Top:15
-Row7Column25
-MatchGenerationNO
+magic code:[ NO]
+front: var
+Top: 15
+Row7  Column25
+Match GenerationNO
 Generate
 
-Row:9Column:25
+Row: 9 Column: 25
 Generating......
-magiccode:[PQ]
-front:var
-Top:17
-Row9Column25
-MatchGenerationPQ
+magic code:[ PQ]
+front: var
+Top: 17
+Row9  Column25
+Match GenerationPQ
 Generate
 
-Row:11Column:25
+Row: 11 Column: 25
 Generating......
-magiccode:[RS]
-front:var
-Top:19
-Row11Column25
-MatchGenerationRS
+magic code:[ RS]
+front: var
+Top: 19
+Row11  Column25
+Match GenerationRS
 Generate
 
-Row:13Column:25
+Row: 13 Column: 25
 Generating......
-magiccode:[TU]
-front:var
-Top:21
-Row13Column25
-MatchGenerationTU
+magic code:[ TU]
+front: var
+Top: 21
+Row13  Column25
+Match GenerationTU
 Generate
 
-Row:15Column:25
+Row: 15 Column: 25
 Generating......
-magiccode:[V]
-front:var
-Top:23
-Row15Column25
-MatchGenerationV
+magic code:[ V]
+front: var
+Top: 23
+Row15  Column25
+Match GenerationV
 Generate
 
-Row:18Column:25
+Row: 18 Column: 25
 Generating......
-magiccode:[yrWsb]
-front:var
-Top:12
-Row18Column25
-MatchGenerationyrWsb
+magic code:[ yrWsb]
+front: var
+Top: 12
+Row18  Column25
+Match GenerationyrWsb
 Generate
 
-Row:0Column:25
+Row: 0 Column: 25
 Match
 
-Row:0Column:15
+Row: 0 Column: 15
 Match
 
-Row:19Column:25
+Row: 19 Column: 25
 Generating......
-magiccode:[XY]
-front:var
-Top:57
-Row19Column25
-MatchGenerationXY
+magic code:[ XY]
+front: var
+Top: 57
+Row19  Column25
+Match GenerationXY
 Generate
 
-Row:21Column:25
+Row: 21 Column: 25
 Generating......
-magiccode:[yZ]
-front:var
-Top:59
-Row21Column25
-MatchGenerationyZ
+magic code:[ yZ]
+front: var
+Top: 59
+Row21  Column25
+Match GenerationyZ
 Generate
 
-Row:0Column:25
+Row: 0 Column: 25
 Match
 
-Row:22Column:8
+Row: 22 Column: 8
 Generating......
-magiccode:[~]
-front:#
-Top:24
-Row22Column8
-MatchGeneration~
+magic code:[ ~]
+front: #
+Top: 24
+Row22  Column8
+Match Generation~
 Generate
 
-Row:20Column:8
+Row: 20 Column: 8
 Generating......
-magiccode:[~]
-front:#
-Top:58
-Row20Column8
-MatchGeneration~
+magic code:[ ~]
+front: #
+Top: 58
+Row20  Column8
+Match Generation~
 Generate

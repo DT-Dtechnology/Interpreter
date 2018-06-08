@@ -1,19 +1,19 @@
-#pragmaonce
-#include<string>
-#include<vector>
-#include<fstream>
-#include"Sentence.h"
+#pragma once
+#include <string>
+#include <vector>
+#include <fstream>
+#include "Sentence.h"
 
-usingstd::string;
-usingstd::ifstream;
+using std::string;
+using std::ifstream;
 
-typedefstd::vector<Sentence*>SenVector;
+typedef std::vector<Sentence*> SenVector;
 
-classInputter
+class Inputter
 {
-	ifstream&fin_;
+	ifstream& fin_;
 public:
-	Inputter(ifstream&fin):fin_(fin){}
-	~Inputter()=default;
-	SenVector*get_sentence_vector()const;
+	Inputter(ifstream& fin) :fin_(fin) { }
+	~Inputter() = default;
+	SenVector* get_sentence_vector() const;
 };

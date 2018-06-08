@@ -1,22 +1,22 @@
-#include"stdafx.h"
-#include"ParseFuncSwitcher.h"
+#include "stdafx.h"
+#include "ParseFuncSwitcher.h"
 
-voidFuncSwitcher(Block*cur,Node*node)
+void FuncSwitcher(Block* cur, Node* node)
 {
-	switch(node->getNodeType())
+	switch (node->getNodeType())
 	{
 		/*
-		caseNodeType::TERMINATE:
-			Object*value=node->value_;
-			if(value->getType()==ObjectType::Operator)
+		case NodeType::TERMINATE:
+			Object * value = node->value_;
+			if (value->getType() == ObjectType::Operator)
 			{
-				node->parent_->nodeType_=
+				node -> parent_ ->nodeType_ = 
 			}
 		break;
 		default:
-			cout<<node->getNodeType()<<endl;
+			cout << node->getNodeType() << endl;
 		break;
 		*/
-	default:;
+	default: ;
 	}
 }

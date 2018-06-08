@@ -1,51 +1,51 @@
-#pragmaonce
-#include"Block.h"
-#include"Inputter.h"
+#pragma once
+#include "Block.h"
+#include "Inputter.h"
 
-classPVM
+class PVM
 {
-	Block*Global_;
-	stringfile_name_;
+	Block* Global_;
+	string file_name_;
 
-	voidinput();
-	voidrun();
+	void input();
+	void run();
 public:
-	PVM(stringfile_name):file_name_(file_name){}
-	~PVM()=default;
-	voidwork()
+	PVM(string file_name) :file_name_(file_name) { }
+	~PVM() = default;
+	void work()
 	{
 		input();
 		run();
 	}
-	voidprint_test_first();
-	voidprint_test_second();
+	void print_test_first();
+	void print_test_second();
 };
 
-inlinevoidPVM::input()
+inline void PVM::input()
 {
-	ifstreamfin;
+	ifstream fin;
 	fin.open(file_name_);
-	Inputter*inputter=newInputter(fin);
-	Global_=newBlock(inputter->get_sentence_vector());
-	deleteinputter;
+	Inputter* inputter = new Inputter(fin);
+	Global_ = new Block(inputter->get_sentence_vector());
+	delete inputter;
 }
 
-inlinevoidPVM::run()
+inline void PVM::run()
 {
 	
 }
 
-inlinevoidPVM::print_test_first()
+inline void PVM::print_test_first()
 {
 	input();
-	std::cout<<"HelloWorld"<<std::endl<<std::endl;
+	std::cout << "Hello World" << std::endl << std::endl;
 	Global_->print_all();
 }
 
-inlinevoidPVM::print_test_second()
+inline void PVM::print_test_second()
 {
 	input();
-	std::cout<<"HelloWorld"<<std::endl<<std::endl;
+	std::cout << "Hello World" << std::endl << std::endl;
 	Global_->print_all_old();
 }
 

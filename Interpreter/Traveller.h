@@ -1,12 +1,12 @@
-#pragmaonce
-#include"SentenceParser.h"
+#pragma once
+#include "SentenceParser.h"
 
-classTraveller
+class Traveller
 {
-	Block*c_block_;
+	Block* c_block_;
 public:
-	Traveller(Block*c_block):c_block_(c_block){;}
-	~Traveller()=default;
-	voidwork();
+	Traveller(Block* c_block) :c_block_(c_block) { ; }
+	~Traveller() = default;
+	void work();
 };
 

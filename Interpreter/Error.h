@@ -1,19 +1,19 @@
-#pragmaonce
-#include<iostream>
-#include<string>
+#pragma once
+#include <iostream>
+#include <string>
 
-usingstd::string;
-usingstd::cout;
-usingstd::endl;
+using std::string;
+using std::cout;
+using std::endl;
 
-classError
+class Error
 {
-	stringmessage_;
+	string message_;
 public:
-	Error(stringmessage="UnkownError!"):message_(message)
+	Error(string message = "Unkown Error!") :message_(message)
 	{
-		cout<<message<<endl;
+		cout << message << endl;
 	}
-	virtual~Error()=default;
+	virtual ~Error() = default;
 };
 

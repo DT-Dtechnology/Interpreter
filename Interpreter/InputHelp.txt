@@ -46,11 +46,17 @@ JUMP -> return EXP ;
 
 DEF -> def var FUNC : ;
 
-FUNC -> ( VARL ) BUG ;
+FUNC -> ( PARAL ) BUG ;
 BUG -> : ;
 BUG -> ~ ;
 FUNC -> ~ ;
-
+PARAL -> PARA PARAL' ;
+PARAL -> PARAL' ;
+PARAL' -> , PARA PARAL' ;
+PARAL' -> ~ ;
+PARA -> var X ;
+X -> = EXP ;
+X -> ~ ;
 
 VARL -> var VARL' ;
 VARL -> VARL' ;
