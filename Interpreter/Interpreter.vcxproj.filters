@@ -24,16 +24,10 @@
     <ClInclude Include="Word.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SentenceParser.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Sentence.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Traveller.h">
@@ -46,9 +40,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ParseFuncSwitcher.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Error.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
@@ -72,10 +63,19 @@
     <ClInclude Include="TypeDetecter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="InputHelper.h">
+    <ClInclude Include="ObjectFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
+    <ClInclude Include="Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sentence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

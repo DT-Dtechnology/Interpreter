@@ -6,6 +6,8 @@
 #include "SenDivider.h"
 
 using std::stack;
+using std::cout;
+using std::endl;
 
 Object* getObject(Block*, string);
 

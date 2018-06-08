@@ -1,10 +1,1 @@
-
-	while (ptr_len == len_en) :
-	#while (ptr_len <= len_en) and (ptr_wid <= wid_en): # while循环
-		# print "Length: %d, width: %d, area: %d" % (ptr_len, ptr_wid, ptr_len * ptr_wid) # 控制格式的输出
-		ptr_wid = ptr_wid + step
-		if (ptr_wid == wid_en): # if分支语句
-			ptr_len, ptr_wid = ptr_len + step, wid_st
-
-TEMP = main( A )
-a = 3
+def fun(1,2):
