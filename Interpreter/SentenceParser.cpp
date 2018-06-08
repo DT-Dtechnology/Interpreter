@@ -7,7 +7,7 @@
 
 using std::stack;
 
-Object* getObject(Block*, string, ObjectType);
+Object* getObject(Block*, string);
 
 void SentenceParser::divide()
 {
@@ -46,7 +46,7 @@ void SentenceParser::buildTree()
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
 		cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
-		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << endl;
+		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
 
 			if (Top == NodeType::TERMINATE)
 			{
@@ -72,8 +72,7 @@ void SentenceParser::buildTree()
 					// 终结符转NodeType 例如：+->ADD
 					X->nodeType_ = charToNode[tmp];
 				}
-				else if (X->getValue()->getType() == ObjectType::TotalValue ||
-					X->getValue()->getType() == ObjectType::TotalVariable)
+				else if (X->getValue()->getType() == ObjectType::TotalVariable)
 				{
 					// X 更新 Object 所指向的内容
 					// 此处暂时存储为Total Object的特殊对象
@@ -86,9 +85,7 @@ void SentenceParser::buildTree()
 					//可能需要更改
 
 					ObjectType type = X->getValue()->getType();
-					if (type == ObjectType::TotalValue)
-						X->isTemp_ = true;
-					X->value_ = getObject(cur_block_, word_queue_.front().getMsg(), type);
+					X->value_ = getObject(cur_block_, word_queue_.front().getMsg());
 					word_queue_.pop();
 					front = getNodeMsg(word_queue_.front());
 				}
@@ -201,13 +198,10 @@ void SentenceParser::build_all()
 	printMatrix();
 }
 
-Object* getObject(Block* cur_block, string name, ObjectType type = ObjectType::TotalValue)
+Object* getObject(Block* cur_block, string name)
 {
 	// ####
-	if (type == ObjectType::TotalValue)
-		return new TestObject(name);
-	else
-		return cur_block->searchObject(name);
+	return new TestObject(name);
 
 	//####
 	/*

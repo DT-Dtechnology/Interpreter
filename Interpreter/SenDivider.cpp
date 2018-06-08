@@ -70,11 +70,49 @@ inline string spaceKiller(const string& s)
 /*
 WordQueue* SenDivider::work()
 {
+	//####
+	cout << endl << endl << "----------" << endl << "Divider: " << endl << command << endl << "---------" << endl << endl;
+
 	WordQueue* word_list = new WordQueue;
 	int start_posi = 0;
 	for (auto i = 0; i < command.length(); ++i)
 	{
 		const auto temp = i;
+		string quoted = "";
+		//detect quote "  
+		if (command[i] == '\"') {
+
+			while (command[++i] != '\"' && i < command.length()) {
+				quoted += command[i];
+			}
+			if (i == command.length()) {
+				system("pause");
+				//不能处理已经进入队列的。
+				exit(1);
+			}
+			++i;
+			start_posi = i;
+			string str = "\"" + quoted + "\"";
+			word_list->push(Word(DetectType(str), str));
+			continue;
+		}
+		//detect quote '
+		if (command[i] == '\'') {
+			while (command[++i] != '\'' && i < command.length()) {
+				quoted += command[i];
+			}
+			if (i == command.length()) {
+				system("pause");
+				//不能处理已经进入队列的。
+				exit(1);
+			}
+			++i;
+			start_posi = i;
+			string str = "\'" + quoted + "\'";
+			word_list->push(Word(DetectType(str), str));
+			continue;
+		}
+
 		if (command[i] == ' ')
 		{
 			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
