@@ -4,7 +4,7 @@
 Node* FuncSwitcher(Block* cur, Node* node)
 {
 	cout << node->getNodeType() << endl;
-	system("pause");
+	//system("pause");
 	switch (node->getNodeType())
 	{
 		case TERMINATE:

@@ -54,12 +54,12 @@ void buildStoN()
 	string set1[] = { "SEN", "LOOP", "IF", "EXP", "JUMP", "DEF", "PRINT", "ASS",
 		"T", "E'", "F", "T'", "G", "F'", "H", "G'", "K", "H'", "X",
 		"FUNC", "PARAL", "PARA", "PARAL'", "var", "VARL'", "VARL", "EXPL", "EXPL'",
-		"while", ":", "for", "in", "if", "elif", "else", ",", "~", "==", "!=", "<<",
+		"while", ":", "for", "in", "if", "elif", "else", ",", "#", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
 		"def", "=", "print" };
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
 		T, EE, F, TT, G, FF, H, GG, K, HH, X, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
-		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, TERMINATE, IS_EQUAL,
+		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, END, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
 	for (int i = 0; i < 55; i++)
@@ -224,28 +224,31 @@ void testCtoN()
 }
 
 
-void print_node(Node* node)
+inline void print_node(Node* node, int depth)
 {
-	
-	if(node->childVector_.size() > 0)
-	{
-		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
-		{
-			print_node(*it);
-		}
-		cout << endl;
-	}
-	if (node->nodeType_!= NodeType::TERMINATE)
+	for (int i = 0; i < depth; ++i)
+		cout << "||";
+	if (node->nodeType_ != NodeType::TERMINATE)
 	{
 		cout << nodeToString[node->getNodeType()] << " ";
+		cout << endl;
 	}
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
+		
 		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
 		if (tmp)
 			tmp->print_test();
 		else
-			system("pause");
+			cout << nodeToString[node->getNodeType()] << endl;
+		cout << endl;
+	}
+	if(node->childVector_.size() > 0)
+	{
+		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
+		{
+			print_node(*it, depth+1);
+		}
 	}
 }
 
@@ -255,7 +258,7 @@ inline void buildisOper()
 {
 	memset(isOperator, 0, sizeof(isOperator));
 	NodeType operlist[] = { PRINTT,
-		EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
+		EQUAL, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
 		LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT,
 		ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN };
 

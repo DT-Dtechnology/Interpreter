@@ -40,7 +40,7 @@ public:
 	Node* getParent() const { return parent_; }
 
 	friend class SentenceParser;
-	friend void print_node(Node*);
+	friend void print_node(Node*, int depth);
 	friend Node* FuncSwitcher(Block*, Node*);
 };
 

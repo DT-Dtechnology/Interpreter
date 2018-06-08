@@ -48,114 +48,109 @@ void SentenceParser::buildTree()
 		NodeType Top = X->getNodeType();
 		cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
 		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
+		
 
-			if (Top == NodeType::TERMINATE)
+		if (Top == NodeType::TERMINATE)
+		{
+			cout << front << "  ";
+			if (X->value_->getType() == ObjectType::Operator && front!= "#")
 			{
-				cout << front << "  ";
-				if (X->value_->getType() == ObjectType::Operator && front!= "#")
-				{
-					// isTerminate[] 表示终结符
-					// stringToChar[] 表示终结符的转化
-
-					// 这里实际可以添加错误判断
-
-					// 之后再说
-					const int tmp = stringToChar[front];
-					// 终结符转NodeType 例如：+->ADD
-					X->nodeType_ = charToNode[tmp];
-					word_queue_.pop();
-					front = getNodeMsg(word_queue_.front());
-				}
-				else if(X->value_->getType() == ObjectType::Operator)
-				{
-					// front == "#";
-					const int tmp = stringToChar[front];
-					// 终结符转NodeType 例如：+->ADD
-					X->nodeType_ = charToNode[tmp];
-				}
-				else if (X->getValue()->getType() == ObjectType::TotalVariable)
-				{
-					// X 更新 Object 所指向的内容
-					// 此处暂时存储为Total Object的特殊对象
-					// 报错处理时要格外小心
-					// ####
-
-					//####
-					//释放管理，在Varieble对应的Node上，isTemp为false，默认为true
-					//用于表示不能删除
-					//可能需要更改
-
-					ObjectType type = X->getValue()->getType();
-					X->value_ = getObject(cur_block_, word_queue_.front().getMsg());
-					word_queue_.pop();
-					front = getNodeMsg(word_queue_.front());
-				}
-				else
-					throw Error("Wrong Match");
-				cout << "Match" << endl << endl;
+				// isTerminate[] 表示终结符
+				// stringToChar[] 表示终结符的转化
+				// 这里实际可以添加错误判断
+				// 之后再说
+				const int tmp = stringToChar[front];
+				// 终结符转NodeType 例如：+->ADD
+				X->nodeType_ = charToNode[tmp];
+				word_queue_.pop();
+				front = getNodeMsg(word_queue_.front());
 			}
-			else if (Top == NodeType::END)
+			else if(X->value_->getType() == ObjectType::Operator)
 			{
-				if (front == "#")
-					FLAG = false;
-				else
-					throw Error("No END");
+				// front == "#";
+				const int tmp = stringToChar[front];
+				// 终结符转NodeType 例如：+->ADD
+				X->nodeType_ = charToNode[tmp];
 			}
-			else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
+			else if (X->getValue()->getType() == ObjectType::TotalVariable)
 			{
-				//nodeToInt 行号
-				//stringToInt 列好
-				string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
-
-				cout << "Generating......" << endl;
-				cout << "magic code:[ " << magic_code << " ]" << endl;
-				cout << "front: " << front << endl;
-				cout << "Top: " << nodeToString[Top] << endl;
-				cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
-
-				// 顺序生成X的子节点
-				for (auto i = 0; i < magic_code.length(); ++i)
-				{
-					if (magic_code[i] == '~')
-						continue;
-					else if (isUnTerminate[magic_code[i]])
-					{
-						const NodeType type = charToNode[magic_code[i]];
-						Node* node = new Node(type);
-						node->parent_ = X;
-						X->addNode(node);
-					}
-					else if (isTerminate[magic_code[i]])
-					{
-						// 判断读入符号类型, 同时处理X结点的NodeType
-						// 注意value 和 variable 不是 true
-						// 基于对应的 chartoNode
-						// ####
-						Node* node = new Node(TERMINATE);
-						node->setValue(new OperatorObject());
-						node->parent_ = X;
-						node->isLeaf_ = true;
-						X->addNode(node);
-					}
-					else
-					{
-						Node* node = new Node(NodeType::TERMINATE);
-						node->setValue(new VariableObject());
-						node->isLeaf_ = true;
-						node->parent_ = X;
-						X->addNode(node);
-					}
-				}
-
-				// 倒序入栈
-				for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
-					ParseStack.push(*(--it));
-
-				cout << "Generate" << endl << endl;
+				// X 更新 Object 所指向的内容
+				// 此处暂时存储为Total Object的特殊对象
+				// 报错处理时要格外小心
+				// ####
+				//####
+				//释放管理，在Varieble对应的Node上，isTemp为false，默认为true
+				//用于表示不能删除
+				//可能需要更改
+				ObjectType type = X->getValue()->getType();
+				X->value_ = getObject(cur_block_, word_queue_.front().getMsg());
+				word_queue_.pop();
+				front = getNodeMsg(word_queue_.front());
 			}
 			else
-				throw Error("What?");
-		
+				throw Error("Wrong Match");
+			cout << "Match" << endl << endl;
+		}
+		else if (Top == NodeType::END)
+		{
+			if (front == "#")
+				FLAG = false;
+			else
+				throw Error("No END");
+		}
+		else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
+		{
+			//nodeToInt 行号
+			//stringToInt 列好
+			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
+
+			cout << "Generating......" << endl;
+			cout << "magic code:[ " << magic_code << " ]" << endl;
+			cout << "front: " << front << endl;
+			cout << "Top: " << nodeToString[Top] << endl;
+			cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
+
+			// 顺序生成X的子节点
+			for (auto i = 0; i < magic_code.length(); ++i)
+			{
+				if (magic_code[i] == '~')
+					continue;
+				if (isUnTerminate[magic_code[i]])
+				{
+					const NodeType type = charToNode[magic_code[i]];
+					Node* node = new Node(type);
+					node->parent_ = X;
+					X->addNode(node);
+				}
+				else if (isTerminate[magic_code[i]])
+				{
+					// 判断读入符号类型, 同时处理X结点的NodeType
+					// 注意value 和 variable 不是 true
+					// 基于对应的 chartoNode
+					// ####
+					Node* node = new Node(TERMINATE);
+					node->setValue(new OperatorObject());
+					node->parent_ = X;
+					node->isLeaf_ = true;
+					X->addNode(node);
+				}
+				else
+				{
+					Node* node = new Node(NodeType::TERMINATE);
+					node->setValue(new VariableObject());
+					node->isLeaf_ = true;
+					node->parent_ = X;
+					X->addNode(node);
+				}
+			}
+
+			// 倒序入栈
+			for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
+				ParseStack.push(*(--it));
+			cout << "Generate" << endl << endl;
+		}
+		else
+			throw Error("What?");
 		
 	}
 	cout << endl;
@@ -170,22 +165,10 @@ void SentenceParser::prepareNode(Node* node)
 	while (it != node->childVector_.end())
 	{
 		Node* tmp = *it;
-		if (tmp->getNodeType() == TERMINATE)
-		{
+		if (tmp->getNodeType() == TERMINATE || isOperator[tmp->nodeType_])
 			;
-		}
 		else if(tmp->childVector_.size() == 0)
 		{
-			// cout << "GG" << endl;
-			if (isOperator[tmp->nodeType_])
-			{
-				//cout << nodeToString[tmp->parent_->nodeType_] << endl;
-				tmp->parent_->nodeType_ = tmp->nodeType_;
-				//system("pause");
-				//print_node(tmp);
-				//system("pause");
-			}
-			
 			it = node->childVector_.erase(it);
 			continue;
 		}
@@ -219,17 +202,17 @@ void SentenceParser::print_test_second()
 	divide();
 	buildTree();
 	cout << "Let Us Print." << endl;
-	print_node(root_);
+	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
 
 	prepareRoot();
 	cout << "Let Us Print." << endl;
-	print_node(root_);
+	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
 
-	parserRoot();
+	//parserRoot();
 }
 
 void SentenceParser::build_all()
