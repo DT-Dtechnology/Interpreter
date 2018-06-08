@@ -12,6 +12,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		// 这里应该是用到工厂函数重新处理Object*
 		// 此处需要更改node的类型至Value或Variable
 		// 
+			
 			return node;
 		
 		case VARIABLE:
@@ -46,10 +47,6 @@ Node* addFunc(Node* left, Node* right)
 
 Node* assFunc(Node* left, Node* right)
 {
-	left->getValue()->print_test();
-	cout << "= ";
-	right->getValue()->print_test();
-	cout << endl << endl;
-	system("pause");
+	left->setValue(right->getValue());
 	return right;
 }
