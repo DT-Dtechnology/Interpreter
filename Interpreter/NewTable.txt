@@ -32,9 +32,8 @@ Q->ST
 T->qST
 T->rST
 T->~
-S->UV
-V->sUV
-V->~
+S->sS
+S->U
 U->tGu
 U->dI
 I->~

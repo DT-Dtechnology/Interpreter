@@ -200,6 +200,8 @@
     <Text Include="InputTest.txt" />
     <Text Include="NewTable.txt" />
     <Text Include="TrueInference.txt" />
+    <Text Include="修改表.txt" />
+    <Text Include="原生城市.txt" />
     <Text Include="备注.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

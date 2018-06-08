@@ -138,5 +138,11 @@
     <Text Include="备注.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="修改表.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="原生城市.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>
