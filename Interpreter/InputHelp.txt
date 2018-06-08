@@ -46,9 +46,7 @@ JUMP -> return EXP ;
 
 DEF -> def var FUNC : ;
 
-FUNC -> ( VARL ) BUG ;
-BUG -> : ;
-BUG -> ~ ;
+FUNC -> ( VARL ) ;
 FUNC -> ~ ;
 
 VARL -> var VARL' ;
