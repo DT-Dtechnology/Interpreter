@@ -17,11 +17,12 @@ class SentenceParser
 
 	void divide();
 	void buildTree();
-	void parserNode(Node*);
-	void parserRoot() { parserNode(root_); }
+	void parserRoot() const { FuncSwitcher(cur_block_,root_); }
+	void prepareNode(Node*);
+	void prepareRoot() { prepareNode(root_); }
 public:
 	SentenceParser(Sentence* sentence) :sentence_(sentence) { }
-	~SentenceParser() = default;
+	~SentenceParser() { delete root_; };
 	void work();
 	void print_test_first();
 	void print_test_second();

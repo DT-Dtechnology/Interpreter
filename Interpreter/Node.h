@@ -2,6 +2,7 @@
 #include <vector>
 #include "Object.h"
 
+class Block;
 class Node;
 
 typedef std::vector<Node*> NodeVector;
@@ -9,8 +10,15 @@ typedef std::vector<Node*> NodeVector;
 enum NodeType
 {
 	ROOT, END, TERMINATE, VALUE, VARIABLE,
-	TEST_S, TEST_A, TEST_E, TEST_T, TEST_P, TEST_M, TEST_L, TEST_G, TEST_H, TEST_F,
-	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE,
+	EXP, SEN, ASS, LOOP, EXPL, EXPLL, DEF, FUNC, DEFF,
+	EE, T, TT, F, FF, G, GG, H, HH, K, X, MI, L,
+	VARL, VARLL, IF, JUMP, PRINT, PRINTT,
+	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
+	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
+	ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN, PARAL, PARALL, PARA, Z, ZZ, M, N, O, MM, NN, OO
+
+	// 有些没有用的
+	// LISTFALG是逗号
 };
 
 class Node
@@ -29,41 +37,19 @@ public:
 	Object* getValue() const;
 	void addNode(Node* node) { childVector_.push_back(node); }
 	void setValue(Object* object) { value_ = object; }
+	Node* getParent() const { return parent_; }
 
 	friend class SentenceParser;
-	friend void print_node(Node*);
+	friend void print_node(Node*, int depth);
+	friend Node* FuncSwitcher(Block*, Node*);
 };
 
-inline void print_node(Node* node)
+inline Node::~Node()
 {
-	if (node->getNodeType() == NodeType::ADD)
-		std::cout << "+ " ;
-	if (node->getNodeType() == NodeType::EQUAL)
-		std::cout << "= " ;
-	if (node->getNodeType() == NodeType::MULTIPLY)
-		std::cout << "* " ;
-	if (node->getNodeType() == NodeType::MINUS)
-		std::cout << "- ";
-	if (node->getNodeType() == NodeType::DIVIDE)
-		std::cout << "/ ";
-	if (node->getNodeType() == NodeType::LEFT_BRACKET)
-		std::cout << "( " ;
-	if (node->getNodeType() == NodeType::RIGHT_BRACKET)
-		std::cout << ") " ;
-	if (node->nodeType_ == NodeType::TERMINATE)
-	{
-		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
-		tmp->print_test();
-	}
-	else
-	{
-		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
-		{
-			print_node(*it);
-		}
-	}
+	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
+		delete *it;
+	delete value_;
 }
-
 
 inline Object* Node::getValue() const
 {

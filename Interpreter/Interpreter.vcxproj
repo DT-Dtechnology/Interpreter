@@ -153,10 +153,12 @@
   <ItemGroup>
     <ClInclude Include="Block.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="InputHelper.h" />
     <ClInclude Include="Inputter.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="OperatorSet.h" />
     <ClInclude Include="ParseBuildTreeTest.h" />
     <ClInclude Include="ParseFuncSwitcher.h" />
@@ -175,6 +177,8 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />
     <ClCompile Include="PVM.cpp" />
     <ClCompile Include="SenDivider.cpp" />
@@ -191,7 +195,14 @@
     <None Include="Test1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="H:\table.txt" />
+    <Text Include="InputHelp.txt" />
+    <Text Include="InputTable.txt" />
+    <Text Include="InputTest.txt" />
+    <Text Include="NewTable.txt" />
+    <Text Include="TrueInference.txt" />
+    <Text Include="修改表.txt" />
+    <Text Include="原生城市.txt" />
+    <Text Include="备注.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,6 +13,11 @@ void Block::returnSpace()
 
 Object* Block::searchObject(string var_name)
 {
+	//####
+	//####
+	return nullptr;
+	//####
+	//####
 	Object* object = nullptr;
 	while(!block_space_stack_.empty())
 	{
@@ -35,6 +40,16 @@ void Block::print_all()
 	{
 		SentenceParser* sp = new SentenceParser((*it));
 		sp->print_test_second();
+		delete sp;
+	}
+}
+
+void Block::print_all_old()
+{
+	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
+	{
+		SentenceParser* sp = new SentenceParser((*it));
+		sp->print_test_first();
 		delete sp;
 	}
 }
