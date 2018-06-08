@@ -14,8 +14,11 @@ enum NodeType
 	EE, T, TT, F, FF, G, GG, H, HH, K, X,
 	VARL, VARLL, IF, JUMP, PRINT, PRINTT,
 	EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
-	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, COMMA, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
+	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
 	ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN, PARAL, PARALL, PARA
+
+	// 有些没有用的
+	// LISTFALG是逗号
 };
 
 class Node
@@ -38,7 +41,7 @@ public:
 
 	friend class SentenceParser;
 	friend void print_node(Node*);
-	friend void FuncSwitcher(Block*, Node*);
+	friend Node* FuncSwitcher(Block*, Node*);
 };
 
 inline Node::~Node()

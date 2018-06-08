@@ -1,1 +1,1 @@
-def fun(1,2):
+Important = 1 + 2

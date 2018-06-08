@@ -11,7 +11,7 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 28;
+const int MatrixRow = 24;
 const int MatrixColumn = 31;
 
 //####
@@ -47,6 +47,7 @@ void buildMaps()
 }
 
 void buildMatrix();
+void buildisOper();
 
 void buildStoN()
 {
@@ -58,7 +59,7 @@ void buildStoN()
 		"def", "=", "print" };
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
 		T, EE, F, TT, G, FF, H, GG, K, HH, X, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
-		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, COMMA, TERMINATE, IS_EQUAL,
+		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, TERMINATE, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
 	for (int i = 0; i < 55; i++)
@@ -79,7 +80,8 @@ void buildAll()
 	buildStoN();
 	buildMaps();
 	buildMatrix();
-
+	buildisOper();
+	testCtoN();
 }
 
 void buildMatrix()
@@ -225,7 +227,6 @@ void testCtoN()
 void print_node(Node* node)
 {
 	
-	
 	if(node->childVector_.size() > 0)
 	{
 		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
@@ -244,6 +245,26 @@ void print_node(Node* node)
 		if (tmp)
 			tmp->print_test();
 		else
-			std::cout << "var ";
+			system("pause");
 	}
 }
+
+bool isOperator[100];
+
+inline void buildisOper()
+{
+	memset(isOperator, 0, sizeof(isOperator));
+	NodeType operlist[] = { PRINTT,
+		EQUAL, LEFT_BRACKET, RIGHT_BRACKET, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
+		LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT,
+		ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN };
+
+	// ####
+	// ()记得要去掉
+	for (auto& it : operlist)
+	{
+		//cout << nodeToString[operlist[it]] << endl;
+		isOperator[it] = true;
+	}
+}
+

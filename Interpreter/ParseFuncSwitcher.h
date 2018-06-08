@@ -3,4 +3,8 @@
 
 class Block;
 
-void FuncSwitcher(Block*, Node*);
+Node* FuncSwitcher(Block*, Node*);
+
+Node* addFunc(Node*, Node*);
+
+Node* assFunc(Node*, Node*);

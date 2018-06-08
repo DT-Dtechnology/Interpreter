@@ -39,7 +39,6 @@ void SentenceParser::buildTree()
 	ParseStack.push(Root);
 	bool FLAG = true;
 	word_queue_.push(Word(keyword, "#"));
-	word_queue_.push(Word(keyword, "#"));
 	string front = getNodeMsg(word_queue_.front());
 	auto X = ParseStack.top();
 	while (FLAG)
@@ -165,15 +164,42 @@ void SentenceParser::buildTree()
 	root_ = Root;
 }
 
-void SentenceParser::parserNode(Node*)
+void SentenceParser::prepareNode(Node* node)
 {
-	//####
+	auto it = node->childVector_.begin();
+	while (it != node->childVector_.end())
+	{
+		Node* tmp = *it;
+		if (tmp->getNodeType() == TERMINATE)
+		{
+			;
+		}
+		else if(tmp->childVector_.size() == 0)
+		{
+			// cout << "GG" << endl;
+			if (isOperator[tmp->nodeType_])
+			{
+				//cout << nodeToString[tmp->parent_->nodeType_] << endl;
+				tmp->parent_->nodeType_ = tmp->nodeType_;
+				//system("pause");
+				//print_node(tmp);
+				//system("pause");
+			}
+			
+			it = node->childVector_.erase(it);
+			continue;
+		}
+		else
+			prepareNode(*it);
+		++it;
+	}
 }
 
 void SentenceParser::work()
 {
 	divide();
 	buildTree();
+
 	parserRoot();
 }
 
@@ -194,8 +220,16 @@ void SentenceParser::print_test_second()
 	buildTree();
 	cout << "Let Us Print." << endl;
 	print_node(root_);
-	std::cout << std::endl;
+	cout << endl << endl;
 	system("pause");
+
+	prepareRoot();
+	cout << "Let Us Print." << endl;
+	print_node(root_);
+	cout << endl << endl;
+	system("pause");
+
+	parserRoot();
 }
 
 void SentenceParser::build_all()

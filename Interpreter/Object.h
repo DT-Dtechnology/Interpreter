@@ -22,6 +22,9 @@ public:
 	ObjectType getType() const { return type_; }
 	void setTemp() { isTemp_ = true; }
 	bool getStatus() const { return isTemp_; }
+	virtual void print_test() const { std::cout << "Test" << std::endl; }
+
+	virtual Object* add(Object* obj);
 };
 
 class ValueObject :
@@ -59,10 +62,12 @@ public:
 		var_name_ = var_name;
 	}
 	~TestObject() = default;
-	void print_test() const
+	void print_test() const override
 	{
 		std::cout << var_name_ << " ";
 	}
+	string getName() const { return var_name_; }
+	Object* add(Object* object) override;
 };
 
 class LongObject;

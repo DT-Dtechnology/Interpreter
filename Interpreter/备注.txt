@@ -1,0 +1,5 @@
+实际上
+NodeType中的Terminate是对于Value Varieble的整合
+
+prepareRoot过程中会处理Operator NodeType中的全部符号，上浮至上一层中
+
