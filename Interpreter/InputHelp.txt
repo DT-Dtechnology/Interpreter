@@ -1,10 +1,9 @@
 SEN -> LOOP ;
 SEN -> IF ;
-SEN -> EXP ;
 SEN -> JUMP ;
 SEN -> DEF ;
 SEN -> PRINT ;
-SEN -> ASS ;
+SEN -> MI ;
 
 LOOP -> while EXP : ;
 LOOP -> for VARL in VARL : ;
@@ -46,15 +45,23 @@ JUMP -> return EXP ;
 
 DEF -> def var FUNC : ;
 
-FUNC -> ( VARL ) ;
+FUNC -> ( PARAL ;
 FUNC -> ~ ;
+PARAL -> var PARAL' ;
+PARAL -> PARAL' ;
+PARAL' -> , var PARAL' ;
+PARAL' -> ) ;
 
 VARL -> var VARL' ;
 VARL -> VARL' ;
 VARL' -> , var VARL' ;
 VARL' -> ~ ;
 
-ASS -> VARL = EXPL ;
+ASS -> VARL' = EXPL ;
+
+MI -> var L ;
+L -> ASS ;
+L -> FUNC ;
 
 PRINT -> print EXP ;
 

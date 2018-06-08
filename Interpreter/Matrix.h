@@ -11,7 +11,7 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 28;
+const int MatrixRow = 27;
 const int MatrixColumn = 31;
 
 //####
@@ -51,13 +51,13 @@ void buildMatrix();
 void buildStoN()
 {
 	string set1[] = { "SEN", "LOOP", "IF", "EXP", "JUMP", "DEF", "PRINT", "ASS",
-		"T", "E'", "F", "T'", "G", "F'", "H", "G'", "K", "H'", "X",
+		"T", "E'", "F", "T'", "G", "F'", "H", "G'", "K", "H'", "X", "MI", "L",
 		"FUNC", "PARAL", "PARA", "PARAL'", "var", "VARL'", "VARL", "EXPL", "EXPL'",
 		"while", ":", "for", "in", "if", "elif", "else", ",", "~", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
 		"def", "=", "print" };
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
-		T, EE, F, TT, G, FF, H, GG, K, HH, X, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
+		T, EE, F, TT, G, FF, H, GG, K, HH, X, MI, L, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
 		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, COMMA, TERMINATE, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
