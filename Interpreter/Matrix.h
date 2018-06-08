@@ -11,8 +11,8 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 22;
-const int MatrixColumn = 31;
+const int MatrixRow = 27;
+const int MatrixColumn = 39;
 
 //####
 bool isUnTerminate[256];
@@ -56,12 +56,12 @@ void buildStoN()
 		"FUNC", "PARAL", "PARA", "PARAL'", "var", "VARL'", "VARL", "EXPL", "EXPL'",
 		"while", ":", "for", "in", "if", "elif", "else", ",", "#", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
-		"def", "=", "print", "Z" , "Z'"};
+		"def", "=", "print", "Z" , "Z'", "M", "N", "O", "M'", "N'", "O'"};
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
 		T, EE, F, TT, G, FF, H, GG, K, HH, X, MI, L, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
 		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, END, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
-		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT, Z, ZZ };
+		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT, Z, ZZ, M, N, O ,MM, NN, OO };
 	for (int i = 0; i < sizeof(set2)/sizeof(Z); i++)
 	{
 		stringToNode[set1[i]] = set2[i];
