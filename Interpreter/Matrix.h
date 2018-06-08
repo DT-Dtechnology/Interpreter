@@ -11,7 +11,7 @@ using std::string;
 using std::map;
 using std::getline;
 
-const int MatrixRow = 27;
+const int MatrixRow = 22;
 const int MatrixColumn = 31;
 
 //####
@@ -56,13 +56,13 @@ void buildStoN()
 		"FUNC", "PARAL", "PARA", "PARAL'", "var", "VARL'", "VARL", "EXPL", "EXPL'",
 		"while", ":", "for", "in", "if", "elif", "else", ",", "#", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
-		"def", "=", "print" };
+		"def", "=", "print", "Z" , "Z'"};
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
 		T, EE, F, TT, G, FF, H, GG, K, HH, X, MI, L, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
 		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, END, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
-		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT };
-	for (int i = 0; i < 55; i++)
+		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT, Z, ZZ };
+	for (int i = 0; i < sizeof(set2)/sizeof(Z); i++)
 	{
 		stringToNode[set1[i]] = set2[i];
 		nodeToString[set2[i]] = set1[i];

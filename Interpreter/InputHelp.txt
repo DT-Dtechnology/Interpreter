@@ -3,7 +3,7 @@ SEN -> IF ;
 SEN -> JUMP ;
 SEN -> DEF ;
 SEN -> PRINT ;
-SEN -> MI ;
+SEN -> Z ;
 
 LOOP -> while EXP : ;
 LOOP -> for var in var FUNC : ;
@@ -12,8 +12,11 @@ IF -> if EXP : ;
 IF -> elif EXP : ;
 IF -> else : ;
 
+Z -> EXPL Z' ;
+Z -> Z' ;
+Z' -> = EXPL Z' ;
+Z' -> ~ ;
 EXPL -> EXP EXPL' ;
-EXPL -> EXPL' ;
 EXPL' -> , EXP EXPL' ;
 EXPL' -> ~ ;
 EXP -> T E' ;
@@ -35,33 +38,18 @@ G' -> ~ ;
 H -> K H' ;
 H' -> not K H' ;
 H' -> ~ ;
-K -> ( EXP ) ;
+K -> ( Z ) ;
 K -> var FUNC ;
+
+FUNC -> ~ ;
+FUNC -> ( Z ) ;
 
 JUMP -> continue ;
 JUMP -> break ;
 JUMP -> pass ;
-JUMP -> return EXP ;
+JUMP -> return Z ;
 
-DEF -> def var FUNC : ;
-
-FUNC -> ( PARAL ;
-FUNC -> ~ ;
-PARAL -> var PARAL' ;
-PARAL -> PARAL' ;
-PARAL' -> , var PARAL' ;
-PARAL' -> ) ;
-
-VARL -> var VARL' ;
-VARL -> VARL' ;
-VARL' -> , var VARL' ;
-VARL' -> ~ ;
-
-ASS -> VARL' = EXPL ;
-
-MI -> var L ;
-L -> ASS ;
-L -> FUNC ;
+DEF -> def Z : ;
 
 PRINT -> print EXP ;
 

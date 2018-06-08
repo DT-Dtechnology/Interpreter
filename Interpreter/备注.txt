@@ -3,3 +3,6 @@ NodeType中的Terminate是对于Value Varieble的整合
 
 prepareRoot过程中会处理Operator NodeType中的全部符号，上浮至上一层中
 
+G行u列
+匹配右括号过程手写了一句
+_ -> ~
