@@ -49,7 +49,6 @@ DEF -> def var FUNC : ;
 FUNC -> ( PARAL ) BUG ;
 BUG -> : ;
 BUG -> ~ ;
-FUNC -> VARL' ;
 FUNC -> ~ ;
 PARAL -> PARA PARAL' ;
 PARAL -> PARAL' ;
