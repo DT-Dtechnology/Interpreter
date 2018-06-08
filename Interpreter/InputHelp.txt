@@ -6,7 +6,7 @@ SEN -> PRINT ;
 SEN -> MI ;
 
 LOOP -> while EXP : ;
-LOOP -> for VARL in VARL : ;
+LOOP -> for var in var FUNC : ;
 
 IF -> if EXP : ;
 IF -> elif EXP : ;
