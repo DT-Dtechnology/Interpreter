@@ -191,4 +191,13 @@ public:
 	void append(Object *);
 	ListObject():Object(ObjectType::ListObj){}
 	~ListObject() = default;
+
+	vector<Object *> * get_val() {
+		return &value_;
+	}
+
+	//for test
+	ListObject(vector<Object*> temp_):Object(ObjectType::ListObj) {
+		value_.assign(temp_.begin(), temp_.end());
+	}
 };

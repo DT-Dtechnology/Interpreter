@@ -381,7 +381,6 @@ Object * LongObject::ByteAnd(Object *right) {
 		return nullptr;
 	}
 }
-
 Object * LongObject::ByteOr(Object *right) {
 	if (right->getType() == LongObj) {
 		long rval = right->get_val();
@@ -393,7 +392,6 @@ Object * LongObject::ByteOr(Object *right) {
 		return nullptr;
 	}
 }
-
 Object * LongObject::Xor(Object *right) {
 	if (right->getType() == LongObj) {
 		long rval = right->get_val();
@@ -419,11 +417,74 @@ Object * LongObject::mod(Object *right) {
 }
 
 Object * StringObject::mod(Object *right) {
+	vector<long> num_vect;
+	if ( (right->getType() == LongObj) || (right->getType() == DoubleObj) ) {
+		long num = right->get_val();
+		num_vect.push_back(num);
+	}
+	else if (right->getType() == ListObj) {
+		ListObject * new_rgt = dynamic_cast<ListObject *>(right);
+		vector<Object *> * temp_vect = new_rgt->get_val();
+		for (auto i : *temp_vect) {
+			long temp = i->get_val();
+			num_vect.push_back(temp);
+		}
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+
+	//for test
+	cout << "----------" << endl;
+	for (auto i : num_vect) {
+		cout << i << endl;
+	}
+	cout << "----------" << endl;
+	//end
+
 	string line = this->get_val();
-	bool left_q;
+	string res = "";
+	bool correct = true;
+	int i = 0;
+	int cnt = 0; 
+	int size = num_vect.end() - num_vect.begin();
 
+	cout << line[0] << "  " << line[line.length()-1] << endl;
 
-	return nullptr;
+	if ( (line[0] == '\"' && line[line.length()-1] == '\"') || (line[0] == '\'' && line[line.length()-1] == '\'') ) {
+		cout << 'r' << endl;
+		res += '\'';
+		for (i = 1; i < line.length()-1; ++i) {
+			if (line[i] == '%' && line[i + 1] == 'd') {
+				if (cnt >= size) {
+					correct = false;
+					break;
+				}
+				res += std::to_string(num_vect[cnt++]);
+				++i;
+			}
+			else {
+				res += line[i];
+			}
+		}
+		res += '\'';
+		if (cnt != size) {
+			correct = false;
+		}
+		else {
+			return new StringObject(res);
+		}
+	}
+	else {
+		correct = false;
+	}
+	if (!correct) {
+		Error("quotation mark missing OR mismatch");
+		system("pause");
+		return nullptr;
+	}
 }
 
 Object * BoolObject::And(Object *right) {
