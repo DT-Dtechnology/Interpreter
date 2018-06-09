@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Block.h"
+#include "ObjectFactory.h"
 
 using std::string;
 using std::vector;
@@ -16,19 +17,30 @@ enum ObjectType
 class Object
 {
 	ObjectType type_;
-	bool isTemp_ = false;
-
+	bool isTemp_ = true;
+	string name_;
+	Block* cur_ = nullptr;
 public:
 	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;
 
 	ObjectType getType() const { return type_; }
-	void setTemp() { isTemp_ = true; }
+	void setUnTemp() { isTemp_ = false; }
 	bool getStatus() const { return isTemp_; }
 	virtual void print_test() const { std::cout << "Test" << std::endl; }
 
 	double get_val();
-
+	void getPosition(const string& name)
+	{
+		name_ = name;
+		cur_ = cur_->searchObjectBlock(name);
+	}
+	void setBlock(Block* block)
+	{
+		cur_ = block;
+	}
+	string getName() const {return name_;}
+	Block* get_block() const { return cur_; }
 
 	virtual Object * add(Object *obj);
 	virtual Object * minus(Object *obj);
@@ -56,7 +68,10 @@ public:
 	virtual Object * ByteOr(Object * obj);
 	virtual Object * Xor(Object * obj);
 
-	virtual Object * negative();	
+	virtual Object * negative();
+	
+	friend Block;
+	friend ObjectFactory;
 };
 
 class ValueObject :
@@ -251,19 +266,4 @@ public:
 	{
 		std::cout << "List " << std::endl;
 	}
-};
-
-
-class MatchObject:
-	public Object
-{
-	string name_;
-	Block* cur_;
-public:
-	MatchObject(const string& name, Block* block):Object(MatchObj),
-		name_(name), cur_(block) { }
-	~MatchObject() = default;
-	
-	Object* getMatchValue();
-	// ####
 };

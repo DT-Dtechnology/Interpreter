@@ -28,5 +28,5 @@ Node* posiFunc(Node*);
 Node* negeFunc(Node*);
 Node* notFunc(Node*);
 
-Node* assFunc(Block*, Node*, Node*);
+Node* assFunc(Node*, Node*);
 

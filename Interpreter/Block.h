@@ -30,8 +30,9 @@ public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	~Block() = default;
 	
+	Block* searchObjectBlock(const string& var_name);
 	Object* searchObject(const string& var_name);
-	Object* changeNode(const string& var_name, Object* object);
+	Object* changeVar(const string& var_name, Object* object);
 
 	void print_all() const;
 	void print_all_old() const;

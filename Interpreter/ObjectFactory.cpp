@@ -35,7 +35,15 @@ Object* ObjectFactory::createObject(Block* cur, const string& name)
 	if (name == "False")
 		return new BoolObject(false);
 	if (isVar(name))
-		return MatchObject(name, cur).getMatchValue();
+	{
+		Object* obj = new Object(ObjectType::TotalVariable);
+		obj->setBlock(cur);
+		if (obj->cur_->searchObject(name))
+			obj = obj->cur_->searchObject(name);
+		else
+			obj->getPosition(name);
+		return obj;
+	}
 	if (isString(name))
 		return new StringObject(name);
 	if (isDouble(name))
