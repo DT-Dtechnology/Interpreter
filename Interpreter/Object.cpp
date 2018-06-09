@@ -120,13 +120,6 @@ Object* TestObject::add(Object* object)
 }
 
 
-/*
-LongObj,
-DoubleObj, 
-StringObj,
-BoolObj
-*/
-
 Object * LongObject::add(Object *right) {
 	double rval = right->get_val();
 	double res = this->get_val() + rval;
