@@ -512,3 +512,8 @@ Object * BoolObject::Not() {
 	return new BoolObject( !(this->get_val()) );
 	
 }
+
+void ListObject::append(Object* obj)
+{
+	value_.push_back(obj);
+}

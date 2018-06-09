@@ -19,13 +19,11 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
 			return new_node;
-		
 		case VARIABLE:
 			//无需处理
 			//暂时没有
 			//由于控制手段有其他方法，可能会被废除
 			return node;
-
 		case VALUE:
 			return node;
 
@@ -33,8 +31,36 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return addFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		case MULTIPLY:
 			return multiFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case MINUS:
+			return minusFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case DIVIDE:
+			return divideFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		
+		case MOD:
+			return modFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		
+		case AND:
+			return andFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case OR:
+			return orFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+
+		case SMALLER:
+			return lessFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case BIGGER:
+			return moreFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case SMALLER_OR_EQUAL:
+			return leeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case BIGGER_OR_EQUAL:
+			return moeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		
+		case LEFT_MOVE:
+			return leftFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case RIGHT_MOVE:
+			return rightFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+
 		case EQUAL:
 			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		
 		case LISTFLAG:
 		// We should return a node with a list object here.
 			return nullptr;
@@ -44,7 +70,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 	}
 }
 
-// 此处可以使用策略模式
+// 此处使用策略模式
 
 
 Node* addFunc(Node* left, Node* right)
@@ -55,7 +81,6 @@ Node* addFunc(Node* left, Node* right)
 	node->setValue(leftobj->add(rightobj));
 	return node;
 }
-
 Node* multiFunc(Node* left, Node* right)
 {
 	Node* node = new Node(NodeType::VALUE);
@@ -64,6 +89,118 @@ Node* multiFunc(Node* left, Node* right)
 	node->setValue(leftobj->multiply(rightobj));
 	return node;
 }
+Node* divideFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->divide(rightobj));
+	return node;
+}
+Node* minusFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->minus(rightobj));
+	return node;
+}
+Node* modFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->mod(rightobj));
+	return node;
+}
+
+
+Node* andFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->And(rightobj));
+	return node;
+}
+Node* orFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->Or(rightobj));
+	return node;
+}
+
+Node* lessFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->less(rightobj));
+	return node;
+}
+Node* moreFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->more(rightobj));
+	return node;
+}
+Node* moeqFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->more_or_equal(rightobj));
+	return node;
+}
+Node* leeqFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->less_or_equal(rightobj));
+	return node;
+}
+
+Node* leftFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->leftmove(rightobj));
+	return node;
+}
+Node* rightFunc(Node* left, Node* right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->rightmove(rightobj));
+	return node;
+}
+
+Node* posiFunc(Node* node)
+{
+	node->setNodeType(VALUE);
+	return node;
+}
+Node* negeFunc(Node* node)
+{
+	// ######
+	node->setNodeType(VALUE);
+	// node->getValue() -> Nega();
+	return node;
+}
+Node* notFunc(Node* node)
+{
+	node->setNodeType(VALUE);
+	node->getValue() -> Not();
+	return node;
+}
+
 
 Node* assFunc(Node* left, Node* right)
 {

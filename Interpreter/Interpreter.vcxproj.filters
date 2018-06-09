@@ -45,9 +45,6 @@
     <ClInclude Include="Matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ParseBuildTreeTest.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Inputter.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -63,9 +60,6 @@
     <ClInclude Include="TypeDetecter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -76,6 +70,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="InputHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

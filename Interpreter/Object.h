@@ -38,6 +38,9 @@ public:
 	virtual Object * more(Object *obj);
 	virtual Object * less_or_equal(Object *obj);
 	virtual Object * less(Object *obj);
+	// ######
+	// equal 
+	// not equal
 
 	virtual Object * leftmove(Object *obj);
 	virtual Object * rightmove(Object *obj);
@@ -47,10 +50,12 @@ public:
 	virtual Object * And(Object *obj);
 	virtual Object * Or (Object *obj);
 	virtual Object * Not();
+	// ######
+	// Nega ∏∫∫≈Œ Ã‚
 
 	virtual Object * ByteAnd(Object * obj);
-	virtual Object * ByteOr(Object * Obj);
-	virtual Object * Xor(Object * Obj);
+	virtual Object * ByteOr(Object * obj);
+	virtual Object * Xor(Object * obj);
 
 	
 };
@@ -110,7 +115,10 @@ class LongObject :	public Object
 {
 	long value_;
 public:
-	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
+	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val)
+	{
+		std::cout << "Long " << value_ << std::endl;
+	}
 	~LongObject() = default;
 	
 	long get_val() { return value_; }
@@ -125,28 +133,31 @@ public:
 	Object * less_or_equal(Object *) override;
 	Object * less(Object *) override;
 
-	Object * leftmove(Object *);
-	Object * rightmove(Object *);
+	Object * leftmove(Object *) override;
+	Object * rightmove(Object *) override;
 
-	Object * mod(Object *);
-	Object * ByteAnd(Object *);
-	Object * ByteOr(Object *);
-	Object * Xor(Object *);
+	Object * mod(Object *) override;
+	Object * ByteAnd(Object *) override;
+	Object * ByteOr(Object *) override;
+	Object * Xor(Object *) override;
 };
 
 
 class DoubleObject : public Object {
 	double value_;
 public:
-	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val) {}
+	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val)
+	{
+		std::cout <<"Double " << value_ << std::endl;
+	}
 	~DoubleObject() = default;
 	
 	double get_val() { return value_; }
 	
-	Object * add(Object *);
-	Object * minus(Object *);
-	Object * multiply(Object *);
-	Object * divide(Object *);
+	Object * add(Object *) override;
+	Object * minus(Object *) override;
+	Object * multiply(Object *) override;
+	Object * divide(Object *) override;
 
 	Object * more_or_equal(Object *) override;
 	Object * more(Object *) override;
@@ -163,8 +174,8 @@ public:
 
 	string get_val() { return value_; }
 
-	Object * add(Object *);
-	Object * mod(Object *);
+	Object * add(Object *) override;
+	Object * mod(Object *) override;
 
 };
 
@@ -179,9 +190,9 @@ public:
 		return value_;
 	}
 
-	Object * And(Object *);
-	Object * Or(Object *);
-	Object * Not();
+	Object * And(Object *) override;
+	Object * Or(Object *) override;
+	Object * Not() override;
 };
 
 class ListObject: public Object
