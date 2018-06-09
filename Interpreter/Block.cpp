@@ -25,8 +25,8 @@ Object* Block::searchObject(const string& var_name)
 		object = block_space_stack_.top()->var_table_[var_name];
 		if (object != nullptr)
 		{
-			cout << "Find " << var_name << endl;
-			system("pause");
+			// cout << "Find " << var_name << endl;
+			// system("pause");
 
 			returnSpace();
 			return object;
@@ -34,8 +34,8 @@ Object* Block::searchObject(const string& var_name)
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
-	cout << "Not Find " << var_name << endl;
-	system("pause");
+	// cout << "Not Find " << var_name << endl;
+	// system("pause");
 
 	returnSpace();
 	return nullptr;

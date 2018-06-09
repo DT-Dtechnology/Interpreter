@@ -18,7 +18,10 @@ class Object
 	bool isTemp_ = false;
 
 public:
-	Object(ObjectType type) :type_(type) { }
+	Object(ObjectType type) :type_(type)
+	{
+		std::cout << "Create Object ";
+	}
 	virtual ~Object() = default;
 
 	ObjectType getType() const { return type_; }
@@ -92,6 +95,7 @@ public:
 	TempObject(const std::string& var_name)
 		: Object(ObjectType::TEMP_OBJ)
 	{
+		std::cout << "TEMP" << std::endl;
 		var_name_ = var_name;
 	}
 	~TempObject() = default;

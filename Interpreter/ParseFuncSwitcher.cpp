@@ -206,6 +206,7 @@ Node* notFunc(Node* node)
 
 Node* assFunc(Block* cur, Node* left, Node* right)
 {
+	cout << "Assign, Then value: " ;
 	string name_left;
 	Object* right_obj;
 	if (left->getValue()->getType() == TEMP_OBJ)
@@ -222,5 +223,7 @@ Node* assFunc(Block* cur, Node* left, Node* right)
 	if (!right_obj)
 		throw Error("You have not define all the paraments yet.");
 	cur->changeNode(name_left, right_obj);
+	Object* temp = cur->searchObject(name_left);
+	temp->print_test();
 	return right;
 }
