@@ -35,7 +35,10 @@ Object* ObjectFactory::createObject(Block* cur, const string& name)
 	if (name == "False")
 		return new BoolObject(false);
 	if (isVar(name))
-		return MatchObject(name, cur).getMatchValue();
+	{
+		Object* node = new Object(ObjectType::TotalValue);
+		
+	}
 	if (isString(name))
 		return new StringObject(name);
 	if (isDouble(name))

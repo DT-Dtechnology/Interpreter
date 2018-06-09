@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Block.h"
 #include "SentenceParser.h"
-#include "PVM.h"
 
 void Block::returnSpace()
 {
@@ -12,33 +11,58 @@ void Block::returnSpace()
 	}
 }
 
-Object* Block::searchObject(const string& var_name)
+Block* Block::searchObjectBlock(const string& var_name)
 {
 	//####
 	//####
 	//return nullptr;
 	//####
 	//####
-	Object* object = nullptr;
+	Block* block = nullptr;
+	Object* return_object = nullptr;
 	while(!block_space_stack_.empty())
 	{
-		object = block_space_stack_.top()->var_table_[var_name];
-		if (object != nullptr)
+		return_object = block_space_stack_.top()->var_table_[var_name];
+		if (return_object != nullptr)
 		{
 			// cout << "Find " << var_name << endl;
 			// system("pause");
 
+			block = block_space_stack_.top();
 			returnSpace();
-			return object;
+			return block;
 		}
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
 	// cout << "Not Find " << var_name << endl;
 	// system("pause");
-
 	returnSpace();
-	return nullptr;
+	block = block_space_stack_.top();
+	return block;
+}
+
+Object* Block::searchObject(const string& var_name)
+{
+	Object* return_object = nullptr;
+	while (!block_space_stack_.empty())
+	{
+		return_object = block_space_stack_.top()->var_table_[var_name];
+		if (return_object != nullptr)
+		{
+			// cout << "Find " << var_name << endl;
+			// system("pause");
+
+			returnSpace();
+			return return_object;
+		}
+		temp_space_stack_.push(block_space_stack_.top());
+		block_space_stack_.pop();
+	}
+	// cout << "Not Find " << var_name << endl;
+	// system("pause");
+	returnSpace();
+	return return_object;
 }
 
 Object* Block::changeNode(const string& var_name, Object* object)

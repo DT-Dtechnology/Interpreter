@@ -639,7 +639,7 @@ void ListObject::append(Object* obj)
 
 Object* MatchObject::getMatchValue()
 {
-	if(cur_->searchObject(name_))
-		return cur_->searchObject(name_);
+	if(cur_->searchObjectBlock(name_))
+		return cur_->searchObjectBlock(name_);
 	return new TempObject(name_);
 }
