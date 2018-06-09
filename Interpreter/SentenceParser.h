@@ -1,8 +1,8 @@
 #pragma once
 #include "Sentence.h"
 #include "Word.h"
-#include <queue>
 #include "Node.h"
+#include <queue>
 
 class Block;
 
@@ -24,6 +24,7 @@ public:
 	SentenceParser(Sentence* sentence) :sentence_(sentence) { }
 	~SentenceParser() { delete root_; };
 	void work();
+	void upFloat();
 	void print_test_first();
 	void print_test_second();
 	
