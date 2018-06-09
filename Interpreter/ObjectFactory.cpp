@@ -36,8 +36,11 @@ Object* ObjectFactory::createObject(Block* cur, const string& name)
 		return new BoolObject(false);
 	if (isVar(name))
 	{
-		Object* node = new Object(ObjectType::TotalValue);
-		
+		Object* obj = new Object(ObjectType::TotalVariable);
+		if (obj->cur_->searchObject(name))
+			obj = obj->cur_->searchObject(name);
+		obj->getPosition(name);
+		return obj;
 	}
 	if (isString(name))
 		return new StringObject(name);

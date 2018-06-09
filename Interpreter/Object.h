@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "Block.h"
+#include "ObjectFactory.h"
 
 using std::string;
 using std::vector;
@@ -68,6 +69,7 @@ public:
 	virtual Object * negative();
 	
 	friend Block;
+	friend ObjectFactory;
 };
 
 class ValueObject :
@@ -262,19 +264,4 @@ public:
 	{
 		std::cout << "List " << std::endl;
 	}
-};
-
-
-class MatchObject:
-	public Object
-{
-	string name_;
-	Block* cur_;
-public:
-	MatchObject(const string& name, Block* block):Object(MatchObj),
-		name_(name), cur_(block) { }
-	~MatchObject() = default;
-	
-	Object* getMatchValue();
-	// ####
 };

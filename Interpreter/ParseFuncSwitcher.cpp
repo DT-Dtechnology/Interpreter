@@ -218,14 +218,14 @@ Node* assFunc(Block* cur, Node* left, Node* right)
 		if (right->getValue()->getType() == TEMP_OBJ)
 		{
 			const string name_right = dynamic_cast<TempObject*>(right->getValue())->getName();
-			right_obj = cur->searchObjectBlock(name_right);
+			right_obj = cur->searchObject(name_right);
 		}
 		else
 			right_obj = right->getValue();
 		if (!right_obj)
 			throw Error("You have not define all the paraments yet.");
 		cur->changeNode(name_left, right_obj);
-		Object* temp = cur->searchObjectBlock(name_left);
+		Object* temp = cur->searchObject(name_left);
 		temp->print_test();
 	}
 	return right;

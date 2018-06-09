@@ -636,10 +636,3 @@ void ListObject::append(Object* obj)
 {
 	value_.push_back(obj);
 }
-
-Object* MatchObject::getMatchValue()
-{
-	if(cur_->searchObjectBlock(name_))
-		return cur_->searchObjectBlock(name_);
-	return new TempObject(name_);
-}
