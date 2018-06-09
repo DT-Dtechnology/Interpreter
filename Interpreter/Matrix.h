@@ -81,7 +81,6 @@ void buildAll()
 	buildMaps();
 	buildMatrix();
 	buildisOper();
-	testCtoN();
 }
 
 void buildMatrix()

@@ -16,15 +16,43 @@ class Object
 {
 	ObjectType type_;
 	bool isTemp_ = false;
+
 public:
 	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;
+
 	ObjectType getType() const { return type_; }
 	void setTemp() { isTemp_ = true; }
 	bool getStatus() const { return isTemp_; }
 	virtual void print_test() const { std::cout << "Test" << std::endl; }
 
-	virtual Object* add(Object* obj);
+	double get_val();
+
+
+	virtual Object * add(Object *obj);
+	virtual Object * minus(Object *obj);
+	virtual Object * multiply(Object *obj);
+	virtual Object * divide(Object *obj);
+
+	virtual Object * more_or_equal(Object *obj);
+	virtual Object * more(Object *obj);
+	virtual Object * less_or_equal(Object *obj);
+	virtual Object * less(Object *obj);
+
+	virtual Object * leftmove(Object *obj);
+	virtual Object * rightmove(Object *obj);
+
+	virtual Object * mod(Object *obj);
+
+	virtual Object * And(Object *obj);
+	virtual Object * Or (Object *obj);
+	virtual Object * Not();
+
+	virtual Object * ByteAnd(Object * obj);
+	virtual Object * ByteOr(Object * Obj);
+	virtual Object * Xor(Object * Obj);
+
+	
 };
 
 class ValueObject :
@@ -78,19 +106,32 @@ class TupleObject;
 class ListObject;
 class DictObject;
 
-class LongObject :
-	public Object
+class LongObject :	public Object
 {
 	long value_;
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
 	~LongObject() = default;
-	LongObject* operator+(const LongObject* longobj) const;
-	LongObject* operator-(const LongObject* longobj) const;
-	LongObject* operator*(const LongObject* longobj) const;
-	DoubleObject* operator/(const LongObject* longobj) const;
+	
+	long get_val() { return value_; }
 
-	//
+	Object * add (Object *) override;
+	Object * minus (Object *) override;
+	Object * multiply (Object *) override;
+	Object * divide (Object *) override;
+
+	Object * more_or_equal(Object *) override;
+	Object * more(Object *) override;
+	Object * less_or_equal(Object *) override;
+	Object * less(Object *) override;
+
+	Object * leftmove(Object *);
+	Object * rightmove(Object *);
+
+	Object * mod(Object *);
+	Object * ByteAnd(Object *);
+	Object * ByteOr(Object *);
+	Object * Xor(Object *);
 };
 
 
@@ -99,7 +140,18 @@ class DoubleObject : public Object {
 public:
 	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val) {}
 	~DoubleObject() = default;
+	
+	double get_val() { return value_; }
+	
+	Object * add(Object *);
+	Object * minus(Object *);
+	Object * multiply(Object *);
+	Object * divide(Object *);
 
+	Object * more_or_equal(Object *) override;
+	Object * more(Object *) override;
+	Object * less_or_equal(Object *) override;
+	Object * less(Object *) override;
 };
 
 class StringObject: public Object
@@ -109,6 +161,11 @@ public:
 	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val) {}
 	~StringObject() = default;
 
+	string get_val() { return value_; }
+
+	Object * add(Object *);
+	Object * mod(Object *);
+
 };
 
 class BoolObject: public Object
@@ -117,13 +174,21 @@ class BoolObject: public Object
 public:
 	BoolObject(bool value) :Object(BoolObj), value_(value) { }
 	~BoolObject() = default;
+
+	bool get_val() {
+		return value_;
+	}
+
+	Object * And(Object *);
+	Object * Or(Object *);
+	Object * Not();
 };
 
 class ListObject: public Object
 {
 	vector<Object*> value_{};
 public:
+	void append(Object *);
 	ListObject():Object(ObjectType::ListObj){}
 	~ListObject() = default;
-
 };
