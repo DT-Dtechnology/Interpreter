@@ -21,9 +21,11 @@ class SentenceParser
 	void parserRoot() { parserNode(root_); }
 public:
 	SentenceParser(Sentence* sentence) :sentence_(sentence) { }
-	~SentenceParser() = default;
+	~SentenceParser() { delete root_; };
 	void work();
 	void print_test_first();
 	void print_test_second();
+	
+	static void build_all();
 };
 
