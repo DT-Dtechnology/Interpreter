@@ -24,16 +24,10 @@
     <ClInclude Include="Word.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SentenceParser.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Sentence.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Traveller.h">
@@ -46,9 +40,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ParseFuncSwitcher.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Error.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
@@ -70,6 +61,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TypeDetecter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sentence.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="InputHelper.h">
@@ -107,6 +110,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Test1.txt">
@@ -114,13 +120,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="table.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="InputTest.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="InputHelp.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="InputTable.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="TrueInference.txt">
+      <Filter>资源文件</Filter>
+    </Text>
     <Text Include="NewTable.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="备注.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="修改表.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="原生城市.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
