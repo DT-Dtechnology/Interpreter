@@ -40,10 +40,10 @@ Object* ObjectFactory::createObject(Block* cur, const string& name)
 		return new StringObject(name);
 	if (isDouble(name))
 	{
-		double value = std::stod(name);
+		const double value = std::stod(name);
 		return new DoubleObject(value);
 	}
-	long value = std::stol(name);
+	const long value = std::stol(name);
 	return new LongObject(value);
 }
 

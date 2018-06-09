@@ -34,5 +34,5 @@ public:
 	Object* addObjetc(const string& var_name);
 
 	void print_all() const;
-	void print_all_old();
+	void print_all_old() const;
 };

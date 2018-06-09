@@ -11,7 +11,7 @@ typedef std::queue<Word> WordQueue;
 class SentenceParser
 {
 	Sentence* sentence_;
-	Block* cur_block_;
+	const Block* cur_block_;
 	WordQueue word_queue_;
 	Node* root_ = nullptr;
 
@@ -25,7 +25,7 @@ public:
 	~SentenceParser() { delete root_; };
 	void work();
 	void upFloat();
-	void setBlock(Block* cur) { cur_block_ = cur; }
+	void setBlock(const Block* cur) { cur_block_ = cur; }
 	void print_test_first();
 	void print_test_second();
 	

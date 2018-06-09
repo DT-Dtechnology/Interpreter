@@ -204,6 +204,8 @@ Node* notFunc(Node* node)
 
 Node* assFunc(Node* left, Node* right)
 {
+	cout << "Assign " << endl;
 	left->setValue(right->getValue());
+	left->getValue()->print_test();
 	return right;
 }

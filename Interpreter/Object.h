@@ -97,7 +97,7 @@ public:
 	~TestObject() = default;
 	void print_test() const override
 	{
-		std::cout << var_name_ << " ";
+		std::cout << "Test "<<var_name_ << std::endl;
 	}
 	string getName() const { return var_name_; }
 	Object* add(Object* object) override;
@@ -140,6 +140,11 @@ public:
 	Object * ByteAnd(Object *) override;
 	Object * ByteOr(Object *) override;
 	Object * Xor(Object *) override;
+
+	void print_test() const override
+	{
+		std::cout << "Long " << value_ << std::endl;
+	}
 };
 
 
@@ -163,6 +168,11 @@ public:
 	Object * more(Object *) override;
 	Object * less_or_equal(Object *) override;
 	Object * less(Object *) override;
+
+	void print_test() const override
+	{
+		std::cout << "Double " << value_ << std::endl;
+	}
 };
 
 class StringObject: public Object
@@ -177,6 +187,10 @@ public:
 	Object * add(Object *) override;
 	Object * mod(Object *) override;
 
+	void print_test() const override
+	{
+		std::cout << "String " << value_ << std::endl;
+	}
 };
 
 class BoolObject: public Object
@@ -193,6 +207,11 @@ public:
 	Object * And(Object *) override;
 	Object * Or(Object *) override;
 	Object * Not() override;
+
+	void print_test() const override
+	{
+		std::cout << "Bool " << value_ << std::endl;
+	}
 };
 
 class ListObject: public Object
@@ -210,5 +229,10 @@ public:
 	//for test
 	ListObject(vector<Object*> temp_):Object(ObjectType::ListObj) {
 		value_.assign(temp_.begin(), temp_.end());
+	}
+
+	void print_test() const override
+	{
+		std::cout << "List " << std::endl;
 	}
 };
