@@ -269,6 +269,28 @@ void SentenceParser::upFloat()
 			}
 		}
 	}
+
+	//
+	nodeQueue.push(root_);
+	while (!nodeQueue.empty())
+	{
+		node = nodeQueue.front();
+		bool flag = 0;
+		if (node->getNodeType() == FUNC)
+		{
+			node->getParent()->setNodeType(FUNC);
+			
+		}
+		if (flag == 0)
+		{
+			nodeQueue.pop();
+			if (node->getChild()->size() > 0)
+			{
+				for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+					nodeQueue.push(*it);
+			}
+		}
+	}
 }
 
 void SentenceParser::print_test_first()
