@@ -25,6 +25,7 @@ public:
 	virtual void print_test() const { std::cout << "Test" << std::endl; }
 
 	virtual Object* add(Object* obj);
+	virtual Object* multiply(Object* obj);
 };
 
 class ValueObject :
@@ -85,11 +86,10 @@ class LongObject :
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val) {}
 	~LongObject() = default;
-	LongObject* operator+(const LongObject* longobj) const;
-	LongObject* operator-(const LongObject* longobj) const;
-	LongObject* operator*(const LongObject* longobj) const;
-	DoubleObject* operator/(const LongObject* longobj) const;
 
+	Object* add(Object* obj) override;
+	Object* multiply(Object* obj) override;
+	void print_test() const override;
 	//
 };
 

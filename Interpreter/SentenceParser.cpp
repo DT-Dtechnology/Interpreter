@@ -253,7 +253,10 @@ void SentenceParser::print_test_second()
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-	//parserRoot();
+
+	
+	parserRoot();
+	system("pause");
 }
 
 void SentenceParser::build_all()

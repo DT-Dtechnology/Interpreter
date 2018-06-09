@@ -8,6 +8,13 @@ Object* Object::add(Object* obj)
 	return nullptr;
 }
 
+Object* Object::multiply(Object* obj)
+{
+	cout << "I think you ......" << endl;
+	system("pause");
+	return nullptr;
+}
+
 Object* TestObject::add(Object* object)
 {
 	TestObject* newobject = dynamic_cast<TestObject*>(object);
@@ -17,22 +24,24 @@ Object* TestObject::add(Object* object)
 	return new TestObject(var_name_ + add_name);
 }
 
-LongObject * LongObject::operator+(const LongObject *longobj) const
+Object* LongObject::add(Object* obj)
 {
-	return new LongObject(this->value_ + longobj->value_);
+	cout << value_ << " Add ";
+	obj->print_test();
+	cout << endl;
+	return this;
 }
 
-LongObject * LongObject::operator-(const LongObject *longobj) const
+Object* LongObject::multiply(Object* obj)
 {
-	return new LongObject(this->value_ - longobj->value_);
+	cout << value_ << " Multi ";
+	obj->print_test();
+	cout << endl;
+	return this;
 }
 
-LongObject * LongObject::operator*(const LongObject *longobj) const
+void LongObject::print_test() const
 {
-	return new LongObject(this->value_ * longobj->value_);
+	cout << value_;
 }
 
-DoubleObject * LongObject::operator/(const LongObject *longobj) const
-{
-	return new DoubleObject(this->value_ / longobj->value_);
-}
