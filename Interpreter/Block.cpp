@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Block.h"
 #include "SentenceParser.h"
+#include "PVM.h"
 
 void Block::returnSpace()
 {
@@ -55,7 +56,7 @@ void Block::print_all() const
 		// #### 
 		// 这里不是非常安全
 		// 后期会考虑改为将所有的传入Block*的参数全部转化为const Block*
-		sp->setBlock(this);
+		sp->setBlock(PVM::Global_);
 		sp->print_test_second();
 		delete sp;
 	}

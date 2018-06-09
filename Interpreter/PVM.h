@@ -4,7 +4,7 @@
 
 class PVM
 {
-	Block* Global_;
+	static Block* Global_;
 	string file_name_;
 
 	void input();
@@ -19,6 +19,7 @@ public:
 	}
 	void print_test_first();
 	void print_test_second();
+	friend Block;
 };
 
 inline void PVM::input()
