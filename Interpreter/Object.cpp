@@ -61,6 +61,17 @@ Object * Object::less(Object *obj) {
 	return nullptr;
 }
 
+Object * Object::equal(Object *obj) {
+	cout << "unprovoked call" << endl;
+	system("pause");
+	return nullptr;
+}
+Object * Object::not_equal(Object *obj) {
+	cout << "unprovoked call" << endl;
+	system("pause");
+	return nullptr;
+}
+
 Object * Object::leftmove(Object *obj) {
 	cout << "unprovoked call" << endl;
 	system("pause");
@@ -105,6 +116,12 @@ Object * Object::ByteOr(Object *obj) {
 	return nullptr;
 }
 Object * Object::Xor(Object *obj) {
+	cout << "unprovoked call" << endl;
+	system("pause");
+	return nullptr;
+}
+
+Object * Object::negative() {
 	cout << "unprovoked call" << endl;
 	system("pause");
 	return nullptr;
@@ -511,6 +528,119 @@ Object * BoolObject::Or(Object *right) {
 Object * BoolObject::Not() {
 	return new BoolObject( !(this->get_val()) );
 	
+}
+
+
+Object * LongObject::equal(Object *right) {
+	if ((right->getType() == LongObj) || (right->getType() == DoubleObj)) {
+		double rval = right->get_val();
+		double curval = this->get_val();
+		return new BoolObject(curval == rval);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+Object * LongObject::not_equal(Object *right) {
+	if ((right->getType() == LongObj) || (right->getType() == DoubleObj)) {
+		double rval = right->get_val();
+		double curval = this->get_val();
+		return new BoolObject(curval != rval);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+
+
+Object * DoubleObject::equal(Object *right) {
+	if ((right->getType() == LongObj) || (right->getType() == DoubleObj)) {
+		double rval = right->get_val();
+		double curval = this->get_val();
+		return new BoolObject(curval == rval);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+Object * DoubleObject::not_equal(Object *right) {
+	if ((right->getType() == LongObj) || (right->getType() == DoubleObj)) {
+		double rval = right->get_val();
+		double curval = this->get_val();
+		return new BoolObject(curval != rval);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+
+Object * StringObject::equal(Object *right) {
+	if (right->getType() == StringObj) {
+		StringObject *new_rgt = dynamic_cast<StringObject *>(right);
+		string r = new_rgt->get_val();
+		string l = this->get_val();
+		return new BoolObject(l == r);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+Object * StringObject::not_equal(Object *right) {
+	if (right->getType() == StringObj) {
+		StringObject *new_rgt = dynamic_cast<StringObject *>(right);
+		string r = new_rgt->get_val();
+		string l = this->get_val();
+		return new BoolObject(l != r);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+
+Object * BoolObject::equal(Object *right) {
+	if (right->getType() == BoolObj) {
+		BoolObject *new_rgt = dynamic_cast<BoolObject *>(right);
+		bool r = new_rgt->get_val();
+		bool l = this->get_val();
+		return new BoolObject(l == r);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+Object * BoolObject::not_equal(Object *right) {
+	if (right->getType() == BoolObj) {
+		BoolObject *new_rgt = dynamic_cast<BoolObject *>(right);
+		bool r = new_rgt->get_val();
+		bool l = this->get_val();
+		return new BoolObject(l != r);
+	}
+	else {
+		Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+
+Object * LongObject::negative() {
+	return new LongObject(-this->get_val());
+}
+Object * DoubleObject::negative() {
+	return new DoubleObject(-this->get_val());
 }
 
 void ListObject::append(Object* obj)
