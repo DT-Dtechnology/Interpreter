@@ -2,9 +2,9 @@
 #include <stack>
 #include <map>
 #include "Object.h"
-#include "Traveller.h"
 
 class Block;
+class Traveller;
 
 using std::stack;
 using std::map;
@@ -22,17 +22,18 @@ class Block
 	stack<Block*> temp_space_stack_;
 	VarTable var_table_;
 	FuncTable func_table_;
-	Traveller traveller_;
 	Object* return_pos_ = nullptr;
 
 	void returnSpace();
 public:
-	Block(SenVector* sen_vector) :sentence_vector_(sen_vector), traveller_(this) { }
+	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	~Block() = default;
 	
 	Object* searchObject(const string& var_name);
-	Object* addObjetc(const string& var_name);
+	Object* addObject(const string& var_name);
 
 	void print_all() const;
 	void print_all_old() const;
+
+	friend Traveller;
 };

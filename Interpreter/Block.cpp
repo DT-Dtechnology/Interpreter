@@ -25,7 +25,7 @@ Object* Block::searchObject(const string& var_name)
 		object = block_space_stack_.top()->var_table_[var_name];
 		if (object != nullptr)
 		{
-			cout << "Find" << endl;
+			cout << "Find " << var_name << endl;
 			system("pause");
 
 			returnSpace();
@@ -34,14 +34,14 @@ Object* Block::searchObject(const string& var_name)
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
-	cout << "Not Find" << endl;
+	cout << "Not Find " << var_name << endl;
 	system("pause");
 
 	returnSpace();
-	return addObjetc(var_name);
+	return addObject(var_name);
 }
 
-Object* Block::addObjetc(const string& var_name)
+Object* Block::addObject(const string& var_name)
 {
 	Object* obj= new Object(ObjectType::TotalValue);
 	var_table_[var_name] = obj;
@@ -56,7 +56,7 @@ void Block::print_all() const
 		// #### 
 		// 这里不是非常安全
 		// 后期会考虑改为将所有的传入Block*的参数全部转化为const Block*
-		sp->setBlock(PVM::Global_);
+		//sp->setBlock();
 		sp->print_test_second();
 		delete sp;
 	}
