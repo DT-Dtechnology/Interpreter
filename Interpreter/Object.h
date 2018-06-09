@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "Block.h"
 
 using std::string;
 using std::vector;
@@ -9,7 +10,7 @@ enum ObjectType
 {
 	TEMP_OBJ, TotalVariable, TotalValue, Operator, LongObj,
 	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
-	BoolObj
+	BoolObj, MatchObj
 };
 
 class Object
@@ -18,10 +19,7 @@ class Object
 	bool isTemp_ = false;
 
 public:
-	Object(ObjectType type) :type_(type)
-	{
-		std::cout << "Create Object ";
-	}
+	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;
 
 	ObjectType getType() const { return type_; }
@@ -95,7 +93,6 @@ public:
 	TempObject(const std::string& var_name)
 		: Object(ObjectType::TEMP_OBJ)
 	{
-		std::cout << "TEMP" << std::endl;
 		var_name_ = var_name;
 	}
 	~TempObject() = default;
@@ -104,7 +101,6 @@ public:
 		std::cout << "Test "<<var_name_ << std::endl;
 	}
 	string getName() const { return var_name_; }
-	Object* add(Object* object) override;
 };
 
 class LongObject;
@@ -114,6 +110,7 @@ class BoolObject;
 class TupleObject;
 class ListObject;
 class DictObject;
+class MatchObject;
 
 class LongObject :	public Object
 {
@@ -239,4 +236,19 @@ public:
 	{
 		std::cout << "List " << std::endl;
 	}
+};
+
+
+class MatchObject:
+	public Object
+{
+	string name_;
+	Block* cur_;
+public:
+	MatchObject(const string& name, Block* block):Object(MatchObj),
+		name_(name), cur_(block) { }
+	~MatchObject() = default;
+	
+	Object* getMatchValue();
+	// ####
 };

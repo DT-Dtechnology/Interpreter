@@ -110,15 +110,6 @@ Object * Object::Xor(Object *obj) {
 	return nullptr;
 }
 
-Object* TempObject::add(Object* object)
-{
-	TempObject* newobject = dynamic_cast<TempObject*>(object);
-	string add_name = " (EMPTY) ";
-	if (object)
-		add_name = newobject->getName();
-	return new TempObject(var_name_ + add_name);
-}
-
 
 Object * LongObject::add(Object *right) {
 	double rval = right->get_val();
@@ -516,4 +507,11 @@ Object * BoolObject::Not() {
 void ListObject::append(Object* obj)
 {
 	value_.push_back(obj);
+}
+
+Object* MatchObject::getMatchValue()
+{
+	if(cur_->searchObject(name_))
+		return cur_->searchObject(name_);
+	return new TempObject(name_);
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include <stack>
 #include <map>
-#include "Object.h"
+#include "Sentence.h"
 
+class Object;
 class Block;
 class Traveller;
 
