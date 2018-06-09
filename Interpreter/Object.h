@@ -39,9 +39,9 @@ public:
 	virtual Object * more(Object *obj);
 	virtual Object * less_or_equal(Object *obj);
 	virtual Object * less(Object *obj);
-	// ######
-	// equal 
-	// not equal
+	
+	virtual Object * equal(Object *obj);
+	virtual Object * not_equal(Object *obj);
 
 	virtual Object * leftmove(Object *obj);
 	virtual Object * rightmove(Object *obj);
@@ -51,14 +51,12 @@ public:
 	virtual Object * And(Object *obj);
 	virtual Object * Or (Object *obj);
 	virtual Object * Not();
-	// ######
-	// Nega ∏∫∫≈Œ Ã‚
 
 	virtual Object * ByteAnd(Object * obj);
 	virtual Object * ByteOr(Object * obj);
 	virtual Object * Xor(Object * obj);
 
-	
+	virtual Object * negative();	
 };
 
 class ValueObject :
@@ -142,6 +140,12 @@ public:
 	Object * ByteOr(Object *) override;
 	Object * Xor(Object *) override;
 
+	Object * equal(Object *) override;
+	Object * not_equal(Object *) override;
+
+	Object * negative() override;
+
+
 	void print_test() const override
 	{
 		std::cout << "Long " << value_ << std::endl;
@@ -170,6 +174,11 @@ public:
 	Object * less_or_equal(Object *) override;
 	Object * less(Object *) override;
 
+	Object * equal(Object *)override;
+	Object * not_equal(Object *)override;
+
+	Object * negative() override;
+
 	void print_test() const override
 	{
 		std::cout << "Double " << value_ << std::endl;
@@ -187,6 +196,9 @@ public:
 
 	Object * add(Object *) override;
 	Object * mod(Object *) override;
+
+	Object * equal(Object *) override;
+	Object * not_equal(Object *)override;
 
 	void print_test() const override
 	{
@@ -208,6 +220,9 @@ public:
 	Object * And(Object *) override;
 	Object * Or(Object *) override;
 	Object * Not() override;
+
+	Object * equal(Object *) override;
+	Object * not_equal(Object *)override;
 
 	void print_test() const override
 	{
