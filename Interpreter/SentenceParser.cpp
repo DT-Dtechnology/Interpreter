@@ -47,14 +47,13 @@ void SentenceParser::buildTree()
 		X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		/*
-		cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
-		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
-		*/
+		//cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
+		//cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
+		
 
 		if (Top == NodeType::TERMINATE)
 		{
-			// cout << front << "  ";
+			cout << front << "  ";
 			if (X->value_->getType() == ObjectType::Operator && front!= "#")
 			{
 				// isTerminate[] 表示终结符
@@ -91,8 +90,7 @@ void SentenceParser::buildTree()
 			}
 			else
 				throw Error("Wrong Match");
-			// ####
-			//cout << "Match" << endl << endl;
+			cout << "Match" << endl << endl;
 		}
 		else if (Top == NodeType::END)
 		{
@@ -106,13 +104,13 @@ void SentenceParser::buildTree()
 			//nodeToInt 行号
 			//stringToInt 列好
 			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
-			/*
-			cout << "Generating......" << endl;
-			cout << "magic code:[ " << magic_code << " ]" << endl;
-			cout << "front: " << front << endl;
-			cout << "Top: " << nodeToString[Top] << endl;
-			cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
-			*/
+
+			//cout << "Generating......" << endl;
+			//cout << "magic code:[ " << magic_code << " ]" << endl;
+			//cout << "front: " << front << endl;
+			//cout << "Top: " << nodeToString[Top] << endl;
+			//cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
+
 			// 顺序生成X的子节点
 			for (auto i = 0; i < magic_code.length(); ++i)
 			{
@@ -156,9 +154,9 @@ void SentenceParser::buildTree()
 			throw Error("What?");
 		
 	}
-	// cout << endl;
-	// cout << "Finish" << endl;
-	// cout << endl;
+	//cout << endl;
+	//cout << "Finish" << endl;
+	//cout << endl;
 	root_ = Root;
 }
 
@@ -221,6 +219,50 @@ void SentenceParser::upFloat()
 		node->getParent()->getParent()->setNodeType(node->getNodeType());
 		node->getParent()->getChild()->erase(node->getParent()->getChild()->begin());
 	}
+
+	cout << "print" << endl;
+	print_node(root_, 0);
+
+	// comma
+	nodeQueue.push(root_);
+	while (!nodeQueue.empty())
+	{
+		node = nodeQueue.front();
+		bool flag = 0;
+		if (node->getNodeType() == LISTFLAG)
+		{
+			auto it1 = node->getChild()->begin();
+			while (it1 != node->getChild()->end())
+			{
+				if ((*it1)->getNodeType() == LISTFLAG)
+				{
+					NodeVector temp;
+					auto it2 = (*it1)->getChild()->begin();
+					while (it2 != (*it1)->getChild()->end())
+					{
+						temp.push_back(*it2);
+						it2++;
+					}
+					it1 = node->getChild()->erase(it1);
+					for (auto it = temp.begin(); it != temp.end(); it++)
+						node->addNode(*it);
+					flag = 1;
+					node->setNodeType(LISTFLAG);
+					break;
+				}
+				it1++;
+			}
+		}
+		if (flag == 0)
+		{
+			nodeQueue.pop();
+			if (node->getChild()->size() > 0)
+			{
+				for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+					nodeQueue.push(*it);
+			}
+		}
+	}
 }
 
 void SentenceParser::print_test_first()
@@ -238,29 +280,24 @@ void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
-	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-	*/
+
 	prepareRoot();
-	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-	*/
+
 	// ######
 	upFloat();
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-
-	
-	parserRoot();
-	system("pause");
+	//parserRoot();
 }
 
 void SentenceParser::build_all()
@@ -272,7 +309,7 @@ void SentenceParser::build_all()
 Object* getObject(Block* cur_block, string name)
 {
 	// ####
-	return new TempObject(name);
+	return new TestObject(name);
 
 	//####
 	/*
