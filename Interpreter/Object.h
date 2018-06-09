@@ -35,10 +35,8 @@ public:
 		name_ = name;
 		cur_ = cur_->searchObjectBlock(name);
 	}
-	void setBlock(Block* block)
-	{
-		cur_ = block;
-	}
+	void setBlock(Block* block) { cur_ = block; }
+	void setName(const string& name) { name_ = name; }
 	string getName() const {return name_;}
 	Block* get_block() const { return cur_; }
 

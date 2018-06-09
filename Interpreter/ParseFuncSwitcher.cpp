@@ -19,7 +19,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
 			if (!obj)
-				system("pause");
+				throw Error("I do not know ");
 			return new_node;
 		case VARIABLE:
 			//无需处理
@@ -211,6 +211,11 @@ Node* assFunc(Node* left, Node* right)
 		cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
+		if (!right->getValue()->get_block())
+		{
+			right->getValue()->setBlock(cur);
+			right->getValue()->setName(name);
+		}
 		cur->changeVar(name, right->getValue());
 		cout << name << " ";
 		right->getValue()->print_test();
