@@ -10,4 +10,6 @@ Object* ObjectFactory::createObject(const string& name)
 {
 	if (name.length() == 0)
 		return nullptr;
+	if (isVar(name))
+		return nullptr;
 }
