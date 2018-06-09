@@ -17,7 +17,8 @@ class Object
 {
 	ObjectType type_;
 	bool isTemp_ = false;
-
+	Block* cur = nullptr;
+	string name;
 public:
 	Object(ObjectType type) :type_(type) { }
 	virtual ~Object() = default;
@@ -58,7 +59,7 @@ public:
 	virtual Object * ByteOr(Object * obj);
 	virtual Object * Xor(Object * obj);
 
-	
+	friend Block;
 };
 
 class ValueObject :
@@ -100,7 +101,6 @@ public:
 	{
 		std::cout << "Test "<<var_name_ << std::endl;
 	}
-	string getName() const { return var_name_; }
 };
 
 class LongObject;

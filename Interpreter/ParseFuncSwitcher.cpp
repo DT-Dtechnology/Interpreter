@@ -206,24 +206,27 @@ Node* notFunc(Node* node)
 
 Node* assFunc(Block* cur, Node* left, Node* right)
 {
-	cout << "Assign, Then value: " ;
-	string name_left;
-	Object* right_obj;
-	if (left->getValue()->getType() == TEMP_OBJ)
-		 name_left = dynamic_cast<TempObject*>(left->getValue())->getName();
-	else
-		throw Error("Assign to A right value");
-	if (right->getValue()->getType() == TEMP_OBJ)
+	if (left->getNodeType() != LISTFLAG)
 	{
-		const string name_right = dynamic_cast<TempObject*>(right->getValue())->getName();
-		right_obj = cur->searchObject(name_right);
+		cout << "Assign, Then value: ";
+		string name_left;
+		Object* right_obj;
+		if (left->getValue()->getType() == TEMP_OBJ)
+			name_left = dynamic_cast<TempObject*>(left->getValue())->getName();
+		else
+			throw Error("Assign to A right value");
+		if (right->getValue()->getType() == TEMP_OBJ)
+		{
+			const string name_right = dynamic_cast<TempObject*>(right->getValue())->getName();
+			right_obj = cur->searchObject(name_right);
+		}
+		else
+			right_obj = right->getValue();
+		if (!right_obj)
+			throw Error("You have not define all the paraments yet.");
+		cur->changeNode(name_left, right_obj);
+		Object* temp = cur->searchObject(name_left);
+		temp->print_test();
 	}
-	else
-		right_obj = right->getValue();
-	if (!right_obj)
-		throw Error("You have not define all the paraments yet.");
-	cur->changeNode(name_left, right_obj);
-	Object* temp = cur->searchObject(name_left);
-	temp->print_test();
 	return right;
 }
