@@ -7,6 +7,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 	cout << node->getNodeType() << endl;
 	//system("pause");
 	Object* obj;
+	Node* new_node = new Node;
 	switch (node->getNodeType())
 	{
 		case TERMINATE:
@@ -15,7 +16,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		// 此处需要更改node的类型至Value或Variable
 		// 
 			obj = ObjectFactory::createObject(cur, node);
-			Node* new_node = new Node(NodeType::VALUE);
+			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
 			return new_node;
 		

@@ -31,7 +31,7 @@ class Node
 	bool isLeaf_ = false;
 	NodeType nodeType_;
 public:
-	Node();
+	Node() = default;
 	~Node();
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };

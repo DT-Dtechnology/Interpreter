@@ -15,7 +15,7 @@ Object* Block::searchObject(string var_name)
 {
 	//####
 	//####
-	return nullptr;
+	//return nullptr;
 	//####
 	//####
 	Object* object = nullptr;
@@ -34,7 +34,7 @@ Object* Block::searchObject(string var_name)
 	return nullptr;
 }
 
-void Block::print_all()
+void Block::print_all() const
 {
 	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
