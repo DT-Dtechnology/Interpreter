@@ -206,13 +206,21 @@ Node* notFunc(Node* node)
 
 Node* assFunc(Block* cur, Node* left, Node* right)
 {
-	string name;
+	string name_left;
+	Object* right_obj;
 	if (left->getValue()->getType() == TEMP_OBJ)
-		 name = dynamic_cast<TempObject*>(left->getValue())->getName();
+		 name_left = dynamic_cast<TempObject*>(left->getValue())->getName();
 	else
 		throw Error("Assign to A right value");
-	cur->changeNode(name, right->getValue());
-	Object* temp = cur->searchObject(name);
-	temp->print_test();
+	if (right->getValue()->getType() == TEMP_OBJ)
+	{
+		const string name_right = dynamic_cast<TempObject*>(right->getValue())->getName();
+		right_obj = cur->searchObject(name_right);
+	}
+	else
+		right_obj = right->getValue();
+	if (!right_obj)
+		throw Error("You have not define all the paraments yet.");
+	cur->changeNode(name_left, right_obj);
 	return right;
 }
