@@ -5,6 +5,7 @@
 #include "Matrix.h"
 #include "SenDivider.h"
 
+using std::queue;
 using std::stack;
 using std::cout;
 using std::endl;
@@ -186,6 +187,40 @@ void SentenceParser::work()
 	parserRoot();
 }
 
+void SentenceParser::upFloat()
+{
+	// bfs
+	queue<Node*> nodeQueue;
+	queue<Node*> upQueue;
+	nodeQueue.push(root_);
+	Node *node;
+	while (!nodeQueue.empty()) 
+	{
+		node = nodeQueue.front();
+		nodeQueue.pop();
+		if (isOperator[node->getNodeType()])
+		{
+			upQueue.push(node);
+			// cout << nodeToString[node->getNodeType()] << " ";
+			// cout << endl;
+		}
+		if (node->getChild()->size() > 0)
+		{
+			for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+				nodeQueue.push(*it);
+		}
+	}
+
+	// float
+	while (!upQueue.empty())
+	{
+		node = upQueue.front();
+		upQueue.pop();
+		node->getParent()->getParent()->setNodeType(node->getNodeType());
+		node->getParent()->getChild()->erase(node->getParent()->getChild()->begin());
+	}
+}
+
 void SentenceParser::print_test_first()
 {
 	divide();
@@ -212,13 +247,19 @@ void SentenceParser::print_test_second()
 	cout << endl << endl;
 	system("pause");
 
+	// ######
+	upFloat();
+	cout << "Let Us Print." << endl;
+	print_node(root_, 0);
+	cout << endl << endl;
+	system("pause");
 	//parserRoot();
 }
 
 void SentenceParser::build_all()
 {
 	buildAll();
-	printMatrix();
+	//printMatrix();
 }
 
 Object* getObject(Block* cur_block, string name)

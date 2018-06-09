@@ -35,6 +35,7 @@ public:
 	~Node();
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
+	void setNodeType(NodeType type) { nodeType_ = type; }
 	NodeVector* getChild() { return &childVector_; }
 	Object* getValue() const;
 	void addNode(Node* node) { childVector_.push_back(node); }
