@@ -25,6 +25,7 @@ public:
 	~SentenceParser() { delete root_; };
 	void work();
 	void upFloat();
+	void setBlock(Block* cur) { cur_block_ = cur; }
 	void print_test_first();
 	void print_test_second();
 	

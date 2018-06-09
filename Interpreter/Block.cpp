@@ -11,13 +11,14 @@ void Block::returnSpace()
 	}
 }
 
-Object* Block::searchObject(string var_name)
+Object* Block::searchObject(const string& var_name)
 {
 	//####
 	//####
 	//return nullptr;
 	//####
 	//####
+	system("pause");
 	Object* object = nullptr;
 	while(!block_space_stack_.empty())
 	{
@@ -31,7 +32,15 @@ Object* Block::searchObject(string var_name)
 		block_space_stack_.pop();
 	}
 	returnSpace();
-	return nullptr;
+	system("pause");
+	return addObjetc(var_name);
+}
+
+Object* Block::addObjetc(const string& var_name)
+{
+	Object* obj= new Object(ObjectType::TotalValue);
+	var_table_[var_name] = obj;
+	return obj;
 }
 
 void Block::print_all() const
@@ -39,6 +48,7 @@ void Block::print_all() const
 	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
 		SentenceParser* sp = new SentenceParser((*it));
+		sp->setBlock();
 		sp->print_test_second();
 		delete sp;
 	}
