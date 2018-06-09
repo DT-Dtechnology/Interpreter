@@ -125,5 +125,5 @@ class ListObject: public Object
 public:
 	ListObject():Object(ObjectType::ListObj){}
 	~ListObject() = default;
-
+	void append(Object*);
 };

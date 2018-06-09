@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "ParseFuncSwitcher.h"
+#include "ObjectFactory.h"
 
 Node* FuncSwitcher(Block* cur, Node* node)
 {
 	cout << node->getNodeType() << endl;
 	//system("pause");
+	Object* obj;
 	switch (node->getNodeType())
 	{
 		case TERMINATE:
@@ -12,11 +14,15 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		// 这里应该是用到工厂函数重新处理Object*
 		// 此处需要更改node的类型至Value或Variable
 		// 
-			
-			return node;
+			obj = ObjectFactory::createObject(cur, node);
+			Node* new_node = new Node(NodeType::VALUE);
+			new_node->setValue(obj);
+			return new_node;
 		
 		case VARIABLE:
 			//无需处理
+			//暂时没有
+			//由于控制手段有其他方法，可能会被废除
 			return node;
 
 		case VALUE:
