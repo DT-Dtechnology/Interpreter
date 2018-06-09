@@ -65,7 +65,7 @@ Object* Block::searchObject(const string& var_name)
 	return return_object;
 }
 
-Object* Block::changeNode(const string& var_name, Object* object)
+Object* Block::changeVar(const string& var_name, Object* object)
 {
 	var_table_[var_name] = object;
 	return object;

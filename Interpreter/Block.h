@@ -32,7 +32,7 @@ public:
 	
 	Block* searchObjectBlock(const string& var_name);
 	Object* searchObject(const string& var_name);
-	Object* changeNode(const string& var_name, Object* object);
+	Object* changeVar(const string& var_name, Object* object);
 
 	void print_all() const;
 	void print_all_old() const;

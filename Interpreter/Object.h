@@ -39,6 +39,8 @@ public:
 	{
 		cur_ = block;
 	}
+	string getName() const {return name_;}
+	Block* get_block() const { return cur_; }
 
 	virtual Object * add(Object *obj);
 	virtual Object * minus(Object *obj);

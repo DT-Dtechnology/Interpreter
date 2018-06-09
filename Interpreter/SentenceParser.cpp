@@ -280,24 +280,30 @@ void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
+	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-
+	*/
+	
 	prepareRoot();
+	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-
+	*/
 	// ######
+	
 	upFloat();
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-	//parserRoot();
+	
+	parserRoot();
+	system("pause");
 }
 
 void SentenceParser::build_all()
