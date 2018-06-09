@@ -30,7 +30,7 @@ public:
 	~Block() = default;
 	
 	Object* searchObject(const string& var_name);
-	Object* addObject(const string& var_name);
+	Object* changeNode(const string& var_name, Object* object);
 
 	void print_all() const;
 	void print_all_old() const;

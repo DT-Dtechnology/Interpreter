@@ -272,7 +272,7 @@ void SentenceParser::build_all()
 Object* getObject(Block* cur_block, string name)
 {
 	// ####
-	return new TestObject(name);
+	return new TempObject(name);
 
 	//####
 	/*

@@ -238,7 +238,7 @@ inline void print_node(Node* node, int depth)
 	}
 	if (node->nodeType_ == NodeType::TERMINATE)
 	{
-		TestObject* tmp = dynamic_cast<TestObject*>(node->value_);
+		TempObject* tmp = dynamic_cast<TempObject*>(node->value_);
 		if (tmp)
 			tmp->print_test();
 		else

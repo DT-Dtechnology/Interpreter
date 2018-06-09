@@ -35,7 +35,7 @@ Object* ObjectFactory::createObject(Block* cur, const string& name)
 	if (name == "False")
 		return new BoolObject(false);
 	if (isVar(name))
-		return cur->searchObject(name);
+		return new TempObject(name);
 	if (isString(name))
 		return new StringObject(name);
 	if (isDouble(name))
@@ -52,7 +52,7 @@ Object* ObjectFactory::createObject(Block* cur, Node* all_node)
 	ListObject* list = new ListObject;
 	if(all_node->getNodeType() == TERMINATE)
 	{
-		TestObject* tmp = dynamic_cast<TestObject*>(all_node->getValue());
+		TempObject* tmp = dynamic_cast<TempObject*>(all_node->getValue());
 		const string value = tmp->getName();
 		Object * obj = ObjectFactory::createObject(cur, value);
 		return obj;

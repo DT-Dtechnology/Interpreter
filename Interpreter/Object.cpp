@@ -110,13 +110,13 @@ Object * Object::Xor(Object *obj) {
 	return nullptr;
 }
 
-Object* TestObject::add(Object* object)
+Object* TempObject::add(Object* object)
 {
-	TestObject* newobject = dynamic_cast<TestObject*>(object);
+	TempObject* newobject = dynamic_cast<TempObject*>(object);
 	string add_name = " (EMPTY) ";
 	if (object)
 		add_name = newobject->getName();
-	return new TestObject(var_name_ + add_name);
+	return new TempObject(var_name_ + add_name);
 }
 
 
@@ -129,7 +129,7 @@ Object * LongObject::add(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}

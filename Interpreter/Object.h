@@ -7,7 +7,7 @@ using std::vector;
 
 enum ObjectType
 {
-	DEBUG_TEST, TotalVariable, TotalValue, Operator, LongObj,
+	TEMP_OBJ, TotalVariable, TotalValue, Operator, LongObj,
 	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
 	BoolObj
 };
@@ -84,17 +84,17 @@ public:
 	~OperatorObject() override = default;
 };
 
-class TestObject :
+class TempObject :
 	public Object
 {
 	std::string var_name_;
 public:
-	TestObject(const std::string& var_name)
-		: Object(ObjectType::DEBUG_TEST)
+	TempObject(const std::string& var_name)
+		: Object(ObjectType::TEMP_OBJ)
 	{
 		var_name_ = var_name;
 	}
-	~TestObject() = default;
+	~TempObject() = default;
 	void print_test() const override
 	{
 		std::cout << "Test "<<var_name_ << std::endl;

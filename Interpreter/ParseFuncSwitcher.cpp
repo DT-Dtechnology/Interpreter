@@ -18,6 +18,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			obj = ObjectFactory::createObject(cur, node);
 			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
+			if (!obj)
+				system("pause");
 			return new_node;
 		case VARIABLE:
 			//无需处理
@@ -59,7 +61,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return rightFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return assFunc(cur, FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		
 		case LISTFLAG:
 		// We should return a node with a list object here.
@@ -202,10 +204,15 @@ Node* notFunc(Node* node)
 }
 
 
-Node* assFunc(Node* left, Node* right)
+Node* assFunc(Block* cur, Node* left, Node* right)
 {
-	cout << "Assign " << endl;
-	left->setValue(right->getValue());
-	left->getValue()->print_test();
+	string name;
+	if (left->getValue()->getType() == TEMP_OBJ)
+		 name = dynamic_cast<TempObject*>(left->getValue())->getName();
+	else
+		throw Error("Assign to A right value");
+	cur->changeNode(name, right->getValue());
+	Object* temp = cur->searchObject(name);
+	temp->print_test();
 	return right;
 }

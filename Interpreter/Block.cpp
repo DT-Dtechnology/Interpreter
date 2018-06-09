@@ -38,14 +38,13 @@ Object* Block::searchObject(const string& var_name)
 	system("pause");
 
 	returnSpace();
-	return addObject(var_name);
+	return nullptr;
 }
 
-Object* Block::addObject(const string& var_name)
+Object* Block::changeNode(const string& var_name, Object* object)
 {
-	Object* obj= new Object(ObjectType::TotalValue);
-	var_table_[var_name] = obj;
-	return obj;
+	var_table_[var_name] = object;
+	return object;
 }
 
 void Block::print_all() const
