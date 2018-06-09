@@ -217,11 +217,17 @@ void SentenceParser::upFloat()
 		node = upQueue.front();
 		upQueue.pop();
 		node->getParent()->getParent()->setNodeType(node->getNodeType());
-		node->getParent()->getChild()->erase(node->getParent()->getChild()->begin());
+		auto it = node->getParent()->getChild()->begin();
+		while (it != node->getParent()->getChild()->end())
+		{
+			if (*it == node)
+			{
+				it = node->getParent()->getChild()->erase(it);
+				break;
+			}
+			it++;
+		}
 	}
-
-	cout << "print" << endl;
-	print_node(root_, 0);
 
 	// comma
 	nodeQueue.push(root_);
