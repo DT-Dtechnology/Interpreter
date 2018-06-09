@@ -33,4 +33,5 @@ public:
 	Object* searchObject(string var_name);
 
 	void print_all();
+	void print_all_old();
 };
