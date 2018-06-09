@@ -18,6 +18,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			obj = ObjectFactory::createObject(cur, node);
 			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
+			if (!obj)
+				system("pause");
 			return new_node;
 		case VARIABLE:
 			//无需处理
@@ -59,7 +61,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return rightFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return assFunc(cur, FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		
 		case LISTFLAG:
 		// We should return a node with a list object here.
@@ -202,8 +204,26 @@ Node* notFunc(Node* node)
 }
 
 
-Node* assFunc(Node* left, Node* right)
+Node* assFunc(Block* cur, Node* left, Node* right)
 {
-	left->setValue(right->getValue());
+	cout << "Assign, Then value: " ;
+	string name_left;
+	Object* right_obj;
+	if (left->getValue()->getType() == TEMP_OBJ)
+		 name_left = dynamic_cast<TempObject*>(left->getValue())->getName();
+	else
+		throw Error("Assign to A right value");
+	if (right->getValue()->getType() == TEMP_OBJ)
+	{
+		const string name_right = dynamic_cast<TempObject*>(right->getValue())->getName();
+		right_obj = cur->searchObject(name_right);
+	}
+	else
+		right_obj = right->getValue();
+	if (!right_obj)
+		throw Error("You have not define all the paraments yet.");
+	cur->changeNode(name_left, right_obj);
+	Object* temp = cur->searchObject(name_left);
+	temp->print_test();
 	return right;
 }

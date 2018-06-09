@@ -127,16 +127,6 @@ Object * Object::negative() {
 	return nullptr;
 }
 
-Object* TestObject::add(Object* object)
-{
-	TestObject* newobject = dynamic_cast<TestObject*>(object);
-	string add_name = " (EMPTY) ";
-	if (object)
-		add_name = newobject->getName();
-	return new TestObject(var_name_ + add_name);
-}
-
-
 Object * LongObject::add(Object *right) {
 	double rval = right->get_val();
 	double res = this->get_val() + rval;
@@ -146,7 +136,7 @@ Object * LongObject::add(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -530,7 +520,6 @@ Object * BoolObject::Not() {
 	
 }
 
-
 Object * LongObject::equal(Object *right) {
 	if ((right->getType() == LongObj) || (right->getType() == DoubleObj)) {
 		double rval = right->get_val();
@@ -646,4 +635,11 @@ Object * DoubleObject::negative() {
 void ListObject::append(Object* obj)
 {
 	value_.push_back(obj);
+}
+
+Object* MatchObject::getMatchValue()
+{
+	if(cur_->searchObject(name_))
+		return cur_->searchObject(name_);
+	return new TempObject(name_);
 }

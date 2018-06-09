@@ -1,15 +1,16 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "Block.h"
 
 using std::string;
 using std::vector;
 
 enum ObjectType
 {
-	DEBUG_TEST, TotalVariable, TotalValue, Operator, LongObj,
+	TEMP_OBJ, TotalVariable, TotalValue, Operator, LongObj,
 	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
-	BoolObj
+	BoolObj, MatchObj
 };
 
 class Object
@@ -38,7 +39,7 @@ public:
 	virtual Object * more(Object *obj);
 	virtual Object * less_or_equal(Object *obj);
 	virtual Object * less(Object *obj);
-
+	
 	virtual Object * equal(Object *obj);
 	virtual Object * not_equal(Object *obj);
 
@@ -50,14 +51,12 @@ public:
 	virtual Object * And(Object *obj);
 	virtual Object * Or (Object *obj);
 	virtual Object * Not();
-	
-	virtual Object * negative();
 
 	virtual Object * ByteAnd(Object * obj);
 	virtual Object * ByteOr(Object * obj);
 	virtual Object * Xor(Object * obj);
 
-	
+	virtual Object * negative();	
 };
 
 class ValueObject :
@@ -84,23 +83,22 @@ public:
 	~OperatorObject() override = default;
 };
 
-class TestObject :
+class TempObject :
 	public Object
 {
 	std::string var_name_;
 public:
-	TestObject(const std::string& var_name)
-		: Object(ObjectType::DEBUG_TEST)
+	TempObject(const std::string& var_name)
+		: Object(ObjectType::TEMP_OBJ)
 	{
 		var_name_ = var_name;
 	}
-	~TestObject() = default;
+	~TempObject() = default;
 	void print_test() const override
 	{
-		std::cout << var_name_ << " ";
+		std::cout << "Test "<<var_name_ << std::endl;
 	}
 	string getName() const { return var_name_; }
-	Object* add(Object* object) override;
 };
 
 class LongObject;
@@ -110,6 +108,7 @@ class BoolObject;
 class TupleObject;
 class ListObject;
 class DictObject;
+class MatchObject;
 
 class LongObject :	public Object
 {
@@ -145,6 +144,12 @@ public:
 	Object * not_equal(Object *) override;
 
 	Object * negative() override;
+
+
+	void print_test() const override
+	{
+		std::cout << "Long " << value_ << std::endl;
+	}
 };
 
 
@@ -173,6 +178,11 @@ public:
 	Object * not_equal(Object *)override;
 
 	Object * negative() override;
+
+	void print_test() const override
+	{
+		std::cout << "Double " << value_ << std::endl;
+	}
 };
 
 class StringObject: public Object
@@ -189,7 +199,11 @@ public:
 
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
-	
+
+	void print_test() const override
+	{
+		std::cout << "String " << value_ << std::endl;
+	}
 };
 
 class BoolObject: public Object
@@ -210,6 +224,10 @@ public:
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
 
+	void print_test() const override
+	{
+		std::cout << "Bool " << value_ << std::endl;
+	}
 };
 
 class ListObject: public Object
@@ -228,4 +246,24 @@ public:
 	ListObject(vector<Object*> temp_):Object(ObjectType::ListObj) {
 		value_.assign(temp_.begin(), temp_.end());
 	}
+
+	void print_test() const override
+	{
+		std::cout << "List " << std::endl;
+	}
+};
+
+
+class MatchObject:
+	public Object
+{
+	string name_;
+	Block* cur_;
+public:
+	MatchObject(const string& name, Block* block):Object(MatchObj),
+		name_(name), cur_(block) { }
+	~MatchObject() = default;
+	
+	Object* getMatchValue();
+	// ####
 };

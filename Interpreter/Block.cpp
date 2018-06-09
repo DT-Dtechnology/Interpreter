@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Block.h"
 #include "SentenceParser.h"
+#include "PVM.h"
 
 void Block::returnSpace()
 {
@@ -11,7 +12,7 @@ void Block::returnSpace()
 	}
 }
 
-Object* Block::searchObject(string var_name)
+Object* Block::searchObject(const string& var_name)
 {
 	//####
 	//####
@@ -24,14 +25,26 @@ Object* Block::searchObject(string var_name)
 		object = block_space_stack_.top()->var_table_[var_name];
 		if (object != nullptr)
 		{
+			// cout << "Find " << var_name << endl;
+			// system("pause");
+
 			returnSpace();
 			return object;
 		}
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
+	// cout << "Not Find " << var_name << endl;
+	// system("pause");
+
 	returnSpace();
 	return nullptr;
+}
+
+Object* Block::changeNode(const string& var_name, Object* object)
+{
+	var_table_[var_name] = object;
+	return object;
 }
 
 void Block::print_all() const
@@ -39,12 +52,16 @@ void Block::print_all() const
 	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
 		SentenceParser* sp = new SentenceParser((*it));
+		// #### 
+		// 这里不是非常安全
+		// 后期会考虑改为将所有的传入Block*的参数全部转化为const Block*
+		//sp->setBlock();
 		sp->print_test_second();
 		delete sp;
 	}
 }
 
-void Block::print_all_old()
+void Block::print_all_old() const
 {
 	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
 	{
