@@ -65,7 +65,15 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		
 		case LISTFLAG:
 		// We should return a node with a list object here.
-			return nullptr;
+			// ############
+			// BIG ERROR 建立无数次单个元素的List
+			obj = ObjectFactory::createObject(cur, node);
+			new_node = new Node(NodeType::VALUE);
+			new_node->setValue(obj);
+			if (!obj)
+				throw Error("I do not know ");
+			system("pause");
+			return new_node;
 		
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
@@ -219,6 +227,25 @@ Node* assFunc(Node* left, Node* right)
 		cur->changeVar(name, right->getValue());
 		cout << name << " ";
 		right->getValue()->print_test();
+	}
+	else
+	{
+		vector<Object*>* left_list = (dynamic_cast<ListObject*>(left->getValue()))->get_val();
+		vector<Object*>* right_list = (dynamic_cast<ListObject*>(right->getValue()))->get_val();
+		auto left_it = left_list->begin();
+		auto right_it = right_list->begin();
+		while(left_it != left_list->end())
+		{
+			Node* left_node = new Node;
+			Node* right_node = new Node;
+			left_node->setValue(*left_it);
+			right_node->setValue(*right_it);
+			assFunc(left_node, right_node);
+			++left_it;
+			++right_it;
+		}
+		if (right_it != right_list->end())
+			throw Error("Wrong size of equal");
 	}
 	return right;
 }

@@ -634,5 +634,7 @@ Object * DoubleObject::negative() {
 
 void ListObject::append(Object* obj)
 {
+	cout << "Append ";
+	obj->print_test();
 	value_.push_back(obj);
 }

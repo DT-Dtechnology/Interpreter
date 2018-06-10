@@ -109,7 +109,7 @@ public:
 	~TempObject() = default;
 	void print_test() const override
 	{
-		std::cout << "Test "<<var_name_ << std::endl;
+		std::cout <<var_name_ << std::endl;
 	}
 	string getName() const { return var_name_; }
 };
@@ -248,7 +248,10 @@ class ListObject: public Object
 	vector<Object*> value_{};
 public:
 	void append(Object *);
-	ListObject():Object(ObjectType::ListObj){}
+	ListObject():Object(ObjectType::ListObj)
+	{
+		std::cout << "List " << std::endl;
+	}
 	~ListObject() = default;
 
 	vector<Object *> * get_val() {

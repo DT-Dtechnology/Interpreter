@@ -53,7 +53,7 @@ void SentenceParser::buildTree()
 
 		if (Top == NodeType::TERMINATE)
 		{
-			cout << front << "  ";
+			// cout << front << "  ";
 			if (X->value_->getType() == ObjectType::Operator && front!= "#")
 			{
 				// isTerminate[] ±íÊ¾ÖÕ½á·û
@@ -90,7 +90,7 @@ void SentenceParser::buildTree()
 			}
 			else
 				throw Error("Wrong Match");
-			cout << "Match" << endl << endl;
+			// cout << "Match" << endl << endl;
 		}
 		else if (Top == NodeType::END)
 		{
@@ -241,7 +241,7 @@ void SentenceParser::upFloat()
 					while (it2 != (*it1)->getChild()->end())
 					{
 						temp.push_back(*it2);
-						it2++;
+						++it2;
 					}
 					it1 = node->getChild()->erase(it1);
 					for (auto it = temp.begin(); it != temp.end(); it++)
@@ -250,7 +250,7 @@ void SentenceParser::upFloat()
 					node->setNodeType(LISTFLAG);
 					break;
 				}
-				it1++;
+				++it1;
 			}
 		}
 		if (flag == 0)
