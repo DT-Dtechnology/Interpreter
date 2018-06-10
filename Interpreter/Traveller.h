@@ -4,6 +4,8 @@
 class Traveller
 {
 	Block* c_block_;
+	SenVector::iterator cur;
+	SenVector::iterator next;
 public:
 	Traveller(Block* c_block) :c_block_(c_block)
 	{
