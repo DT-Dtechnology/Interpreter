@@ -101,6 +101,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		// ######
 		// 注意LOOP的两种类型
 		// 需要条件判断
+		// case LOOP:
+		
 
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);

@@ -8,12 +8,14 @@ enum ControlStatus
 };
 
 typedef stack<ControlStatus> StatusControl;
+typedef stack<SenVector::iterator> JumpPosiStack;
 
 class Traveller
 {
 	Block* c_block_;
 	SenVector::iterator current_;
 	StatusControl status_;
+	JumpPosiStack jump_posi_;
 public:
 	Traveller(Block* c_block) :c_block_(c_block)
 	{

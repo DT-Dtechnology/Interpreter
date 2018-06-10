@@ -13,6 +13,23 @@ void Traveller::work()
 			++current_;
 			continue;
 		}
+		if((*current_)->order_ == "endDef")
+		{
+			if (status_.top() == DEFSTA)
+				status_.pop();
+			++current_;
+			continue;
+		}
+		if ((*current_)->order_ == "endLoop")
+		{
+			if (status_.top() == LOOPSTA)
+			{
+				status_.pop();
+				jump_posi_.pop();
+			}
+			++current_;
+			continue;
+		}
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
@@ -40,14 +57,39 @@ void Traveller::work()
 				{
 					// cout << "GG" << endl;
 					++current_;
-					while ((*current_)->tab_cnt_ > cur_tabs)
+					while ((*current_)->tab_cnt_ != cur_tabs)
+						++current_;
+				}
+				else if(status == DEFSTA)
+				{
+					status_.push(DEFSTA);
+					// Let Us Create a Block
+				}
+				else if(status == LOOPTRUE)
+				{
+					jump_posi_.push(current_);
+					status_.push(LOOPSTA);
+					++current_;
+				}
+				else if(status == LOOPFALSE)
+				{
+					++current_;
+					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
 				}
 		}
 		else
 		{
-			while ((*current_)->order_ != "endIf")
-				++current_;
+			if (status_.top() == IFSTA)
+			{
+				while ((*current_)->order_ != "endIf")
+					++current_;
+			}
+			else if(status_.top() == LOOPSTA)
+			{
+				current_ = jump_posi_.top();
+				jump_posi_.pop();
+			}
 		}
 		delete sp;
 	}
