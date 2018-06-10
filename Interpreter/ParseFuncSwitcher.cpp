@@ -108,6 +108,12 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
 			return new_node;
 
+		case FOR:
+			new_node = new Node(NodeType::LOOP);
+			Object* tmp_node = node->childVector_[1]->getValue();
+			
+			return new_node;
+
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
 	}
