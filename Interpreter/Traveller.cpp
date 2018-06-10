@@ -10,6 +10,8 @@ void Traveller::work()
 		{
 			if (status_.top() == IFSTA)
 				status_.pop();
+			if(current_ == c_block_->sentence_vector_->end())
+				return;
 			++current_;
 			continue;
 		}
@@ -17,6 +19,8 @@ void Traveller::work()
 		{
 			if (status_.top() == DEFSTA)
 				status_.pop();
+			if (current_ == c_block_->sentence_vector_->end())
+				return;
 			++current_;
 			continue;
 		}
@@ -24,11 +28,20 @@ void Traveller::work()
 		{
 			cout << "LoopEnd" << endl;
 			system("pause");
-			if (status_.top() == LOOPSTA)
+			if(status_.top() == LOOPTRUE)
+			{
+				current_ = jump_posi_.top();
+				jump_posi_.pop();
+				status_.pop();
+				continue;
+			}
+			if (status_.top() == LOOPFALSE)
 			{
 				status_.pop();
 				jump_posi_.pop();
 			}
+			if (current_ == c_block_->sentence_vector_->end())
+				return;
 			++current_;
 			continue;
 		}
@@ -71,11 +84,12 @@ void Traveller::work()
 				else if(status == LOOPTRUE)
 				{
 					jump_posi_.push(current_);
-					status_.push(LOOPSTA);
+					status_.push(LOOPTRUE);
 					++current_;
 				}
 				else if(status == LOOPFALSE)
 				{
+					status_.push(LOOPFALSE);
 					++current_;
 					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
@@ -89,7 +103,7 @@ void Traveller::work()
 				while ((*current_)->order_ != "endIf")
 					++current_;
 			}
-			else if(status_.top() == LOOPSTA)
+			else if(status_.top() == LOOPTRUE)
 			{
 				current_ = jump_posi_.top();
 				jump_posi_.pop();
