@@ -202,7 +202,7 @@ class StringObject: public Object
 {
 	string value_;
 public:
-	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val.substr(1,_val.length()-2)) {}
+	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val) {}
 	~StringObject() = default;
 
 	string get_val() { return value_; }
