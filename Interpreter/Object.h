@@ -69,6 +69,8 @@ public:
 
 	virtual Object * negative();
 	
+	int list_posi = -1;
+
 	friend Block;
 	friend ObjectFactory;
 };

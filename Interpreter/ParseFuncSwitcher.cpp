@@ -109,13 +109,55 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return new_node;
 
 		case FOR:
+		{
 			new_node = new Node(NodeType::LOOP);
-			Object* tmp_node = node->childVector_[1]->getValue();
-			
-			return new_node;
-
+			Node* left_node = FuncSwitcher(cur, node->childVector_[1]);
+			Node* right_node = FuncSwitcher(cur, node->childVector_[2]);
+			if(left_node->getValue()->list_posi == -1)
+			{
+				if (right_node->getValue()->getType() != ListObj)
+				{
+					Node* tmp_node = assFunc(left_node, right_node);
+					tmp_node->getValue()->list_posi = 1;
+				}
+				else
+				{
+					ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
+					Node* new_right_node = new Node(VALUE);
+					new_right_node->setValue((*list_object->get_val())[0]);
+					new_right_node->getValue()->list_posi = 0;
+					Node* tmp_node = assFunc(left_node, new_right_node);
+				}
+				Node* new_tmp_node = new Node(LOOP);
+				new_tmp_node->setValue(new BoolObject(true));
+				return new_tmp_node;
+			}else
+			{
+				if (right_node->getValue()->getType() != ListObj)
+				{
+					Node* new_tmp_node = new Node(LOOP);
+					new_tmp_node->setValue(new BoolObject(false));
+					return new_tmp_node;
+				}
+				ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
+				if(left_node->getValue()->list_posi >= list_object->get_val()->size())
+				{
+					Node* new_tmp_node = new Node(LOOP);
+					new_tmp_node->setValue(new BoolObject(false));
+					return new_tmp_node;
+				}
+				Node* new_right_node = new Node(VALUE);
+				new_right_node->setValue((*list_object->get_val())[left_node->getValue()->list_posi]);
+				new_right_node->getValue()->list_posi = left_node->getValue()->list_posi+1;
+				Node* tmp_node = assFunc(left_node, new_right_node);
+				Node* new_tmp_node = new Node(LOOP);
+				new_tmp_node->setValue(new BoolObject(true));
+				return new_tmp_node;
+			}
+		}
+		
 		case PRINT:
-			return negeFunc(FuncSwitcher(cur, node->childVector_[1]));
+			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
 
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
@@ -320,7 +362,7 @@ Node* assFunc(Node* left, Node* right)
 		if (right_it != right_list->end())
 			throw Error("Wrong size of equal");
 	}
-	return right;
+	return left;
 }
 
 Node* printFunc(Node* node)
