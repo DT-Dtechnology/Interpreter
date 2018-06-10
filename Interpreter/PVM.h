@@ -17,7 +17,7 @@ public:
 		input();
 	}
 	~PVM() = default;
-	void work()
+	void work() const
 	{
 		run();
 	}

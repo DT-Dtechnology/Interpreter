@@ -3,6 +3,7 @@
 #include <iostream> // 
 
 using std::string;
+class Traveller;
 
 enum SentenceType
 {
@@ -21,6 +22,8 @@ public:
 	~Sentence();
 	string getOrder() const { return order_; }
 	void printTest() const { std::cout << row_ << " " << tab_cnt_ << " " << order_ << '\n'; }
+	
+	friend Traveller;
 };
 
 inline Sentence::Sentence(std::string& order, int tab, int row):

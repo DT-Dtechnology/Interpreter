@@ -1,12 +1,10 @@
-a = -1
-b = a
-b = a + 1
-b = 1 + a
-c = b
-d = a
-a = a + 1
-d = a
-a = a + 1
-a = a + a
+a = 1
+if a == 1:
+	b = 2
+elif a == 2:
+	c = 3
+else:
+	d = 4
+endIf
 
-
+e = "stop"

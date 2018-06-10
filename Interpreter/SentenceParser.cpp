@@ -4,6 +4,7 @@
 #include "Error.h"
 #include "Matrix.h"
 #include "SenDivider.h"
+#include "Traveller.h"
 
 using std::queue;
 using std::stack;
@@ -179,12 +180,39 @@ void SentenceParser::prepareNode(Node* node)
 	}
 }
 
-void SentenceParser::work()
+ControlStatus SentenceParser::getStatus() const
+{
+	if( root_->getNodeType() == IF )
+	{
+		BoolObject *temp = dynamic_cast<BoolObject*>(root_->getValue());
+		bool val = temp->get_val();
+		if(val)
+		{
+			cout << "if true" << endl;
+			system("pause");
+			return IFTRUE;
+		}else
+		{
+			cout << "if false" << endl;
+			system("pause");
+			return IFFALSE;
+		}
+	}
+	return USELESS;
+}
+
+ControlStatus SentenceParser::work()
 {
 	divide();
 	buildTree();
+	prepareRoot();
+	upFloat();
 
+	print_test();
+	
 	parserRoot();
+	system("pause");
+	return getStatus();
 }
 
 void SentenceParser::upFloat()
@@ -270,7 +298,7 @@ void SentenceParser::upFloat()
 		}
 	}
 
-	//func
+	//func, +/-, elif
 	
 	nodeQueue.push(root_);
 	while (!nodeQueue.empty())
@@ -302,6 +330,13 @@ void SentenceParser::upFloat()
 				node->setNodeType(POSI);
 			else
 				node->setNodeType(NEGA);
+		}
+		
+		if(node->getNodeType() == IF)
+		{
+			if (node->childVector_[0]->getNodeType() == ELIF)
+				node->nodeType_ = ELIF;
+
 		}
 
 		if (node->getChild()->size() > 0)
@@ -358,6 +393,14 @@ void SentenceParser::build_all()
 {
 	buildAll();
 	//printMatrix();
+}
+
+void SentenceParser::print_test() const
+{
+	cout << "Let Us Print." << endl;
+	print_node(root_, 0);
+	cout << endl << endl;
+	system("pause");
 }
 
 Object* getObject(Block* cur_block, string name)
