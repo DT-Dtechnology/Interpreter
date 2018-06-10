@@ -82,6 +82,7 @@ void Traveller::work()
 		{
 			if (status_.top() == IFSTA)
 			{
+				system("pause");
 				while ((*current_)->order_ != "endIf")
 					++current_;
 			}
@@ -89,9 +90,11 @@ void Traveller::work()
 			{
 				current_ = jump_posi_.top();
 				jump_posi_.pop();
+				status_.pop();
 			}
 		}
 		delete sp;
+		system("pause");
 	}
 }
 

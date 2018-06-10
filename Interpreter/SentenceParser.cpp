@@ -198,6 +198,23 @@ ControlStatus SentenceParser::getStatus() const
 			return IFFALSE;
 		}
 	}
+	if (root_->getNodeType() == LOOP)
+	{
+		BoolObject *temp = dynamic_cast<BoolObject*>(root_->getValue());
+		bool val = temp->get_val();
+		if (val)
+		{
+			cout << "while true" << endl;
+			system("pause");
+			return LOOPTRUE;
+		}
+		else
+		{
+			cout << "while false" << endl;
+			system("pause");
+			return LOOPFALSE;
+		}
+	}
 	return USELESS;
 }
 
@@ -336,7 +353,14 @@ void SentenceParser::upFloat()
 		{
 			if (node->childVector_[0]->getNodeType() == ELIF)
 				node->nodeType_ = ELIF;
+		}
 
+		if (node->getNodeType() == LOOP)
+		{
+			if (node->childVector_[0]->getNodeType() == FOR)
+				node->nodeType_ = FOR;
+			if (node->childVector_[0]->getNodeType() == WHILE)
+				node->nodeType_ = WHILE;
 		}
 
 		if (node->getChild()->size() > 0)

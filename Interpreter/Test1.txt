@@ -1,0 +1,12 @@
+
+a = 1
+while a != 4 :
+	if a==1:
+		a = a + 1
+	else :
+		a = a + 1
+	endIf
+endLoop
+d = a
+
+c = 'End Of Game'

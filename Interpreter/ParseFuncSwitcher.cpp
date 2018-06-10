@@ -103,6 +103,10 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		// 需要条件判断
 		// case LOOP:
 		
+		case WHILE:
+			new_node = new Node(NodeType::LOOP);
+			new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
+			return new_node;
 
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
