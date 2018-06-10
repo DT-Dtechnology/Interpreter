@@ -94,6 +94,7 @@ void Traveller::work()
 			}
 		}
 		delete sp;
+		cout << "Next" << endl;
 		system("pause");
 	}
 }
