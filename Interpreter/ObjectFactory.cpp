@@ -75,6 +75,7 @@ Object* ObjectFactory::createObject(Block* cur, Node* all_node)
 		Node* temp_node = FuncSwitcher(cur, *it);
 		list->append(temp_node->getValue());
 	}
+	system("pause");
 	return list;
 }
 

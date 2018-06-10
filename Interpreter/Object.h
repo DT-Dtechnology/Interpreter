@@ -27,7 +27,7 @@ public:
 	ObjectType getType() const { return type_; }
 	void setUnTemp() { isTemp_ = false; }
 	bool getStatus() const { return isTemp_; }
-	virtual void print_test() const { std::cout << "Test" << std::endl; }
+	virtual void print_test() const { std::cout << "Temp " << name_ << std::endl; }
 
 	double get_val();
 	void getPosition(const string& name)
@@ -109,7 +109,7 @@ public:
 	~TempObject() = default;
 	void print_test() const override
 	{
-		std::cout <<var_name_ << std::endl;
+		std::cout <<var_name_ ;
 	}
 	string getName() const { return var_name_; }
 };
@@ -248,10 +248,7 @@ class ListObject: public Object
 	vector<Object*> value_{};
 public:
 	void append(Object *);
-	ListObject():Object(ObjectType::ListObj)
-	{
-		std::cout << "List " << std::endl;
-	}
+	ListObject() :Object(ObjectType::ListObj) { }
 	~ListObject() = default;
 
 	vector<Object *> * get_val() {
@@ -266,5 +263,7 @@ public:
 	void print_test() const override
 	{
 		std::cout << "List " << std::endl;
+		for (auto it = value_.begin(); it != value_.end(); ++it)
+			(*it)->print_test();
 	}
 };

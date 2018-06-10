@@ -72,7 +72,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node->setValue(obj);
 			if (!obj)
 				throw Error("I do not know ");
-			system("pause");
 			return new_node;
 		
 		default: 
@@ -214,7 +213,7 @@ Node* notFunc(Node* node)
 
 Node* assFunc(Node* left, Node* right)
 {
-	if (left->getNodeType() != LISTFLAG)
+	if (left->getValue()->getType() != ObjectType::ListObj)
 	{
 		cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
@@ -230,6 +229,7 @@ Node* assFunc(Node* left, Node* right)
 	}
 	else
 	{
+		cout << "List Assign" << endl;
 		vector<Object*>* left_list = (dynamic_cast<ListObject*>(left->getValue()))->get_val();
 		vector<Object*>* right_list = (dynamic_cast<ListObject*>(right->getValue()))->get_val();
 		auto left_it = left_list->begin();
