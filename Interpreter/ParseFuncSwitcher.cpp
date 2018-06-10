@@ -114,6 +114,9 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			
 			return new_node;
 
+		case PRINT:
+			return negeFunc(FuncSwitcher(cur, node->childVector_[1]));
+
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
 	}
@@ -318,4 +321,11 @@ Node* assFunc(Node* left, Node* right)
 			throw Error("Wrong size of equal");
 	}
 	return right;
+}
+
+Node* printFunc(Node* node)
+{
+	cout << "print_test" << endl;
+	node->getValue()->print();
+	return node;
 }
