@@ -223,7 +223,10 @@ class BoolObject: public Object
 {
 	bool value_;
 public:
-	BoolObject(bool value) :Object(BoolObj), value_(value) { }
+	BoolObject(bool value) :Object(BoolObj), value_(value)
+	{
+		std::cout << "Bool " << value_ << std::endl;
+	}
 	~BoolObject() = default;
 
 	bool get_val() {

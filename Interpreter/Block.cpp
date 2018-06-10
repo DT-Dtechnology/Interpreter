@@ -67,7 +67,41 @@ Object* Block::searchObject(const string& var_name)
 
 Object* Block::changeVar(const string& var_name, Object* object)
 {
-	var_table_[var_name] = object;
+	if (object->getType() == ListObj)
+	{
+		ListObject* obj = dynamic_cast<ListObject*>(object);
+		ListObject* new_obj = new ListObject(*obj);
+		var_table_[var_name] = new_obj;
+	}
+	else if (object->getType() == LongObj)
+	{
+		LongObject* obj = dynamic_cast<LongObject*>(object);
+		LongObject* new_obj = new LongObject(*obj);
+		var_table_[var_name] = new_obj;
+	}
+	else if (object->getType() == DoubleObj)
+	{
+		DoubleObject* obj = dynamic_cast<DoubleObject*>(object);
+		DoubleObject* new_obj = new DoubleObject(*obj);
+		var_table_[var_name] = new_obj;
+	}
+	else if(object->getType() == BoolObj)
+	{
+		BoolObject* obj = dynamic_cast<BoolObject*>(object);
+		BoolObject* new_obj = new BoolObject(*obj);
+		var_table_[var_name] = new_obj;
+	}
+	else if(object->getType() == StringObj)
+	{
+		StringObject* obj = dynamic_cast<StringObject*>(object);
+		StringObject* new_obj = new StringObject(*obj);
+		var_table_[var_name] = new_obj;
+	}
+	else
+	{
+		throw Error("Unknown Type");
+	}
+	
 	return object;
 }
 

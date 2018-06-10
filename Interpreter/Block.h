@@ -24,6 +24,7 @@ class Block
 	VarTable var_table_;
 	FuncTable func_table_;
 	Object* return_pos_ = nullptr;
+	vector<string> para_name_;
 
 	void returnSpace();
 public:

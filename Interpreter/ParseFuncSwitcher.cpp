@@ -55,6 +55,11 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		case BIGGER_OR_EQUAL:
 			return moeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		
+		case IS_EQUAL:
+			return equalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+		case IS_NOT_EQUAL:
+			return nequalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+
 		case LEFT_MOVE:
 			return leftFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		case RIGHT_MOVE:
@@ -78,7 +83,31 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			if (!obj)
 				throw Error("I do not know ");
 			return new_node;
+
+		case IF:
+			new_node = new Node(NodeType::IF);
+			new_node->setValue(FuncSwitcher(cur, node->childVector_[0])->getValue());
+			return new_node;
+
+		case ELIF:
+			new_node = new Node(NodeType::IF);
+			new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
+			return new_node;
+
+		case ELSE:
+			new_node = new Node(NodeType::IF);
+			new_node->setValue(new BoolObject(true));
+			return new_node;
+		// ######
+		// 注意LOOP的两种类型
+		// 需要条件判断
+		// case LOOP:
 		
+		case WHILE:
+			new_node = new Node(NodeType::LOOP);
+			new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
+			return new_node;
+
 		default: 
 			return FuncSwitcher(cur, node->childVector_[0]);
 	}
@@ -179,6 +208,22 @@ Node* leeqFunc(Node* left, Node* right)
 	return node;
 }
 
+Node* equalFunc(Node *left, Node *right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->equal(rightobj));
+	return node;
+}
+Node* nequalFunc(Node *left, Node *right)
+{
+	Node* node = new Node(NodeType::VALUE);
+	Object* leftobj = left->getValue();
+	Object* rightobj = right->getValue();
+	node->setValue(leftobj->not_equal(rightobj));
+	return node;
+}
 Node* leftFunc(Node* left, Node* right)
 {
 	Node* node = new Node(NodeType::VALUE);
@@ -223,12 +268,26 @@ Node* assFunc(Node* left, Node* right)
 		cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
+		string tmp_name;
+		Block* tmp_block = nullptr;
 		if (!right->getValue()->get_block())
 		{
 			right->getValue()->setBlock(cur);
 			right->getValue()->setName(name);
 		}
+		else
+		{
+			tmp_name = right->getValue()->getName();
+			tmp_block = right->getValue()->get_block();
+			right->getValue()->setBlock(cur);
+			right->getValue()->setName(name);
+		}
 		cur->changeVar(name, right->getValue());
+		if (tmp_block)
+		{
+			right->getValue()->setBlock(tmp_block);
+			right->getValue()->setName(tmp_name);
+		}
 		cout << name << " ";
 		right->getValue()->print_test();
 	}
