@@ -295,15 +295,14 @@ void SentenceParser::upFloat()
 				it++;
 			}
 		}
-
-		/*if (node->getNodeType() == FUNC)
+		
+		if (node->getChild()->size() == 1 && (node->getNodeType() == ADD || node->getNodeType() == MINUS))
 		{
-			// 考虑FUNC的父节点的子节点情况一定是var + FUNC
-			Node* temp = *node->getParent()->getChild()->begin();
-			node->getParent()->getChild()->erase(node->getParent()->getChild()->begin());
-			node->getChild()->insert(node->getChild()->begin(), temp);
-		}*/
-
+			if (node->getNodeType() == ADD)
+				node->setNodeType(POSI);
+			else
+				node->setNodeType(NEGA);
+		}
 
 		if (node->getChild()->size() > 0)
 		{
