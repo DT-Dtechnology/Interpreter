@@ -418,7 +418,6 @@ Node* assFunc(Node* left, Node* right)
 
 Node* printFunc(Node* node)
 {
-	cout << "print_test" << endl;
 	node->getValue()->print();
 	return node;
 }
