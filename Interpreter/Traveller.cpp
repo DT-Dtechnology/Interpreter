@@ -8,7 +8,7 @@ void Traveller::work() const
 	{
 		SentenceParser* sp = new SentenceParser((*it));
 		sp->setBlock(c_block_);
-		sp->print_test_second();
+		sp->print_test_first();
 		delete sp;
 	}
 }

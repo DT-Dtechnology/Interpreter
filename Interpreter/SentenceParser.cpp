@@ -318,10 +318,11 @@ void SentenceParser::print_test_first()
 	divide();
 	while (!word_queue_.empty())
 	{
-		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
+
+//		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
 		word_queue_.pop();
 	}
-	std::cout << std::endl;
+//	std::cout << std::endl;
 }
 
 void SentenceParser::print_test_second()
