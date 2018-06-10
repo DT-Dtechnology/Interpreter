@@ -32,7 +32,7 @@ class Node
 	NodeType nodeType_;
 public:
 	Node() = default;
-	~Node();
+	~Node() = default;
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
 	void setNodeType(NodeType type) { nodeType_ = type; }
@@ -46,13 +46,6 @@ public:
 	friend void print_node(Node*, int depth);
 	friend Node* FuncSwitcher(Block*, Node*);
 };
-
-inline Node::~Node()
-{
-	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
-		delete *it;
-	delete value_;
-}
 
 inline Object* Node::getValue() const
 {

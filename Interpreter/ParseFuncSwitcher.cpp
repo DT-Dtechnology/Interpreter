@@ -63,6 +63,11 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		case EQUAL:
 			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		
+		case NEGA:
+			return negeFunc(FuncSwitcher(cur, node->childVector_[0]));
+		case POSI:
+			return posiFunc(FuncSwitcher(cur, node->childVector_[0]));
+
 		case LISTFLAG:
 		// We should return a node with a list object here.
 			// ############
@@ -200,7 +205,7 @@ Node* negeFunc(Node* node)
 {
 	// ######
 	node->setNodeType(VALUE);
-	// node->getValue() -> Nega();
+	node -> setValue(node->getValue() -> negative());
 	return node;
 }
 Node* notFunc(Node* node)
