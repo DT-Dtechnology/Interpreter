@@ -117,8 +117,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			{
 				if (right_node->getValue()->getType() != ListObj)
 				{
-					Node* tmp_node = assFunc(left_node, right_node);
-					tmp_node->getValue()->list_posi = 1;
+					right_node->getValue()->list_posi = 0;
+					assFunc(left_node, right_node);
 				}
 				else
 				{
@@ -126,10 +126,12 @@ Node* FuncSwitcher(Block* cur, Node* node)
 					Node* new_right_node = new Node(VALUE);
 					new_right_node->setValue((*list_object->get_val())[0]);
 					new_right_node->getValue()->list_posi = 0;
-					Node* tmp_node = assFunc(left_node, new_right_node);
+					assFunc(left_node, new_right_node);
 				}
 				Node* new_tmp_node = new Node(LOOP);
 				new_tmp_node->setValue(new BoolObject(true));
+				// cout << "Position1 "<< cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+				
 				return new_tmp_node;
 			}else
 			{
@@ -140,18 +142,22 @@ Node* FuncSwitcher(Block* cur, Node* node)
 					return new_tmp_node;
 				}
 				ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
-				if(left_node->getValue()->list_posi >= list_object->get_val()->size())
+				if(left_node->getValue()->list_posi >= list_object->get_val()->size()-1)
 				{
 					Node* new_tmp_node = new Node(LOOP);
 					new_tmp_node->setValue(new BoolObject(false));
+					// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+					
 					return new_tmp_node;
 				}
 				Node* new_right_node = new Node(VALUE);
-				new_right_node->setValue((*list_object->get_val())[left_node->getValue()->list_posi]);
+				new_right_node->setValue((*list_object->get_val())[left_node->getValue()->list_posi+1]);
 				new_right_node->getValue()->list_posi = left_node->getValue()->list_posi+1;
-				Node* tmp_node = assFunc(left_node, new_right_node);
+				assFunc(left_node, new_right_node);
 				Node* new_tmp_node = new Node(LOOP);
 				new_tmp_node->setValue(new BoolObject(true));
+				// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+				
 				return new_tmp_node;
 			}
 		}
@@ -362,7 +368,7 @@ Node* assFunc(Node* left, Node* right)
 		if (right_it != right_list->end())
 			throw Error("Wrong size of equal");
 	}
-	return left;
+	return right;
 }
 
 Node* printFunc(Node* node)
