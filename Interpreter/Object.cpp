@@ -238,7 +238,23 @@ Object * StringObject::add(Object * right) {
 	
 	if (rtype == StringObj) {
 		StringObject *new_rgt = dynamic_cast<StringObject *>(right);
-		string res = this->get_val() + new_rgt->get_val();
+		string l = this->get_val();
+		string r = new_rgt->get_val();
+		string res = "\'";
+		if (!(l[0] == '\'' && l[l.length() - 1] == '\'') || (l[0] == '\"' && l[l.length() - 1] == '\"')) {
+			if (!(r[0] == '\'' && r[l.length() - 1] == '\'') || (r[0] == '\"' && r[l.length() - 1] == '\"')) {
+				Error("quotation mark missing ");
+				system("pause");
+				return nullptr;
+			}
+		}
+		for( int i=1; i<l.length()-1; ++i){
+			res += l[i];
+		}
+		for (int i = 1; i < r.length() - 1; ++i) {
+			res += r[i];
+		}
+		res += '\'';
 		return new StringObject(res);
 	}
 	else {
