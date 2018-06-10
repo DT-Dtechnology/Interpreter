@@ -10,8 +10,7 @@ void Traveller::work()
 		{
 			if (status_.top() == IFSTA)
 				status_.pop();
-			if(current_ == c_block_->sentence_vector_->end())
-				return;
+			
 			++current_;
 			continue;
 		}
@@ -19,30 +18,28 @@ void Traveller::work()
 		{
 			if (status_.top() == DEFSTA)
 				status_.pop();
-			if (current_ == c_block_->sentence_vector_->end())
-				return;
+			
 			++current_;
 			continue;
 		}
 		if ((*current_)->order_ == "endLoop")
 		{
-			cout << "LoopEnd" << endl;
-			system("pause");
+			
 			if(status_.top() == LOOPTRUE)
 			{
 				current_ = jump_posi_.top();
 				jump_posi_.pop();
 				status_.pop();
-				continue;
 			}
-			if (status_.top() == LOOPFALSE)
+			else if (status_.top() == LOOPFALSE)
 			{
 				status_.pop();
 				jump_posi_.pop();
+				++current_;
+				cout << "LoopEnd" << endl;
+				system("pause");
 			}
-			if (current_ == c_block_->sentence_vector_->end())
-				return;
-			++current_;
+			
 			continue;
 		}
 		SentenceParser* sp = new SentenceParser(*current_);
@@ -59,8 +56,6 @@ void Traveller::work()
 		--current_;
 		if (next_tabs >= cur_tabs)
 		{
-			cout << "Normal" << endl;
-			system("pause");
 			if(next_tabs == cur_tabs)
 				++current_;
 			else
