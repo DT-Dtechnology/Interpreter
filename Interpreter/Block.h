@@ -42,5 +42,7 @@ public:
 	void print_all() const;
 	void print_all_old() const;
 
+	Object* return_value() const { return return_pos_; };
+
 	friend Traveller;
 };

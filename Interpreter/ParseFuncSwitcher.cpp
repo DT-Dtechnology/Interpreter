@@ -198,14 +198,37 @@ Node* FuncSwitcher(Block* cur, Node* node)
 
 		case FUNC:
 			{
-			string name = node->childVector_[0]->getValue()->getName();
+			new_node->setNodeType(VALUE);
+			const string name = node->childVector_[0]->getValue()->getName();
 			Block* block = cur->searchFunc(name);
 			if(node->childVector_.size() == 1)
 			{
 				Traveller* tmp_traveller = new Traveller(block);
 				tmp_traveller->work();
+				new_node->setValue(block->return_value());
+			}else if(node->childVector_.size() == 2)
+			{
+				Node* list_node = FuncSwitcher(cur,node->childVector_[1]);
+				Object* tmp_obj = list_node->getValue();
+				vector<Object*> obj_vec;
+				if(tmp_obj->getType() != ListObj)
+				{
+					obj_vec.push_back(tmp_obj);
+				}else
+				{
+					ListObject* list_object = dynamic_cast<ListObject*>(tmp_obj);
+					for (auto it = list_object->get_val()->begin();
+						it != list_object->get_val()->end(); ++it)
+						obj_vec.push_back(*it);
+				}
+				block->setValue(obj_vec);
+				Traveller* tmp_traveller = new Traveller(block);
+				tmp_traveller->work();
+				new_node->setValue(block->return_value());
 			}
-			return new Node(VALUE);
+			else
+				throw Error("Unkown Error we can't hold");
+			return new_node;
 			}
 		case PRINT:
 			return printFunc(FuncSwitcher(cur, node->childVector_[1]));

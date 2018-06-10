@@ -132,6 +132,18 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	return object;
 }
 
+void Block::setValue(const vector<Object*>& obj_vec)
+{
+	auto name_it = para_name_.begin();
+	auto value_it = obj_vec.begin();
+	while(name_it != para_name_.end())
+	{
+		var_table_[*name_it] = *value_it;
+		++name_it;
+		++value_it;
+	}
+}
+
 void Block::print_all() const
 {
 	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
