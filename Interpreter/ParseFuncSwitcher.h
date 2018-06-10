@@ -30,3 +30,5 @@ Node* notFunc(Node*);
 
 Node* assFunc(Node*, Node*);
 
+Node* printFunc(Node*);
+
