@@ -223,12 +223,26 @@ Node* assFunc(Node* left, Node* right)
 		cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
+		string tmp_name;
+		Block* tmp_block = nullptr;
 		if (!right->getValue()->get_block())
 		{
 			right->getValue()->setBlock(cur);
 			right->getValue()->setName(name);
 		}
+		else
+		{
+			tmp_name = right->getValue()->getName();
+			tmp_block = right->getValue()->get_block();
+			right->getValue()->setBlock(cur);
+			right->getValue()->setName(name);
+		}
 		cur->changeVar(name, right->getValue());
+		if (tmp_block)
+		{
+			right->getValue()->setBlock(tmp_block);
+			right->getValue()->setName(tmp_name);
+		}
 		cout << name << " ";
 		right->getValue()->print_test();
 	}
