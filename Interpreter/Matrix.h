@@ -57,14 +57,14 @@ void buildStoN()
 		"while", ":", "for", "in", "if", "elif", "else", ",", "#", "==", "!=", "<<",
 		">>", "+", "-", "*", "/", "not", "(", ")", "continue", "break", "pass", "return",
 		"def", "=", "print", "Z" , "Z'", "M", "N", "O", "M'", "N'", "O'", ">", "<", ">=", "<=", "and"
-		, "or", "&", "|", "^", "%", "//"};
+		, "or", "&", "|", "^", "%", "//", "posi", "nega"};
 	NodeType set2[] = { SEN, LOOP, IF, EXP, JUMP, DEF, PRINT, ASS,
 		T, EE, F, TT, G, FF, H, GG, K, HH, X, MI, L, FUNC, PARAL, PARA, PARALL, VARIABLE, VARLL,
 		VARL, EXPL, EXPLL, WHILE, COLON, FOR, IN, IF, ELIF, ELSE, LISTFLAG, END, IS_EQUAL,
 		IS_NOT_EQUAL, LEFT_MOVE, RIGHT_MOVE, ADD, MINUS, MULTIPLY, DIVIDE, NOT, LEFT_BRACKET,
 		RIGHT_BRACKET, CONTINUE, BREAK, PASS, RETURN, DEFF, EQUAL, PRINTT, Z, ZZ, M, N, O ,MM, NN, OO,
 		BIGGER, SMALLER, BIGGER_OR_EQUAL, SMALLER_OR_EQUAL, AND, OR, WEI_AND, WEI_OR, WEI_YIHUO,
-		MOD, ZHENG_DIVIDE };
+		MOD, ZHENG_DIVIDE, POSI, NEGA };
 	for (int i = 0; i < sizeof(set2)/sizeof(Z); i++)
 	{
 		stringToNode[set1[i]] = set2[i];
@@ -255,15 +255,22 @@ inline void print_node(Node* node, int depth)
 }
 
 bool isOperator[100];
+bool doubleOperator[100];
 
 inline void buildisOper()
 {
 	memset(isOperator, 0, sizeof(isOperator));
 	NodeType operlist[] = { PRINTT,
 		EQUAL, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL,
-		LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT,
+		LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, LISTFLAG, NOT,
 		ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN ,BIGGER, SMALLER, BIGGER_OR_EQUAL, SMALLER_OR_EQUAL, AND, OR, WEI_AND, WEI_OR, WEI_YIHUO,
 		MOD, ZHENG_DIVIDE };
+
+	NodeType doubleList[] = {
+		EQUAL, ADD, MINUS, MULTIPLY, DIVIDE, IS_EQUAL, IS_NOT_EQUAL, 
+		LEFT_MOVE, RIGHT_MOVE, LISTFLAG, BIGGER, SMALLER, BIGGER_OR_EQUAL, SMALLER_OR_EQUAL,
+		WEI_AND, WEI_OR, WEI_YIHUO, MOD, ZHENG_DIVIDE
+	};
 
 	// ####
 	// ()记得要去掉
@@ -271,6 +278,11 @@ inline void buildisOper()
 	{
 		//cout << nodeToString[operlist[it]] << endl;
 		isOperator[it] = true;
+	}
+
+	for (auto& it : doubleList)
+	{
+		doubleOperator[it] = true;
 	}
 }
 

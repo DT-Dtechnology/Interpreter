@@ -198,7 +198,7 @@ void SentenceParser::upFloat()
 	{
 		node = nodeQueue.front();
 		nodeQueue.pop();
-		if (isOperator[node->getNodeType()])
+		if (doubleOperator[node->getNodeType()])
 		{
 			upQueue.push(node);
 			// cout << nodeToString[node->getNodeType()] << " ";
@@ -270,27 +270,47 @@ void SentenceParser::upFloat()
 		}
 	}
 
-	//
+	//func
+	
 	nodeQueue.push(root_);
 	while (!nodeQueue.empty())
 	{
 		node = nodeQueue.front();
-		bool flag = 0;
-		if (node->getNodeType() == FUNC)
+		nodeQueue.pop();
+
+		if (node->getChild()->size() > 0)
 		{
-			node->getParent()->setNodeType(FUNC);
 			
-		}
-		if (flag == 0)
-		{
-			nodeQueue.pop();
-			if (node->getChild()->size() > 0)
+			auto it = node->getChild()->begin();
+			while (it != node->getChild()->end())
 			{
-				for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
-					nodeQueue.push(*it);
+				if ((*it)->getNodeType() == FUNC)
+				{
+
+					Node* temp = *(it - 1);
+					(*it)->getChild()->insert((*it)->getChild()->begin(), temp);
+					it = node->getChild()->erase(it - 1);
+					break;
+				}
+				it++;
 			}
 		}
+		
+		if (node->getChild()->size() == 1 && (node->getNodeType() == ADD || node->getNodeType() == MINUS))
+		{
+			if (node->getNodeType() == ADD)
+				node->setNodeType(POSI);
+			else
+				node->setNodeType(NEGA);
+		}
+
+		if (node->getChild()->size() > 0)
+		{
+			for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+				nodeQueue.push(*it);
+		}
 	}
+	
 }
 
 void SentenceParser::print_test_first()
