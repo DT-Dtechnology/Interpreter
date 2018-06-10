@@ -10,6 +10,7 @@ void Traveller::work()
 		{
 			if (status_.top() == IFSTA)
 				status_.pop();
+			
 			++current_;
 			continue;
 		}
@@ -17,19 +18,27 @@ void Traveller::work()
 		{
 			if (status_.top() == DEFSTA)
 				status_.pop();
+			
 			++current_;
 			continue;
 		}
 		if ((*current_)->order_ == "endLoop")
 		{
-			cout << "LoopEnd" << endl;
-			system("pause");
-			if (status_.top() == LOOPSTA)
+			if(status_.top() == LOOPTRUE)
+			{
+				current_ = jump_posi_.top();
+				jump_posi_.pop();
+				status_.pop();
+			}
+			else if (status_.top() == LOOPFALSE)
 			{
 				status_.pop();
-				jump_posi_.pop();
+				++current_;
+			}else
+			{
+				++current_;
 			}
-			++current_;
+			
 			continue;
 		}
 		SentenceParser* sp = new SentenceParser(*current_);
@@ -46,8 +55,6 @@ void Traveller::work()
 		--current_;
 		if (next_tabs >= cur_tabs)
 		{
-			cout << "Normal" << endl;
-			system("pause");
 			if(next_tabs == cur_tabs)
 				++current_;
 			else
@@ -71,11 +78,12 @@ void Traveller::work()
 				else if(status == LOOPTRUE)
 				{
 					jump_posi_.push(current_);
-					status_.push(LOOPSTA);
+					status_.push(LOOPTRUE);
 					++current_;
 				}
 				else if(status == LOOPFALSE)
 				{
+					status_.push(LOOPFALSE);
 					++current_;
 					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
@@ -89,17 +97,13 @@ void Traveller::work()
 				while ((*current_)->order_ != "endIf")
 					++current_;
 			}
-			else if(status_.top() == LOOPSTA)
+			else if(status_.top() == LOOPTRUE)
 			{
 				current_ = jump_posi_.top();
 				jump_posi_.pop();
 				status_.pop();
 			}
 		}
-		
-		cout << "Next" << endl;
-		system("pause");
-
 		delete sp;
 	}
 }

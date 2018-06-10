@@ -1,7 +1,6 @@
-
 a = 1
-while a != 4 :
-	a=a+1
-d = a
 
-c = 'End Of Game'
+while a == 1:
+	a = a + 1
+
+c = a
