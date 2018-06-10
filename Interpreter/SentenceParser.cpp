@@ -217,11 +217,17 @@ void SentenceParser::upFloat()
 		node = upQueue.front();
 		upQueue.pop();
 		node->getParent()->getParent()->setNodeType(node->getNodeType());
-		node->getParent()->getChild()->erase(node->getParent()->getChild()->begin());
+		auto it = node->getParent()->getChild()->begin();
+		while (it != node->getParent()->getChild()->end())
+		{
+			if (*it == node)
+			{
+				it = node->getParent()->getChild()->erase(it);
+				break;
+			}
+			it++;
+		}
 	}
-
-	cout << "print" << endl;
-	print_node(root_, 0);
 
 	// comma
 	nodeQueue.push(root_);
@@ -252,6 +258,28 @@ void SentenceParser::upFloat()
 				}
 				++it1;
 			}
+		}
+		if (flag == 0)
+		{
+			nodeQueue.pop();
+			if (node->getChild()->size() > 0)
+			{
+				for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+					nodeQueue.push(*it);
+			}
+		}
+	}
+
+	//
+	nodeQueue.push(root_);
+	while (!nodeQueue.empty())
+	{
+		node = nodeQueue.front();
+		bool flag = 0;
+		if (node->getNodeType() == FUNC)
+		{
+			node->getParent()->setNodeType(FUNC);
+			
 		}
 		if (flag == 0)
 		{
