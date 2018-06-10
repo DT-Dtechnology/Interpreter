@@ -24,7 +24,6 @@ void Traveller::work()
 		}
 		if ((*current_)->order_ == "endLoop")
 		{
-			
 			if(status_.top() == LOOPTRUE)
 			{
 				current_ = jump_posi_.top();
@@ -34,10 +33,10 @@ void Traveller::work()
 			else if (status_.top() == LOOPFALSE)
 			{
 				status_.pop();
-				jump_posi_.pop();
 				++current_;
-				cout << "LoopEnd" << endl;
-				system("pause");
+			}else
+			{
+				++current_;
 			}
 			
 			continue;
@@ -105,10 +104,6 @@ void Traveller::work()
 				status_.pop();
 			}
 		}
-		
-		cout << "Next" << endl;
-		system("pause");
-
 		delete sp;
 	}
 }
