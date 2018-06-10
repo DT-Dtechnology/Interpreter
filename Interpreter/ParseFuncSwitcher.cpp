@@ -166,7 +166,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			{
 			string name = node->childVector_[0]->getValue()->getName();
 			vector<string> name_list;
-			if(node->childVector_.size() != 0)
+			if(node->childVector_.size() != 1)
 			{
 				Node *childNode = FuncSwitcher(cur, node->childVector_[1]);
 				ListObject *list = dynamic_cast<ListObject*>(childNode->getValue());
@@ -190,12 +190,10 @@ Node* FuncSwitcher(Block* cur, Node* node)
 
 		case RETURN:
 			new_node->setNodeType(RETURN);
-			if (new_node->childVector_.size() == 0)
-				new_node->setValue(nullptr);
-			else if (new_node->childVector_.size() == 1)
-				new_node->setValue(nullptr);
+			if (node->childVector_.size() == 1)
+				node->setValue(nullptr);
 			else
-				new_node->setValue(FuncSwitcher(cur, new_node->childVector_[1])->getValue());
+				new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
 			return new_node;
 
 		case FUNC:

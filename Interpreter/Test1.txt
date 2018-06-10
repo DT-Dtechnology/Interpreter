@@ -1,1 +1,4 @@
-return 1
+def fun():
+	print 1
+
+fun()
