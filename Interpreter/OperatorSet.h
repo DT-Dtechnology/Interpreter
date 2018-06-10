@@ -11,10 +11,10 @@ string python_operator[] =
 	"**", "^", "~", "//", "[", "]", ":",
 	"<<", ">>", "<=", "==", "!=", ">=",
 	"<", ">", "%=", "<>", "/=","-=",
-	"+=", "*=", "++", "(", ")", ",", "--"
+	"+=", "*=", "(", ")", ","
 };
 
-set<string> operatorSet(python_operator, python_operator + 34);
+set<string> operatorSet(python_operator, python_operator + 32);
 
 
 string python_keyword[] =
