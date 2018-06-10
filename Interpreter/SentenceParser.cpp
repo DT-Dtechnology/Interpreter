@@ -217,8 +217,11 @@ ControlStatus SentenceParser::getStatus() const
 	}
 	if(root_->getNodeType() == DEF)
 	{
-		
 		return DEFSTA;
+	}
+	if(root_->getNodeType() == RETURN)
+	{
+		return RETURNSTA;
 	}
 	return USELESS;
 }
@@ -274,7 +277,7 @@ void SentenceParser::upFloat()
 				it = node->getParent()->getChild()->erase(it);
 				break;
 			}
-			it++;
+			++it;
 		}
 	}
 
@@ -365,6 +368,16 @@ void SentenceParser::upFloat()
 				node->nodeType_ = FOR;
 			if (node->childVector_[0]->getNodeType() == WHILE)
 				node->nodeType_ = WHILE;
+		}
+
+		if (node->getNodeType() == JUMP)
+		{
+			if (node->childVector_[0]->getNodeType() == RETURN)
+				node->nodeType_ = RETURN;
+			if (node->childVector_[0]->getNodeType() == BREAK)
+				node->nodeType_ = BREAK;
+			if (node->childVector_[0]->getNodeType() == CONTINUE)
+				node->nodeType_ = CONTINUE;
 		}
 
 		if (node->getChild()->size() > 0)

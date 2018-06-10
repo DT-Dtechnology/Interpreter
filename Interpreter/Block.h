@@ -32,7 +32,8 @@ public:
 	Block() { sentence_vector_ = new SenVector; };
 	~Block() = default;
 	
-	Block* addBlock(const string& name, const vector<string>& name_list);
+	Block* addFunc(const string& name, const vector<string>& name_list);
+	Block* searchFunc(const string& name);
 
 	Block* searchObjectBlock(const string& var_name);
 	Object* searchObject(const string& var_name);

@@ -11,12 +11,30 @@ void Block::returnSpace()
 	}
 }
 
-Block* Block::addBlock(const string& name, const vector<string>& name_list)
+Block* Block::addFunc(const string& name, const vector<string>& name_list)
 {
 	Block* block = new Block();
 	for(auto it = name_list.begin() ; it != name_list.end() ; ++it)
 		block->para_name_.push_back(*it);
 	func_table_[name] = block;
+	return block;
+}
+
+Block* Block::searchFunc(const string& name)
+{
+	Block* block = nullptr;
+	while (!block_space_stack_.empty())
+	{
+		block = block_space_stack_.top()->func_table_[name];
+		if (block != nullptr)
+		{
+			returnSpace();
+			return block;
+		}
+		temp_space_stack_.push(block_space_stack_.top());
+		block_space_stack_.pop();
+	}
+	returnSpace();
 	return block;
 }
 

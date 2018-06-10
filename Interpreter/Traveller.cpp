@@ -44,8 +44,11 @@ void Traveller::work()
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
-		cout << status << endl;
-		cout << endl;
+		if(status == RETURNSTA)
+		{
+			c_block_->return_pos_ = sp->root_->getValue();
+			return;
+		}
 		const int cur_tabs = (*current_)->tab_cnt_;
 		++current_;
 		if(current_ == c_block_->sentence_vector_->end())

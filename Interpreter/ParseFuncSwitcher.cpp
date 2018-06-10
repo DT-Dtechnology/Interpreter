@@ -180,24 +180,32 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				{
 					name_list.push_back(childNode->getValue()->getName());
 				}
-				/*
-				for(auto it = name_list.begin() ; it != name_list.end() ; ++it )
-				{
-					cout << *it << " ";
-				}
-				cout << endl;
-				*/
 			}
-			cur->addBlock(name, name_list);
+			cur->addFunc(name, name_list);
 			Node* tmp_node = new Node(DEF);
 			Object* object = new Object(FuncObj);
 			tmp_node->setValue(object);
 			return tmp_node;
 			}
 
+		case RETURN:
+			new_node->setNodeType(RETURN);
+			if (new_node->childVector_.size() == 1)
+				new_node->setValue(nullptr);
+			else
+				new_node->setValue(FuncSwitcher(cur, new_node->childVector_[1])->getValue());
+			return new_node;
+
 		case FUNC:
 			{
-			return new Node(FUNC);
+			string name = node->childVector_[0]->getValue()->getName();
+			Block* block = cur->searchFunc(name);
+			if(node->childVector_.size() == 1)
+			{
+				Traveller* tmp_traveller = new Traveller(block);
+				tmp_traveller->work();
+			}
+			return new Node(VALUE);
 			}
 		case PRINT:
 			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
