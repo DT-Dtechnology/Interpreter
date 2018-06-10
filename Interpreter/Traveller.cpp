@@ -47,6 +47,9 @@ void Traveller::work()
 		if(status == RETURNSTA)
 		{
 			c_block_->return_pos_ = sp->root_->getValue();
+			if (c_block_->return_pos_)
+				c_block_->return_pos_->print_test();
+			system("pause");
 			return;
 		}
 		const int cur_tabs = (*current_)->tab_cnt_;

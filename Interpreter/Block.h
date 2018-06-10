@@ -39,6 +39,8 @@ public:
 	Object* searchObject(const string& var_name);
 	Object* changeVar(const string& var_name, Object* object);
 
+	void setValue(const vector<Object*>&);
+
 	void print_all() const;
 	void print_all_old() const;
 

@@ -190,7 +190,9 @@ Node* FuncSwitcher(Block* cur, Node* node)
 
 		case RETURN:
 			new_node->setNodeType(RETURN);
-			if (new_node->childVector_.size() == 1)
+			if (new_node->childVector_.size() == 0)
+				new_node->setValue(nullptr);
+			else if (new_node->childVector_.size() == 1)
 				new_node->setValue(nullptr);
 			else
 				new_node->setValue(FuncSwitcher(cur, new_node->childVector_[1])->getValue());
