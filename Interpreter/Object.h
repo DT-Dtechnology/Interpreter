@@ -215,7 +215,7 @@ public:
 
 	void print_test() const override
 	{
-		std::cout << "String '" << value_ <<"'"<< std::endl;
+		std::cout << "String " << value_ << std::endl;
 	}
 };
 
