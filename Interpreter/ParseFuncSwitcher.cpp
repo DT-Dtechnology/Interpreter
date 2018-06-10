@@ -162,6 +162,30 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			}
 		}
 		
+		case DEF:
+			{
+			string name = node->childVector_[0]->getValue()->getName();
+			vector<string> name_list;
+			if(node->childVector_.size() != 0)
+			{
+				Node *childNode = FuncSwitcher(cur, node->childVector_[1]);
+				ListObject *list = dynamic_cast<ListObject*>(childNode->getValue());
+				for(auto it = list->get_val()->begin() ; it != list->get_val()->end() ; ++it)
+				{
+					name_list.push_back((*it)->getName());
+				}
+				/*
+				for(auto it = name_list.begin() ; it != name_list.end() ; ++it )
+				{
+					cout << *it << " ";
+				}
+				cout << endl;
+				*/
+			}
+			Node* tmp_node = new Node(DEF);
+			return tmp_node;
+			}
+
 		case PRINT:
 			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
 
