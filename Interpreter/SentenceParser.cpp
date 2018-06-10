@@ -370,6 +370,17 @@ void SentenceParser::upFloat()
 		}
 	}
 	
+	// def
+	if  (root_->getChild()->size() == 1 && (*root_->getChild()->begin())->getNodeType() == DEF)
+	{
+		Node* temp = *root_->getChild()->begin();
+		while (temp->getNodeType() != FUNC)
+		{
+			temp->setNodeType(SEN);
+			temp = *temp->getChild()->begin();
+		}
+		temp->setNodeType(DEF);
+	}
 }
 
 void SentenceParser::print_test_first()
