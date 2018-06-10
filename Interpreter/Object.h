@@ -202,7 +202,7 @@ class StringObject: public Object
 {
 	string value_;
 public:
-	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val) {}
+	StringObject(const string &_val) : Object(ObjectType::StringObj), value_(_val.substr(1,_val.length()-2)) {}
 	~StringObject() = default;
 
 	string get_val() { return value_; }
@@ -215,7 +215,7 @@ public:
 
 	void print_test() const override
 	{
-		std::cout << "String " << value_ << std::endl;
+		std::cout << "String '" << value_ <<"'"<< std::endl;
 	}
 };
 
