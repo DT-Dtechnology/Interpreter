@@ -28,6 +28,7 @@ public:
 	void setUnTemp() { isTemp_ = false; }
 	bool getStatus() const { return isTemp_; }
 	virtual void print_test() const { std::cout << "Temp " << name_ << std::endl; }
+	virtual void print() const {}
 
 	double get_val();
 	void getPosition(const string& name)
@@ -163,6 +164,8 @@ public:
 	{
 		std::cout << "Long " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 
@@ -196,6 +199,8 @@ public:
 	{
 		std::cout << "Double " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 class StringObject: public Object
@@ -217,6 +222,8 @@ public:
 	{
 		std::cout << "String " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_.substr(1, value_.length() - 2) << std::endl; }
 };
 
 class BoolObject: public Object
@@ -244,6 +251,14 @@ public:
 	{
 		std::cout << "Bool " << value_ << std::endl;
 	}
+
+	void print() const
+	{
+		if (value_)
+			std::cout << "True" << std::endl;
+		else
+			std::cout << "False" << std::endl;
+	}
 };
 
 class ListObject: public Object
@@ -268,5 +283,19 @@ public:
 		std::cout << "List " << std::endl;
 		for (auto it = value_.begin(); it != value_.end(); ++it)
 			(*it)->print_test();
+	}
+
+	void print() const 
+	{
+		std::cout << "( ";
+		auto it = value_.begin();
+		for (; it != value_.end() - 1; ++it)
+		{
+			(*it)->print();
+			std::cout << ", ";
+		}
+		(*it)->print();
+		std::cout << " )" << std::endl;
+			
 	}
 };
