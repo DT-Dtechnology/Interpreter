@@ -201,7 +201,7 @@ ControlStatus SentenceParser::getStatus() const
 	if (root_->getNodeType() == LOOP)
 	{
 		BoolObject *temp = dynamic_cast<BoolObject*>(root_->getValue());
-		bool val = temp->get_val();
+		const bool val = temp->get_val();
 		if (val)
 		{
 			cout << "while true" << endl;
@@ -214,6 +214,11 @@ ControlStatus SentenceParser::getStatus() const
 			system("pause");
 			return LOOPFALSE;
 		}
+	}
+	if(root_->getNodeType() == DEF)
+	{
+		
+		return DEFSTA;
 	}
 	return USELESS;
 }
@@ -228,7 +233,6 @@ ControlStatus SentenceParser::work()
 	print_test();
 	
 	parserRoot();
-	system("pause");
 	return getStatus();
 }
 

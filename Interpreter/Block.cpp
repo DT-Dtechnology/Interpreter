@@ -11,6 +11,15 @@ void Block::returnSpace()
 	}
 }
 
+Block* Block::addBlock(const string& name, const vector<string>& name_list)
+{
+	Block* block = new Block();
+	for(auto it = name_list.begin() ; it != name_list.end() ; ++it)
+		block->para_name_.push_back(*it);
+	func_table_[name] = block;
+	return block;
+}
+
 Block* Block::searchObjectBlock(const string& var_name)
 {
 	//####

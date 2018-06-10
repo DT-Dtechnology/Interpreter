@@ -170,9 +170,15 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			{
 				Node *childNode = FuncSwitcher(cur, node->childVector_[1]);
 				ListObject *list = dynamic_cast<ListObject*>(childNode->getValue());
-				for(auto it = list->get_val()->begin() ; it != list->get_val()->end() ; ++it)
+				if (list)
 				{
-					name_list.push_back((*it)->getName());
+					for (auto it = list->get_val()->begin(); it != list->get_val()->end(); ++it)
+					{
+						name_list.push_back((*it)->getName());
+					}
+				}else
+				{
+					name_list.push_back(childNode->getValue()->getName());
 				}
 				/*
 				for(auto it = name_list.begin() ; it != name_list.end() ; ++it )
@@ -182,10 +188,17 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				cout << endl;
 				*/
 			}
+			cur->addBlock(name, name_list);
 			Node* tmp_node = new Node(DEF);
+			Object* object = new Object(FuncObj);
+			tmp_node->setValue(object);
 			return tmp_node;
 			}
 
+		case FUNC:
+			{
+			return new Node(FUNC);
+			}
 		case PRINT:
 			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
 

@@ -11,7 +11,7 @@ enum ObjectType
 {
 	TEMP_OBJ, TotalVariable, TotalValue, Operator, LongObj,
 	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
-	BoolObj, MatchObj
+	BoolObj, FuncObj
 };
 
 class Object
