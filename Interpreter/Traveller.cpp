@@ -22,6 +22,8 @@ void Traveller::work()
 		}
 		if ((*current_)->order_ == "endLoop")
 		{
+			cout << "LoopEnd" << endl;
+			system("pause");
 			if (status_.top() == LOOPSTA)
 			{
 				status_.pop();
@@ -44,6 +46,7 @@ void Traveller::work()
 		--current_;
 		if (next_tabs >= cur_tabs)
 		{
+			cout << "Normal" << endl;
 			system("pause");
 			if(next_tabs == cur_tabs)
 				++current_;
@@ -93,9 +96,11 @@ void Traveller::work()
 				status_.pop();
 			}
 		}
-		delete sp;
+		
 		cout << "Next" << endl;
 		system("pause");
+
+		delete sp;
 	}
 }
 

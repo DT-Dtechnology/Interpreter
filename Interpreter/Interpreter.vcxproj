@@ -191,6 +191,7 @@
     <ClCompile Include="Traveller.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Test1.txt" />
   </ItemGroup>
   <ItemGroup>
