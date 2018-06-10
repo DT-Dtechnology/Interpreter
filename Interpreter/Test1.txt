@@ -1,4 +1,3 @@
-def fun(a):
-	print a
-
-fun(1)
+a = 3
+b = 2
+print a - 1 + b

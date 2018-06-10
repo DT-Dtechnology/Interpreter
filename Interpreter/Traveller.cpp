@@ -121,7 +121,6 @@ void Traveller::work()
 		{
 			if (status_.top() == IFSTA)
 			{
-				system("pause");
 				while ((*current_)->order_ != "endIf")
 					++current_;
 			}
@@ -133,6 +132,7 @@ void Traveller::work()
 			}
 		}
 		delete sp;
+		system("pause");
 	}
 }
 
