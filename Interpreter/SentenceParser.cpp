@@ -41,7 +41,6 @@ void SentenceParser::buildTree()
 	ParseStack.push(Root);
 	bool FLAG = true;
 	word_queue_.push(Word(keyword, "#"));
-	system("pause");
 	string front = getNodeMsg(word_queue_.front());
 	auto X = ParseStack.top();
 	while (FLAG)
@@ -156,7 +155,6 @@ void SentenceParser::buildTree()
 			throw Error("What?");
 		
 	}
-	system("pause");
 	root_ = Root;
 }
 
@@ -434,8 +432,6 @@ void SentenceParser::print_test_second()
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
-	system("pause");
-	
 	parserRoot();
 	system("pause");
 }
