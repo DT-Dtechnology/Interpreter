@@ -137,10 +137,11 @@ WordQueue* SenDivider::work()
 	if (str.length() != 0)
 		word_list->push(Word(DetectType(str), str));
 
-	/*
+	
 
 	WordQueue* new_word_list = new WordQueue;
 	WordStack word_stack;
+	WordStack tmp_stack;
 	while(!word_list->empty())
 	{
 		if (word_list->front().getType() == WordType::word_type_error)
@@ -155,6 +156,45 @@ WordQueue* SenDivider::work()
 			new_word_list->push(word_list->front());
 			word_list->pop();
 		}
+		else if(word_list->front().getType() == WordType::value 
+			|| word_list->front().getType() == WordType::variable)
+		{
+			if (!tmp_stack.empty())
+			{
+				word_stack.push(Word(WordType::operate, "\'"));
+				word_stack.push(word_list->front());
+				if (!tmp_stack.empty())
+				{
+					word_stack.push(tmp_stack.top());
+					tmp_stack.pop();
+				}
+				word_stack.push(Word(WordType::operate, "\""));
+				word_list->pop();
+			}
+			else
+			{
+				word_stack.push(word_list->front());
+				word_list->pop();
+			}
+		}
+		else if(word_list->front().getMsg() == "+" 
+			|| word_list->front().getMsg() == "-" 
+			|| word_list->front().getMsg() == "not")
+		{
+			if(!word_stack.empty() && (word_stack.top().getType() != operate 
+				|| word_stack.top().getMsg() == "\'"
+				|| word_stack.top().getMsg() == "\""
+				|| word_stack.top().getMsg() == ")"))
+			{
+				word_stack.push(word_list->front());
+				word_list->pop();
+			}
+			else
+			{
+				tmp_stack.push(word_list->front());
+				word_list->pop();
+			}
+		}
 		else
 		{
 			word_stack.push(word_list->front());
@@ -167,7 +207,7 @@ WordQueue* SenDivider::work()
 		word_stack.pop();
 	}
 	
-	// ****
+	/****
 	while(!new_word_list->empty())
 	{
 		const Word tmp_word = new_word_list->front();
@@ -216,22 +256,25 @@ WordQueue* SenDivider::work()
 		if (new_tmp_word.getMsg() != "")
 			word_list->push(new_tmp_word);
 	}
-
+	*/
 	
-	while(!word_list->empty())
+
+	while(!new_word_list->empty())
 	{
-		if (word_list->front().getMsg() == "(")
-			new_word_list->push(Word(WordType::operate, ")"));
-		else if (word_list->front().getMsg() == ")")
-			new_word_list->push(Word(WordType::operate, "("));
+		if (new_word_list->front().getMsg() == "(")
+			word_list->push(Word(WordType::operate, ")"));
+		else if (new_word_list->front().getMsg() == ")")
+			word_list->push(Word(WordType::operate, "("));
+		else if (new_word_list->front().getMsg() == "\'")
+			word_list->push(Word(WordType::operate, ")"));
+		else if (new_word_list->front().getMsg() == "\"")
+			word_list->push(Word(WordType::operate, "("));
 		else
-			new_word_list->push(word_list->front());
-		word_list->pop();
+			word_list->push(new_word_list->front());
+		new_word_list->pop();
 	}
 
-	// system("pause");
-	delete word_list;
+	delete new_word_list;
 
-	*/
 	return word_list;
 }
