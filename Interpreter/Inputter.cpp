@@ -65,7 +65,7 @@ SenVector* Inputter::get_sentence_vector() const
 			auto itr = it + 1;
 			while (itr != sen_vector->end())
 			{
-				if ((*itr)->getTab() <= r && (*itr)->getOrder().substr(0, 4) != "else" && (*itr)->getOrder().substr(0, 4) != "elif")
+				if ((*itr)->getTab() <= r && ((*itr)->getOrder().substr(0, 4) != "else" || (*itr)->getTab() != r) && ((*itr)->getOrder().substr(0, 4) != "elif" || (*itr)->getTab() != r))
 				{
 					int temp_row = (*itr)->getRow();
 					n[temp_row]++;

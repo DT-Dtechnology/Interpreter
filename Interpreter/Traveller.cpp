@@ -8,11 +8,22 @@ void Traveller::work()
 		if ((*current_)->order_ == "endIf")
 			// 还有别的判断
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE)
 				status_.pop();
 			
 			++current_;
 			continue;
+		}
+		if ((*current_)->order_.substr(0,4) == "else" || (*current_)->order_.substr(0,4) == "elif")
+		{
+			if (status_.top() == IFTRUE)
+			{
+				++current_;
+				while ((*current_)->getOrder() != "endIf") {
+					++current_;
+				}
+				continue;
+			}
 		}
 		if((*current_)->order_ == "endDef")
 		{
@@ -39,6 +50,32 @@ void Traveller::work()
 				++current_;
 			}
 			
+			continue;
+		}
+		if ((*current_)->order_ == "break")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			jump_posi_.pop();
+			status_.pop();
+			while ((*current_)->order_ != "endLoop")
+				++current_;
+			++current_;
+			continue;
+		}
+		if ((*current_)->order_ == "continue")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			current_ = jump_posi_.top();
+			jump_posi_.pop();
+			status_.pop();
 			continue;
 		}
 		SentenceParser* sp = new SentenceParser(*current_);
@@ -72,7 +109,7 @@ void Traveller::work()
 				if (status == IFTRUE)
 				{
 					++current_;
-					status_.push(IFSTA);
+					status_.push(IFTRUE);
 				}
 				else if (status == IFFALSE)
 				{
@@ -117,7 +154,8 @@ void Traveller::work()
 		}
 		else
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE
+				)
 			{
 				while ((*current_)->order_ != "endIf")
 					++current_;
