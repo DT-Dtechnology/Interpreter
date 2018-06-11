@@ -186,13 +186,11 @@ ControlStatus SentenceParser::getStatus() const
 		bool val = temp->get_val();
 		if(val)
 		{
-			cout << "if true" << endl;
-			system("pause");
+			
 			return IFTRUE;
 		}else
 		{
-			cout << "if false" << endl;
-			system("pause");
+			
 			return IFFALSE;
 		}
 	}
@@ -202,14 +200,12 @@ ControlStatus SentenceParser::getStatus() const
 		const bool val = temp->get_val();
 		if (val)
 		{
-			cout << "while true" << endl;
-			system("pause");
+			
 			return LOOPTRUE;
 		}
 		else
 		{
-			cout << "while false" << endl;
-			system("pause");
+			
 			return LOOPFALSE;
 		}
 	}
@@ -236,6 +232,7 @@ ControlStatus SentenceParser::work()
 	print_test();
 	
 	parserRoot();
+	system("pause");
 	return getStatus();
 }
 
