@@ -11,7 +11,7 @@ enum ObjectType
 {
 	TEMP_OBJ, TotalVariable, TotalValue, Operator, LongObj,
 	DoubleObj, StringObj, TupleObj, ListObj, DictObj,
-	BoolObj, MatchObj
+	BoolObj, FuncObj
 };
 
 class Object
@@ -28,6 +28,7 @@ public:
 	void setUnTemp() { isTemp_ = false; }
 	bool getStatus() const { return isTemp_; }
 	virtual void print_test() const { std::cout << "Temp " << name_ << std::endl; }
+	virtual void print() const {}
 
 	double get_val();
 	void getPosition(const string& name)
@@ -68,6 +69,8 @@ public:
 
 	virtual Object * negative();
 	
+	int list_posi = -1;
+
 	friend Block;
 	friend ObjectFactory;
 };
@@ -129,7 +132,7 @@ class LongObject :	public Object
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val)
 	{
-		std::cout << "Long " << value_ << std::endl;
+		// std::cout << "Long " << value_ << std::endl;
 	}
 	~LongObject() = default;
 	
@@ -163,6 +166,8 @@ public:
 	{
 		std::cout << "Long " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 
@@ -171,7 +176,7 @@ class DoubleObject : public Object {
 public:
 	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val)
 	{
-		std::cout <<"Double " << value_ << std::endl;
+		// std::cout <<"Double " << value_ << std::endl;
 	}
 	~DoubleObject() = default;
 	
@@ -196,6 +201,8 @@ public:
 	{
 		std::cout << "Double " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 class StringObject: public Object
@@ -217,6 +224,8 @@ public:
 	{
 		std::cout << "String " << value_ << std::endl;
 	}
+
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 class BoolObject: public Object
@@ -225,7 +234,7 @@ class BoolObject: public Object
 public:
 	BoolObject(bool value) :Object(BoolObj), value_(value)
 	{
-		std::cout << "Bool " << value_ << std::endl;
+		// std::cout << "Bool " << value_ << std::endl;
 	}
 	~BoolObject() = default;
 
@@ -243,6 +252,14 @@ public:
 	void print_test() const override
 	{
 		std::cout << "Bool " << value_ << std::endl;
+	}
+
+	void print() const
+	{
+		if (value_)
+			std::cout << "True" << std::endl;
+		else
+			std::cout << "False" << std::endl;
 	}
 };
 
@@ -268,5 +285,19 @@ public:
 		std::cout << "List " << std::endl;
 		for (auto it = value_.begin(); it != value_.end(); ++it)
 			(*it)->print_test();
+	}
+
+	void print() const 
+	{
+		std::cout << "( ";
+		auto it = value_.begin();
+		for (; it != value_.end() - 1; ++it)
+		{
+			(*it)->print();
+			std::cout << ", ";
+		}
+		(*it)->print();
+		std::cout << " )" << std::endl;
+			
 	}
 };

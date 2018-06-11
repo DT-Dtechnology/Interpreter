@@ -11,6 +11,33 @@ void Block::returnSpace()
 	}
 }
 
+Block* Block::addFunc(const string& name, const vector<string>& name_list)
+{
+	Block* block = new Block();
+	for(auto it = name_list.begin() ; it != name_list.end() ; ++it)
+		block->para_name_.push_back(*it);
+	func_table_[name] = block;
+	return block;
+}
+
+Block* Block::searchFunc(const string& name)
+{
+	Block* block = nullptr;
+	while (!block_space_stack_.empty())
+	{
+		block = block_space_stack_.top()->func_table_[name];
+		if (block != nullptr)
+		{
+			returnSpace();
+			return block;
+		}
+		temp_space_stack_.push(block_space_stack_.top());
+		block_space_stack_.pop();
+	}
+	returnSpace();
+	return block;
+}
+
 Block* Block::searchObjectBlock(const string& var_name)
 {
 	//####
@@ -99,10 +126,22 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	}
 	else
 	{
-		throw Error("Unknown Type");
+		// throw Error("Unknown Type");
 	}
 	
 	return object;
+}
+
+void Block::setValue(const vector<Object*>& obj_vec)
+{
+	auto name_it = para_name_.begin();
+	auto value_it = obj_vec.begin();
+	while(name_it != para_name_.end())
+	{
+		var_table_[*name_it] = *value_it;
+		++name_it;
+		++value_it;
+	}
 }
 
 void Block::print_all() const

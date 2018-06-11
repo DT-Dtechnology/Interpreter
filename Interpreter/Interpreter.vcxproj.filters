@@ -115,7 +115,6 @@
     <None Include="Test1.txt">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputTest.txt">

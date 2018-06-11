@@ -8,11 +8,22 @@ void Traveller::work()
 		if ((*current_)->order_ == "endIf")
 			// 还有别的判断
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE)
 				status_.pop();
 			
 			++current_;
 			continue;
+		}
+		if ((*current_)->order_.substr(0,4) == "else" || (*current_)->order_.substr(0,4) == "elif")
+		{
+			if (status_.top() == IFTRUE)
+			{
+				++current_;
+				while ((*current_)->getOrder() != "endIf") {
+					++current_;
+				}
+				continue;
+			}
 		}
 		if((*current_)->order_ == "endDef")
 		{
@@ -41,9 +52,45 @@ void Traveller::work()
 			
 			continue;
 		}
+		if ((*current_)->order_ == "break")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			jump_posi_.pop();
+			status_.pop();
+			while ((*current_)->order_ != "endLoop")
+				++current_;
+			++current_;
+			continue;
+		}
+		if ((*current_)->order_ == "continue")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			current_ = jump_posi_.top();
+			jump_posi_.pop();
+			status_.pop();
+			continue;
+		}
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
+		if(status == RETURNSTA)
+		{
+			c_block_->return_pos_ = sp->root_->getValue();
+			if (c_block_->return_pos_)
+			{
+				c_block_->return_pos_->print_test();
+				system("pause");
+			}
+			return;
+		}
 		const int cur_tabs = (*current_)->tab_cnt_;
 		++current_;
 		if(current_ == c_block_->sentence_vector_->end())
@@ -58,42 +105,58 @@ void Traveller::work()
 			if(next_tabs == cur_tabs)
 				++current_;
 			else
-				if(status == IFTRUE)
+			{
+				if (status == IFTRUE)
 				{
 					++current_;
-					status_.push(IFSTA);
+					status_.push(IFTRUE);
 				}
-				else if(status == IFFALSE)
+				else if (status == IFFALSE)
 				{
 					// cout << "GG" << endl;
 					++current_;
 					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
 				}
-				else if(status == DEFSTA)
-				{
-					status_.push(DEFSTA);
-					// Let Us Create a Block
-				}
-				else if(status == LOOPTRUE)
+				else if (status == LOOPTRUE)
 				{
 					jump_posi_.push(current_);
 					status_.push(LOOPTRUE);
 					++current_;
 				}
-				else if(status == LOOPFALSE)
+				else if (status == LOOPFALSE)
 				{
 					status_.push(LOOPFALSE);
 					++current_;
 					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
 				}
+				else if (status == DEFSTA)
+				{
+					const string func_name = sp->root_->getValue()->getName();
+					Block* block = c_block_->func_table_[func_name];
+					++current_;
+					while ((*current_)->getOrder() != "endDef")
+					{
+						block->sentence_vector_->push_back(*current_);
+						++current_;
+					}
+
+					cout << "Def a Function" << endl;
+					for(auto it = block->sentence_vector_->begin() ; it != block->sentence_vector_->end();
+						++it)
+					{
+						cout << (*it)->getOrder() << endl;
+					}
+					
+				}
+			}
 		}
 		else
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE
+				)
 			{
-				system("pause");
 				while ((*current_)->order_ != "endIf")
 					++current_;
 			}
@@ -105,6 +168,7 @@ void Traveller::work()
 			}
 		}
 		delete sp;
+		system("pause");
 	}
 }
 

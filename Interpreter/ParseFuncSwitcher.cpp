@@ -30,43 +30,43 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return node;
 
 		case ADD:
-			return addFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return addFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case MULTIPLY:
-			return multiFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return multiFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case MINUS:
-			return minusFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return minusFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case DIVIDE:
-			return divideFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return divideFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case MOD:
-			return modFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return modFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case AND:
-			return andFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return andFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case OR:
-			return orFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return orFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case SMALLER:
-			return lessFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return lessFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case BIGGER:
-			return moreFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return moreFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case SMALLER_OR_EQUAL:
-			return leeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return leeqFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case BIGGER_OR_EQUAL:
-			return moeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return moeqFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case IS_EQUAL:
-			return equalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return equalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case IS_NOT_EQUAL:
-			return nequalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return nequalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case LEFT_MOVE:
-			return leftFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return leftFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case RIGHT_MOVE:
-			return rightFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return rightFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return assFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case NEGA:
 			return negeFunc(FuncSwitcher(cur, node->childVector_[0]));
@@ -108,8 +108,138 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
 			return new_node;
 
+		case FOR:
+		{
+			new_node = new Node(NodeType::LOOP);
+			Node* left_node = FuncSwitcher(cur, node->childVector_[1]);
+			Node* right_node = FuncSwitcher(cur, node->childVector_[2]);
+			if(left_node->getValue()->list_posi == -1)
+			{
+				if (right_node->getValue()->getType() != ListObj)
+				{
+					right_node->getValue()->list_posi = 0;
+					assFunc(left_node, right_node);
+				}
+				else
+				{
+					ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
+					Node* new_right_node = new Node(VALUE);
+					new_right_node->setValue((*list_object->get_val())[0]);
+					new_right_node->getValue()->list_posi = 0;
+					assFunc(left_node, new_right_node);
+				}
+				Node* new_tmp_node = new Node(LOOP);
+				new_tmp_node->setValue(new BoolObject(true));
+				// cout << "Position1 "<< cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+				
+				return new_tmp_node;
+			}else
+			{
+				if (right_node->getValue()->getType() != ListObj)
+				{
+					Node* new_tmp_node = new Node(LOOP);
+					new_tmp_node->setValue(new BoolObject(false));
+					return new_tmp_node;
+				}
+				ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
+				if(left_node->getValue()->list_posi >= list_object->get_val()->size()-1)
+				{
+					Node* new_tmp_node = new Node(LOOP);
+					new_tmp_node->setValue(new BoolObject(false));
+					// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+					
+					return new_tmp_node;
+				}
+				Node* new_right_node = new Node(VALUE);
+				new_right_node->setValue((*list_object->get_val())[left_node->getValue()->list_posi+1]);
+				new_right_node->getValue()->list_posi = left_node->getValue()->list_posi+1;
+				assFunc(left_node, new_right_node);
+				Node* new_tmp_node = new Node(LOOP);
+				new_tmp_node->setValue(new BoolObject(true));
+				// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+				
+				return new_tmp_node;
+			}
+		}
+		
+		case DEF:
+			{
+			string name = node->childVector_[0]->getValue()->getName();
+			vector<string> name_list;
+			if(node->childVector_.size() != 1)
+			{
+				Node *childNode = FuncSwitcher(cur, node->childVector_[1]);
+				ListObject *list = dynamic_cast<ListObject*>(childNode->getValue());
+				if (list)
+				{
+					for (auto it = list->get_val()->begin(); it != list->get_val()->end(); ++it)
+					{
+						name_list.push_back((*it)->getName());
+					}
+				}else
+				{
+					name_list.push_back(childNode->getValue()->getName());
+				}
+			}
+			cur->addFunc(name, name_list);
+			Node* tmp_node = new Node(DEF);
+			Object* object = new Object(FuncObj);
+			tmp_node->setValue(object);
+			system("pause");
+			return tmp_node;
+			}
+
+		case RETURN:
+			new_node->setNodeType(RETURN);
+			if (node->childVector_.size() == 1)
+				node->setValue(nullptr);
+			else
+				new_node->setValue(FuncSwitcher(cur, node->childVector_[1])->getValue());
+			return new_node;
+
+		case FUNC:
+			{
+			new_node->setNodeType(VALUE);
+			const string name = node->childVector_[0]->getValue()->getName();
+			Block* block = cur->searchFunc(name);
+			if(node->childVector_.size() == 1)
+			{
+				Traveller* tmp_traveller = new Traveller(cur, block);
+				tmp_traveller->work();
+				new_node->setValue(block->return_value());
+			}else if(node->childVector_.size() == 2)
+			{
+				Node* list_node = FuncSwitcher(cur,node->childVector_[1]);
+				Object* tmp_obj = list_node->getValue();
+				vector<Object*> obj_vec;
+				if(tmp_obj->getType() != ListObj)
+				{
+					obj_vec.push_back(tmp_obj);
+				}else
+				{
+					ListObject* list_object = dynamic_cast<ListObject*>(tmp_obj);
+					for (auto it = list_object->get_val()->begin();
+						it != list_object->get_val()->end(); ++it)
+						obj_vec.push_back(*it);
+				}
+				block->setValue(obj_vec);
+				Traveller* tmp_traveller = new Traveller(cur, block);
+				tmp_traveller->work();
+				new_node->setValue(block->return_value());
+			}
+			else
+				throw Error("Unkown Error we can't hold");
+			return new_node;
+			}
+		case PRINT:
+			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
+
 		default: 
-			return FuncSwitcher(cur, node->childVector_[0]);
+			if (node->childVector_.size() != 0)
+				return FuncSwitcher(cur, node->childVector_[0]);
+			cout << node->getNodeType() << endl;
+			system("pause");
+			return new Node(node->getNodeType());
 	}
 }
 
@@ -265,7 +395,7 @@ Node* assFunc(Node* left, Node* right)
 {
 	if (left->getValue()->getType() != ObjectType::ListObj)
 	{
-		cout << "Assign, Then value: ";
+		// cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
 		string tmp_name;
@@ -288,8 +418,8 @@ Node* assFunc(Node* left, Node* right)
 			right->getValue()->setBlock(tmp_block);
 			right->getValue()->setName(tmp_name);
 		}
-		cout << name << " ";
-		right->getValue()->print_test();
+		// cout << name << " ";
+		// right->getValue()->print_test();
 	}
 	else
 	{
@@ -312,4 +442,10 @@ Node* assFunc(Node* left, Node* right)
 			throw Error("Wrong size of equal");
 	}
 	return right;
+}
+
+Node* printFunc(Node* node)
+{
+	node->getValue()->print();
+	return node;
 }

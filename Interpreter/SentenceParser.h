@@ -33,5 +33,7 @@ public:
 	
 	static void build_all();
 	void print_test() const;
+
+	friend Traveller;
 };
 
