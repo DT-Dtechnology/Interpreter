@@ -13,7 +13,7 @@ enum WordType
 class Word
 {
 	WordType word_type_;
-	string msg_;
+	string msg_ = "";
 public:
 	Word() = default;
 	~Word() = default;

@@ -30,43 +30,43 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return node;
 
 		case ADD:
-			return addFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return addFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case MULTIPLY:
-			return multiFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return multiFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case MINUS:
-			return minusFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return minusFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case DIVIDE:
-			return divideFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return divideFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case MOD:
-			return modFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return modFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case AND:
-			return andFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return andFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case OR:
-			return orFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return orFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case SMALLER:
-			return lessFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return lessFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case BIGGER:
-			return moreFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return moreFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case SMALLER_OR_EQUAL:
-			return leeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return leeqFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case BIGGER_OR_EQUAL:
-			return moeqFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return moeqFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case IS_EQUAL:
-			return equalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return equalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case IS_NOT_EQUAL:
-			return nequalFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return nequalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
 
 		case LEFT_MOVE:
-			return leftFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return leftFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
 		case RIGHT_MOVE:
-			return rightFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return rightFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
+			return assFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
 		
 		case NEGA:
 			return negeFunc(FuncSwitcher(cur, node->childVector_[0]));
