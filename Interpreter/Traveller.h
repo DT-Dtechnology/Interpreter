@@ -34,6 +34,8 @@ public:
 		}
 		parent->returnSpace();
 		c_block->returnSpace();
+		status_.push(NORMALSTA);
+		current_ = c_block_->sentence_vector_->begin();
 	}
 	~Traveller() = default;
 	void work();

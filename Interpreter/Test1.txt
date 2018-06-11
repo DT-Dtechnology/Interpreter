@@ -2,3 +2,9 @@ def func():
 	print 1
 
 func()
+
+a = 1
+def newfunc():
+	print a
+
+newfunc()

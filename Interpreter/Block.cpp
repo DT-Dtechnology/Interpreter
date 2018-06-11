@@ -126,7 +126,7 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	}
 	else
 	{
-		throw Error("Unknown Type");
+		// throw Error("Unknown Type");
 	}
 	
 	return object;

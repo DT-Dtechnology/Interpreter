@@ -66,7 +66,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return rightFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
+			return assFunc(FuncSwitcher(cur, node->childVector_[0]), FuncSwitcher(cur, node->childVector_[1]));
 		
 		case NEGA:
 			return negeFunc(FuncSwitcher(cur, node->childVector_[0]));
@@ -185,6 +185,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			Node* tmp_node = new Node(DEF);
 			Object* object = new Object(FuncObj);
 			tmp_node->setValue(object);
+			system("pause");
 			return tmp_node;
 			}
 
@@ -203,7 +204,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			Block* block = cur->searchFunc(name);
 			if(node->childVector_.size() == 1)
 			{
-				Traveller* tmp_traveller = new Traveller(block);
+				Traveller* tmp_traveller = new Traveller(cur, block);
 				tmp_traveller->work();
 				new_node->setValue(block->return_value());
 			}else if(node->childVector_.size() == 2)

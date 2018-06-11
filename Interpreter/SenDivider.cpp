@@ -137,6 +137,8 @@ WordQueue* SenDivider::work()
 	if (str.length() != 0)
 		word_list->push(Word(DetectType(str), str));
 
+	/*
+
 	WordQueue* new_word_list = new WordQueue;
 	WordStack word_stack;
 	while(!word_list->empty())
@@ -224,11 +226,12 @@ WordQueue* SenDivider::work()
 			new_word_list->push(Word(WordType::operate, "("));
 		else
 			new_word_list->push(word_list->front());
-		// cout << word_list->front().getMsg() << " ";
 		word_list->pop();
 	}
 
 	// system("pause");
 	delete word_list;
-	return new_word_list;
+
+	*/
+	return word_list;
 }

@@ -155,9 +155,7 @@ void SentenceParser::buildTree()
 			throw Error("What?");
 		
 	}
-	//cout << endl;
-	//cout << "Finish" << endl;
-	//cout << endl;
+	
 	root_ = Root;
 }
 
