@@ -52,6 +52,20 @@ void Traveller::work()
 			
 			continue;
 		}
+		if ((*current_)->order_ == "break")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			jump_posi_.pop();
+			status_.pop();
+			while ((*current_)->order_ != "endLoop")
+				++current_;
+			++current_;
+			continue;
+		}
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
