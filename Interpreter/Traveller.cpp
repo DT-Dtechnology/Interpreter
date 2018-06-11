@@ -111,9 +111,7 @@ void Traveller::work()
 					{
 						cout << (*it)->getOrder() << endl;
 					}
-					cout << "Size:" << block->sentence_vector_->size() << endl;
-					system("pause");
-					cout << endl;
+					
 				}
 			}
 		}
