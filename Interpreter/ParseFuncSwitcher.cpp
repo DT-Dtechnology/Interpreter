@@ -222,7 +222,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 						obj_vec.push_back(*it);
 				}
 				block->setValue(obj_vec);
-				Traveller* tmp_traveller = new Traveller(block);
+				Traveller* tmp_traveller = new Traveller(cur, block);
 				tmp_traveller->work();
 				new_node->setValue(block->return_value());
 			}
