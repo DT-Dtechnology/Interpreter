@@ -229,11 +229,7 @@ ControlStatus SentenceParser::work()
 	divide();
 	buildTree();
 
-	print_test();
-
 	prepareRoot();
-
-	print_test();
 
 	upFloat();
 

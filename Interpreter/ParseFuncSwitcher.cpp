@@ -395,7 +395,7 @@ Node* assFunc(Node* left, Node* right)
 {
 	if (left->getValue()->getType() != ObjectType::ListObj)
 	{
-		cout << "Assign, Then value: ";
+		// cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
 		string tmp_name;
@@ -418,8 +418,8 @@ Node* assFunc(Node* left, Node* right)
 			right->getValue()->setBlock(tmp_block);
 			right->getValue()->setName(tmp_name);
 		}
-		cout << name << " ";
-		right->getValue()->print_test();
+		// cout << name << " ";
+		// right->getValue()->print_test();
 	}
 	else
 	{
