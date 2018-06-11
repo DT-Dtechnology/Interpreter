@@ -23,106 +23,106 @@ Object* Object::add(Object* obj)
 
 Object* Object::minus(Object* obj)
 {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object* Object::multiply(Object* obj)
 {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object* Object::divide(Object* obj)
 {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::more_or_equal(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::more(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::less_or_equal(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::less(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::equal(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::not_equal(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::leftmove(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::rightmove(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::mod(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::And(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::Or(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::Not() {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::ByteAnd(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::ByteOr(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 Object * Object::Xor(Object *obj) {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
 
 Object * Object::negative() {
-	cout << "unprovoked call" << endl;
+	throw Error("unprovoked call");
 	system("pause");
 	return nullptr;
 }
@@ -151,7 +151,7 @@ Object * LongObject::minus(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -166,7 +166,7 @@ Object * LongObject::multiply(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -178,7 +178,7 @@ Object * LongObject::divide(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -191,7 +191,7 @@ Object * DoubleObject::add(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -203,7 +203,7 @@ Object * DoubleObject::minus(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -215,7 +215,7 @@ Object * DoubleObject::multiply(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -227,7 +227,7 @@ Object * DoubleObject::divide(Object *right) {
 		return new DoubleObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -243,7 +243,7 @@ Object * StringObject::add(Object * right) {
 		string res = "\'";
 		if (!(l[0] == '\'' && l[l.length() - 1] == '\'') || (l[0] == '\"' && l[l.length() - 1] == '\"')) {
 			if (!(r[0] == '\'' && r[l.length() - 1] == '\'') || (r[0] == '\"' && r[l.length() - 1] == '\"')) {
-				Error("quotation mark missing ");
+				throw Error("quotation mark missing ");
 				system("pause");
 				return nullptr;
 			}
@@ -258,7 +258,7 @@ Object * StringObject::add(Object * right) {
 		return new StringObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -271,7 +271,7 @@ Object * LongObject::more_or_equal(Object * right) {
 		return new BoolObject(curval >= rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -283,7 +283,7 @@ Object * LongObject::more(Object * right) {
 		return new BoolObject(curval > rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -295,7 +295,7 @@ Object * LongObject::less_or_equal(Object * right) {
 		return new BoolObject(curval <= rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -307,7 +307,7 @@ Object * LongObject::less(Object * right) {
 		return new BoolObject(curval < rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -319,7 +319,7 @@ Object * DoubleObject::more_or_equal(Object * right) {
 		return new BoolObject(curval >= rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -331,7 +331,7 @@ Object * DoubleObject::more(Object * right) {
 		return new BoolObject(curval > rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -343,7 +343,7 @@ Object * DoubleObject::less_or_equal(Object * right) {
 		return new BoolObject(curval <= rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -355,7 +355,7 @@ Object * DoubleObject::less(Object * right) {
 		return new BoolObject(curval < rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -368,7 +368,7 @@ Object * LongObject::leftmove(Object *right) {
 		return new LongObject(curval << rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -380,7 +380,7 @@ Object * LongObject::rightmove(Object *right) {
 		return new LongObject(curval >> rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -392,7 +392,7 @@ Object * LongObject::ByteAnd(Object *right) {
 		return new LongObject(this->get_val() & rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -403,7 +403,7 @@ Object * LongObject::ByteOr(Object *right) {
 		return new LongObject(this->get_val() | rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -414,7 +414,7 @@ Object * LongObject::Xor(Object *right) {
 		return new LongObject(this->get_val() ^ rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -426,7 +426,7 @@ Object * LongObject::mod(Object *right) {
 		return new LongObject(this->get_val() % rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -447,7 +447,7 @@ Object * StringObject::mod(Object *right) {
 		}
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -497,7 +497,7 @@ Object * StringObject::mod(Object *right) {
 		correct = false;
 	}
 	if (!correct) {
-		Error("quotation mark missing OR mismatch");
+		throw Error("quotation mark missing OR mismatch");
 		system("pause");
 		return nullptr;
 	}
@@ -512,7 +512,7 @@ Object * BoolObject::And(Object *right) {
 		return new BoolObject( res );
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -526,7 +526,7 @@ Object * BoolObject::Or(Object *right) {
 		return new BoolObject(res);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -543,7 +543,7 @@ Object * LongObject::equal(Object *right) {
 		return new BoolObject(curval == rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -555,7 +555,7 @@ Object * LongObject::not_equal(Object *right) {
 		return new BoolObject(curval != rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -569,7 +569,7 @@ Object * DoubleObject::equal(Object *right) {
 		return new BoolObject(curval == rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -581,7 +581,7 @@ Object * DoubleObject::not_equal(Object *right) {
 		return new BoolObject(curval != rval);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -595,7 +595,7 @@ Object * StringObject::equal(Object *right) {
 		return new BoolObject(l == r);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -608,7 +608,7 @@ Object * StringObject::not_equal(Object *right) {
 		return new BoolObject(l != r);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -622,7 +622,7 @@ Object * BoolObject::equal(Object *right) {
 		return new BoolObject(l == r);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}
@@ -635,7 +635,7 @@ Object * BoolObject::not_equal(Object *right) {
 		return new BoolObject(l != r);
 	}
 	else {
-		Error("TypeError: unsupported operand types");
+		throw Error("TypeError: unsupported operand types");
 		system("pause");
 		return nullptr;
 	}

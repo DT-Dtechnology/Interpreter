@@ -8,11 +8,22 @@ void Traveller::work()
 		if ((*current_)->order_ == "endIf")
 			// 还有别的判断
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE)
 				status_.pop();
 			
 			++current_;
 			continue;
+		}
+		if ((*current_)->order_ == "else" || (*current_)->order_ == "elif")
+		{
+			if (status_.top() == IFTRUE)
+			{
+				++current_;
+				while ((*current_)->getOrder() != "endIf") {
+					++current_;
+				}
+				continue;
+			}
 		}
 		if((*current_)->order_ == "endDef")
 		{
@@ -72,7 +83,7 @@ void Traveller::work()
 				if (status == IFTRUE)
 				{
 					++current_;
-					status_.push(IFSTA);
+					status_.push(IFTRUE);
 				}
 				else if (status == IFFALSE)
 				{
@@ -119,7 +130,8 @@ void Traveller::work()
 		}
 		else
 		{
-			if (status_.top() == IFSTA)
+			if (status_.top() == IFTRUE
+				)
 			{
 				while ((*current_)->order_ != "endIf")
 					++current_;
