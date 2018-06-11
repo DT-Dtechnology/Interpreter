@@ -425,7 +425,6 @@ void SentenceParser::print_test() const
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
-	system("pause");
 }
 
 Object* getObject(Block* cur_block, string name)

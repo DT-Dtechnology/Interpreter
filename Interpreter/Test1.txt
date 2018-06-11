@@ -1,6 +1,11 @@
-a = 1
-
-while a == 1:
-	a = a + 1
-
-c = a
+# -*- coding: UTF-8 -*-
+a = 2018
+b = 1951
+c = 21
+d = 60
+e = True
+f = False
+g = "Tsinghua"
+h = "???"
+print (a / c - (b / d * c + 5 * d) * (90 - d)) # 四则运算1
+print ((-5) + 7 * 90 / 6 / 5 * 3 + 100 * (-5)) # 四则运算2
