@@ -14,7 +14,7 @@ void Traveller::work()
 			++current_;
 			continue;
 		}
-		if ((*current_)->order_ == "else" || (*current_)->order_ == "elif")
+		if ((*current_)->order_.substr(0,4) == "else" || (*current_)->order_.substr(0,4) == "elif")
 		{
 			if (status_.top() == IFTRUE)
 			{
