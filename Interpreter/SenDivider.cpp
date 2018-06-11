@@ -165,6 +165,7 @@ WordQueue* SenDivider::work()
 		word_stack.pop();
 	}
 	
+	// ****
 	while(!new_word_list->empty())
 	{
 		const Word tmp_word = new_word_list->front();
@@ -181,6 +182,18 @@ WordQueue* SenDivider::work()
 		{
 			new_tmp_word = new_word_list->front();
 			new_word_list->pop();
+			if(new_word_list->empty())
+			{
+				while (!word_stack.empty())
+				{
+					word_list->push(word_stack.top());
+					word_stack.pop();
+				}
+				word_list->push(new_tmp_word);
+				new_tmp_word = Word();
+				break;
+				
+			}
 			if (new_word_list->front().getMsg() != "not" 
 				&& new_word_list->front().getMsg() != "-" 
 				&& new_word_list->front().getMsg() != "+")
@@ -194,18 +207,28 @@ WordQueue* SenDivider::work()
 			}
 			word_stack.push(new_tmp_word);
 		}
+		
+		// ****
+
 		word_list->push(tmp_word);
 		if (new_tmp_word.getMsg() != "")
 			word_list->push(new_tmp_word);
 	}
 
-	/*
+	
 	while(!word_list->empty())
 	{
-		cout << word_list->front().getMsg() << " ";
+		if (word_list->front().getMsg() == "(")
+			new_word_list->push(Word(WordType::operate, ")"));
+		else if (word_list->front().getMsg() == ")")
+			new_word_list->push(Word(WordType::operate, "("));
+		else
+			new_word_list->push(word_list->front());
+		// cout << word_list->front().getMsg() << " ";
 		word_list->pop();
 	}
-	*/
-	delete new_word_list;
-	return word_list;
+
+	// system("pause");
+	delete word_list;
+	return new_word_list;
 }

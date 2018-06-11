@@ -58,15 +58,15 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		case IS_EQUAL:
 			return equalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case IS_NOT_EQUAL:
-			return nequalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
+			return nequalFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case LEFT_MOVE:
-			return leftFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
+			return leftFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		case RIGHT_MOVE:
-			return rightFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
+			return rightFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 
 		case EQUAL:
-			return assFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[1]));
+			return assFunc(FuncSwitcher(cur, node->childVector_[1]), FuncSwitcher(cur, node->childVector_[0]));
 		
 		case NEGA:
 			return negeFunc(FuncSwitcher(cur, node->childVector_[0]));
@@ -234,7 +234,11 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			return printFunc(FuncSwitcher(cur, node->childVector_[1]));
 
 		default: 
-			return FuncSwitcher(cur, node->childVector_[0]);
+			if (node->childVector_.size() != 0)
+				return FuncSwitcher(cur, node->childVector_[0]);
+			cout << node->getNodeType() << endl;
+			system("pause");
+			return new Node(node->getNodeType());
 	}
 }
 

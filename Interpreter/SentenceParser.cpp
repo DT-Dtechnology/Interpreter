@@ -48,8 +48,8 @@ void SentenceParser::buildTree()
 		X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		//cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
-		//cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
+		// cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
+		// cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
 		
 
 		if (Top == NodeType::TERMINATE)
@@ -106,11 +106,11 @@ void SentenceParser::buildTree()
 			//stringToInt 列好
 			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-			//cout << "Generating......" << endl;
-			//cout << "magic code:[ " << magic_code << " ]" << endl;
-			//cout << "front: " << front << endl;
-			//cout << "Top: " << nodeToString[Top] << endl;
-			//cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
+			// cout << "Generating......" << endl;
+			// cout << "magic code:[ " << magic_code << " ]" << endl;
+			// cout << "front: " << front << endl;
+			// cout << "Top: " << nodeToString[Top] << endl;
+			// cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
 
 			// 顺序生成X的子节点
 			for (auto i = 0; i < magic_code.length(); ++i)
@@ -149,7 +149,7 @@ void SentenceParser::buildTree()
 			// 倒序入栈
 			for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
 				ParseStack.push(*(--it));
-			//cout << "Generate" << endl << endl;
+			// cout << "Generate" << endl << endl;
 		}
 		else
 			throw Error("What?");
@@ -230,7 +230,13 @@ ControlStatus SentenceParser::work()
 {
 	divide();
 	buildTree();
+
+	print_test();
+
 	prepareRoot();
+
+	print_test();
+
 	upFloat();
 
 	print_test();
