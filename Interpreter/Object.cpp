@@ -453,11 +453,11 @@ Object * StringObject::mod(Object *right) {
 	}
 
 	//for test
-	cout << "----------" << endl;
-	for (auto i : num_vect) {
-		cout << i << endl;
-	}
-	cout << "----------" << endl;
+	//cout << "----------" << endl;
+	//for (auto i : num_vect) {
+	//	cout << i << endl;
+	//}
+	//cout << "----------" << endl;
 	//end
 
 	string line = this->get_val();
