@@ -1,2 +1,11 @@
-for i in (1,2,3):
+print -5 + 7 * 90 / 6 / 5 * 3 + 100 * (-5) # ËÄÔòÔËËã2
+
+def func():
+	print 1
+
+func()
+
+def newfunc(i):
 	print i
+
+newfunc(2)
