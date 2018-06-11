@@ -1,7 +1,12 @@
-a = 4
-if a==4:
-	if a< 5:
-		a=0
-else:
-	a = a + 1
+# -*- coding: UTF-8 -*-
+PI = 3
+
+def calculate_circle(r): # 简单的函数调用
+	print r
+	result = r
+	for i in (0,1): # for循环
+		result = result * r
+	return result
+
+a = calculate_circle(3)
 print a

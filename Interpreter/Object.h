@@ -225,7 +225,7 @@ public:
 		std::cout << "String " << value_ << std::endl;
 	}
 
-	void print() const { std::cout << value_.substr(1, value_.length() - 2) << std::endl; }
+	void print() const { std::cout << value_ << std::endl; }
 };
 
 class BoolObject: public Object

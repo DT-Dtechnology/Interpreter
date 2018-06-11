@@ -66,6 +66,18 @@ void Traveller::work()
 			++current_;
 			continue;
 		}
+		if ((*current_)->order_ == "continue")
+		{
+			while (status_.top() != LOOPTRUE)
+			{
+				if (!status_.empty())
+					status_.pop();
+			}
+			current_ = jump_posi_.top();
+			jump_posi_.pop();
+			status_.pop();
+			continue;
+		}
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
