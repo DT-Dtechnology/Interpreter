@@ -200,7 +200,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		case FUNC:
 			{
 			new_node->setNodeType(VALUE);
-			const string name = node->childVector_[0]->getValue()->getName();
+			const string name = FuncSwitcher(cur, node->childVector_[0])->getValue()->getName();
 			Block* block = cur->searchFunc(name);
 			if(node->childVector_.size() == 1)
 			{
