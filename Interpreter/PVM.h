@@ -3,6 +3,11 @@
 #include "Inputter.h"
 #include "Traveller.h"
 
+/**
+ * \brief 
+ * PVM为整体Python文件运行的虚拟机。建立的目的是为了做到整体性的控制。
+ * 实现的功能为读入文件，单句执行。执行过程中依据语句内容会输出运行的结果。
+ */
 class PVM
 {
 	string file_name_;

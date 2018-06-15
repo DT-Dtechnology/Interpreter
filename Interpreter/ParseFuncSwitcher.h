@@ -3,6 +3,13 @@
 
 class Block;
 
+/**
+ * \brief 
+ * 整体采用递归调用的方式来遍历全部的结点。
+ * 策略模式，基于父结点类型选择对应的函数归并子节点
+ * \return 
+ * 放回归并子节点后的结果
+ */
 Node* FuncSwitcher(Block*, Node*);
 
 Node* addFunc(Node*, Node*);

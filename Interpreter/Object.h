@@ -4,6 +4,10 @@
 #include "Block.h"
 #include "ObjectFactory.h"
 
+/*
+ * 本文件定义了全部需要的Object类型，利用虚函数调用的方式实现了函数多态
+ */
+
 using std::string;
 using std::vector;
 
@@ -14,6 +18,11 @@ enum ObjectType
 	BoolObj, FuncObj
 };
 
+/**
+ * \brief 
+ * 基类，但并非抽象类。作为非抽象类，作用为存储Python中间过程中尚未解析的初始定义变量。存储变量所出现位置和名字，方便后续解析。作为中间对象使用。
+ * 同时记录了自身的属性type，用于在C++中访问具体数据时进行受控制的动态转化。
+ */
 class Object
 {
 	ObjectType type_;

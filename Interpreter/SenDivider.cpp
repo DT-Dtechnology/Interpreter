@@ -271,7 +271,6 @@ WordQueue* SenDivider::work()
 			word_list->push(Word(WordType::operate, "("));
 		else
 			word_list->push(new_word_list->front());
-		cout << new_word_list->front().getMsg() << " ";
 		new_word_list->pop();
 	}
 

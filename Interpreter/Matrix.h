@@ -5,6 +5,13 @@
 #include <fstream>
 #include "InputHelper.h"
 
+/*
+ * 必须修改：
+ * 这个文件明显需要修改，全部为全局变量和全局函数，十分不符合OOP思想
+ * 
+ * 该文件的作用生成所需要的全部矩阵、映射等信息。只是程序运行的数据基础。
+ */
+
 //####
 
 using std::string;
