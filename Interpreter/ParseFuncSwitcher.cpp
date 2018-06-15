@@ -4,8 +4,6 @@
 
 Node* FuncSwitcher(Block* cur, Node* node)
 {
-	//cout << node->getNodeType() << endl;
-	//system("pause");
 	Object* obj;
 	Node* new_node = new Node;
 	switch (node->getNodeType())
@@ -130,7 +128,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				}
 				Node* new_tmp_node = new Node(LOOP);
 				new_tmp_node->setValue(new BoolObject(true));
-				// cout << "Position1 "<< cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
 				
 				return new_tmp_node;
 			}else
@@ -154,7 +151,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				assFunc(left_node, new_right_node);
 				Node* new_tmp_node = new Node(LOOP);
 				new_tmp_node->setValue(new BoolObject(true));
-				// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
+				
 				
 				return new_tmp_node;
 			}
@@ -163,8 +160,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		case DEF:
 			{
 			const string name = FuncSwitcher(cur, node->childVector_[0])->getValue()->getName();
-			cout << name << endl;
-			system("pause");
 			vector<string> name_list;
 			if(node->childVector_.size() != 1)
 			{
@@ -395,7 +390,6 @@ Node* assFunc(Node* left, Node* right)
 {
 	if (left->getValue()->getType() != ObjectType::ListObj)
 	{
-		// cout << "Assign, Then value: ";
 		const string name = left->getValue()->getName();
 		Block* cur = left->getValue()->get_block();
 		string tmp_name;
@@ -418,12 +412,9 @@ Node* assFunc(Node* left, Node* right)
 			right->getValue()->setBlock(tmp_block);
 			right->getValue()->setName(tmp_name);
 		}
-		// cout << name << " ";
-		// right->getValue()->print_test();
 	}
 	else
 	{
-		cout << "List Assign" << endl;
 		vector<Object*>* left_list = (dynamic_cast<ListObject*>(left->getValue()))->get_val();
 		vector<Object*>* right_list = (dynamic_cast<ListObject*>(right->getValue()))->get_val();
 		auto left_it = left_list->begin();

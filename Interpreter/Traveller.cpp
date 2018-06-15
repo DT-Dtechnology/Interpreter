@@ -78,6 +78,7 @@ void Traveller::work()
 			status_.pop();
 			continue;
 		}
+		system("pause");
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
@@ -113,7 +114,6 @@ void Traveller::work()
 				}
 				else if (status == IFFALSE)
 				{
-					// cout << "GG" << endl;
 					++current_;
 					while ((*current_)->tab_cnt_ != cur_tabs)
 						++current_;
@@ -147,7 +147,6 @@ void Traveller::work()
 					{
 						cout << (*it)->getOrder() << endl;
 					}
-					system("pause");
 				}
 			}
 		}

@@ -249,8 +249,6 @@ void SentenceParser::upFloat()
 		if (doubleOperator[node->getNodeType()])
 		{
 			upQueue.push(node);
-			// cout << nodeToString[node->getNodeType()] << " ";
-			// cout << endl;
 		}
 		if (node->getChild()->size() > 0)
 		{

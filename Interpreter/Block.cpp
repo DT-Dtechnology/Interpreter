@@ -40,11 +40,6 @@ Block* Block::searchFunc(const string& name)
 
 Block* Block::searchObjectBlock(const string& var_name)
 {
-	//####
-	//####
-	//return nullptr;
-	//####
-	//####
 	Block* block = nullptr;
 	Object* return_object = nullptr;
 	while(!block_space_stack_.empty())
@@ -94,6 +89,7 @@ Object* Block::searchObject(const string& var_name)
 
 Object* Block::changeVar(const string& var_name, Object* object)
 {
+	cout << "Change" << endl;
 	if (object->getType() == ListObj)
 	{
 		ListObject* obj = dynamic_cast<ListObject*>(object);
@@ -128,6 +124,7 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	{
 		// throw Error("Unknown Type");
 	}
+	system("pause");
 	
 	return object;
 }
@@ -138,7 +135,7 @@ void Block::setValue(const vector<Object*>& obj_vec)
 	auto value_it = obj_vec.begin();
 	while(name_it != para_name_.end())
 	{
-		var_table_[*name_it] = *value_it;
+		changeVar(*name_it, *value_it);
 		++name_it;
 		++value_it;
 	}

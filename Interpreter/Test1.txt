@@ -1,4 +1,5 @@
-def fun():
-	print 1
+def func(a):
+	a = 3
+	print a
 
-fun()
+func(3)

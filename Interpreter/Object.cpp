@@ -452,14 +452,6 @@ Object * StringObject::mod(Object *right) {
 		return nullptr;
 	}
 
-	//for test
-	//cout << "----------" << endl;
-	//for (auto i : num_vect) {
-	//	cout << i << endl;
-	//}
-	//cout << "----------" << endl;
-	//end
-
 	string line = this->get_val();
 	string res = "";
 	bool correct = true;
@@ -650,9 +642,5 @@ Object * DoubleObject::negative() {
 
 void ListObject::append(Object* obj)
 {
-	/*
-	cout << "Append ";
-	obj->print_test();
-	*/
 	value_.push_back(obj);
 }
