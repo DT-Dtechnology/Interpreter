@@ -162,7 +162,9 @@ Node* FuncSwitcher(Block* cur, Node* node)
 		
 		case DEF:
 			{
-			string name = node->childVector_[0]->getValue()->getName();
+			const string name = FuncSwitcher(cur, node->childVector_[0])->getValue()->getName();
+			cout << name << endl;
+			system("pause");
 			vector<string> name_list;
 			if(node->childVector_.size() != 1)
 			{
@@ -182,8 +184,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			cur->addFunc(name, name_list);
 			Node* tmp_node = new Node(DEF);
 			Object* object = new Object(FuncObj);
+			object->setName(name);
 			tmp_node->setValue(object);
-			system("pause");
 			return tmp_node;
 			}
 

@@ -1,7 +1,4 @@
-def fuc():
+def fun():
 	print 1
 
-def func(a):
-	print a
-
-fuc()
+fun()
