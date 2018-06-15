@@ -271,10 +271,47 @@ WordQueue* SenDivider::work()
 			word_list->push(Word(WordType::operate, "("));
 		else
 			word_list->push(new_word_list->front());
+		cout << new_word_list->front().getMsg() << " ";
 		new_word_list->pop();
 	}
-		
-	delete new_word_list;
 
-	return word_list;
+	WordQueue *twl = new WordQueue;
+	WordQueue *nwl = new WordQueue;
+	while (!word_list->empty())
+	{
+		if (word_list->front().getMsg() == "(") {
+			while (word_list->front().getMsg() != ")") {
+				twl->push(word_list->front());
+				word_list->pop();
+			}
+			twl->push(word_list->front());
+			word_list->pop();
+
+			if (word_list->empty()) {
+				while (!twl->empty()) {
+					nwl->push(twl->front());
+					twl->pop();
+				}
+				break;
+			}
+			auto tar = word_list->front();
+			if (tar.getType() == WordType::variable) {
+				nwl->push(word_list->front());
+				word_list->pop();
+			}
+			while (!twl->empty()) {
+				nwl->push(twl->front());
+				twl->pop();
+			}
+		}
+		else {
+			nwl->push(word_list->front());
+			word_list->pop();
+		}
+			
+	}
+	delete new_word_list;
+	delete twl;
+	delete word_list;
+	return nwl;
 }
