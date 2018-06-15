@@ -141,14 +141,13 @@ void Traveller::work()
 						block->sentence_vector_->push_back(*current_);
 						++current_;
 					}
-
 					cout << "Def a Function" << endl;
 					for(auto it = block->sentence_vector_->begin() ; it != block->sentence_vector_->end();
 						++it)
 					{
 						cout << (*it)->getOrder() << endl;
 					}
-					
+					system("pause");
 				}
 			}
 		}
