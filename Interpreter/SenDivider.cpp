@@ -273,7 +273,7 @@ WordQueue* SenDivider::work()
 			word_list->push(new_word_list->front());
 		new_word_list->pop();
 	}
-
+		
 	delete new_word_list;
 
 	return word_list;

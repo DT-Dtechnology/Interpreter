@@ -70,9 +70,9 @@ Object* ObjectFactory::createObject(Block* cur, Node* all_node)
 	if(all_node->getNodeType() != LISTFLAG)
 		return nullptr;
 	NodeVector* child_list = all_node->getChild();
-	for (auto it = child_list->begin(); it != child_list->end(); ++it)
+	for (auto it = child_list->end(); it != child_list->begin();)
 	{
-		Node* temp_node = FuncSwitcher(cur, *it);
+		Node* temp_node = FuncSwitcher(cur, *(--it));
 		list->append(temp_node->getValue());
 	}
 	system("pause");
