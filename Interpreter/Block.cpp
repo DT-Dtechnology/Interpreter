@@ -88,7 +88,6 @@ Object* Block::searchObject(const string& var_name)
 
 Object* Block::changeVar(const string& var_name, Object* object)
 {
-	cout << "Change" << endl;
 	if (object->getType() == ListObj)
 	{
 		ListObject* obj = dynamic_cast<ListObject*>(object);
@@ -122,7 +121,6 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	else
 	{
 	}
-	system("pause");
 	
 	return object;
 }

@@ -78,7 +78,6 @@ void Traveller::work()
 			status_.pop();
 			continue;
 		}
-		system("pause");
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
@@ -88,7 +87,6 @@ void Traveller::work()
 			if (c_block_->return_pos_)
 			{
 				c_block_->return_pos_->print_test();
-				system("pause");
 			}
 			return;
 		}
@@ -166,7 +164,6 @@ void Traveller::work()
 			}
 		}
 		delete sp;
-		system("pause");
 	}
 }
 

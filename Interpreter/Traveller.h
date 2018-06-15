@@ -37,7 +37,25 @@ public:
 		status_.push(NORMALSTA);
 		current_ = c_block_->sentence_vector_->begin();
 	}
-	~Traveller() = default;
+	~Traveller()
+	{
+		c_block_->block_space_stack_.pop();
+		auto it = c_block_->var_table_.begin();
+		while (it != c_block_->var_table_.end())
+		{
+			/*
+			if (std::find(c_block_->para_name_.begin(), c_block_->para_name_.end(), it->first) == c_block_->para_name_.end())
+			{
+				it = c_block_->var_table_.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+			*/
+			it = c_block_->var_table_.erase(it);
+		}
+	};
 	void work();
 	void work_test() const;
 };

@@ -459,10 +459,7 @@ Object * StringObject::mod(Object *right) {
 	int cnt = 0; 
 	int size = num_vect.end() - num_vect.begin();
 
-	cout << line[0] << "  " << line[line.length()-1] << endl;
-
 	if ( (line[0] == '\"' && line[line.length()-1] == '\"') || (line[0] == '\'' && line[line.length()-1] == '\'') ) {
-		cout << 'r' << endl;
 		res += '\'';
 		for (i = 1; i < line.length()-1; ++i) {
 			if (line[i] == '%' && line[i + 1] == 'd') {

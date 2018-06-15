@@ -177,6 +177,9 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				}
 			}
 			cur->addFunc(name, name_list);
+			//
+			Traveller traveller(cur, cur->searchFunc(name));
+			
 			Node* tmp_node = new Node(DEF);
 			Object* object = new Object(FuncObj);
 			object->setName(name);
@@ -199,8 +202,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			Block* block = cur->searchFunc(name);
 			if(node->childVector_.size() == 1)
 			{
-				Traveller* tmp_traveller = new Traveller(cur, block);
-				tmp_traveller->work();
+				Traveller tmp_traveller = Traveller(block);
+				tmp_traveller.work();
 				new_node->setValue(block->return_value());
 			}else if(node->childVector_.size() == 2)
 			{
@@ -218,8 +221,8 @@ Node* FuncSwitcher(Block* cur, Node* node)
 						obj_vec.push_back(*it);
 				}
 				block->setValue(obj_vec);
-				Traveller* tmp_traveller = new Traveller(cur, block);
-				tmp_traveller->work();
+				Traveller tmp_traveller = Traveller(block);
+				tmp_traveller.work();
 				new_node->setValue(block->return_value());
 			}
 			else
