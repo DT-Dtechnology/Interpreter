@@ -160,7 +160,6 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="OperatorSet.h" />
-    <ClInclude Include="ParseBuildTreeTest.h" />
     <ClInclude Include="ParseFuncSwitcher.h" />
     <ClInclude Include="PVM.h" />
     <ClInclude Include="QuoteDetecter.h" />

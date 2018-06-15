@@ -4,7 +4,9 @@
 #include "Error.h"
 #include "Matrix.h"
 #include "SenDivider.h"
+#include "Traveller.h"
 
+using std::queue;
 using std::stack;
 using std::cout;
 using std::endl;
@@ -46,13 +48,13 @@ void SentenceParser::buildTree()
 		X = ParseStack.top();
 		ParseStack.pop();
 		NodeType Top = X->getNodeType();
-		cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
-		cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
+		// cout << "Row: " << nodeToString[Top] << " Column: " << front << endl;
+		// cout << "Row: " << nodeToInt[Top]<< " "<<stringToChar[nodeToString[Top]] << " Column: " << stringToChar[front] << " " <<stringToInt[front] << endl;
 		
 
 		if (Top == NodeType::TERMINATE)
 		{
-			cout << front << "  ";
+			// cout << front << "  ";
 			if (X->value_->getType() == ObjectType::Operator && front!= "#")
 			{
 				// isTerminate[] 表示终结符
@@ -89,7 +91,7 @@ void SentenceParser::buildTree()
 			}
 			else
 				throw Error("Wrong Match");
-			cout << "Match" << endl << endl;
+			// cout << "Match" << endl << endl;
 		}
 		else if (Top == NodeType::END)
 		{
@@ -104,11 +106,11 @@ void SentenceParser::buildTree()
 			//stringToInt 列好
 			string magic_code = Matrix[nodeToInt[Top]][stringToInt[front]];
 
-			cout << "Generating......" << endl;
-			cout << "magic code:[ " << magic_code << " ]" << endl;
-			cout << "front: " << front << endl;
-			cout << "Top: " << nodeToString[Top] << endl;
-			cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
+			// cout << "Generating......" << endl;
+			// cout << "magic code:[ " << magic_code << " ]" << endl;
+			// cout << "front: " << front << endl;
+			// cout << "Top: " << nodeToString[Top] << endl;
+			// cout << "Row" << nodeToInt[Top] << "  Column" << stringToInt[front] << endl;
 
 			// 顺序生成X的子节点
 			for (auto i = 0; i < magic_code.length(); ++i)
@@ -147,15 +149,12 @@ void SentenceParser::buildTree()
 			// 倒序入栈
 			for (auto it = X->childVector_.end(); it != X->childVector_.begin();)
 				ParseStack.push(*(--it));
-			cout << "Generate" << endl << endl;
+			// cout << "Generate" << endl << endl;
 		}
 		else
 			throw Error("What?");
 		
 	}
-	cout << endl;
-	cout << "Finish" << endl;
-	cout << endl;
 	root_ = Root;
 }
 
@@ -178,12 +177,223 @@ void SentenceParser::prepareNode(Node* node)
 	}
 }
 
-void SentenceParser::work()
+ControlStatus SentenceParser::getStatus() const
+{
+	if( root_->getNodeType() == IF )
+	{
+		BoolObject *temp = dynamic_cast<BoolObject*>(root_->getValue());
+		bool val = temp->get_val();
+		if(val)
+		{
+			
+			return IFTRUE;
+		}else
+		{
+			
+			return IFFALSE;
+		}
+	}
+	if (root_->getNodeType() == LOOP)
+	{
+		BoolObject *temp = dynamic_cast<BoolObject*>(root_->getValue());
+		const bool val = temp->get_val();
+		if (val)
+		{
+			
+			return LOOPTRUE;
+		}
+		else
+		{
+			
+			return LOOPFALSE;
+		}
+	}
+	if(root_->getNodeType() == DEF)
+	{
+		return DEFSTA;
+	}
+	if(root_->getNodeType() == RETURN)
+	{
+		return RETURNSTA;
+	}
+	return USELESS;
+}
+
+ControlStatus SentenceParser::work()
 {
 	divide();
 	buildTree();
 
+	prepareRoot();
+
+	upFloat();
+
+	print_test();
+	
 	parserRoot();
+	system("pause");
+	return getStatus();
+}
+
+void SentenceParser::upFloat()
+{
+	// bfs
+	queue<Node*> nodeQueue;
+	queue<Node*> upQueue;
+	nodeQueue.push(root_);
+	Node *node;
+	while (!nodeQueue.empty()) 
+	{
+		node = nodeQueue.front();
+		nodeQueue.pop();
+		if (doubleOperator[node->getNodeType()])
+		{
+			upQueue.push(node);
+			// cout << nodeToString[node->getNodeType()] << " ";
+			// cout << endl;
+		}
+		if (node->getChild()->size() > 0)
+		{
+			for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+				nodeQueue.push(*it);
+		}
+	}
+
+	// float
+	while (!upQueue.empty())
+	{
+		node = upQueue.front();
+		upQueue.pop();
+		node->getParent()->getParent()->setNodeType(node->getNodeType());
+		auto it = node->getParent()->getChild()->begin();
+		while (it != node->getParent()->getChild()->end())
+		{
+			if (*it == node)
+			{
+				it = node->getParent()->getChild()->erase(it);
+				break;
+			}
+			++it;
+		}
+	}
+
+	// comma
+	nodeQueue.push(root_);
+	while (!nodeQueue.empty())
+	{
+		node = nodeQueue.front();
+		bool flag = 0;
+		if (node->getNodeType() == LISTFLAG)
+		{
+			auto it1 = node->getChild()->begin();
+			while (it1 != node->getChild()->end())
+			{
+				if ((*it1)->getNodeType() == LISTFLAG)
+				{
+					NodeVector temp;
+					auto it2 = (*it1)->getChild()->begin();
+					while (it2 != (*it1)->getChild()->end())
+					{
+						temp.push_back(*it2);
+						++it2;
+					}
+					it1 = node->getChild()->erase(it1);
+					for (auto it = temp.begin(); it != temp.end(); it++)
+						node->addNode(*it);
+					flag = 1;
+					node->setNodeType(LISTFLAG);
+					break;
+				}
+				++it1;
+			}
+		}
+		if (flag == 0)
+		{
+			nodeQueue.pop();
+			if (node->getChild()->size() > 0)
+			{
+				for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+					nodeQueue.push(*it);
+			}
+		}
+	}
+
+	//func, +/-, elif
+	
+	nodeQueue.push(root_);
+	while (!nodeQueue.empty())
+	{
+		node = nodeQueue.front();
+		nodeQueue.pop();
+
+		if (node->getChild()->size() > 0)
+		{
+			
+			auto it = node->getChild()->begin();
+			while (it != node->getChild()->end())
+			{
+				if ((*it)->getNodeType() == FUNC)
+				{
+
+					Node* temp = *(it - 1);
+					(*it)->getChild()->insert((*it)->getChild()->begin(), temp);
+					it = node->getChild()->erase(it - 1);
+					break;
+				}
+				it++;
+			}
+		}
+		
+		if (node->getChild()->size() == 1 && (node->getNodeType() == ADD || node->getNodeType() == MINUS))
+		{
+			if (node->getNodeType() == ADD)
+				node->setNodeType(POSI);
+			else
+				node->setNodeType(NEGA);
+		}
+		
+		if(node->getNodeType() == IF)
+		{
+			if (node->childVector_[0]->getNodeType() == ELIF)
+				node->nodeType_ = ELIF;
+		}
+
+		if (node->getNodeType() == LOOP)
+		{
+			if (node->childVector_[0]->getNodeType() == FOR)
+				node->nodeType_ = FOR;
+			if (node->childVector_[0]->getNodeType() == WHILE)
+				node->nodeType_ = WHILE;
+		}
+
+		if (node->getNodeType() == JUMP)
+		{
+			if (node->childVector_[0]->getNodeType() == RETURN)
+				node->nodeType_ = RETURN;
+			if (node->childVector_[0]->getNodeType() == BREAK)
+				node->nodeType_ = BREAK;
+			if (node->childVector_[0]->getNodeType() == CONTINUE)
+				node->nodeType_ = CONTINUE;
+		}
+
+		if (node->getChild()->size() > 0)
+		{
+			for (auto it = node->getChild()->begin(); it != node->getChild()->end(); it++)
+				nodeQueue.push(*it);
+		}
+	}
+	
+	// def
+	if  (root_->getChild()->size() == 1 && (*root_->getChild()->begin())->getNodeType() == DEF)
+	{
+		Node* temp = *root_->getChild()->begin();
+		while (temp->getNodeType() != FUNC)
+		{
+			temp->setNodeType(SEN);
+			temp = *temp->getChild()->begin();
+		}
+		temp->setNodeType(DEF);
+	}
 }
 
 void SentenceParser::print_test_first()
@@ -191,40 +401,58 @@ void SentenceParser::print_test_first()
 	divide();
 	while (!word_queue_.empty())
 	{
-		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
+
+//		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
 		word_queue_.pop();
 	}
-	std::cout << std::endl;
+//	std::cout << std::endl;
 }
 
 void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
+	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-
+	*/
+	
 	prepareRoot();
+	/*
 	cout << "Let Us Print." << endl;
 	print_node(root_, 0);
 	cout << endl << endl;
 	system("pause");
-
-	//parserRoot();
+	*/
+	// ######
+	
+	upFloat();
+	cout << "Let Us Print." << endl;
+	print_node(root_, 0);
+	cout << endl << endl;
+	parserRoot();
+	system("pause");
 }
 
 void SentenceParser::build_all()
 {
 	buildAll();
-	printMatrix();
+	//printMatrix();
+}
+
+void SentenceParser::print_test() const
+{
+	cout << "Let Us Print." << endl;
+	print_node(root_, 0);
+	cout << endl << endl;
 }
 
 Object* getObject(Block* cur_block, string name)
 {
 	// ####
-	return new TestObject(name);
+	return new TempObject(name);
 
 	//####
 	/*

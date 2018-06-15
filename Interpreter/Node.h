@@ -17,8 +17,8 @@ enum NodeType
 	LEFT_MOVE, RIGHT_MOVE, WHILE, FOR, IN, COLON, LISTFLAG, NOT, BANG, PLUS_PLUS, MINUS_MINUS,
 	ELIF, ELSE, CONTINUE, BREAK, PASS, RETURN, PARAL, PARALL, PARA, Z, ZZ, M, N, O, MM, NN, OO,
 	BIGGER, SMALLER, BIGGER_OR_EQUAL, SMALLER_OR_EQUAL, AND, OR, WEI_AND, WEI_OR, WEI_YIHUO,
-	MOD, ZHENG_DIVIDE
-
+	MOD, ZHENG_DIVIDE,
+	POSI, NEGA
 	// 有些没有用的
 	// LISTFALG是逗号
 };
@@ -31,10 +31,11 @@ class Node
 	bool isLeaf_ = false;
 	NodeType nodeType_;
 public:
-	Node();
-	~Node();
+	Node() = default;
+	~Node() = default;
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
+	void setNodeType(NodeType type) { nodeType_ = type; }
 	NodeVector* getChild() { return &childVector_; }
 	Object* getValue() const;
 	void addNode(Node* node) { childVector_.push_back(node); }
@@ -45,13 +46,6 @@ public:
 	friend void print_node(Node*, int depth);
 	friend Node* FuncSwitcher(Block*, Node*);
 };
-
-inline Node::~Node()
-{
-	for (auto it = childVector_.begin(); it != childVector_.end(); ++it)
-		delete *it;
-	delete value_;
-}
 
 inline Object* Node::getValue() const
 {

@@ -1,10 +1,11 @@
 #pragma once
 #include <stack>
 #include <map>
-#include "Object.h"
-#include "Traveller.h"
+#include "Sentence.h"
 
+class Object;
 class Block;
+class Traveller;
 
 using std::stack;
 using std::map;
@@ -22,16 +23,28 @@ class Block
 	stack<Block*> temp_space_stack_;
 	VarTable var_table_;
 	FuncTable func_table_;
-	Traveller traveller_;
 	Object* return_pos_ = nullptr;
+	vector<string> para_name_;
 
 	void returnSpace();
 public:
-	Block(SenVector* sen_vector) :sentence_vector_(sen_vector), traveller_(this) { }
+	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
+	Block() { sentence_vector_ = new SenVector; };
 	~Block() = default;
 	
-	Object* searchObject(string var_name);
+	Block* addFunc(const string& name, const vector<string>& name_list);
+	Block* searchFunc(const string& name);
 
-	void print_all();
-	void print_all_old();
+	Block* searchObjectBlock(const string& var_name);
+	Object* searchObject(const string& var_name);
+	Object* changeVar(const string& var_name, Object* object);
+
+	void setValue(const vector<Object*>&);
+
+	void print_all() const;
+	void print_all_old() const;
+
+	Object* return_value() const { return return_pos_; };
+
+	friend Traveller;
 };
