@@ -146,8 +146,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				{
 					Node* new_tmp_node = new Node(LOOP);
 					new_tmp_node->setValue(new BoolObject(false));
-					// cout << "Position2 " << cur->searchObject(left_node->getValue()->getName())->list_posi << endl;
-					
 					return new_tmp_node;
 				}
 				Node* new_right_node = new Node(VALUE);

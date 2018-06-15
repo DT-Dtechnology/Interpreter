@@ -1,10 +1,15 @@
+#pragma once
 #include <string>
 #include <map>
 #include <fstream>
 
 using namespace std;
 
-//####
+/**
+ * \brief 
+ * 用于处理产生式的输入问题，方便在后期工作拓展中实现对于多种语言的解释
+ * 解释不同的语言仅需要修改资源文件中的InputHelp.txt文件，但修改时要注意产生式符合LL1要求
+ */
 class InputHelper {
 public:
 	static const int A = 'A';

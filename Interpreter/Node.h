@@ -1,12 +1,18 @@
 #pragma once
 #include <vector>
-#include "Object.h"
 
 class Block;
 class Node;
 
 typedef std::vector<Node*> NodeVector;
 
+/**
+ * \brief 
+ * 必须修改：
+ * 冗余的NodeType过多
+ * 
+ * 这里表示了Node可能的所有类型，没有采用特殊字符而是使用了Enum，增强了程序的可读性
+ */
 enum NodeType
 {
 	ROOT, END, TERMINATE, VALUE, VARIABLE,
@@ -23,11 +29,21 @@ enum NodeType
 	// LISTFALG是逗号
 };
 
+/**
+ * \brief 
+ * 必须修改：
+ * 去除isLeaf
+ * 添加析构函数，其中添加析构函数时一定要注意是否析构Object。由于Object可能同时还要被其他对象使用。这里可以考虑使用智能指针。
+ * 
+ * 
+ * 用于表示语法分析树中的结点，存储了包含子节点和父节点的相关信息。同时实现了基本的外部操作。
+ * 同时，本身作为分析树访问Object数据的中间代理
+ */
 class Node
 {
 	Object* value_ = nullptr;
 	Node* parent_ = nullptr;
-	NodeVector childVector_;
+	NodeVector childVector_{};
 	bool isLeaf_ = false;
 	NodeType nodeType_;
 public:
@@ -37,7 +53,7 @@ public:
 	NodeType getNodeType() const { return nodeType_; };
 	void setNodeType(NodeType type) { nodeType_ = type; }
 	NodeVector* getChild() { return &childVector_; }
-	Object* getValue() const;
+	Object* getValue() const { return value_; }
 	void addNode(Node* node) { childVector_.push_back(node); }
 	void setValue(Object* object) { value_ = object; }
 	Node* getParent() const { return parent_; }
@@ -47,8 +63,3 @@ public:
 	friend Node* FuncSwitcher(Block*, Node*);
 };
 
-inline Object* Node::getValue() const
-{
-	// ####
-	return value_;
-}
