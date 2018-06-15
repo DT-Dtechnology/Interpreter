@@ -207,57 +207,6 @@ WordQueue* SenDivider::work()
 		word_stack.pop();
 	}
 	
-	/****
-	while(!new_word_list->empty())
-	{
-		const Word tmp_word = new_word_list->front();
-		new_word_list->pop();
-		if(new_word_list->empty())
-		{
-			word_list->push(tmp_word);
-			break;
-		}
-		Word new_tmp_word = Word();
-		while(new_word_list->front().getMsg() == "not" 
-			|| new_word_list->front().getMsg() == "-" 
-			|| new_word_list->front().getMsg() == "+")
-		{
-			new_tmp_word = new_word_list->front();
-			new_word_list->pop();
-			if(new_word_list->empty())
-			{
-				while (!word_stack.empty())
-				{
-					word_list->push(word_stack.top());
-					word_stack.pop();
-				}
-				word_list->push(new_tmp_word);
-				new_tmp_word = Word();
-				break;
-				
-			}
-			if (new_word_list->front().getMsg() != "not" 
-				&& new_word_list->front().getMsg() != "-" 
-				&& new_word_list->front().getMsg() != "+")
-			{
-				while (!word_stack.empty())
-				{
-					word_list->push(word_stack.top());
-					word_stack.pop();
-				}
-				break;
-			}
-			word_stack.push(new_tmp_word);
-		}
-		
-		// ****
-
-		word_list->push(tmp_word);
-		if (new_tmp_word.getMsg() != "")
-			word_list->push(new_tmp_word);
-	}
-	*/
-	
 
 	while(!new_word_list->empty())
 	{
@@ -274,7 +223,82 @@ WordQueue* SenDivider::work()
 		new_word_list->pop();
 	}
 
-	delete new_word_list;
+	typedef vector<Word> WordVec;
+	WordVec *tvt = new WordVec;
+	while ( !word_list->empty()) {
+		tvt->push_back(word_list->front());
+		word_list->pop();
+	}
+	WordVec *nvt = new WordVec;
+	queue<int> leftmark;
+	queue<int> rightmark;
+	WordQueue *func_name = new WordQueue;
+	int cnt = 0;
+	for (auto i = tvt->begin(); i != tvt->end(); ++i, ++cnt) {
+		if (i->getMsg() == ")") {
+			auto j = ++i;
+			--i;
+			if (j == tvt->end()) {
+				break;
+			}
 
-	return word_list;
+			if (j->getType() == WordType::variable) {
+				int num = 0;
+				int temp = cnt;
+				bool find = false;
+
+				for (auto k = i; ; --temp) {
+					
+					if (k->getMsg() == ")") {
+						--num;
+					}
+					else if (k->getMsg() == "(") {
+						++num;
+					}
+					if (num == 0) {
+						find = true;
+						break;
+					}
+					if (k == tvt->begin()) {
+						break;
+					}
+					--k;
+
+				}
+
+				if (find) {
+					leftmark.push(temp);
+					rightmark.push(cnt+1);
+					func_name->push(*j);
+				}
+			}
+		}
+	}
+
+	int size = tvt->size();
+	for (int i = 0; i < size; ++i) {
+		if (!leftmark.empty() && i == leftmark.front()) {
+			nvt->push_back(func_name->front());
+			leftmark.pop();
+			func_name->pop();
+			nvt->push_back(tvt->operator[](i));
+		}
+		else if (!rightmark.empty() && i == rightmark.front()) {
+			rightmark.pop();
+		}
+		else {
+			nvt->push_back(tvt->operator[](i));
+		}
+	}
+
+	WordQueue *nwl = new WordQueue;
+	for (auto i : *nvt) {
+		nwl->push(i);
+	}
+
+	delete tvt;
+	delete func_name;
+	delete new_word_list;
+	delete word_list;
+	return nwl;
 }

@@ -1,6 +1,11 @@
 #pragma once
 #include "Node.h"
 
+/**
+ * \brief 
+ * 整体控制Object的建立过程。可以基于数据类型类型建立对应的Object类型
+ * 本身为单件的工厂函数。
+ */
 class ObjectFactory
 {
 public:

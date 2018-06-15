@@ -67,16 +67,15 @@ SenVector* Inputter::get_sentence_vector() const
 			{
 				if ((*itr)->getTab() <= r && ((*itr)->getOrder().substr(0, 4) != "else" || (*itr)->getTab() != r) && ((*itr)->getOrder().substr(0, 4) != "elif" || (*itr)->getTab() != r))
 				{
-					int temp_row = (*itr)->getRow();
+					const int temp_row = (*itr)->getRow();
 					n[temp_row]++;
 
-					tuple< string, int, int, int > temp;
-					temp = std::make_tuple("endIf", (*itr)->getRow(), n[temp_row]-1, r);
-					endMark.push_back(temp);
+					const tuple< string, int, int, int > local_temp = std::make_tuple("endIf", (*itr)->getRow(), n[temp_row]-1, r);
+					endMark.push_back(local_temp);
 					flag = 0;
 					break;
 				}
-				itr++;
+				++itr;
 			}
 			if (flag)
 			{
@@ -86,23 +85,22 @@ SenVector* Inputter::get_sentence_vector() const
 		}
 		if ((*it)->getOrder().substr(0, 3) == "for" || (*it)->getOrder().substr(0, 5) == "while")
 		{
-			bool flag = 1;
+			bool flag = true;
 			int r = (*it)->getTab();
 			auto itr = it + 1;
 			while (itr != sen_vector->end())
 			{
 				if ((*itr)->getTab() <= r)
 				{
-					int temp_row = (*itr)->getRow();
+					const int temp_row = (*itr)->getRow();
 					n[temp_row]++;
 
-					tuple< string, int, int, int > temp;
-					temp = std::make_tuple("endLoop", (*itr)->getRow(), n[temp_row] - 1, r);
-					endMark.push_back(temp);
+					const tuple< string, int, int, int > local_temp = std::make_tuple("endLoop", (*itr)->getRow(), n[temp_row] - 1, r);
+					endMark.push_back(local_temp);
 					flag = 0;
 					break;
 				}
-				itr++;
+				++itr;
 			}
 			if (flag)
 			{
@@ -119,12 +117,11 @@ SenVector* Inputter::get_sentence_vector() const
 			{
 				if ((*itr)->getTab() <= r)
 				{
-					int temp_row = (*itr)->getRow();
+					const int temp_row = (*itr)->getRow();
 					n[temp_row]++;
 
-					tuple< string, int, int, int > temp;
-					temp = std::make_tuple("endDef", (*itr)->getRow(), n[temp_row] - 1, r);
-					endMark.push_back(temp);
+					const tuple< string, int, int, int > local_temp = std::make_tuple("endDef", (*itr)->getRow(), n[temp_row] - 1, r);
+					endMark.push_back(local_temp);
 					flag = 0;
 					break;
 				}
@@ -154,11 +151,8 @@ SenVector* Inputter::get_sentence_vector() const
 			}
 		}
 	}
-	// end if, end loop, end def
 	SenVector* new_sv = new SenVector;
-//	int ifCnt = endIf.size(), loopCnt = endLoop.size(), defCnt = endDef.size();
 	int row = row_cnt + endMark.size() + tail->size();
-	int _row = 0;
 
 	cout << "endMark :" << endl;
 	for (auto i : endMark) {
@@ -172,7 +166,6 @@ SenVector* Inputter::get_sentence_vector() const
 	for (auto it = tail->begin(); it != tail->end(); ++it)
 	{
 		new_sv->push_back(*it);
-	//	cout << (*it)->getOrder() << endl;
 		row--;
 	}
 	auto it = sen_vector->end();
@@ -193,32 +186,7 @@ SenVector* Inputter::get_sentence_vector() const
 		}
 		if (it == sen_vector->begin())
 			break;
-		/*
-		if (ifCnt >= 0 && (*it)->getRow() == endIf[ifCnt])
-		{
-			//cout << "IF" << endl;
-			string tmp = "endIf";
-			new_sv->push_back(new Sentence(tmp, (*it)->getTab(), row));
-			row++;
-			ifCnt--;
-		}
-		*/
-		/*if (loopCnt >= 0 && (*it)->getRow() == endLoop[ifCnt])
-		{
-			//cout << "LOOP" << endl;
-			string tmp = "endLoop";
-			new_sv->push_back(new Sentence(tmp, (*it)->getTab(), row));
-			row++;
-			loopCnt--;
-		}
-		if (defCnt >= 0 && (*it)->getRow() == endDef[ifCnt])
-		{
-			//cout << "DEF" << endl;
-			string tmp = "endDef";
-			new_sv->push_back(new Sentence(tmp, (*it)->getTab(), row));
-			row++;
-			defCnt--;
-		}*/
+		
 	}
 
 	SenVector *new_new_sv = new SenVector;
@@ -236,8 +204,8 @@ SenVector* Inputter::get_sentence_vector() const
 	}
 	
 	for (auto i : *new_new_sv) {
-		int tab_cnt = i->getTab();
-		for (int i = 0; i < tab_cnt; ++i) {
+		const int tab_cnt = i->getTab();
+		for (auto in_it = 0; in_it < tab_cnt; ++in_it) {
 			cout << "  ";
 		}
 		cout << i->getOrder() << endl;

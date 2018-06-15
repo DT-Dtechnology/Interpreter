@@ -75,6 +75,9 @@
     <ClInclude Include="ObjectFactory.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="IDLE.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,6 +111,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IDLE.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
