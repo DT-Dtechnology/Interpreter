@@ -1,1 +1,7 @@
-b = -5 * ( 3 - f(1, 2, -1))
+def fuc():
+	print 1
+
+def func(a):
+	print a
+
+fuc()

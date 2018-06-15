@@ -207,57 +207,6 @@ WordQueue* SenDivider::work()
 		word_stack.pop();
 	}
 	
-	/****
-	while(!new_word_list->empty())
-	{
-		const Word tmp_word = new_word_list->front();
-		new_word_list->pop();
-		if(new_word_list->empty())
-		{
-			word_list->push(tmp_word);
-			break;
-		}
-		Word new_tmp_word = Word();
-		while(new_word_list->front().getMsg() == "not" 
-			|| new_word_list->front().getMsg() == "-" 
-			|| new_word_list->front().getMsg() == "+")
-		{
-			new_tmp_word = new_word_list->front();
-			new_word_list->pop();
-			if(new_word_list->empty())
-			{
-				while (!word_stack.empty())
-				{
-					word_list->push(word_stack.top());
-					word_stack.pop();
-				}
-				word_list->push(new_tmp_word);
-				new_tmp_word = Word();
-				break;
-				
-			}
-			if (new_word_list->front().getMsg() != "not" 
-				&& new_word_list->front().getMsg() != "-" 
-				&& new_word_list->front().getMsg() != "+")
-			{
-				while (!word_stack.empty())
-				{
-					word_list->push(word_stack.top());
-					word_stack.pop();
-				}
-				break;
-			}
-			word_stack.push(new_tmp_word);
-		}
-		
-		// ****
-
-		word_list->push(tmp_word);
-		if (new_tmp_word.getMsg() != "")
-			word_list->push(new_tmp_word);
-	}
-	*/
-	
 
 	while(!new_word_list->empty())
 	{
@@ -279,9 +228,6 @@ WordQueue* SenDivider::work()
 	while ( !word_list->empty()) {
 		tvt->push_back(word_list->front());
 		word_list->pop();
-	}
-	for (auto i : *tvt ) {
-		cout << i.getMsg() << " ";
 	}
 	WordVec *nvt = new WordVec;
 	queue<int> leftmark;
@@ -345,64 +291,11 @@ WordQueue* SenDivider::work()
 		}
 	}
 
-	cout << endl << endl << "#--------------------" << endl;
-	for (auto i : *nvt) {
-		cout << i.getMsg() << " ";
-	}
-	cout << endl << "##-------------------" << endl;
-	system("pause");
-
 	WordQueue *nwl = new WordQueue;
 	for (auto i : *nvt) {
 		nwl->push(i);
 	}
 
-	/*
-	while (!word_list->empty())
-	{
-		if (word_list->front().getMsg() == "(") {
-			while (word_list->front().getMsg() != ")") {
-				twl->push(word_list->front());
-				word_list->pop();
-			}
-			twl->push(word_list->front());
-			word_list->pop();
-
-			if (word_list->empty()) {
-				while (!twl->empty()) {
-					nwl->push(twl->front());
-					cout << twl->front().getMsg() << " ";
-					twl->pop();
-				}
-				break;
-			}
-			auto tar = word_list->front();
-			if (tar.getType() == WordType::variable) {
-				nwl->push(word_list->front());
-				cout << tar.getMsg() << " ";
-				word_list->pop();
-			}
-			while (!twl->empty()) {
-				nwl->push(twl->front());
-				cout << twl->front().getMsg() << " ";
-				twl->pop();
-			}
-		}
-		else {
-			cout << word_list->front().getMsg() << " ";
-			nwl->push(word_list->front());
-			word_list->pop();
-		}
-			
-	}
-	cout << endl << "##-------------------" << endl;
-	while (!nwl->empty()) {
-		cout << nwl->front().getMsg() << " ";
-		nwl->pop();
-	}
-	cout << endl << "###------------------" << endl;
-	system("pause");
-	*/
 	delete tvt;
 	delete func_name;
 	delete new_word_list;
