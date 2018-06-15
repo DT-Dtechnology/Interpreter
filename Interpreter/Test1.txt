@@ -1,4 +1,1 @@
-def func(a):
-	print a;
-
-func(-1)
+b = -5 * ( 3 - f(1, 2, -1))
