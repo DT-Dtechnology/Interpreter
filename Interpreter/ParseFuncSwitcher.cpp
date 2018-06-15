@@ -407,6 +407,7 @@ Node* assFunc(Node* left, Node* right)
 			right->getValue()->setName(name);
 		}
 		cur->changeVar(name, right->getValue());
+		
 		if (tmp_block)
 		{
 			right->getValue()->setBlock(tmp_block);

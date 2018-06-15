@@ -1,5 +1,5 @@
 def func(a):
-	a = 3
+	a = a*a
 	print a
 
 func(3)

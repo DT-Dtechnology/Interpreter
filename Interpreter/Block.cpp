@@ -72,9 +72,8 @@ Object* Block::searchObject(const string& var_name)
 		return_object = block_space_stack_.top()->var_table_[var_name];
 		if (return_object != nullptr)
 		{
-			// cout << "Find " << var_name << endl;
-			// system("pause");
-
+			return_object->setName(var_name);
+			return_object->setBlock(block_space_stack_.top());
 			returnSpace();
 			return return_object;
 		}
@@ -122,7 +121,6 @@ Object* Block::changeVar(const string& var_name, Object* object)
 	}
 	else
 	{
-		// throw Error("Unknown Type");
 	}
 	system("pause");
 	
