@@ -53,13 +53,11 @@ void IDLE::parse_sen(Sentence* sentence)
 			{
 				if (getNext(block))
 				{
-					string end_msg("EndDef");
-					block->sentence_vector_->push_back(new Sentence(end_msg, 0, 0));
 					break;
 				}
 			}
 		}
-		cout << "EndDefFunc" << endl;
+		// cout << "EndDefFunc" << endl;
 		delete sp;
 		return;
 	}
