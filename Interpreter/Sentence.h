@@ -19,7 +19,7 @@ class Sentence
 public:
 	Sentence() = delete;
 	Sentence(std::string& order, int tab, int row);
-	~Sentence();
+	~Sentence() = default;
 	string getOrder() const { return order_; }
 	int getRow() const { return row_; }
 	int getTab() const { return tab_cnt_; }

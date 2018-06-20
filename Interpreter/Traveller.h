@@ -56,6 +56,7 @@ public:
 			it = c_block_->var_table_.erase(it);
 		}
 	};
+	// For PVM
 	void work();
 	void work_test() const;
 };

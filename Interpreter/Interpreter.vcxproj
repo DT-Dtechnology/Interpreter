@@ -181,7 +181,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />
-    <ClCompile Include="PVM.cpp" />
     <ClCompile Include="SenDivider.cpp" />
     <ClCompile Include="SentenceParser.cpp" />
     <ClCompile Include="stdafx.cpp">
