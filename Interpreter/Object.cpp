@@ -421,7 +421,7 @@ Object * LongObject::Xor(Object *right) {
 }
 
 Object * LongObject::mod(Object *right) {
-	if (right->getType() == LongObj){
+	if (right->getType() == LongObj || right->getType() == DoubleObj){
 		long rval = right->get_val();
 		return new LongObject(this->get_val() % rval);
 	}
@@ -654,6 +654,20 @@ Object * DoubleObject::leftmove(Object *right) {
 		return nullptr;
 	}
 }
+
+Object* DoubleObject::mod(Object* obj)
+{
+	if (obj->getType() == LongObj || obj->getType() == DoubleObj) {
+		long rval = obj->get_val();
+		return new LongObject(long(this->get_val()) % rval);
+	}
+	else {
+		throw Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+
 Object * DoubleObject::rightmove(Object *right) {
 	if (right->getType() == LongObj || right->getType() == DoubleObj) {
 		long rval = right->get_val();

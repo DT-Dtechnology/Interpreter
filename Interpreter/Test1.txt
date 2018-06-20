@@ -9,15 +9,15 @@ def deepdiv(i, j):
 def is_prime(num):
 	j = 2
 	flag = True
-	while (j * j <= num):
-		if num % j == 0 :
+	while (j * j <= num) :
+		if num % j == 0:
 			flag = False
 			break
 		j = j + 1
 	if flag:
 		print "%d is a prime." % num
 		return True
-	else :
+	else:
 		print "%d is not a prime." % num
 		return False
 

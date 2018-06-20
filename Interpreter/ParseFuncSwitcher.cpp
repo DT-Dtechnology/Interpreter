@@ -416,6 +416,7 @@ Node* assFunc(Node* left, Node* right)
 			right->getValue()->setBlock(tmp_block);
 			right->getValue()->setName(tmp_name);
 		}
+
 	}
 	else
 	{
