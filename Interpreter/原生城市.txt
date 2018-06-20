@@ -1,0 +1,57 @@
+SEN -> LOOP ;
+SEN -> IF ;
+SEN -> JUMP ;
+SEN -> DEF ;
+SEN -> PRINT ;
+SEN -> Z ;
+
+LOOP -> while EXP : ;
+LOOP -> for var in var FUNC : ;
+
+IF -> if EXP : ;
+IF -> elif EXP : ;
+IF -> else : ;
+
+Z -> EXPL Z' ;
+Z -> Z' ;
+Z' -> = EXPL Z' ;
+Z' -> ~ ;
+EXPL -> EXP EXPL' ;
+EXPL' -> , EXP EXPL' ;
+EXPL' -> ~ ;
+EXP -> T E' ;
+E' -> == T E' ;
+E' -> != T E' ;
+E' -> ~ ;
+T -> F T' ;
+T' -> << F T' ;
+T' -> >> F T' ;
+T' -> ~ ;
+F -> G F' ;
+F' -> + G F' ;
+F' -> - G F' ;
+F' -> ~ ;
+G -> H G' ;
+G' -> * H G' ;
+G' -> / H G' ;
+G' -> ~ ;
+H -> not H ;
+H -> K ;
+K -> ( Z ) ;
+K -> var FUNC ;
+
+FUNC -> ~ ;
+FUNC -> ( Z ) ;
+
+JUMP -> continue ;
+JUMP -> break ;
+JUMP -> pass ;
+JUMP -> return Z ;
+
+DEF -> def Z : ;
+
+PRINT -> print EXP ;
+
+END
+
+已经测试产生式中FUNC和EXPL模块正确

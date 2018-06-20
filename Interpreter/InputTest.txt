@@ -1,0 +1,76 @@
+SEN -> LOOP ;
+SEN -> IF ;
+SEN -> JUMP ;
+SEN -> DEF ;
+SEN -> PRINT ;
+SEN -> Z ;
+
+LOOP -> while EXP : ;
+LOOP -> for var in Z : ;
+
+IF -> if EXP : ;
+IF -> elif EXP : ;
+IF -> else : ;
+
+Z -> EXPL Z' ;
+Z -> Z' ;
+Z' -> = EXPL Z' ;
+Z' -> ~ ;
+EXPL -> EXP EXPL' ;
+EXPL' -> , EXP EXPL' ;
+EXPL' -> ~ ;
+EXP -> M L ;
+L -> and M L ;
+L -> or M L ;
+L -> ~ ;
+M -> N M' ;
+M' -> == N M' ;
+M' -> != N M' ;
+M' -> ~ ;
+N -> O N' ;
+N' -> >= O N' ;
+N' -> <= O N' ;
+N' -> > O N' ;
+N' -> < O N' ;
+N' -> ~ ;
+O -> T O' ;
+O' -> ^ T O' ;
+O' -> | T O' ;
+O' -> & T O' ;
+O' -> ~ ;
+T -> F T' ;
+T' -> << F T' ;
+T' -> >> F T' ;
+T' -> ~ ;
+F -> G F' ;
+F' -> + G F' ;
+F' -> - G F' ;
+F' -> ~ ;
+G -> H G' ;
+G' -> * H G' ;
+G' -> / H G' ;
+G' -> % H G' ;
+G' -> // H G' ;
+G' -> ~ ;
+H -> not H ;
+H -> - H ;
+H -> + H ;
+H -> K ;
+K -> ( Z ) ;
+K -> var FUNC ;
+
+FUNC -> ~ ;
+FUNC -> ( Z ) ;
+
+JUMP -> continue ;
+JUMP -> break ;
+JUMP -> pass ;
+JUMP -> return Z ;
+
+DEF -> def Z : ;
+
+PRINT -> print EXP ;
+
+END
+
+已经测试产生式中FUNC和EXPL模块正确

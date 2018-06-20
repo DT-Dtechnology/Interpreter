@@ -1,27 +1,39 @@
 #pragma once
 #include "Sentence.h"
 #include "Word.h"
-#include <vector>
 #include "Node.h"
+#include <queue>
 
 class Block;
+enum ControlStatus;
 
-typedef std::vector<Word> WordVector;
+typedef std::queue<Word> WordQueue;
 
 class SentenceParser
 {
 	Sentence* sentence_;
 	Block* cur_block_;
-	WordVector word_vector_;
-	Node* root_;
+	WordQueue word_queue_;
+	Node* root_ = nullptr;
 
 	void divide();
 	void buildTree();
-	void parserNode(Node*);
-	void parserRoot() { parserNode(root_); }
+	void parserRoot(){ root_ = FuncSwitcher(cur_block_,root_); }
+	void prepareNode(Node*);
+	void prepareRoot() { prepareNode(root_); }
+	ControlStatus getStatus() const;
 public:
-	SentenceParser();
-	~SentenceParser();
-	void work();
+	SentenceParser(Sentence* sentence) :sentence_(sentence) { }
+	~SentenceParser() { delete root_; };
+	ControlStatus work();
+	void upFloat();
+	void setBlock(Block* cur) { cur_block_ = cur; }
+	void print_test_first();
+	void print_test_second();
+	
+	static void build_all();
+	void print_test() const;
+
+	friend Traveller;
 };
 

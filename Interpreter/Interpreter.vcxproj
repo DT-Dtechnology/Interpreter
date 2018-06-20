@@ -90,11 +90,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -148,29 +152,38 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="IDLE.h" />
+    <ClInclude Include="InputHelper.h" />
     <ClInclude Include="Inputter.h" />
-    <ClInclude Include="InputterTest.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="OperatorSet.h" />
+    <ClInclude Include="ParseFuncSwitcher.h" />
     <ClInclude Include="PVM.h" />
     <ClInclude Include="QuoteDetecter.h" />
+    <ClInclude Include="SenDivider.h" />
     <ClInclude Include="Sentence.h" />
     <ClInclude Include="SentenceParser.h" />
-    <ClInclude Include="SentenceVector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Traveller.h" />
+    <ClInclude Include="TypeDetecter.h" />
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="IDLE.cpp" />
     <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="ParseFuncSwitcher.cpp" />
     <ClCompile Include="PVM.cpp" />
-    <ClCompile Include="Sentence.cpp" />
+    <ClCompile Include="SenDivider.cpp" />
     <ClCompile Include="SentenceParser.cpp" />
-    <ClCompile Include="SentenceVector.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -180,7 +193,17 @@
     <ClCompile Include="Traveller.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="InputterTest.txt" />
+    <None Include="Test1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="InputHelp.txt" />
+    <Text Include="InputTable.txt" />
+    <Text Include="InputTest.txt" />
+    <Text Include="NewTable.txt" />
+    <Text Include="TrueInference.txt" />
+    <Text Include="修改表.txt" />
+    <Text Include="原生城市.txt" />
+    <Text Include="备注.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
