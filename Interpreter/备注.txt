@@ -19,24 +19,6 @@ List倒转问题 应经完成
 
 重要问题：
 函数名倒转问题
-
-现存错误列表：
-(1)	：前面没有空格情况，没有分开
-(2)	
-a = 1
-if a == 1 :
-	while a <= 2 :
-		a = a + 1
-		if a != 3 :
-			print a
-			print "a != 3 "
-		elif a == 3 :
-			print a
-			print a
-			print "a == 3"
-        else :
-			print "?"
-程序迷之错误
-(3)
-
+需要将and/or/not关键字变为运算符
+移位运算未正确生成树，疑似上浮问题
 

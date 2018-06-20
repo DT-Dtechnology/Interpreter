@@ -7,6 +7,8 @@
 using std::string;
 
 WordType DetectType(const string &word) {
+	if (word == "and" || word == "or" || word == "not")
+		return operate;
 	if ((word[0] == '\'' && word[word.length() - 1] == '\'')
 		|| (word[0] == '\"' && word[word.length() - 1] == '\"')) {
 		//begin with quotation marks

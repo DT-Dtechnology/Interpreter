@@ -275,7 +275,7 @@ WordQueue* SenDivider::work()
 		}
 	}
 
-	int size = tvt->size();
+	const int size = tvt->size();
 	for (int i = 0; i < size; ++i) {
 		if (!leftmark.empty() && i == leftmark.front()) {
 			nvt->push_back(func_name->front());

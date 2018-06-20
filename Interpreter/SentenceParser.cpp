@@ -223,11 +223,10 @@ ControlStatus SentenceParser::work()
 {
 	divide();
 	buildTree();
-
 	prepareRoot();
+	print_test();
 
 	upFloat();
-
 	print_test();
 	
 	parserRoot();
@@ -338,7 +337,7 @@ void SentenceParser::upFloat()
 					it = node->getChild()->erase(it - 1);
 					break;
 				}
-				it++;
+				++it;
 			}
 		}
 		
@@ -399,32 +398,18 @@ void SentenceParser::print_test_first()
 	divide();
 	while (!word_queue_.empty())
 	{
-
-//		std::cout << word_queue_.front().getMsg() <<":"<< word_queue_.front().getType()<< "/";
 		word_queue_.pop();
 	}
-//	std::cout << std::endl;
+
 }
 
 void SentenceParser::print_test_second()
 {
 	divide();
 	buildTree();
-	/*
-	cout << "Let Us Print." << endl;
-	print_node(root_, 0);
-	cout << endl << endl;
-	system("pause");
-	*/
 	
 	prepareRoot();
-	/*
-	cout << "Let Us Print." << endl;
-	print_node(root_, 0);
-	cout << endl << endl;
-	system("pause");
-	*/
-	// ######
+	
 	
 	upFloat();
 	cout << "Let Us Print." << endl;
