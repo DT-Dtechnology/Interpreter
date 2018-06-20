@@ -362,7 +362,7 @@ Object * DoubleObject::less(Object * right) {
 }
 
 Object * LongObject::leftmove(Object *right) {
-	if (right->getType() == LongObj) {
+	if (right->getType() == LongObj || right->getType() == DoubleObj) {
 		long rval = right->get_val();
 		long curval = this->get_val();
 		return new LongObject(curval << rval);
@@ -374,7 +374,7 @@ Object * LongObject::leftmove(Object *right) {
 	}
 }
 Object * LongObject::rightmove(Object *right) {
-	if (right->getType() == LongObj) {
+	if (right->getType() == LongObj || right->getType() == DoubleObj) {
 		long rval = right->get_val();
 		long curval = this->get_val();
 		return new LongObject(curval >> rval);
@@ -640,4 +640,29 @@ Object * DoubleObject::negative() {
 void ListObject::append(Object* obj)
 {
 	value_.push_back(obj);
+}
+
+Object * DoubleObject::leftmove(Object *right) {
+	if (right->getType() == LongObj || right->getType() == DoubleObj) {
+		long rval = right->get_val();
+		long curval = this->get_val();
+		return new LongObject(curval << rval);
+	}
+	else {
+		throw Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
+}
+Object * DoubleObject::rightmove(Object *right) {
+	if (right->getType() == LongObj || right->getType() == DoubleObj) {
+		long rval = right->get_val();
+		long curval = this->get_val();
+		return new LongObject(curval >> rval);
+	}
+	else {
+		throw Error("TypeError: unsupported operand types");
+		system("pause");
+		return nullptr;
+	}
 }

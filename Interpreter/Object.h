@@ -201,6 +201,9 @@ public:
 	Object * less_or_equal(Object *) override;
 	Object * less(Object *) override;
 
+	Object * rightmove(Object* obj) override;
+	Object * leftmove(Object* obj) override;
+
 	Object * equal(Object *)override;
 	Object * not_equal(Object *)override;
 
