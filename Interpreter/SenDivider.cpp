@@ -114,7 +114,7 @@ WordQueue* SenDivider::work()
 			continue;
 		}
 
-		if (command[i] == ' ')
+		if (command[i] == ' ' || command[i] == ':')
 		{
 			string str = spaceKiller(command.substr(start_posi, temp - start_posi));
 			if (str.length() != 0)
@@ -136,8 +136,6 @@ WordQueue* SenDivider::work()
 	string str = spaceKiller(command.substr(start_posi, command.length() - start_posi));
 	if (str.length() != 0)
 		word_list->push(Word(DetectType(str), str));
-
-	
 
 	WordQueue* new_word_list = new WordQueue;
 	WordStack word_stack;

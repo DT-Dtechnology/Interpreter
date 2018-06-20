@@ -234,7 +234,7 @@ Object * DoubleObject::divide(Object *right) {
 }
 
 Object * StringObject::add(Object * right) {
-	ObjectType rtype = right->getType();
+	const ObjectType rtype = right->getType();
 	
 	if (rtype == StringObj) {
 		StringObject *new_rgt = dynamic_cast<StringObject *>(right);
@@ -242,7 +242,7 @@ Object * StringObject::add(Object * right) {
 		string r = new_rgt->get_val();
 		string res = "\'";
 		if (!(l[0] == '\'' && l[l.length() - 1] == '\'') || (l[0] == '\"' && l[l.length() - 1] == '\"')) {
-			if (!(r[0] == '\'' && r[l.length() - 1] == '\'') || (r[0] == '\"' && r[l.length() - 1] == '\"')) {
+			if (!((r[0] == '\'' && r[r.length() - 1] == '\'') || (r[0] == '\"' && r[r.length() - 1] == '\"'))) {
 				throw Error("quotation mark missing ");
 				system("pause");
 				return nullptr;
