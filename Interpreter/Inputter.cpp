@@ -154,7 +154,7 @@ SenVector* Inputter::get_sentence_vector() const
 	SenVector* new_sv = new SenVector;
 	int row = row_cnt + endMark.size() + tail->size();
 
-	cout << "endMark :" << endl;
+	/* cout << "endMark :" << endl;
 	for (auto i : endMark) {
 		cout << std::get<0>(i) << "\t" << std::get<1>(i) << '\t' << std::get<2>(i) << endl;
 	}
@@ -163,6 +163,7 @@ SenVector* Inputter::get_sentence_vector() const
 		cout << i->getOrder() << endl;
 	}
 	cout << "-------" << endl;
+	*/
 	for (auto it = tail->begin(); it != tail->end(); ++it)
 	{
 		new_sv->push_back(*it);
@@ -203,13 +204,14 @@ SenVector* Inputter::get_sentence_vector() const
 		i->setRow(new_row++);
 	}
 	
+	/*
 	for (auto i : *new_new_sv) {
 		const int tab_cnt = i->getTab();
 		for (auto in_it = 0; in_it < tab_cnt; ++in_it) {
 			cout << "  ";
 		}
 		cout << i->getOrder() << endl;
-	}
+	}*/
 
 	return new_new_sv;
 }
