@@ -118,6 +118,18 @@
     <None Include="Test1.txt">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="test1.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test2.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test3.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="testForNamespace.py">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputTest.txt">
