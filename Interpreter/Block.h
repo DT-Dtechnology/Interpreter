@@ -6,6 +6,7 @@
 class Object;
 class Block;
 class Traveller;
+class IDLE;
 
 using std::stack;
 using std::map;
@@ -55,4 +56,5 @@ public:
 	Object* return_value() const { return return_pos_; };
 
 	friend Traveller;
+	friend IDLE;
 };

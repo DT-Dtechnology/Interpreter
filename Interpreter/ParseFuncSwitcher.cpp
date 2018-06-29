@@ -236,7 +236,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			if (node->childVector_.size() != 0)
 				return FuncSwitcher(cur, node->childVector_[0]);
 			cout << node->getNodeType() << endl;
-			system("pause");
+			throw Error("I think you have not input anything");
 			return new Node(node->getNodeType());
 	}
 }

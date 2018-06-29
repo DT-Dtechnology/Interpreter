@@ -95,9 +95,6 @@
     <ClCompile Include="Block.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PVM.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ParseFuncSwitcher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

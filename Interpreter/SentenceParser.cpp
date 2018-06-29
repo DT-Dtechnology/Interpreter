@@ -226,10 +226,8 @@ ControlStatus SentenceParser::work()
 	prepareRoot();
 
 	upFloat();
-	print_test();
 	
 	parserRoot();
-	system("pause");
 	return getStatus();
 }
 

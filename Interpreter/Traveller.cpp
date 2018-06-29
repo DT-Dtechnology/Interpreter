@@ -10,7 +10,6 @@ void Traveller::work()
 		{
 			if (status_.top() == IFTRUE)
 				status_.pop();
-			
 			++current_;
 			continue;
 		}
@@ -78,16 +77,14 @@ void Traveller::work()
 			status_.pop();
 			continue;
 		}
+
 		SentenceParser* sp = new SentenceParser(*current_);
 		sp->setBlock(c_block_);
 		const ControlStatus status = sp->work();
+
 		if(status == RETURNSTA)
 		{
 			c_block_->return_pos_ = sp->root_->getValue();
-			if (c_block_->return_pos_)
-			{
-				c_block_->return_pos_->print_test();
-			}
 			return;
 		}
 		const int cur_tabs = (*current_)->tab_cnt_;
@@ -139,12 +136,7 @@ void Traveller::work()
 						block->sentence_vector_->push_back(*current_);
 						++current_;
 					}
-					cout << "Def a Function" << endl;
-					for(auto it = block->sentence_vector_->begin() ; it != block->sentence_vector_->end();
-						++it)
-					{
-						cout << (*it)->getOrder() << endl;
-					}
+					
 				}
 			}
 		}
