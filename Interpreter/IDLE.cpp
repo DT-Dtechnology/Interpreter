@@ -7,10 +7,18 @@ using std::endl;
 
 void IDLE::input()
 {
-	string order;
+	string tmp;
+	int tab_cnt = 0;
 	cout << ">>>";
 	print_tab();
-	std::getline(cin, order);
+	std::getline(cin, tmp);
+	while (tmp[tab_cnt] == '\t')
+	{
+		++tab_cnt;
+	}
+	string order = tmp.substr(tab_cnt, tmp.length() - tab_cnt);
+	if(order == "")
+		return;
 	Sentence* sentence = new Sentence(order, cur_tab, 0);
 	parse_sen(sentence);
 	cur_tab = 0;
@@ -20,12 +28,18 @@ void IDLE::input()
 
 bool IDLE::getNext(Block* block)
 {
-	string order;
+	string tmp;
+	int tab_cnt = 0;
 	print_tab();
-	std::getline(cin, order);
+	std::getline(cin, tmp);
+	while(tmp[tab_cnt] == '\t')
+	{
+		++tab_cnt;
+	}
+	string order = tmp.substr(tab_cnt, tmp.length()-tab_cnt);
 	if (order == "")
 		return true;
-	Sentence* sentence = new Sentence(order, cur_tab, 0);
+	Sentence* sentence = new Sentence(order, cur_tab+tab_cnt, 0);
 	block->sentence_vector_->push_back(sentence);
 	return false;
 }
@@ -60,6 +74,36 @@ void IDLE::parse_sen(Sentence* sentence)
 		// cout << "EndDefFunc" << endl;
 		delete sp;
 		return;
+	}
+	if(status == IFTRUE || status == IFFALSE || status == LOOPTRUE || status == LOOPFALSE)
+	{
+		// 构造临时使用的块，最后调整命名空间，使其命名空间与Global_一致
+		Block* tmp_block = new Block();
+		tmp_block->sentence_vector_->push_back(sentence);
+		
+
+		while (true)
+		{
+			if (getNext(tmp_block))
+			{
+				if (getNext(tmp_block))
+				{
+					break;
+				}
+			}
+		}
+		string EndFlag;
+		if (status == IFTRUE || status == IFFALSE)
+			EndFlag = "endIf";
+		else
+			EndFlag = "endLoop";
+		tmp_block->sentence_vector_->push_back(new Sentence(EndFlag, cur_tab, 0));
+
+		Traveller traveller = Traveller(tmp_block);
+		tmp_block->block_space_stack_.pop();
+		tmp_block->block_space_stack_.push(Global_);
+		traveller.work();
+		
 	}
 }
 

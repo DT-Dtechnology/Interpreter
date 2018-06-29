@@ -10,7 +10,6 @@ void Traveller::work()
 		{
 			if (status_.top() == IFTRUE)
 				status_.pop();
-			
 			++current_;
 			continue;
 		}
