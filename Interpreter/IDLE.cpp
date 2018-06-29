@@ -5,6 +5,33 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+inline bool isPython(const string& order)
+{
+	return order.length() >= 6 && (order.substr(0, 6) == "python");
+}
+
+string getFileName(const string& order)
+{
+	int start = 0, end = 0;
+	for(auto it = 0 ; it < order.length() ; ++it)
+	{
+		if (order[it] == '\'' || order[it] == '\"')
+		{
+			start = it + 1;
+			break;
+		}
+	}
+	for (auto it = start + 1; it < order.length(); ++it)
+	{
+		if (order[it] == '\'' || order[it] == '\"')
+		{
+			end = it;
+			break;
+		}
+	}
+	return order.substr(start, end - start);
+}
+
 void IDLE::input()
 {
 	string tmp;
@@ -19,6 +46,12 @@ void IDLE::input()
 	string order = tmp.substr(tab_cnt, tmp.length() - tab_cnt);
 	if(order == "")
 		return;
+	if(isPython(order))
+	{
+		PVM pvm(getFileName(order));
+		pvm.work();
+		return;
+	}
 	Sentence* sentence = new Sentence(order, cur_tab, 0);
 	parse_sen(sentence);
 	cur_tab = 0;

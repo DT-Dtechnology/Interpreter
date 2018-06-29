@@ -5,7 +5,6 @@ class IDLE
 {
 	Block* Global_;
 
-	bool repeat_ = false;
 	int cur_tab = 0;
 
 	void input();
