@@ -23,7 +23,7 @@ def is_prime(num):
 
 
 def main():
-	for i in (100,101):
+	for i in (100,200):
 		if is_prime(i):
 			continue
 		j = 2
