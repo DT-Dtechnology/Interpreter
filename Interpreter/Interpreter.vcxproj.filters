@@ -131,9 +131,6 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="InputTest.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="InputHelp.txt">
       <Filter>资源文件</Filter>
     </Text>
