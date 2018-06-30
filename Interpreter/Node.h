@@ -48,7 +48,10 @@ class Node
 	NodeType nodeType_;
 public:
 	Node() = default;
-	~Node() = default;
+	~Node() {
+		delete value_;
+		delete parent_;
+	}
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
 	void setNodeType(NodeType type) { nodeType_ = type; }

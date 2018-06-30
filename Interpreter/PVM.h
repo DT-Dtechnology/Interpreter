@@ -21,7 +21,10 @@ public:
 	{
 		input();
 	}
-	~PVM() = default;
+	~PVM() {
+		delete Global_;
+		delete Global_Traveler_;
+	}
 	void work() const
 	{
 		run();

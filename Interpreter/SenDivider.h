@@ -16,7 +16,9 @@ class SenDivider
 	Block* cur_block;
 public:
 	SenDivider(const string& order) :command(order) {}
-	~SenDivider() = default;
+	~SenDivider() {
+		delete cur_block;
+	}
 	WordQueue* work();
 	//####
 };

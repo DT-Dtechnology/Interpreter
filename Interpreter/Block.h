@@ -39,7 +39,11 @@ class Block
 public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	Block() { sentence_vector_ = new SenVector; };
-	~Block() = default;
+	~Block() {
+		delete sentence_vector_;
+		delete return_pos_;
+		para_name_.clear();		
+	}
 	
 	Block* addFunc(const string& name, const vector<string>& name_list);
 	Block* searchFunc(const string& name);
