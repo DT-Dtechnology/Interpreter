@@ -471,5 +471,6 @@ Node* assFunc(Node* left, Node* right)
 Node* printFunc(Node* node)
 {
 	node->getValue()->print();
+	cout << endl;
 	return node;
 }

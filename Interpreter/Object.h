@@ -164,7 +164,7 @@ public:
 
 	Object * negative() override;
 
-	void print() const { std::cout << value_ << std::endl; }
+	void print() const { std::cout << value_; }
 };
 
 
@@ -198,7 +198,7 @@ public:
 
 	Object * negative() override;
 
-	void print() const { std::cout << value_ << std::endl; }
+	void print() const { std::cout << value_ ; }
 };
 
 class StringObject: public Object
@@ -216,7 +216,7 @@ public:
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
 
-	void print() const { std::cout << value_.substr(1, value_.length() - 2) << std::endl; }
+	void print() const { std::cout << value_.substr(1, value_.length() - 2) ; }
 };
 
 class BoolObject: public Object
@@ -239,12 +239,12 @@ public:
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
 
-	void print() const
+	void print() const override
 	{
 		if (value_)
-			std::cout << "True" << std::endl;
+			std::cout << "True" ;
 		else
-			std::cout << "False" << std::endl;
+			std::cout << "False" ;
 	}
 };
 
@@ -270,7 +270,7 @@ public:
 			std::cout << ", ";
 		}
 		(*it)->print();
-		std::cout << " )" << std::endl;
+		std::cout << " )" ;
 			
 	}
 };
