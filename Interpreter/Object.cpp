@@ -11,6 +11,7 @@ double Object::get_val() {
 		DoubleObject *new_rgt = dynamic_cast<DoubleObject *>(this);
 		return new_rgt->get_val();
 	}
+	throw Error("Wrong Get Value Function");
 }
 
 
@@ -24,8 +25,6 @@ Object* Object::add(Object* obj)
 Object* Object::minus(Object* obj)
 {
 	throw Error("unprovoked call");
-	system("pause");
-	return nullptr;
 }
 Object* Object::multiply(Object* obj)
 {
@@ -168,8 +167,6 @@ Object * DoubleObject::multiply(Object *right) {
 	}
 	else {
 		throw Error("TypeError: unsupported operand types");
-		system("pause");
-		return nullptr;
 	}
 }
 Object * DoubleObject::divide(Object *right) {
@@ -388,8 +385,6 @@ Object * StringObject::mod(Object *right) {
 	}
 	else {
 		throw Error("TypeError: unsupported operand types");
-		system("pause");
-		return nullptr;
 	}
 
 	string line = this->get_val();
@@ -422,14 +417,8 @@ Object * StringObject::mod(Object *right) {
 			return new StringObject(res);
 		}
 	}
-	else {
-		correct = false;
-	}
-	if (!correct) {
+	else
 		throw Error("quotation mark missing OR mismatch");
-		system("pause");
-		return nullptr;
-	}
 }
 
 Object * BoolObject::And(Object *right) {
@@ -485,8 +474,6 @@ Object * LongObject::not_equal(Object *right) {
 	}
 	else {
 		throw Error("TypeError: unsupported operand types");
-		system("pause");
-		return nullptr;
 	}
 }
 
