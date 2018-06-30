@@ -6,13 +6,9 @@
 #include "InputHelper.h"
 
 /*
- * 必须修改：
- * 这个文件明显需要修改，全部为全局变量和全局函数，十分不符合OOP思想
  * 
  * 该文件的作用生成所需要的全部矩阵、映射等信息。只是程序运行的数据基础。
  */
-
-//####
 
 using std::string;
 using std::map;
@@ -21,23 +17,19 @@ using std::getline;
 const int MatrixRow = 27;
 const int MatrixColumn = 39;
 
-//####
 bool isUnTerminate[256];
 bool isTerminate[256];
 
 string Matrix[MatrixRow][MatrixColumn];
 
 // 非终结符对应的行号
-// eg: SEN
 map<NodeType, int> nodeToInt;
 map<char, NodeType> charToNode;
 map<string, char> stringToChar;
 map<char, string> charToString;
 // 终结符对应的列号
-// eg: ==
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
-// test用
 map<NodeType, string> nodeToString;
 
 void buildMaps()
@@ -79,11 +71,6 @@ void buildStoN()
 	}
 		
 }
-
-void testBoolMap();
-void testStoI();
-void testNtoI();
-void testCtoN();
 
 void buildAll()
 {
@@ -173,7 +160,6 @@ void buildMatrix()
 			{
 				if (str != "")
 				{
-					//cout << "ok" << endl;
 					Matrix[row][column] = str;
 					str = "";
 					column++;
@@ -186,79 +172,6 @@ void buildMatrix()
 	}
 }
 
-void printMatrix()
-{
-	for (int i = 0; i < MatrixRow; i++)
-	{
-		for (int j = 0; j < MatrixColumn; j++)
-			cout << Matrix[i][j] << " ";
-		cout << endl;
-	}
-}
-
-// test
-void testBoolMap()
-{
-	cout << "isUnTerminate test\n";
-	for (int i = 0; i < 128; i++)
-		cout << char(i) << " " << isUnTerminate[i] << endl;
-	cout << endl;
-	cout << "isTerminate test\n";
-	for (int i = 0; i < 128; i++)
-		cout << char(i) << " " << isTerminate[i] << endl;
-}
-
-void testStoI()
-{
-	for (auto it = stringToInt.begin(); it != stringToInt.end(); it++)
-		cout << it->first << " " << it->second << endl;
-	system("pause");
-	for (auto it = stringToChar.begin(); it != stringToChar.end(); ++it)
-		cout << it->first << " " << it->second << endl;
-	system("pause");
-}
-
-void testNtoI()
-{
-	for (auto it = nodeToInt.begin(); it != nodeToInt.end(); it++)
-		cout << it->first << " " << it->second << endl;
-}
-
-void testCtoN()
-{
-	for (auto it = charToNode.begin(); it != charToNode.end(); ++it)
-		cout << it->first << " " << nodeToString[it->second] << endl;
-	for (auto it = charToString.begin(); it!=charToString.end();++it)
-		cout << it->first << " " << it->second << endl;
-}
-
-
-inline void print_node(Node* node, int depth)
-{
-	for (int i = 0; i < depth; ++i)
-		cout << "||";
-	if (node->nodeType_ != NodeType::TERMINATE)
-	{
-		cout << nodeToString[node->getNodeType()] << " ";
-		cout << endl;
-	}
-	if (node->nodeType_ == NodeType::TERMINATE)
-	{
-		TempObject* tmp = dynamic_cast<TempObject*>(node->value_);
-		if (tmp)
-			tmp->print_test();
-		else
-			cout << nodeToString[node->getNodeType()] << endl;
-		cout << endl;
-	}
-	if(node->childVector_.size() > 0)
-	{
-		for (auto it = node->childVector_.begin(); it != node->childVector_.end(); ++it)
-		{
-			print_node(*it, depth+1);
-		}
-	}
-}
 
 bool isOperator[100];
 bool doubleOperator[100];
@@ -278,11 +191,8 @@ inline void buildisOper()
 		WEI_AND, WEI_OR, WEI_YIHUO, MOD, ZHENG_DIVIDE, AND, OR
 	};
 
-	// ####
-	// ()记得要去掉
 	for (auto& it : operlist)
 	{
-		//cout << nodeToString[operlist[it]] << endl;
 		isOperator[it] = true;
 	}
 

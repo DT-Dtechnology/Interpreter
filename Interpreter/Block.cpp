@@ -47,9 +47,6 @@ Block* Block::searchObjectBlock(const string& var_name)
 		return_object = block_space_stack_.top()->var_table_[var_name];
 		if (return_object != nullptr)
 		{
-			// cout << "Find " << var_name << endl;
-			// system("pause");
-
 			block = block_space_stack_.top();
 			returnSpace();
 			return block;
@@ -79,8 +76,6 @@ Object* Block::searchObject(const string& var_name)
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
-	// cout << "Not Find " << var_name << endl;
-	// system("pause");
 	returnSpace();
 	return return_object;
 }
@@ -117,9 +112,6 @@ Object* Block::changeVar(const string& var_name, Object* object)
 		StringObject* new_obj = new StringObject(*obj);
 		var_table_[var_name] = new_obj;
 	}
-	else
-	{
-	}
 	
 	return object;
 }
@@ -133,29 +125,5 @@ void Block::setValue(const vector<Object*>& obj_vec)
 		changeVar(*name_it, *value_it);
 		++name_it;
 		++value_it;
-	}
-}
-
-void Block::print_all() const
-{
-	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
-	{
-		SentenceParser* sp = new SentenceParser((*it));
-		// #### 
-		// 这里不是非常安全
-		// 后期会考虑改为将所有的传入Block*的参数全部转化为const Block*
-		//sp->setBlock();
-		sp->print_test_second();
-		delete sp;
-	}
-}
-
-void Block::print_all_old() const
-{
-	for (auto it = sentence_vector_->begin(); it != sentence_vector_->end(); ++it)
-	{
-		SentenceParser* sp = new SentenceParser((*it));
-		sp->print_test_first();
-		delete sp;
 	}
 }

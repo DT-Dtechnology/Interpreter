@@ -23,8 +23,6 @@ WordType DetectType(const string &word) {
 			if (i >= '0' && i <= '9')
 				++num_cnt;
 			if (i == '.' && dotexist) {
-				//;;####
-				//12.12.12
 				return WordType::word_type_error;
 			}
 			if (i == '.' && !dotexist)
@@ -55,7 +53,6 @@ WordType DetectType(const string &word) {
 					return WordType::variable;
 				}
 				else {
-					//;;####
 					//begin with _ or a-z or A-Z but contain other character
 					return WordType::word_type_error;
 				}

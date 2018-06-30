@@ -72,7 +72,6 @@ typedef stack<Word> WordStack;
 
 WordQueue* SenDivider::work()
 {
-	//####
 
 	WordQueue* word_list = new WordQueue;
 	int start_posi = 0;

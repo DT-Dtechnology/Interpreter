@@ -40,12 +40,16 @@ public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	Block() { sentence_vector_ = new SenVector; };
 	~Block() {
-		while (!sentence_vector_->empty()) {
+		getchar();
+		if (return_pos_)
+			delete return_pos_;
+		if (sentence_vector_) {
+			while (!sentence_vector_->empty()) {
 				auto i = sentence_vector_->front();
 				delete i;
 			}
 			delete sentence_vector_;
-
+		}
 		while (!block_space_stack_.empty()) {
 			auto i = block_space_stack_.top();
 			delete i;
@@ -64,9 +68,6 @@ public:
 	Object* changeVar(const string& var_name, Object* object);
 
 	void setValue(const vector<Object*>&);
-
-	void print_all() const;
-	void print_all_old() const;
 
 	Object* return_value() const { return return_pos_; };
 

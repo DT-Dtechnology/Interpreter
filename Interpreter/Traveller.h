@@ -48,7 +48,6 @@ public:
 	};
 	// For PVM
 	void work();
-	void work_test() const;
 
 	// For IDLE
 	void passOne(ControlStatus);

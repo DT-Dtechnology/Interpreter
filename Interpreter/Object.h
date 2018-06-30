@@ -36,7 +36,6 @@ public:
 	ObjectType getType() const { return type_; }
 	void setUnTemp() { isTemp_ = false; }
 	bool getStatus() const { return isTemp_; }
-	virtual void print_test() const { std::cout << "Temp " << name_ << std::endl; }
 	virtual void print() const {}
 
 	double get_val();
@@ -119,10 +118,6 @@ public:
 		var_name_ = var_name;
 	}
 	~TempObject() = default;
-	void print_test() const override
-	{
-		std::cout <<var_name_ ;
-	}
 	string getName() const { return var_name_; }
 };
 
@@ -141,7 +136,6 @@ class LongObject :	public Object
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val)
 	{
-		// std::cout << "Long " << value_ << std::endl;
 	}
 	~LongObject() = default;
 	
@@ -170,12 +164,6 @@ public:
 
 	Object * negative() override;
 
-
-	void print_test() const override
-	{
-		std::cout << "Long " << value_ << std::endl;
-	}
-
 	void print() const { std::cout << value_ << std::endl; }
 };
 
@@ -185,7 +173,6 @@ class DoubleObject : public Object {
 public:
 	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val)
 	{
-		// std::cout <<"Double " << value_ << std::endl;
 	}
 	~DoubleObject() = default;
 	
@@ -211,11 +198,6 @@ public:
 
 	Object * negative() override;
 
-	void print_test() const override
-	{
-		std::cout << "Double " << value_ << std::endl;
-	}
-
 	void print() const { std::cout << value_ << std::endl; }
 };
 
@@ -234,7 +216,7 @@ public:
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
 
-	void print() const { std::cout << value_.substr(1, value_.length()-2) << std::endl; }
+	void print() const { std::cout << value_.substr(1, value_.length() - 2) << std::endl; }
 };
 
 class BoolObject: public Object
@@ -257,11 +239,6 @@ public:
 	Object * equal(Object *) override;
 	Object * not_equal(Object *)override;
 
-	void print_test() const override
-	{
-		std::cout << "Bool " << value_ << std::endl;
-	}
-
 	void print() const
 	{
 		if (value_)
@@ -281,18 +258,6 @@ public:
 
 	vector<Object *> * get_val() {
 		return &value_;
-	}
-
-	//for test
-	ListObject(vector<Object*> temp_):Object(ObjectType::ListObj) {
-		value_.assign(temp_.begin(), temp_.end());
-	}
-
-	void print_test() const override
-	{
-		std::cout << "List " << std::endl;
-		for (auto it = value_.begin(); it != value_.end(); ++it)
-			(*it)->print_test();
 	}
 
 	void print() const 
