@@ -32,11 +32,8 @@ public:
 	ControlStatus work();
 	void upFloat();
 	void setBlock(Block* cur) { cur_block_ = cur; }
-	void print_test_first();
-	void print_test_second();
 	
 	static void build_all();
-	void print_test() const;
 
 	friend Traveller;
 	friend IDLE;

@@ -73,8 +73,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 
 		case LISTFLAG:
 		// We should return a node with a list object here.
-			// ############
-			// BIG ERROR 建立无数次单个元素的List
 			obj = ObjectFactory::createObject(cur, node);
 			new_node = new Node(NodeType::VALUE);
 			new_node->setValue(obj);
@@ -96,10 +94,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			new_node = new Node(NodeType::IF);
 			new_node->setValue(new BoolObject(true));
 			return new_node;
-		// ######
-		// 注意LOOP的两种类型
-		// 需要条件判断
-		// case LOOP:
 		
 		case WHILE:
 			new_node = new Node(NodeType::LOOP);
@@ -411,7 +405,6 @@ Node* posiFunc(Node* node)
 }
 Node* negeFunc(Node* node)
 {
-	// ######
 	node->setNodeType(VALUE);
 	node -> setValue(node->getValue() -> negative());
 	return node;

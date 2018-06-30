@@ -390,43 +390,10 @@ void SentenceParser::upFloat()
 	}
 }
 
-void SentenceParser::print_test_first()
-{
-	divide();
-	while (!word_queue_.empty())
-	{
-		word_queue_.pop();
-	}
-
-}
-
-void SentenceParser::print_test_second()
-{
-	divide();
-	buildTree();
-	
-	prepareRoot();
-	
-	
-	upFloat();
-	cout << "Let Us Print." << endl;
-	print_node(root_, 0);
-	cout << endl << endl;
-	parserRoot();
-	system("pause");
-}
-
 void SentenceParser::build_all()
 {
 	buildAll();
 	//printMatrix();
-}
-
-void SentenceParser::print_test() const
-{
-	cout << "Let Us Print." << endl;
-	print_node(root_, 0);
-	cout << endl << endl;
 }
 
 Object* getObject(Block* cur_block, string name)

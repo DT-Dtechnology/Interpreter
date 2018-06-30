@@ -18,5 +18,4 @@ public:
 	SenDivider(const string& order) :command(order) {}
 	~SenDivider() = default;
 	WordQueue* work();
-	//####
 };

@@ -213,14 +213,6 @@ SenVector* Inputter::get_sentence_vector() const
 		i->setRow(new_row++);
 	}
 	
-	/*
-	for (auto i : *new_new_sv) {
-		const int tab_cnt = i->getTab();
-		for (auto in_it = 0; in_it < tab_cnt; ++in_it) {
-			cout << "  ";
-		}
-		cout << i->getOrder() << endl;
-	}*/
 	senVec_delete(tail);
 	senVec_delete(sen_vector);
 	senVec_delete(new_sv);
