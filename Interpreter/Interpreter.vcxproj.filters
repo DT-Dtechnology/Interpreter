@@ -127,6 +127,8 @@
     <None Include="test1.py">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputTest.txt">
@@ -138,19 +140,7 @@
     <Text Include="InputTable.txt">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="TrueInference.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="NewTable.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="备注.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="修改表.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="原生城市.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

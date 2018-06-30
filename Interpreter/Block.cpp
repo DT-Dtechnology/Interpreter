@@ -57,8 +57,6 @@ Block* Block::searchObjectBlock(const string& var_name)
 		temp_space_stack_.push(block_space_stack_.top());
 		block_space_stack_.pop();
 	}
-	// cout << "Not Find " << var_name << endl;
-	// system("pause");
 	returnSpace();
 	block = block_space_stack_.top();
 	delete return_object;

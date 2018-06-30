@@ -40,17 +40,12 @@ public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	Block() { sentence_vector_ = new SenVector; };
 	~Block() {
-		std::cout << "deleteing block: " << std::endl;
-		getchar();
-		if (return_pos_)
-			delete return_pos_;
-		if (sentence_vector_) {
-			while (!sentence_vector_->empty()) {
+		while (!sentence_vector_->empty()) {
 				auto i = sentence_vector_->front();
 				delete i;
 			}
 			delete sentence_vector_;
-		}
+
 		while (!block_space_stack_.empty()) {
 			auto i = block_space_stack_.top();
 			delete i;

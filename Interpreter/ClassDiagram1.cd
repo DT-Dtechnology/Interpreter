@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Block" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAUAQAAAgAAAAAAIAASKAAEAIACAAQAAEAAABIIE=</HashCode>
+      <FileName>Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDLE" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAgAIAAAAAAAAAAAAAAAAAAAQABIAgAACAAACAAA=</HashCode>
+      <FileName>IDLE.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InputHelper" Collapsed="true">
+    <Position X="18.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABBAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAIE=</HashCode>
+      <FileName>InputHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inputter" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAE=</HashCode>
+      <FileName>Inputter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAAgQAAAgAAACAAAAIAACACAAAAACAgAAgAAAEAAAA=</HashCode>
+      <FileName>Node.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Object" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IISAYAIAASKAAAGiAAGgBAAAQSBCxABgQAAEAAgioCA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ValueObject" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VariableObject" Collapsed="true">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoolObject" Collapsed="true">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAKEAAACAAAgAAAAACACACAgAAAAAAAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListObject" Collapsed="true">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAIAAAAAAAAAgAAAAAACACAAAAEAAQAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectFactory" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAAAgAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ObjectFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PVM">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgwAIAAAAAAAEAAAAAAAAAAAAABAAgAAQAABAAAA=</HashCode>
+      <FileName>PVM.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Global_" />
+      <Field Name="Global_Traveler_" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SenDivider">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIIAAAAAAAAAAAAAAAAAQAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>SenDivider.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="cur_block" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SentenceParser" Collapsed="true">
+    <Position X="18" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DIAAAAAIIEIAAAEEAABCAEAAAIAABBQAQAAAACIAAAA=</HashCode>
+      <FileName>SentenceParser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Traveller" Collapsed="true">
+    <Position X="18.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAQEAIAAAgAAgAAAAAAAAAAggAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Traveller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
