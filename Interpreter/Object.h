@@ -136,7 +136,6 @@ class LongObject :	public Object
 public:
 	LongObject(const long &_val) : Object(ObjectType::LongObj), value_(_val)
 	{
-		// std::cout << "Long " << value_ << std::endl;
 	}
 	~LongObject() = default;
 	
@@ -174,7 +173,6 @@ class DoubleObject : public Object {
 public:
 	DoubleObject(const double &_val) : Object(ObjectType::DoubleObj), value_(_val)
 	{
-		// std::cout <<"Double " << value_ << std::endl;
 	}
 	~DoubleObject() = default;
 	
