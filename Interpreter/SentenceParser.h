@@ -25,7 +25,10 @@ class SentenceParser
 	ControlStatus getStatus() const;
 public:
 	SentenceParser(Sentence* sentence) :sentence_(sentence) { }
-	~SentenceParser() { delete root_; };
+	~SentenceParser()
+	{
+		delete root_;
+	};
 	ControlStatus work();
 	void upFloat();
 	void setBlock(Block* cur) { cur_block_ = cur; }

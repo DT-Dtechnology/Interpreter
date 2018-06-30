@@ -485,8 +485,6 @@ Object * LongObject::not_equal(Object *right) {
 	}
 	else {
 		throw Error("TypeError: unsupported operand types");
-		system("pause");
-		return nullptr;
 	}
 }
 
