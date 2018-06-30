@@ -21,6 +21,18 @@ SenVector* Inputter::get_sentence_vector() const
 	int row_cnt = 0;
 	while (getline(fin_, temp))
 	{
+		int spaceCnt = 0;
+		for (int i = 0; i < temp.length() - 4; i++)
+		{
+			if (temp[i] != ' ') break;
+			else spaceCnt++;
+		}
+		string temp2 = "";
+		for (int i = 0; i < spaceCnt / 4; i++)
+			temp2 = temp2 + '\t';
+		temp2 = temp2 + temp.substr(4*temp2.length(), temp.length() - temp2.length() * 4);
+		temp = temp2;
+
 		string line = "";
 		int tab_cnt = 0;
 		int space_cnt = 0;
