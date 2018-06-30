@@ -40,7 +40,6 @@ public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	Block() { sentence_vector_ = new SenVector; };
 	~Block() {
-		std::cout << "deleteing block: " << std::endl;
 		getchar();
 		if (return_pos_)
 			delete return_pos_;
