@@ -248,7 +248,6 @@ class BoolObject: public Object
 public:
 	BoolObject(bool value) :Object(BoolObj), value_(value)
 	{
-		// std::cout << "Bool " << value_ << std::endl;
 	}
 	~BoolObject() = default;
 

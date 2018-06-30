@@ -144,7 +144,12 @@ void IDLE::work()
 {
 	while(true)
 	{
-		input();
+		try {
+			input();
+		}catch(Error e)
+		{
+			cout << e.message_ << endl;
+		}
 	}
 }
 

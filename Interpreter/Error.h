@@ -11,13 +11,12 @@ using std::endl;
  * 用于实现报错机制
  * 会根据错误类型输出不同的信息
  */
-class Error
+struct Error
 {
 	string message_;
-public:
 	Error(string message = "Unkown Error!") :message_(message)
 	{
-		cout << message << endl;
+		cout << "Error" << endl;
 	}
 	virtual ~Error() = default;
 };
