@@ -5,6 +5,7 @@
 #include <queue>
 
 class Block;
+class IDLE;
 enum ControlStatus;
 
 typedef std::queue<Word> WordQueue;
@@ -35,5 +36,6 @@ public:
 	void print_test() const;
 
 	friend Traveller;
+	friend IDLE;
 };
 

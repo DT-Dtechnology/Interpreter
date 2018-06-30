@@ -181,7 +181,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />
-    <ClCompile Include="PVM.cpp" />
     <ClCompile Include="SenDivider.cpp" />
     <ClCompile Include="SentenceParser.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -193,7 +192,11 @@
     <ClCompile Include="Traveller.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="test1.py" />
     <None Include="Test1.txt" />
+    <None Include="test2.py" />
+    <None Include="test3.py" />
+    <None Include="testForNamespace.py" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputHelp.txt" />

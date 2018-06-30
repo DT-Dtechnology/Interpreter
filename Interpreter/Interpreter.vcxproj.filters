@@ -98,9 +98,6 @@
     <ClCompile Include="Block.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PVM.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ParseFuncSwitcher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -122,6 +119,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Test1.txt">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test1.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test2.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test3.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="testForNamespace.py">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
