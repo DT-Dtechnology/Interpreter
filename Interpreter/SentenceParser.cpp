@@ -90,7 +90,7 @@ void SentenceParser::buildTree()
 				front = getNodeMsg(word_queue_.front());
 			}
 			else
-				throw Error("Wrong Match");
+				throw Error("Syntax Error");
 			// cout << "Match" << endl << endl;
 		}
 		else if (Top == NodeType::END)
@@ -98,7 +98,7 @@ void SentenceParser::buildTree()
 			if (front == "#")
 				FLAG = false;
 			else
-				throw Error("No END");
+				throw Error("Syntax Error");
 		}
 		else if (Matrix[nodeToInt[Top]][stringToInt[front]] != "_")
 		{
@@ -152,7 +152,7 @@ void SentenceParser::buildTree()
 			// cout << "Generate" << endl << endl;
 		}
 		else
-			throw Error("What?");
+			throw Error("Syntax Error");
 		
 	}
 	root_ = Root;
