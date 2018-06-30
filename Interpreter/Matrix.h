@@ -23,16 +23,13 @@ bool isTerminate[256];
 string Matrix[MatrixRow][MatrixColumn];
 
 // 非终结符对应的行号
-// eg: SEN
 map<NodeType, int> nodeToInt;
 map<char, NodeType> charToNode;
 map<string, char> stringToChar;
 map<char, string> charToString;
 // 终结符对应的列号
-// eg: ==
 map<string, int> stringToInt;
 map<string, NodeType> stringToNode;
-// test用
 map<NodeType, string> nodeToString;
 
 void buildMaps()
@@ -163,7 +160,6 @@ void buildMatrix()
 			{
 				if (str != "")
 				{
-					//cout << "ok" << endl;
 					Matrix[row][column] = str;
 					str = "";
 					column++;
@@ -197,7 +193,6 @@ inline void buildisOper()
 
 	for (auto& it : operlist)
 	{
-		//cout << nodeToString[operlist[it]] << endl;
 		isOperator[it] = true;
 	}
 
