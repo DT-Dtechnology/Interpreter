@@ -133,6 +133,8 @@ void IDLE::parse_sen(Sentence* sentence)
 		tmp_block->sentence_vector_->push_back(new Sentence(EndFlag, cur_tab, 0));
 
 		Traveller traveller = Traveller(tmp_block);
+		if (status == LOOPFALSE || LOOPTRUE)
+			traveller.passOne(status);
 		tmp_block->block_space_stack_.pop();
 		tmp_block->block_space_stack_.push(Global_);
 		traveller.work();

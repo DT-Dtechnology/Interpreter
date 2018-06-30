@@ -170,3 +170,10 @@ void Traveller::work_test() const
 		delete sp;
 	}
 }
+
+void Traveller::passOne(ControlStatus cs)
+{
+	jump_posi_.push(current_);
+	++current_;
+	status_.push(cs);
+}

@@ -136,6 +136,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				{
 					Node* new_tmp_node = new Node(LOOP);
 					new_tmp_node->setValue(new BoolObject(false));
+					left_node->getValue()->list_posi = -1;
 					return new_tmp_node;
 				}
 				ListObject* list_object = dynamic_cast<ListObject*>(right_node->getValue());
@@ -143,6 +144,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				{
 					Node* new_tmp_node = new Node(LOOP);
 					new_tmp_node->setValue(new BoolObject(false));
+					left_node->getValue()->list_posi = -1;
 					return new_tmp_node;
 				}
 				Node* new_right_node = new Node(VALUE);
@@ -151,8 +153,6 @@ Node* FuncSwitcher(Block* cur, Node* node)
 				assFunc(left_node, new_right_node);
 				Node* new_tmp_node = new Node(LOOP);
 				new_tmp_node->setValue(new BoolObject(true));
-				
-				
 				return new_tmp_node;
 			}
 		}
@@ -197,8 +197,43 @@ Node* FuncSwitcher(Block* cur, Node* node)
 
 		case FUNC:
 			{
+			
 			new_node->setNodeType(VALUE);
 			const string name = FuncSwitcher(cur, node->childVector_[0])->getValue()->getName();
+			if(name == "range")
+			{
+				ListObject* list_object = new ListObject();
+				if (node->childVector_.size() == 2)
+				{
+					Node* list_node = FuncSwitcher(cur, node->childVector_[1]);
+					Object* tmp_obj = list_node->getValue();
+					int startnum, endnum;
+					if (tmp_obj->getType() != ListObj)
+					{
+						LongObject* tmp = dynamic_cast<LongObject*>(tmp_obj);
+						startnum = 0;
+						endnum = tmp->get_val();
+						delete tmp;
+					}
+					else
+					{
+						auto tmp = *dynamic_cast<ListObject*>(tmp_obj)->get_val();
+						LongObject* long_obj = dynamic_cast<LongObject*>(tmp[0]);
+						startnum = long_obj->get_val();
+						long_obj = dynamic_cast<LongObject*>(tmp[1]);
+						endnum = long_obj->get_val();
+						delete long_obj;
+					}
+					ListObject* list = new ListObject;
+					for(auto it = startnum ; it < endnum ; ++it)
+					{
+						list->append(new LongObject(it));
+					}
+					new_node->setValue(list);
+					return new_node;
+				}
+					throw Error("Wrong Range Function Paraments");
+			}
 			Block* block = cur->searchFunc(name);
 			if(node->childVector_.size() == 1)
 			{
