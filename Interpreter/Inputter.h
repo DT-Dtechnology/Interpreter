@@ -21,3 +21,4 @@ public:
 	~Inputter() = default;
 	SenVector* get_sentence_vector() const;
 };
+

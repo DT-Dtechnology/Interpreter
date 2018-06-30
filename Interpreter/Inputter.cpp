@@ -5,6 +5,13 @@
 using std::pair;
 using std::tuple;
 
+void senVec_delete(SenVector* sv)
+{
+	sv->erase(sv->begin(), sv->end());
+	delete sv;
+}
+
+
 SenVector* Inputter::get_sentence_vector() const
 {
 	SenVector* sen_vector = new SenVector;
@@ -212,6 +219,8 @@ SenVector* Inputter::get_sentence_vector() const
 		}
 		cout << i->getOrder() << endl;
 	}*/
-
+	senVec_delete(tail);
+	senVec_delete(sen_vector);
+	senVec_delete(new_sv);
 	return new_new_sv;
 }

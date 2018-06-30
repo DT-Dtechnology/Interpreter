@@ -105,6 +105,7 @@ void IDLE::parse_sen(Sentence* sentence)
 			}
 		}
 		// cout << "EndDefFunc" << endl;
+		//delete block;
 		delete sp;
 		return;
 	}
@@ -136,7 +137,7 @@ void IDLE::parse_sen(Sentence* sentence)
 		tmp_block->block_space_stack_.pop();
 		tmp_block->block_space_stack_.push(Global_);
 		traveller.work();
-		
+		//delete tmp_block;
 	}
 }
 

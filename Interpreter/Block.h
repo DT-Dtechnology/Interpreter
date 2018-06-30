@@ -39,7 +39,27 @@ class Block
 public:
 	Block(SenVector* sen_vector) :sentence_vector_(sen_vector) { }
 	Block() { sentence_vector_ = new SenVector; };
-	~Block() = default;
+	~Block() {
+		std::cout << "deleteing block: " << std::endl;
+		getchar();
+		if (return_pos_)
+			delete return_pos_;
+		if (sentence_vector_) {
+			while (!sentence_vector_->empty()) {
+				auto i = sentence_vector_->front();
+				delete i;
+			}
+			delete sentence_vector_;
+		}
+		while (!block_space_stack_.empty()) {
+			auto i = block_space_stack_.top();
+			delete i;
+		}
+		while (!temp_space_stack_.empty()) {
+			auto i = block_space_stack_.top();
+			delete i;
+		}
+	}
 	
 	Block* addFunc(const string& name, const vector<string>& name_list);
 	Block* searchFunc(const string& name);

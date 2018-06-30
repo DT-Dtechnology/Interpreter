@@ -61,6 +61,7 @@ Block* Block::searchObjectBlock(const string& var_name)
 	// system("pause");
 	returnSpace();
 	block = block_space_stack_.top();
+	delete return_object;
 	return block;
 }
 

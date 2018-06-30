@@ -294,6 +294,7 @@ WordQueue* SenDivider::work()
 		nwl->push(i);
 	}
 
+	
 	delete tvt;
 	delete func_name;
 	delete new_word_list;

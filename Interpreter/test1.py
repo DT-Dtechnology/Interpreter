@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+for i in (1,2):
+    print i
 a = 2018
 b = 1951
 c = 21
