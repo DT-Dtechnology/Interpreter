@@ -178,6 +178,7 @@
     <ClCompile Include="IDLE.cpp" />
     <ClCompile Include="Inputter.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ParseFuncSwitcher.cpp" />

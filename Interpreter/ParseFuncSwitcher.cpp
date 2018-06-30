@@ -239,6 +239,7 @@ Node* FuncSwitcher(Block* cur, Node* node)
 			throw Error("I think you have not input anything");
 			return new Node(node->getNodeType());
 	}
+	delete node;
 }
 
 // 此处使用策略模式
@@ -250,6 +251,8 @@ Node* addFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->add(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* multiFunc(Node* left, Node* right)
@@ -258,6 +261,8 @@ Node* multiFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->multiply(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* divideFunc(Node* left, Node* right)
@@ -266,6 +271,8 @@ Node* divideFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->divide(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* minusFunc(Node* left, Node* right)
@@ -274,6 +281,8 @@ Node* minusFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->minus(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* modFunc(Node* left, Node* right)
@@ -282,6 +291,8 @@ Node* modFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->mod(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 
@@ -292,6 +303,8 @@ Node* andFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->And(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* orFunc(Node* left, Node* right)
@@ -300,6 +313,8 @@ Node* orFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->Or(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 
@@ -309,6 +324,8 @@ Node* lessFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->less(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* moreFunc(Node* left, Node* right)
@@ -317,6 +334,8 @@ Node* moreFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->more(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* moeqFunc(Node* left, Node* right)
@@ -325,6 +344,8 @@ Node* moeqFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->more_or_equal(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* leeqFunc(Node* left, Node* right)
@@ -333,6 +354,8 @@ Node* leeqFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->less_or_equal(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 
@@ -342,6 +365,8 @@ Node* equalFunc(Node *left, Node *right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->equal(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* nequalFunc(Node *left, Node *right)
@@ -350,6 +375,8 @@ Node* nequalFunc(Node *left, Node *right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->not_equal(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* leftFunc(Node* left, Node* right)
@@ -358,6 +385,8 @@ Node* leftFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->leftmove(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 Node* rightFunc(Node* left, Node* right)
@@ -366,6 +395,8 @@ Node* rightFunc(Node* left, Node* right)
 	Object* leftobj = left->getValue();
 	Object* rightobj = right->getValue();
 	node->setValue(leftobj->rightmove(rightobj));
+	delete left;
+	delete right;
 	return node;
 }
 

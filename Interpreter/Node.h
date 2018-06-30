@@ -3,6 +3,7 @@
 
 class Block;
 class Node;
+class Object;
 
 typedef std::vector<Node*> NodeVector;
 
@@ -48,7 +49,7 @@ class Node
 	NodeType nodeType_;
 public:
 	Node() = default;
-	~Node() = default;
+	~Node();
 	Node(NodeType nodeType) :nodeType_(nodeType) {}
 	NodeType getNodeType() const { return nodeType_; };
 	void setNodeType(NodeType type) { nodeType_ = type; }
