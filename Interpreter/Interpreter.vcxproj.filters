@@ -78,9 +78,6 @@
     <ClInclude Include="IDLE.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -118,12 +115,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Test1.txt">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="test1.py">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="test2.py">
       <Filter>资源文件</Filter>
     </None>
@@ -131,6 +122,9 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="testForNamespace.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="test1.py">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

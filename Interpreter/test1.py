@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-for i in (1,2):
+for i in range(10):
     print i
 a = 2018
 b = 1951
