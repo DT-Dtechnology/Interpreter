@@ -3,7 +3,7 @@ PI = 3
 
 def calculate_circle(r): # 简单的函数调用
 	result = PI
-	for i in (0,1, 2): # for循环
+	for i in range(3): # for循环
 		result = result * r
 	return result
 
@@ -12,7 +12,7 @@ def main():
 	
 	# Step 1: Circle
 	print "Circle"
-	for i in (3,4,5,6,7): # for循环
+	for i in range(3,8): # for循环
 		print "Radius: %d, area: %d" % (i, calculate_circle(i)) # 控制格式的输出
 
 	# Step 2: Rectangle
